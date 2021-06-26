@@ -94,9 +94,14 @@ Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
 Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
 Stop-Process -Name explorer -Force
 
-Write-Host "Attempting to download spotify installer..." -ForegroundColor Yellow
-$source = 'https://download.scdn.co/SpotifySetup.exe'
-Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
+if ("$(winget list --id Spotify.Spotify)".Contains("--")) { 
+    Write-Host "Spotify is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download spotify installer..." -ForegroundColor Yellow
+    $source = 'https://download.scdn.co/SpotifySetup.exe'
+    Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
+}
 
 # Finally, upgrade all.
 Write-Host "Checking for final upgrades..." -ForegroundColor Yellow
