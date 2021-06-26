@@ -76,7 +76,7 @@ Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 Write-Host "Setting up .NET build environment..." -ForegroundColor Yellow
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb"
 git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb"
-dotnet test "$HOME\source\repos\AiursoftWeb\Aiursoft.Infrastructures.sln"
+dotnet test "$HOME\source\repos\AiursoftWeb\Infrastructures\Aiursoft.Infrastructures.sln"
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Yellow
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
