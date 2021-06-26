@@ -26,7 +26,8 @@ winget install Microsoft.dotnet
 winget install Microsoft.Edge
 winget install Microsoft.Edge.Update
 winget install Microsoft.EdgeWebView2Runtime
-winget install Microsoft.VisualStudio.2019.Enterprise
+# We shall not install Visual Studio. Since the user may not buy enterprise license.
+# winget install Microsoft.VisualStudio.2019.Enterprise
 winget install Microsoft.AzureDataStudio
 winget install Microsoft.AzureStorageExplorer
 winget install Tencent.WeChat
@@ -70,7 +71,7 @@ git clone git@github.com:AiursoftWeb/Infrastructures.git source/repos/AiursoftWe
 git clone git@github.com:AiursoftWeb/AiurVersionControl.git source/repos/AiursoftWeb
 dotnet test $HOME/source/repos/AiursoftWeb/Infrastructures.git
 
-# show desktop icons
+# Show desktop icons
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {59031a47-3f72-44a7-89c5-5595fe6b30ee} /t REG_DWORD /d 0 /f"
@@ -79,14 +80,14 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {645FF040-5081-101B-9F08-00AA002F954E} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
-Stop-Process -Name explorer -Force
 
 # Clean desktop
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
 Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
+Stop-Process -Name explorer -Force
 
 # Finally, upgrade all.
 winget upgrade --all
 
-# consider to reboot.
-shutdown -r -t 10
+# Consider to reboot.
+shutdown -r -t 60
