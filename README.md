@@ -14,7 +14,5 @@ Open Windows PowerShell(Admin)
 
 ```powershell
 Set-ExecutionPolicy remotesigned
-$Script = Invoke-WebRequest 'https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'
-$ScriptBlock = [Scriptblock]::Create($Script.Content)
-Invoke-Command -ScriptBlock $ScriptBlock
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
 ```
