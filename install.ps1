@@ -50,6 +50,7 @@ Install-IfNotInstalled OBSProject.OBSStudio -scope machine
 Install-IfNotInstalled Git.git -scope machine
 Install-IfNotInstalled OpenJS.NodeJS -scope machine
 Install-IfNotInstalled Postman.Postman -scope machine
+Install-IfNotInstalled 7zip.7zip -scope machine
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
@@ -88,11 +89,15 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 
-# Clean desktop
+# Clean
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
 Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
 Stop-Process -Name explorer -Force
+
+Write-Host "Attempting to download spotify installer..." -ForegroundColor Yellow
+$source = 'https://download.scdn.co/SpotifySetup.exe'
+Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
 
 # Finally, upgrade all.
 Write-Host "Checking for final upgrades..." -ForegroundColor Yellow
