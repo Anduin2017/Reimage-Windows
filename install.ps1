@@ -65,17 +65,17 @@ $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneD
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Yellow
-$wtConfigPath = "C:\Users\xuef.FAREAST\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+$wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Yellow
-git clone git@github.com:lextm/windowsterminal-shell.git "$HOME\temp"
+git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
 pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
 Write-Host "Setting up .NET build environment..." -ForegroundColor Yellow
-git clone git@github.com:AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb"
-git clone git@github.com:AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb"
+git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb"
+git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb"
 dotnet test "$HOME\source\repos\AiursoftWeb\Aiursoft.Infrastructures.sln"
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Yellow
