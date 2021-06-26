@@ -103,9 +103,15 @@ else {
     Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
 }
 
-# Finally, upgrade all.
+# Upgrade all.
 Write-Host "Checking for final upgrades..." -ForegroundColor Yellow
 winget upgrade --all
+
+# Do some cleaning.
+& "C:\Program Files\Git\bin\bash.exe" .\clean.sh
+
+# Reset network
+cmd.exe /c .\reset-net.cmd
 
 # Consider to reboot.
 shutdown -r -t 60
