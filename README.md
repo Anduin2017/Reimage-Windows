@@ -13,6 +13,5 @@ Do NOT run it on your computer!!! May ruin your key!
 Open Windows PowerShell(Admin)
 
 ```powershell
-Set-ExecutionPolicy remotesigned
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
 ```
