@@ -9,8 +9,7 @@ function Get-IsElevated {
 
 function Install-IfNotInstalled {
     param (
-        [string]$package,
-        [string]$scope
+        [string]$package
     )
 
     if ("$(winget list --id $package)".Contains("--")) { 
@@ -18,7 +17,7 @@ function Install-IfNotInstalled {
     }
     else {
         Write-Host "Attempting to install: $package..." -ForegroundColor Yellow
-        winget install $package -i --scope $scope
+        winget install $package
     }
 }
 
@@ -32,25 +31,25 @@ if (-not $(Get-Command winget)) {
 }
 
 Install-IfNotInstalled Microsoft.VisualStudioCode -scope machine
-Install-IfNotInstalled Microsoft.WindowsTerminal  -scope machine
-Install-IfNotInstalled Microsoft.Teams  -scope machine
-Install-IfNotInstalled Microsoft.Office -scope machine
-Install-IfNotInstalled Microsoft.OneDrive -scope machine
-Install-IfNotInstalled Microsoft.PowerShell -scope machine
-Install-IfNotInstalled Microsoft.dotnet -scope machine
-Install-IfNotInstalled Microsoft.Edge -scope machine
-Install-IfNotInstalled Microsoft.EdgeWebView2Runtime -scope machine
+Install-IfNotInstalled Microsoft.WindowsTerminal
+Install-IfNotInstalled Microsoft.Teams
+Install-IfNotInstalled Microsoft.Office
+Install-IfNotInstalled Microsoft.OneDrive
+Install-IfNotInstalled Microsoft.PowerShell
+Install-IfNotInstalled Microsoft.dotnet
+Install-IfNotInstalled Microsoft.Edge
+Install-IfNotInstalled Microsoft.EdgeWebView2Runtime
 # We shall not install Visual Studio. Since the user may not buy enterprise license.
 # winget install Microsoft.VisualStudio.2019.Enterprise
 Install-IfNotInstalled Microsoft.AzureDataStudio -scope machine
 Install-IfNotInstalled Tencent.WeChat -scope machine
-Install-IfNotInstalled SoftDeluxe.FreeDownloadManager -scope machine
-Install-IfNotInstalled VideoLAN.VLC -scope machine
-Install-IfNotInstalled OBSProject.OBSStudio -scope machine
-Install-IfNotInstalled Git.git -scope machine
-Install-IfNotInstalled OpenJS.NodeJS -scope machine
-Install-IfNotInstalled Postman.Postman -scope machine
-Install-IfNotInstalled 7zip.7zip -scope machine
+Install-IfNotInstalled SoftDeluxe.FreeDownloadManager
+Install-IfNotInstalled VideoLAN.VLC
+Install-IfNotInstalled OBSProject.OBSStudio
+Install-IfNotInstalled Git.git
+Install-IfNotInstalled OpenJS.NodeJS
+Install-IfNotInstalled Postman.Postman
+Install-IfNotInstalled 7zip.7zip
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
