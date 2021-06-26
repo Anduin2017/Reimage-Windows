@@ -53,15 +53,15 @@ Install-IfNotInstalled OpenJS.NodeJS
 Install-IfNotInstalled Spotify.Spotify
 Install-IfNotInstalled Postman.Postman
 
-Get-ChildItem -PathWrite-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
+Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
 
-Get-ChildItem -PathWrite-Host "Setting up .NET environment variables..." -ForegroundColor Yellow
+Write-Host "Setting up .NET environment variables..." -ForegroundColor Yellow
 $env:ASPNETCORE_ENVIRONMENT = 'Development'
 $env:DOTNET_PRINT_TELEMETRY_MESSAGE = 'false'
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
 
-Get-ChildItem -PathWrite-Host "Copying back SSH keys..." -ForegroundColor Yellow
+Write-Host "Copying back SSH keys..." -ForegroundColor Yellow
 $HOME | Where-Object { $_.Name -like "OneDrive*" }
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
