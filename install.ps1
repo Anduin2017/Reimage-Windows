@@ -69,7 +69,7 @@ mkdir source/repos
 mkdir source/repos/AiursoftWeb
 git clone git@github.com:AiursoftWeb/Infrastructures.git source/repos/AiursoftWeb
 git clone git@github.com:AiursoftWeb/AiurVersionControl.git source/repos/AiursoftWeb
-dotnet test $HOME/source/repos/AiursoftWeb/Infrastructures.git
+dotnet test $HOME/source/repos/AiursoftWeb/
 
 # Show desktop icons
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
