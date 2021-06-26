@@ -9,14 +9,16 @@ function Get-IsElevated {
 
 function Install-IfNotInstalled {
     param (
-        [string]$package
+        [string]$package,
+        [string]$scope
     )
 
-    if ($(winget list --id FastCopy).Contains("-------------------------")) { 
+    if ("$(winget list --id $package)".Contains("--")) { 
         Write-Host "$package is already installed!" -ForegroundColor Green
     }
     else {
-        winget install $package --id $package --scope machine -i --locale en-US
+        Write-Host "Attempting to install: $package..." -ForegroundColor Yellow
+        winget install $package -i --scope $scope
     }
 }
 
@@ -29,29 +31,25 @@ if (-not $(Get-Command winget)) {
     return
 }
 
-Install-IfNotInstalled Microsoft.VisualStudioCode
-Install-IfNotInstalled Microsoft.WindowsTerminal 
-Install-IfNotInstalled Microsoft.Teams 
-Install-IfNotInstalled Microsoft.Office
-Install-IfNotInstalled Microsoft.OneDrive
-Install-IfNotInstalled Microsoft.PowerShell
-Install-IfNotInstalled Microsoft.dotnet
-Install-IfNotInstalled Microsoft.Edge
-Install-IfNotInstalled Microsoft.Edge.Update
-Install-IfNotInstalled Microsoft.EdgeWebView2Runtime
+Install-IfNotInstalled Microsoft.VisualStudioCode -scope machine
+Install-IfNotInstalled Microsoft.WindowsTerminal  -scope machine
+Install-IfNotInstalled Microsoft.Teams  -scope machine
+Install-IfNotInstalled Microsoft.Office -scope machine
+Install-IfNotInstalled Microsoft.OneDrive -scope machine
+Install-IfNotInstalled Microsoft.PowerShell -scope machine
+Install-IfNotInstalled Microsoft.dotnet -scope machine
+Install-IfNotInstalled Microsoft.Edge -scope machine
+Install-IfNotInstalled Microsoft.EdgeWebView2Runtime -scope machine
 # We shall not install Visual Studio. Since the user may not buy enterprise license.
 # winget install Microsoft.VisualStudio.2019.Enterprise
-Install-IfNotInstalled Microsoft.AzureDataStudio
-Install-IfNotInstalled Microsoft.AzureStorageExplorer
-Install-IfNotInstalled Tencent.WeChat
-Install-IfNotInstalled FastCopy.FastCopy
-Install-IfNotInstalled SoftDeluxe.FreeDownloadManager
-Install-IfNotInstalled VideoLAN.VLC
-Install-IfNotInstalled OBSProject.OBSStudio
-Install-IfNotInstalled Git.git
-Install-IfNotInstalled OpenJS.NodeJS
-Install-IfNotInstalled Spotify.Spotify
-Install-IfNotInstalled Postman.Postman
+Install-IfNotInstalled Microsoft.AzureDataStudio -scope machine
+Install-IfNotInstalled Tencent.WeChat -scope machine
+Install-IfNotInstalled SoftDeluxe.FreeDownloadManager -scope machine
+Install-IfNotInstalled VideoLAN.VLC -scope machine
+Install-IfNotInstalled OBSProject.OBSStudio -scope machine
+Install-IfNotInstalled Git.git -scope machine
+Install-IfNotInstalled OpenJS.NodeJS -scope machine
+Install-IfNotInstalled Postman.Postman -scope machine
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
@@ -76,13 +74,9 @@ pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
 Write-Host "Setting up .NET build environment..." -ForegroundColor Yellow
-Set-Location $HOME
-mkdir source
-mkdir source/repos
-mkdir source/repos/AiursoftWeb
-git clone git@github.com:AiursoftWeb/Infrastructures.git source/repos/AiursoftWeb
-git clone git@github.com:AiursoftWeb/AiurVersionControl.git source/repos/AiursoftWeb
-dotnet test $HOME/source/repos/AiursoftWeb/
+git clone git@github.com:AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb"
+git clone git@github.com:AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb"
+dotnet test "$HOME\source\repos\AiursoftWeb\Aiursoft.Infrastructures.sln"
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Yellow
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
