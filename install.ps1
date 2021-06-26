@@ -60,8 +60,8 @@ $env:DOTNET_PRINT_TELEMETRY_MESSAGE = 'false'
 $env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Yellow
-$HOME | Where-Object { $_.Name -like "OneDrive*" }
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+mkdir $HOME\.ssh -Force
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Yellow
