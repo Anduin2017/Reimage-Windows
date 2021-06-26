@@ -30,7 +30,7 @@ if (-not $(Get-Command winget)) {
     return
 }
 
-Install-IfNotInstalled Microsoft.VisualStudioCode -scope machine
+Install-IfNotInstalled Microsoft.VisualStudioCode
 Install-IfNotInstalled Microsoft.WindowsTerminal
 Install-IfNotInstalled Microsoft.Teams
 Install-IfNotInstalled Microsoft.Office
@@ -41,8 +41,8 @@ Install-IfNotInstalled Microsoft.Edge
 Install-IfNotInstalled Microsoft.EdgeWebView2Runtime
 # We shall not install Visual Studio. Since the user may not buy enterprise license.
 # winget install Microsoft.VisualStudio.2019.Enterprise
-Install-IfNotInstalled Microsoft.AzureDataStudio -scope machine
-Install-IfNotInstalled Tencent.WeChat -scope machine
+Install-IfNotInstalled Microsoft.AzureDataStudio
+Install-IfNotInstalled Tencent.WeChat
 Install-IfNotInstalled SoftDeluxe.FreeDownloadManager
 Install-IfNotInstalled VideoLAN.VLC
 Install-IfNotInstalled OBSProject.OBSStudio
