@@ -64,6 +64,11 @@ $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneD
 mkdir $HOME\.ssh -Force
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
+Write-Host "Configuring git..." -ForegroundColor Yellow
+git config --global user.email "anduin.xue@microsoft.com"
+git config --global user.name "Anduin Xue"
+git config --global core.autocrlf true
+
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Yellow
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
