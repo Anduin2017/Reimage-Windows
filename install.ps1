@@ -51,6 +51,10 @@ Install-IfNotInstalled OpenJS.NodeJS
 Install-IfNotInstalled Postman.Postman
 Install-IfNotInstalled 7zip.7zip
 
+Write-Host "Setting up some node js global tools..." -ForegroundColor Yellow
+npm install --global npm@latest
+npm install --global node-static typescript
+
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
 
@@ -79,6 +83,8 @@ pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
 Write-Host "Setting up .NET build environment..." -ForegroundColor Yellow
+dotnet tool install --global dotnet-ef
+dotnet tool update --global dotnet-ef
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
 git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb/AiurVersionControl"
 dotnet test "$HOME\source\repos\AiursoftWeb\Infrastructures\Aiursoft.Infrastructures.sln"
