@@ -33,7 +33,7 @@ rm /c/ProgramData/Microsoft/Windows\ Defender/Definition\ Updates/Backup -rvf
 
 cd /c/
 rm '/c/$Windows.~WS' -rvf
-ls -a "/c/" | grep -v ProgramData | grep -v Windows | grep -v Users | grep -v Program | grep -v Recovery | grep -v .sys | grep -v Settings | grep -v System | grep -v boot | xargs rm -rvf --
+ls -a "/c/" | grep -v ProgramData | grep -v Windows | grep -v orus | grep -v Users | grep -v Program | grep -v Recovery | grep -v .sys | grep -v Settings | grep -v System | grep -v boot | xargs rm -rvf --
 
 
 find ~/AppData/Local/Packages/TencentWeChatLimited.forWindows10_sdtnhv12zgd7a/LocalCache/Roaming/Tencent/WeChatAppStore -name "CustomEmoV1" -exec bash -c "rm -rvf '{}'" \;
