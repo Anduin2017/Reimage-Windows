@@ -51,17 +51,21 @@ Install-IfNotInstalled OpenJS.NodeJS
 Install-IfNotInstalled Postman.Postman
 Install-IfNotInstalled 7zip.7zip
 
+Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
+Powercfg /Change monitor-timeout-ac 20
+Powercfg /Change standby-timeout-ac 0
+
 Write-Host "Setting up some node js global tools..." -ForegroundColor Yellow
 npm install --global npm@latest
-npm install --global node-static typescript
+npm install --global node-static typescript @angular/cli
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
 
 Write-Host "Setting up .NET environment variables..." -ForegroundColor Yellow
-$env:ASPNETCORE_ENVIRONMENT = 'Development'
-$env:DOTNET_PRINT_TELEMETRY_MESSAGE = 'false'
-$env:DOTNET_CLI_TELEMETRY_OPTOUT = '1'
+[Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Yellow
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
@@ -98,6 +102,11 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {645FF040-5081-101B-9F08-00AA002F954E} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
+
+Write-Host "Enable Remote Desktop..." -ForegroundColor Yellow
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name "fDenyTSConnections" -Value 0
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 1
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 # Clean
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
