@@ -20,4 +20,8 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 
 Yes. You need to fork this repo, and modify some configuration path in the source code.
 
-For example, I copied my SSH private key file from my OneDrive. Which requires you to modify those logic.
+For example:
+
+* I copied my SSH private key file from my OneDrive. Which requires you to modify those logic.
+* I setup git to use my own email address. Which requires you to modify those configuration.
+* I used the script to test my own project to verify that my development environment works fine. Which requires you to modify those configration.
