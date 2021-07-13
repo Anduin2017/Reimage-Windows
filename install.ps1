@@ -30,26 +30,33 @@ if (-not $(Get-Command winget)) {
     return
 }
 
-Install-IfNotInstalled Microsoft.VisualStudioCode
-Install-IfNotInstalled Microsoft.WindowsTerminal
-Install-IfNotInstalled Microsoft.Teams
-Install-IfNotInstalled Microsoft.Office
-Install-IfNotInstalled Microsoft.OneDrive
-Install-IfNotInstalled Microsoft.PowerShell
-Install-IfNotInstalled Microsoft.dotnet
-Install-IfNotInstalled Microsoft.Edge
-Install-IfNotInstalled Microsoft.EdgeWebView2Runtime
-# We shall not install Visual Studio. Since the user may not buy enterprise license.
-# winget install Microsoft.VisualStudio.2019.Enterprise
-Install-IfNotInstalled Microsoft.AzureDataStudio
-Install-IfNotInstalled Tencent.WeChat
-Install-IfNotInstalled SoftDeluxe.FreeDownloadManager
-Install-IfNotInstalled VideoLAN.VLC
-Install-IfNotInstalled OBSProject.OBSStudio
-Install-IfNotInstalled Git.git
-Install-IfNotInstalled OpenJS.NodeJS
-Install-IfNotInstalled Postman.Postman
-Install-IfNotInstalled 7zip.7zip
+#apps want to install
+$appList = @(
+    "Microsoft.VisualStudioCode",
+    "Microsoft.WindowsTerminal",
+    "Microsoft.Teams",
+    "Microsoft.Office",
+    "Microsoft.OneDrive",
+    "Microsoft.PowerShell",
+    "Microsoft.dotnet",
+    "Microsoft.Edge",
+    "Microsoft.EdgeWebView2Runtime",
+    "Microsoft.AzureDataStudio",
+    "Tencent.WeChat",
+    "SoftDeluxe.FreeDownloadManager",
+    "VideoLAN.VLC",
+    "OBSProject.OBSStudio",
+    "Git.git",
+    "OpenJS.NodeJS",
+    "Postman.Postman",
+    "7zip.7zip"
+)
+
+Write-Host "Starting to install apps..." -ForegroundColor Yellow
+foreach ($app in $appList){
+    Install-IfNotInstalled $app
+}
+ 
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
