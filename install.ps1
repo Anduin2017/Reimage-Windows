@@ -64,7 +64,7 @@ Powercfg /Change standby-timeout-ac 0
 
 Write-Host "Setting up some node js global tools..." -ForegroundColor Yellow
 npm install --global npm@latest
-npm install --global node-static typescript @angular/cli
+npm install --global node-static typescript @angular/cli yarn
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Yellow
 Set-ExecutionPolicy remotesigned
