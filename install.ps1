@@ -122,7 +122,7 @@ Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
 Stop-Process -Name explorer -Force
 
 # Download spotify installer to desktop. Since spotify doesn't support to be installed from admin.
-if ("$(winget list --id Spotify.Spotify)".Contains("--")) { 
+if ("$(winget list --id Spotify)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
 }
 else {
