@@ -115,7 +115,10 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 1
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-# Clean
+Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Yellow
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
+
+# Clean desktop
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
 Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
