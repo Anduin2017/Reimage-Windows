@@ -47,6 +47,7 @@ $appList = @(
     "VideoLAN.VLC",
     "OBSProject.OBSStudio",
     "Git.git",
+    "Github.gitlfs",
     "OpenJS.NodeJS",
     "Postman.Postman",
     "7zip.7zip"
