@@ -16,6 +16,9 @@ Open Windows PowerShell(Admin)
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
 ```
 
+![image](https://user-images.githubusercontent.com/19531547/127482010-6f8d35f8-37c5-472a-97ae-a75c16aa3699.png)
+
+
 ## How can I benefit from this project?
 
 Yes. You need to fork this repo, and modify some configuration path in the source code.
