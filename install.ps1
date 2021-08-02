@@ -58,15 +58,15 @@ foreach ($app in $appList){
     Install-IfNotInstalled $app
 }
  
-Write-Host "Downloading FFmpeg..." -ForegroundColor Yellow
-$ffmpegPath = "C:\Program Files\FFMPEG"
-$downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
-Invoke-WebRequest -Uri $downloadUri -OutFile "C:\ffmpeg.7z"
-& ${env:ProgramFiles}\7-Zip\7z.exe x "C:\ffmpeg.7z" "-o$($ffmpegPath)" -y
-$subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
-$subPath = Join-Path -Path $ffmpegPath -ChildPath $subPath
-$binPath = Join-Path -Path $subPath -ChildPath "bin"
 if (-not $env:Path.Contains("mpeg")) {
+    Write-Host "Downloading FFmpeg..." -ForegroundColor Yellow
+    $ffmpegPath = "C:\Program Files\FFMPEG"
+    $downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
+    Invoke-WebRequest -Uri $downloadUri -OutFile "C:\ffmpeg.7z"
+    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\ffmpeg.7z" "-o$($ffmpegPath)" -y
+    $subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+    $subPath = Join-Path -Path $ffmpegPath -ChildPath $subPath
+    $binPath = Join-Path -Path $subPath -ChildPath "bin"
     Write-Host "Adding FFmpeg to PATH..." -ForegroundColor Yellow
     [Environment]::SetEnvironmentVariable(
         "Path",
