@@ -58,7 +58,7 @@ foreach ($app in $appList){
     Install-IfNotInstalled $app
 }
  
-if (-not $env:Path.Contains("mpeg")) {
+if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Yellow
     $ffmpegPath = "C:\Program Files\FFMPEG"
     $downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
