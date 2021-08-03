@@ -57,6 +57,9 @@ Write-Host "Starting to install apps..." -ForegroundColor Yellow
 foreach ($app in $appList){
     Install-IfNotInstalled $app
 }
+
+Write-Host "Reloading environment variables..." -ForegroundColor Yellow
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
  
 if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Yellow
@@ -72,6 +75,8 @@ if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
         "Path",
         [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$binPath",
         [EnvironmentVariableTarget]::Machine)
+} else {
+    Write-Host "FFmpeg is already installed." -ForegroundColor Yellow
 }
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
