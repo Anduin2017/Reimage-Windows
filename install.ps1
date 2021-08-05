@@ -136,6 +136,11 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 # Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 1
 # Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
+Write-Host "Enabling Chinese input method..." -ForegroundColor Yellow
+$LanguageList = Get-WinUserLanguageList
+$LanguageList.Add("zh-CN")
+Set-WinUserLanguageList $LanguageList -Force
+
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Yellow
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
 
