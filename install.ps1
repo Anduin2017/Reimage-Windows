@@ -12,7 +12,7 @@ function Install-IfNotInstalled {
         [string]$package
     )
 
-    if ("$(winget list --id $package)".Contains("--")) { 
+    if ("$(winget list -e --id $package)".Contains("--")) { 
         Write-Host "$package is already installed!" -ForegroundColor Green
     }
     else {
