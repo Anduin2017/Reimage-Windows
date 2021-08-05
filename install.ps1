@@ -139,6 +139,9 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Yellow
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
 
+Write-Host "Removing Bluetooth icons..." -ForegroundColor Yellow
+cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
+
 # Clean desktop
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
