@@ -29,6 +29,7 @@ $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($(
 if (-not ([string]::IsNullOrEmpty($computerName)))
 {
     Write-Host "Renaming computer to $computerName..." -ForegroundColor Yellow
+    cmd /c "bcdedit /set {current} description `"$computerName`""
     Rename-Computer -NewName $computerName
 }
 
