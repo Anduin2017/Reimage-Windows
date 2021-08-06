@@ -46,7 +46,7 @@ $appList = @(
     "SoftDeluxe.FreeDownloadManager",
     "VideoLAN.VLC",
     "OBSProject.OBSStudio",
-    "Git.git",
+    "Git.Git",
     "Github.gitlfs",
     "OpenJS.NodeJS",
     "Postman.Postman",
