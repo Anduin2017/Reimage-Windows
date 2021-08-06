@@ -75,6 +75,7 @@ if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
         "Path",
         [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$binPath",
         [EnvironmentVariableTarget]::Machine)
+    Remove-Item -Path "C:\ffmpeg.7z" -Force
 } else {
     Write-Host "FFmpeg is already installed." -ForegroundColor Yellow
 }
