@@ -223,11 +223,7 @@ else {
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all
 
-# Do some cleaning.
-& "C:\Program Files\Git\bin\bash.exe" .\clean.sh
-
-# Reset network
-cmd.exe /c .\reset-net.cmd
-
-# Consider to reboot.
-shutdown -r -t 60
+Write-Host "Checking for windows updates..." -ForegroundColor Green
+Install-Module -Name PSWindowsUpdate -Force
+Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
+Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
