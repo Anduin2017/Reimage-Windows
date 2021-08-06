@@ -25,16 +25,23 @@ if (-not(Get-IsElevated)) {
     throw "Please run this script as an administrator" 
 }
 
-if (-not $(Get-Command winget)) {
-    Start-Process "https://github.com/microsoft/winget-cli/releases"
-    return
-}
-
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
 {
     Write-Host "Renaming computer to $computerName..." -ForegroundColor Yellow
     Rename-Computer -NewName $computerName
+}
+
+if (-not $(Get-Command winget)) {
+    Write-Host "Installing WinGet" -ForegroundColor Yellow
+    $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $releases = Invoke-RestMethod -uri "$($releases_url)"
+    $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith("msixbundle") } | Select -First 1
+    Invoke-WebRequest -Uri $latestRelease.browser_download_url -OutFile ".\winget.msixbundle"
+    Add-AppxPackage -Path .\wingeet.msixbundle
+    Write-Host "Reloading environment variables..." -ForegroundColor Yellow
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
 #apps want to install
