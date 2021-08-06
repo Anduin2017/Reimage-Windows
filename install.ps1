@@ -39,7 +39,7 @@ if (-not $(Get-Command winget)) {
     $releases = Invoke-RestMethod -uri "$($releases_url)"
     $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith("msixbundle") } | Select -First 1
     Invoke-WebRequest -Uri $latestRelease.browser_download_url -OutFile ".\winget.msixbundle"
-    Add-AppxPackage -Path .\wingeet.msixbundle
+    Add-AppxPackage -Path .\winget.msixbundle
     Write-Host "Reloading environment variables..." -ForegroundColor Yellow
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
