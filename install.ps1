@@ -203,6 +203,10 @@ cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSpeed /t REG_SZ /d 0 /f
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseThreshold1 /t REG_SZ /d 0 /f"
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseThreshold2 /t REG_SZ /d 0 /f"
 
+Write-Host "Pin repos to quick access..." -ForegroundColor Green
+$load_com = new-object -com shell.application
+$load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
+
 # Clean desktop
 Write-Host "Cleaning desktop..." -ForegroundColor Green
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
