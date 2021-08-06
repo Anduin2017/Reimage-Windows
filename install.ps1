@@ -178,9 +178,14 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 Write-Host "Removing Bluetooth icons..." -ForegroundColor Yellow
 cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
 
-Write-Host "Disabling apps auto start" -ForegroundColor Yellow
+Write-Host "Disabling apps auto start..." -ForegroundColor Yellow
 cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v Wechat /f"
 cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v `"Free Download Manager`" /f"
+
+Write-Host "Applying file explorer settings..." -ForegroundColor Yellow
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v AutoCheckSelect /t REG_DWORD /d 0 /f"
+cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f"
 
 # Clean desktop
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
