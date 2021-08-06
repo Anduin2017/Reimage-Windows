@@ -187,6 +187,9 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Adva
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v AutoCheckSelect /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f"
 
+Write-Host "Setting Time zone..." -ForegroundColor Yellow
+Set-TimeZone -Name "China Standard Time"
+
 # Clean desktop
 Write-Host "Cleaning desktop..." -ForegroundColor Yellow
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
