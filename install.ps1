@@ -139,8 +139,13 @@ mkdir $HOME\.ssh -Force
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
-git config --global user.email "anduin.xue@microsoft.com"
-git config --global user.name "Anduin Xue"
+$searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
+$email = $searcher.FindOne().Properties.mail
+$name = $searcher.FindOne().Properties.name
+Write-Host "Setting git email to $email" -ForegroundColor Yellow
+Write-Host "Setting git name to $name" -ForegroundColor Yellow
+git config --global user.email $email ...
+git config --global user.name $name ...
 git config --global core.autocrlf true
 
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Green
