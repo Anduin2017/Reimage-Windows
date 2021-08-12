@@ -90,6 +90,12 @@ $appList = @(
     "7zip.7zip"
 )
 
+Write-Host "Installing this script as Update-All..." -ForegroundColor Green
+Set-Content $PROFILE "function Update-All {
+    iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
+}"
+. $PROFILE
+
 Write-Host "Starting to install apps..." -ForegroundColor Yellow
 foreach ($app in $appList){
     Install-IfNotInstalled $app
