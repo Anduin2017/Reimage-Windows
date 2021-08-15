@@ -91,6 +91,11 @@ $appList = @(
 )
 
 Write-Host "Installing this script as Update-All..." -ForegroundColor Green
+if (!(Test-Path $PROFILE))
+{
+   Write-Host "Creating PROFILE..." -ForegroundColor Yellow
+   New-Item -Path $PROFILE -ItemType "file" -Force
+}
 Set-Content $PROFILE "function Update-All {
     iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
 }"
