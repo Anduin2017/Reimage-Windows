@@ -241,6 +241,14 @@ else {
     Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
 }
 
+if ("$(winget list --id Todos)".Contains("--")) { 
+    Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
+    Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
+}
+
 # Upgrade all.
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all
