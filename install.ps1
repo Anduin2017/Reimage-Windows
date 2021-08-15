@@ -69,7 +69,6 @@ $result = $wmiObj.UpdateScanMethod()
 
 #apps want to install
 $appList = @(
-    "Microsoft.VisualStudioCode",
     "Microsoft.WindowsTerminal",
     "Microsoft.Teams",
     "Microsoft.Office",
@@ -247,6 +246,14 @@ if ("$(winget list --id Todos)".Contains("--")) {
 else {
     Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
     Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
+}
+
+if ("$(winget list --id Microsoft.VisualStudioCode)".Contains("--")) { 
+    Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
+    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive
 }
 
 # Upgrade all.
