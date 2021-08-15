@@ -145,9 +145,11 @@ mkdir $HOME\.ssh -Force
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
-$searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
-$email = $searcher.FindOne().Properties.mail
-$name = $searcher.FindOne().Properties.name
+# $searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
+# $email = $searcher.FindOne().Properties.mail
+# $name = $searcher.FindOne().Properties.name
+$email = "anduin.xue@microsoft.com"
+$name = "Anduin Xue"
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
 git config --global user.email $email ...
