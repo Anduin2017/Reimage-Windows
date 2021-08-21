@@ -1,4 +1,4 @@
-# configuration-script-win
+# My Windows Configuration script
 
 These scripts are for my personal usage to configure a ready-to-use Windows environment for me.
 
@@ -13,15 +13,14 @@ Do NOT run it on your computer!!! May ruin your key!
 Open Windows PowerShell(Admin)
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Anduin2017/configuration-script-win/master/install.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
 ```
 
 ![image](https://user-images.githubusercontent.com/19531547/127482010-6f8d35f8-37c5-472a-97ae-a75c16aa3699.png)
 
+## How can I use this project?
 
-## How can I benefit from this project?
-
-Yes. You need to fork this repo, and modify some configuration path in the source code.
+You need to **fork** this repo, and modify some configuration path in the source code.
 
 For example:
 
