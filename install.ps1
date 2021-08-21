@@ -265,3 +265,12 @@ Install-PackageProvider -Name NuGet -Force
 Install-Module -Name PSWindowsUpdate -Force
 Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
 Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
+
+cmd.exe /c "netsh winsock reset catalog"
+cmd.exe /c "netsh int ip reset reset.log"
+cmd.exe /c "ipconfig /flushdns"
+cmd.exe /c "ipconfig /registerdns"
+cmd.exe /c "route /f"
+cmd.exe /c "sc config FDResPub start=auto"
+cmd.exe /c "sc config fdPHost start=auto"
+cmd.exe /c "shutdown -r -t 10"
