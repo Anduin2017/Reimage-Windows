@@ -10,7 +10,7 @@ Do NOT run it on your computer!!! May ruin your key!
 
 ## One-key install
 
-Open Windows PowerShell(Admin)
+Right click the start button, click `Windows PowerShell(Admin)`.
 
 ```powershell
 iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
