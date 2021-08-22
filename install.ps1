@@ -83,7 +83,6 @@ $appList = @(
     "VideoLAN.VLC",
     "OBSProject.OBSStudio",
     "Git.Git",
-    "GitHub.GitLFS",
     "OpenJS.NodeJS",
     "Postman.Postman",
     "7zip.7zip"
@@ -125,6 +124,12 @@ if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
     Remove-Item -Path "C:\ffmpeg.7z" -Force
 } else {
     Write-Host "FFmpeg is already installed." -ForegroundColor Yellow
+}
+
+if (-not $(Get-Command git-lfs)) {
+    winget install "GitHub.GitLFS"
+} else {
+    Write-Host "Git LFS is already installed." -ForegroundColor Yellow
 }
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
