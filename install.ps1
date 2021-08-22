@@ -191,14 +191,21 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 
-Write-Host "Setting UAC..." -ForegroundColor Yellow
+Write-Host "Setting UAC..." -ForegroundColor Green
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "ConsentPromptBehaviorAdmin" -Value 5
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop" -Value 1
 
-Write-Host "Enable Remote Desktop..." -ForegroundColor Yellow
+Write-Host "Enable Remote Desktop..." -ForegroundColor Green
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name "fDenyTSConnections" -Value 0
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+
+$networkProfiles = Get-NetConnectionProfile
+foreach ($networkProfile in $networkProfiles) {
+    Write-Host "Setting network $($networkProfile.Name) to home network to enable more features..." -ForegroundColor Green
+    Write-Host "This is dangerous because your roommates may detect your device is online." -ForegroundColor Yellow
+    Set-NetConnectionProfile -Name $networkProfile.Name -NetworkCategory Private
+}
 
 Write-Host "Enabling Chinese input method..." -ForegroundColor Green
 $LanguageList = Get-WinUserLanguageList
