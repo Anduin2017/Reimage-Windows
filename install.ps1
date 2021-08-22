@@ -233,7 +233,9 @@ Write-Host "Pin repos to quick access..." -ForegroundColor Green
 $load_com = new-object -com shell.application
 $load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
 
-# Clean desktop
+Write-Host "Enabling dark theme..." -ForegroundColor Green
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
+
 Write-Host "Cleaning desktop..." -ForegroundColor Green
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
 Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
@@ -282,4 +284,4 @@ cmd.exe /c "ipconfig /registerdns"
 cmd.exe /c "route /f"
 cmd.exe /c "sc config FDResPub start=auto"
 cmd.exe /c "sc config fdPHost start=auto"
-cmd.exe /c "shutdown -r -t 10"
+cmd.exe /c "shutdown -r -t 30"
