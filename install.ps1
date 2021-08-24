@@ -88,17 +88,6 @@ $appList = @(
     "7zip.7zip"
 )
 
-Write-Host "Installing this script as Update-All..." -ForegroundColor Green
-if (!(Test-Path $PROFILE))
-{
-   Write-Host "Creating PROFILE..." -ForegroundColor Yellow
-   New-Item -Path $PROFILE -ItemType "file" -Force
-}
-Set-Content $PROFILE "function Update-All {
-    iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
-}"
-. $PROFILE
-
 Write-Host "Starting to install apps..." -ForegroundColor Yellow
 foreach ($app in $appList){
     Install-IfNotInstalled $app
@@ -142,6 +131,17 @@ npm install --global node-static typescript @angular/cli yarn
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned
+
+Write-Host "Installing this script as Update-All..." -ForegroundColor Green
+if (!(Test-Path $PROFILE))
+{
+   Write-Host "Creating PROFILE..." -ForegroundColor Yellow
+   New-Item -Path $PROFILE -ItemType "file" -Force
+}
+Set-Content $PROFILE "function Update-All {
+    iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
+}"
+. $PROFILE
 
 Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
