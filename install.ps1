@@ -34,15 +34,16 @@ if (-not ([string]::IsNullOrEmpty($computerName)))
 }
 
 if (-not $(Get-Command winget)) {
-    Write-Host "Installing WinGet..." -ForegroundColor Green
-    $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    $releases = Invoke-RestMethod -uri "$($releases_url)"
-    $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith("msixbundle") } | Select -First 1
-    Invoke-WebRequest -Uri $latestRelease.browser_download_url -OutFile "C:\winget.msixbundle"
-    Add-AppxPackage -Path .\winget.msixbundle
-    Write-Host "Reloading environment variables..." -ForegroundColor Green
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+     Write-Host "Installing WinGet..." -ForegroundColor Green
+#    $releases_url = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+#    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+#    $releases = Invoke-RestMethod -uri "$($releases_url)"
+#    $latestRelease = $releases.assets | Where { $_.browser_download_url.EndsWith("msixbundle") } | Select -First 1
+#    Invoke-WebRequest -Uri $latestRelease.browser_download_url -OutFile "C:\winget.msixbundle"
+#    Add-AppxPackage -Path .\winget.msixbundle
+#    Write-Host "Reloading environment variables..." -ForegroundColor Green
+#    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    start "ms-appinstaller:?source=https://aka.ms/getwinget"
     if (-not $(Get-Command winget)) {
         start "C:\winget.msixbundle"
         while($true)
