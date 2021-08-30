@@ -252,11 +252,15 @@ Stop-Process -Name explorer -Force
 # Download spotify installer to desktop. Since spotify doesn't support to be installed from admin.
 if ("$(winget list --id Spotify)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
+    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify"
+    explorer ".\upgrade-spotify.cmd"
+    Remove-Item -Path ".\upgrade-spotify.cmd" -Force
 }
 else {
     Write-Host "Attempting to download spotify installer..." -ForegroundColor Green
-    $source = 'https://download.scdn.co/SpotifySetup.exe'
-    Invoke-WebRequest -Uri $source -OutFile "$HOME\Desktop\spotify.exe"
+    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify"
+    explorer ".\install-spotify.cmd"
+    Remove-Item -Path ".\install-spotify.cmd" -Force
 }
 
 if ("$(winget list --id Todos)".Contains("--")) { 
