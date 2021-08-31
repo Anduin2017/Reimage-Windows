@@ -30,7 +30,7 @@ if (-not $(Get-Command Connect-AzureAD)) {
 } else {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
-Connect-AzureAD
+$aad = Connect-AzureAD
 
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
@@ -132,14 +132,12 @@ if (-not $(Get-Command git-lfs)) {
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
 $HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
 $DiskSizeregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive\DiskSpaceCheckThresholdMB'##Path to max disk size key
-$tennat = Get-AzureADTenantDetail
-$TenantGUID = $tennat.ObjectId
 
 if(!(Test-Path $HKLMregistryPath)){New-Item -Path $HKLMregistryPath -Force}
 if(!(Test-Path $DiskSizeregistryPath)){New-Item -Path $DiskSizeregistryPath -Force}
 Write-Host "Tenant Id is $($TenantGUID )"
 New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' -PropertyType DWORD -Force | Out-Null ##Enable silent account configuration
-New-ItemProperty -Path $DiskSizeregistryPath -Name $TenantGUID -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
+New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
@@ -175,8 +173,8 @@ Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
 $searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
-$email = $searcher.FindOne().Properties.mail
-$name = $searcher.FindOne().Properties.name
+$email = $aad.Account
+$name = $env:UserName
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
 git config --global user.email $email ...
