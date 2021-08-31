@@ -25,6 +25,9 @@ if (-not(Get-IsElevated)) {
     throw "Please run this script as an administrator" 
 }
 
+Install-Module AzureAD -Force
+Connect-AzureAD
+
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
 {
@@ -125,8 +128,6 @@ if (-not $(Get-Command git-lfs)) {
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
 $HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
 $DiskSizeregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive\DiskSpaceCheckThresholdMB'##Path to max disk size key
-Install-Module AzureAD -Force
-Connect-AzureAD
 $tennat = Get-AzureADTenantDetail
 $TenantGUID = $tennat.ObjectId
 
