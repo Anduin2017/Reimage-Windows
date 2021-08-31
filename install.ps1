@@ -25,7 +25,11 @@ if (-not(Get-IsElevated)) {
     throw "Please run this script as an administrator" 
 }
 
-Install-Module AzureAD -Force
+if (-not $(Get-Command Connect-AzureAD)) {
+    Install-Module AzureAD -Force
+} else {
+    Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
+}
 Connect-AzureAD
 
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
@@ -166,15 +170,13 @@ Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Green
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
-mkdir $HOME\.ssh -Force
+mkdir $HOME\.ssh -ErrorAction SilentlyContinue
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
-# $searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
-# $email = $searcher.FindOne().Properties.mail
-# $name = $searcher.FindOne().Properties.name
-$email = "anduin.xue@microsoft.com"
-$name = "Anduin Xue"
+$searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
+$email = $searcher.FindOne().Properties.mail
+$name = $searcher.FindOne().Properties.name
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
 git config --global user.email $email ...
