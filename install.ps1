@@ -192,12 +192,13 @@ git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
 pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
-Write-Host "Setting up .NET build environment..." -ForegroundColor Green
+Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
 dotnet tool install --global dotnet-ef
 dotnet tool update --global dotnet-ef
-git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
-git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME/source/repos/AiursoftWeb/AiurVersionControl"
-dotnet test "$HOME\source\repos\AiursoftWeb\Infrastructures\Aiursoft.Infrastructures.sln"
+git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME\source\repos\AiursoftWeb\Infrastructures"
+git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\repos\AiursoftWeb\AiurVersionControl"
+git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\AiursoftWeb\Happiness-recorder"
+dotnet publish "$HOME\source\repos\AiursoftWeb\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\JAL"
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Green
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
