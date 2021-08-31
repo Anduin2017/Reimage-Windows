@@ -133,7 +133,7 @@ $TenantGUID = $tennat.ObjectId
 
 if(!(Test-Path $HKLMregistryPath)){New-Item -Path $HKLMregistryPath -Force}
 if(!(Test-Path $DiskSizeregistryPath)){New-Item -Path $DiskSizeregistryPath -Force}
-
+Write-Host "Tenant Id is $($TenantGUID )"
 New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' -PropertyType DWORD -Force | Out-Null ##Enable silent account configuration
 New-ItemProperty -Path $DiskSizeregistryPath -Name $TenantGUID -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
 
