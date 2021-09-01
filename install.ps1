@@ -26,6 +26,7 @@ if (-not(Get-IsElevated)) {
 }
 
 if (-not $(Get-Command Connect-AzureAD)) {
+    Install-PackageProvider -Name NuGet -Force
     Install-Module AzureAD -Force
 } else {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
@@ -303,7 +304,6 @@ Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all
 
 Write-Host "Checking for windows updates..." -ForegroundColor Green
-Install-PackageProvider -Name NuGet -Force
 Install-Module -Name PSWindowsUpdate -Force
 Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
 Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
