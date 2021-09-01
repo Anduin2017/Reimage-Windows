@@ -135,7 +135,7 @@ $DiskSizeregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive\DiskSpaceChe
 
 if(!(Test-Path $HKLMregistryPath)){New-Item -Path $HKLMregistryPath -Force}
 if(!(Test-Path $DiskSizeregistryPath)){New-Item -Path $DiskSizeregistryPath -Force}
-Write-Host "Tenant Id is $($TenantGUID )"
+Write-Host "Tenant Id is $($aad.TenantId)"
 New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' -PropertyType DWORD -Force | Out-Null ##Enable silent account configuration
 New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
 
@@ -173,12 +173,12 @@ Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
 $searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
-$email = $aad.Account
-$name = $env:UserName
+$email = $aad.Account.Id
+$name = (Get-AzureADUser -ObjectId $email).DisplayName
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
-git config --global user.email $email ...
-git config --global user.name $name ...
+git config --global user.email $email
+git config --global user.name $name
 git config --global core.autocrlf true
 
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Green
