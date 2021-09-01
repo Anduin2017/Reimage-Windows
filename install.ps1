@@ -172,7 +172,6 @@ mkdir $HOME\.ssh -ErrorAction SilentlyContinue
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
-$searcher = [adsisearcher]"(samaccountname=$env:USERNAME)"
 $email = $aad.Account.Id
 $name = (Get-AzureADUser -ObjectId $email).DisplayName
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
