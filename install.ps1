@@ -269,12 +269,6 @@ Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 Write-Host "Dark theme enabled."
 
-Write-Host "Cleaning desktop..." -ForegroundColor Green
-Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
-Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
-Stop-Process -Name explorer -Force
-Write-Host "Desktop cleaned."
-
 # Download spotify installer to desktop. Since spotify doesn't support to be installed from admin.
 if ("$(winget list --id Spotify)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
@@ -304,6 +298,12 @@ else {
     Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
     winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive
 }
+
+Write-Host "Cleaning desktop..." -ForegroundColor Green
+Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
+Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
+Stop-Process -Name explorer -Force
+Write-Host "Desktop cleaned."
 
 # Upgrade all.
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
