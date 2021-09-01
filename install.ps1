@@ -141,7 +141,7 @@ New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' 
 New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
 Write-Host "Restarting OneDrive..." -ForegroundColor Yellow
 taskkill.exe /IM OneDrive.exe /F
-explorer "C:\Users\xuef\AppData\Local\Microsoft\OneDrive\OneDrive.exe"
+explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 Start-Sleep -Seconds 10
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
 Get-ChildItem $OneDrivePath
