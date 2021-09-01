@@ -59,7 +59,7 @@ if (-not $(Get-Command winget)) {
             if (-not $(Get-Command winget))
             {
                 Write-Host "Winget is still not found!" -ForegroundColor Yellow
-                Start-Sleep -Milliseconds 5000
+                Start-Sleep -Seconds 5
             } 
             else
             {
@@ -128,6 +128,45 @@ if (-not $(Get-Command git-lfs)) {
     winget install "GitHub.GitLFS"
 } else {
     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
+}
+
+if ("$(winget list --id Tencent.WeChat)".Contains("--")) { 
+    Write-Host "WeChat is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download WeChat..." -ForegroundColor Green
+    winget install --exact --id Tencent.WeChat
+}
+
+if ("$(winget list --id Spotify)".Contains("--")) { 
+    Write-Host "Spotify is already installed!" -ForegroundColor Green
+    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify"
+    explorer ".\upgrade-spotify.cmd"
+    Start-Sleep -Seconds 10
+    Remove-Item -Path ".\upgrade-spotify.cmd" -Force
+}
+else {
+    Write-Host "Attempting to download spotify installer..." -ForegroundColor Green
+    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify"
+    explorer ".\install-spotify.cmd"
+    Start-Sleep -Seconds 10
+    Remove-Item -Path ".\install-spotify.cmd" -Force
+}
+
+if ("$(winget list --id Todos)".Contains("--")) { 
+    Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
+    Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
+}
+
+if ("$(winget list --id Microsoft.VisualStudioCode)".Contains("--")) { 
+    Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
+    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive
 }
 
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
@@ -269,36 +308,6 @@ Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
 Write-Host "Dark theme enabled."
-
-# Download spotify installer to desktop. Since spotify doesn't support to be installed from admin.
-if ("$(winget list --id Spotify)".Contains("--")) { 
-    Write-Host "Spotify is already installed!" -ForegroundColor Green
-    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify"
-    explorer ".\upgrade-spotify.cmd"
-    Remove-Item -Path ".\upgrade-spotify.cmd" -Force
-}
-else {
-    Write-Host "Attempting to download spotify installer..." -ForegroundColor Green
-    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify"
-    explorer ".\install-spotify.cmd"
-    Remove-Item -Path ".\install-spotify.cmd" -Force
-}
-
-if ("$(winget list --id Todos)".Contains("--")) { 
-    Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
-}
-else {
-    Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
-    Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
-}
-
-if ("$(winget list --id Microsoft.VisualStudioCode)".Contains("--")) { 
-    Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
-}
-else {
-    Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
-    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive
-}
 
 Write-Host "Cleaning desktop..." -ForegroundColor Green
 Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
