@@ -139,6 +139,12 @@ if(!(Test-Path $DiskSizeregistryPath)){New-Item -Path $DiskSizeregistryPath -For
 Write-Host "Tenant Id is $($aad.TenantId)"
 New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' -PropertyType DWORD -Force | Out-Null ##Enable silent account configuration
 New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
+Write-Host "Restarting OneDrive..." -ForegroundColor Yellow
+taskkill.exe /IM OneDrive.exe /F
+explorer "C:\Users\xuef\AppData\Local\Microsoft\OneDrive\OneDrive.exe"
+Start-Sleep -Seconds 10
+$OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+Get-ChildItem $OneDrivePath
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
@@ -168,7 +174,7 @@ Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Green
-$OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+
 mkdir $HOME\.ssh -ErrorAction SilentlyContinue
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
