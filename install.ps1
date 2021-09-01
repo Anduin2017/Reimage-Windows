@@ -207,13 +207,9 @@ Set-Content $PROFILE "function Update-All {
 }"
 . $PROFILE
 
-Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
-[Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
-[Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
-[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
+
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Green
-
 mkdir $HOME\.ssh -ErrorAction SilentlyContinue
 Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
@@ -235,12 +231,21 @@ git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
 pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
+Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
+[Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
+[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
+New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force
+
+Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
+dotnet tool install --global dotnet-ef --interactive
+dotnet tool update --global dotnet-ef --interactive
+
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
-dotnet tool install --global dotnet-ef
-dotnet tool update --global dotnet-ef
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME\source\repos\AiursoftWeb\Infrastructures"
 git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\repos\AiursoftWeb\AiurVersionControl"
-git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\AiursoftWeb\Happiness-recorder"
+git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\Anduin2017\Happiness-recorder"
 dotnet publish "$HOME\source\repos\AiursoftWeb\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\JAL"
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Green
@@ -273,9 +278,6 @@ Write-Host "Enabling Chinese input method..." -ForegroundColor Green
 $LanguageList = Get-WinUserLanguageList
 $LanguageList.Add("zh-CN")
 Set-WinUserLanguageList $LanguageList -Force
-
-Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
 
 Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
 cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
