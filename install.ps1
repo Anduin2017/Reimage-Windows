@@ -267,6 +267,7 @@ Write-Host "Repos folder are pinned to file explorer."
 
 Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
 Write-Host "Dark theme enabled."
 
 # Download spotify installer to desktop. Since spotify doesn't support to be installed from admin.
