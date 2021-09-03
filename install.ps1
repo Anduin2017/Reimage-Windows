@@ -236,6 +236,22 @@ Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
 [Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
+
+if (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") {
+    $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
+    <configuration>`
+      <packageSources>`
+        <add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`" protocolVersion=`"3`" />`
+        <add key=`"Microsoft Visual Studio Offline Packages`" value=`"C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\`" />`
+      </packageSources>`
+      <config>`
+        <add key=`"repositoryPath`" value=`"D:\CxCache`" />`
+      </config>`
+    </configuration>"
+    Set-Content -Path "$env:APPDATA\Nuget\Nuget.config" -Value $config
+} else {
+    Write-Host "Nuget config file already exists." -ForegroundColor Yellow
+}
 New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force
 
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
