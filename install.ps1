@@ -190,6 +190,7 @@ explorer "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 
 Start-Sleep -Seconds 10
 $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+$OneDrivePath = "$HOME\$OneDrivePath"
 Get-ChildItem $OneDrivePath
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
