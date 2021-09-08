@@ -209,7 +209,7 @@ Set-Content $PROFILE "function Update-All {
 
 Write-Host "Copying back SSH keys..." -ForegroundColor Green
 mkdir $HOME\.ssh -ErrorAction SilentlyContinue
-Copy-Item -Path "$HOME\$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
+Copy-Item -Path "$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
 
 Write-Host "Configuring git..." -ForegroundColor Green
 $email = $aad.Account.Id
@@ -222,7 +222,7 @@ git config --global core.autocrlf true
 
 Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Copy-Item -Path "$HOME\$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
+Copy-Item -Path "$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
 git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
