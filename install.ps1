@@ -17,7 +17,7 @@ function Install-IfNotInstalled {
     }
     else {
         Write-Host "Attempting to install: $package..." -ForegroundColor Green
-        winget install $package
+        winget install $package --source winget
     }
 }
 
@@ -125,7 +125,7 @@ if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
 }
 
 if (-not $(Get-Command git-lfs)) {
-    winget install "GitHub.GitLFS"
+    winget install "GitHub.GitLFS" --source winget
 } else {
     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
 }
@@ -135,19 +135,19 @@ if ("$(winget list --id Tencent.WeChat --source winget)".Contains("--")) {
 }
 else {
     Write-Host "Attempting to download WeChat..." -ForegroundColor Green
-    winget install --exact --id Tencent.WeChat
+    winget install --exact --id Tencent.WeChat --source winget
 }
 
 if ("$(winget list --id Spotify --source winget)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
-    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify"
+    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify --source winget"
     explorer ".\upgrade-spotify.cmd"
     Start-Sleep -Seconds 10
     Remove-Item -Path ".\upgrade-spotify.cmd" -Force
 }
 else {
     Write-Host "Attempting to download spotify installer..." -ForegroundColor Green
-    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify"
+    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify --source winget"
     explorer ".\install-spotify.cmd"
     Start-Sleep -Seconds 10
     Remove-Item -Path ".\install-spotify.cmd" -Force
@@ -166,7 +166,7 @@ if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("-
 }
 else {
     Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
-    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive
+    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive --source winget
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -356,7 +356,7 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 # Upgrade all.
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
-winget upgrade --all
+winget upgrade --all --source winget
 
 Write-Host "Checking for windows updates..." -ForegroundColor Green
 Install-Module -Name PSWindowsUpdate -Force
