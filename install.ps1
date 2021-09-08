@@ -12,7 +12,7 @@ function Install-IfNotInstalled {
         [string]$package
     )
 
-    if ("$(winget list -e --id $package)".Contains("--")) { 
+    if ("$(winget list -e --id $package --source winget)".Contains("--")) { 
         Write-Host "$package is already installed!" -ForegroundColor Green
     }
     else {
@@ -130,7 +130,7 @@ if (-not $(Get-Command git-lfs)) {
     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
 }
 
-if ("$(winget list --id Tencent.WeChat)".Contains("--")) { 
+if ("$(winget list --id Tencent.WeChat --source winget)".Contains("--")) { 
     Write-Host "WeChat is already installed!" -ForegroundColor Green
 }
 else {
@@ -138,7 +138,7 @@ else {
     winget install --exact --id Tencent.WeChat
 }
 
-if ("$(winget list --id Spotify)".Contains("--")) { 
+if ("$(winget list --id Spotify --source winget)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
     Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify"
     explorer ".\upgrade-spotify.cmd"
@@ -153,7 +153,7 @@ else {
     Remove-Item -Path ".\install-spotify.cmd" -Force
 }
 
-if ("$(winget list --id Todos)".Contains("--")) { 
+if ("$(winget list --id Todos --source winget)".Contains("--")) { 
     Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
 }
 else {
@@ -161,7 +161,7 @@ else {
     Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
 }
 
-if ("$(winget list --id Microsoft.VisualStudioCode)".Contains("--")) { 
+if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
     Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
 }
 else {
