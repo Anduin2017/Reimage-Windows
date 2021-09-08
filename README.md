@@ -25,5 +25,4 @@ You need to **fork** this repo, and modify some configuration path in the source
 For example:
 
 * I copied my SSH private key file from my OneDrive. Which requires you to modify those logic.
-* I setup git to use my own email address. Which requires you to modify those configuration.
-* I used the script to test my own project to verify that my development environment works fine. Which requires you to modify those configration.
+* I copied my Windows Terminal configuration file from my OneDrive. Which requires you to modify those logic.
