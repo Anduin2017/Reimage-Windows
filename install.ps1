@@ -242,7 +242,7 @@ Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
 
-if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or -not (Get-Content -Path "$env:APPDATA\Nuget\Nuget.config").Contains("nuget.org")) {
+if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or (Select-String -Path "$env:APPDATA\Nuget\Nuget.config" -Pattern "nuget.org") -eq $null) {
     $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
     <configuration>`
       <packageSources>`
