@@ -358,6 +358,9 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
 
+Write-Host "Scanning missing dlls..." -ForegroundColor Green
+sfc /scannow
+
 Write-Host "Checking for windows updates..." -ForegroundColor Green
 Install-Module -Name PSWindowsUpdate -Force
 Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
