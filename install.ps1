@@ -327,8 +327,8 @@ Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\P
 Write-Host "Dark theme enabled."
 
 Write-Host "Cleaning desktop..." -ForegroundColor Green
-Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false
-Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false
+Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
+Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
 
 Write-Host "Resetting desktop..." -ForegroundColor Yellow
 Stop-Process -Name explorer -Force
