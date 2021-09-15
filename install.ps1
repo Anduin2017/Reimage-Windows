@@ -202,7 +202,9 @@ if (!(Test-Path $PROFILE))
    Write-Host "Creating PROFILE..." -ForegroundColor Yellow
    New-Item -Path $PROFILE -ItemType "file" -Force
 }
-Set-Content $PROFILE "function Update-All {
+Set-Content $PROFILE "
+Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
+function Update-All {
     iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
 }"
 . $PROFILE
