@@ -362,6 +362,7 @@ winget upgrade --all --source winget
 
 Write-Host "Scanning missing dlls..." -ForegroundColor Green
 sfc /scannow
+chkdsk c: /r /f
 
 Write-Host "Checking for windows updates..." -ForegroundColor Green
 Install-Module -Name PSWindowsUpdate -Force
