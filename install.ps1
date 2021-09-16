@@ -36,7 +36,7 @@ if (-not $(Get-Command Connect-AzureAD)) {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
 $aad = Connect-AzureAD
-
+$driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
 {
@@ -362,7 +362,7 @@ winget upgrade --all --source winget
 
 Write-Host "Scanning missing dlls..." -ForegroundColor Green
 sfc /scannow
-echo y | chkdsk c: /f /r /x
+echo y | chkdsk "$($driveLetter):" /f /r /x
 
 Write-Host "Checking for windows updates..." -ForegroundColor Green
 Install-Module -Name PSWindowsUpdate -Force
