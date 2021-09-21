@@ -313,21 +313,6 @@ Write-Host "Disabling apps auto start..." -ForegroundColor Green
 cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v Wechat /f"
 cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v `"Free Download Manager`" /f"
 
-if (Test-Path $TeamsConfig) {
-    Write-Host "Setting up teams..." -ForegroundColor Green
-    Stop-Process -Name Teams -Force -ErrorAction SilentlyContinue
-    Start-Sleep 5
-    $TeamsConfig = "$env:APPDATA\Microsoft\Teams\desktop-config.json"
-    $TeamsConfigData = Get-Content $TeamsConfig -Raw -ErrorAction SilentlyContinue | ConvertFrom-Json
-    $TeamsConfigData.theme = "darkV2"
-    $TeamsConfigData.appPreferenceSettings.openAtLogin = $true
-    $TeamsConfigData.appPreferenceSettings.openAsHidden = $true
-    $TeamsConfigData.appPreferenceSettings.runningOnClose = $true
-    $TeamsConfigData | ConvertTo-Json -Depth 100 | Out-File -Encoding UTF8 -FilePath $TeamsConfig -Force
-} else {
-    Write-Host "Teams is not configured. Skipped Teams configuration" -ForegroundColor Yellow
-}
-
 Write-Host "Applying file explorer settings..." -ForegroundColor Green
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v AutoCheckSelect /t REG_DWORD /d 0 /f"
