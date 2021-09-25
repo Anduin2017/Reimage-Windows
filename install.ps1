@@ -217,6 +217,7 @@ function Update-All {
 Write-Host "Linking back SSH keys..." -ForegroundColor Green
 $oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
 $localSshConfigPath = "$HOME\.ssh\"
+cmd /c "rmdir $localSshConfigPath"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 
 Write-Host "Configuring git..." -ForegroundColor Green
