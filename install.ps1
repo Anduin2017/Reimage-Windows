@@ -214,9 +214,10 @@ function Update-All {
 }"
 . $PROFILE
 
-Write-Host "Copying back SSH keys..." -ForegroundColor Green
-mkdir $HOME\.ssh -ErrorAction SilentlyContinue
-Copy-Item -Path "$OneDrivePath\Storage\SSH\*" -Destination "$HOME\.ssh\"
+Write-Host "Linking back SSH keys..." -ForegroundColor Green
+$oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
+$localSshConfigPath = "$HOME\.ssh\"
+cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 
 Write-Host "Configuring git..." -ForegroundColor Green
 $email = $aad.Account.Id
