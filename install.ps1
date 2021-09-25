@@ -227,9 +227,10 @@ git config --global user.email $email
 git config --global user.name $name
 git config --global core.autocrlf true
 
-Write-Host "Copying back windows terminal configuration file..." -ForegroundColor Green
+Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Copy-Item -Path "$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
+#Copy-Item -Path "$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
+(cmd /c "del `"$wtConfigPath`"") -or (cmd /c "mklink `"$wtConfigPath`" `"$onedriveConfigwt`"")
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
 git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
