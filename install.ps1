@@ -230,7 +230,7 @@ git config --global core.autocrlf true
 
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-#Copy-Item -Path "$OneDrivePath\Storage\WT\settings.json" -Destination $wtConfigPath
+$onedriveConfigwt = "$OneDrivePath\Storage\WT\settings.json"
 (cmd /c "del `"$wtConfigPath`"") -or (cmd /c "mklink `"$wtConfigPath`" `"$onedriveConfigwt`"")
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
