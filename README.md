@@ -16,6 +16,12 @@ Right click the start button, click `Windows PowerShell(Admin)`.
 iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1'))
 ```
 
+In China? There is a proxy for China network which bypass the firewall.
+
+```powershell
+iex ((New-Object System.Net.WebClient).DownloadString('https://githubcontent.aiurs.co/Anduin2017/configuration-script-win/main/install.ps1'))
+```
+
 ![image](https://user-images.githubusercontent.com/19531547/127482010-6f8d35f8-37c5-472a-97ae-a75c16aa3699.png)
 
 ## How can I use this project?
