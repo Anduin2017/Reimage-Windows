@@ -216,12 +216,12 @@ function Update-All {
 }
 
 function Watch-RandomVideo {
-    $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4') -Recurse -ErrorAction SilentlyContinue -Force
+    `$allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4') -Recurse -ErrorAction SilentlyContinue -Force
 
     while ($true) {
-        $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
-        Write-Host 'Picked to play $pickedVideo' -ForegroundColor Yellow
-        Start-Process 'C:\Program Files\VideoLAN\VLC\vlc.exe' -PassThru "--start-time 9 $pickedVideo" -Wait
+        `$pickedVideo = `$(Get-Random -InputObject $allVideos).FullName
+        Write-Host 'Picked to play `$pickedVideo' -ForegroundColor Yellow
+        Start-Process 'C:\Program Files\VideoLAN\VLC\vlc.exe' -PassThru '--start-time 9 `$pickedVideo' -Wait
     }
 }
 
