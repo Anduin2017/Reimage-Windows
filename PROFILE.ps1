@@ -3,14 +3,12 @@
 Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 
 function Update-All {
-    if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { 
-        Start-Process "PowerShell.exe" -PassThru "Update-AllThisTerminal" -Verb RunAs;
-        exit 
-    }
-    Start-Process "PowerShell.exe" -PassThru "Update-AllThisTerminal" -Verb RunAs
+    # This will start a new PowerShell window outside Windows terminal with Admin permission.
+    Start-Process "PowerShell.exe" -PassThru "Force-UpdateAll" -Verb RunAs
 }
 
 function Force-UpdateAll {
+    # This will run this update script inside current terminal.
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1"))
 }
 
