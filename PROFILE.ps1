@@ -10,7 +10,7 @@ function Update-All {
     Start-Process "PowerShell.exe" -PassThru "Update-AllThisTerminal" -Verb RunAs
 }
 
-function Update-AllThisTerminal {
+function Force-UpdateAll {
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1"))
 }
 
