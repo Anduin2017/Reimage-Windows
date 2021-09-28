@@ -22,6 +22,8 @@ In China? There is a proxy for China network which bypass the firewall.
 iex ((New-Object System.Net.WebClient).DownloadString('https://githubcontent.aiurs.co/Anduin2017/configuration-script-win/main/install.ps1'))
 ```
 
+**Caution: DO NOT RUN this in Windows Terminal!!! Instead, start a pure PowerShell with admin instead!**
+
 ![image](https://user-images.githubusercontent.com/19531547/127482010-6f8d35f8-37c5-472a-97ae-a75c16aa3699.png)
 
 ## How can I use this project?
