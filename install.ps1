@@ -371,24 +371,30 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-# Upgrade all.
-Write-Host "Checking for final app upgrades..." -ForegroundColor Green
-winget upgrade --all --source winget
+Write-Output "Press the [C] key to continue to steps which requires reboot."
+$pressedKey = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "You pressed: $($pressedKey.Character)"
 
-Write-Host "Scanning missing dlls..." -ForegroundColor Green
-sfc /scannow
-echo y | chkdsk "$($driveLetter):" /f /r /x
+if ($pressedKey.Character -eq 'c') {
+    # Upgrade all.
+    Write-Host "Checking for final app upgrades..." -ForegroundColor Green
+    winget upgrade --all --source winget
 
-Write-Host "Checking for windows updates..." -ForegroundColor Green
-Install-Module -Name PSWindowsUpdate -Force
-Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
-Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
+    Write-Host "Scanning missing dlls..." -ForegroundColor Green
+    sfc /scannow
+    echo y | chkdsk "$($driveLetter):" /f /r /x
 
-cmd.exe /c "netsh winsock reset catalog"
-cmd.exe /c "netsh int ip reset reset.log"
-cmd.exe /c "ipconfig /flushdns"
-cmd.exe /c "ipconfig /registerdns"
-cmd.exe /c "route /f"
-cmd.exe /c "sc config FDResPub start=auto"
-cmd.exe /c "sc config fdPHost start=auto"
-cmd.exe /c "shutdown -r -t 70"
+    Write-Host "Checking for windows updates..." -ForegroundColor Green
+    Install-Module -Name PSWindowsUpdate -Force
+    Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
+    Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
+
+    cmd.exe /c "netsh winsock reset catalog"
+    cmd.exe /c "netsh int ip reset reset.log"
+    cmd.exe /c "ipconfig /flushdns"
+    cmd.exe /c "ipconfig /registerdns"
+    cmd.exe /c "route /f"
+    cmd.exe /c "sc config FDResPub start=auto"
+    cmd.exe /c "sc config fdPHost start=auto"
+    cmd.exe /c "shutdown -r -t 70"
+}
