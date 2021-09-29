@@ -402,3 +402,14 @@ if ($pressedKey.Character -eq 'c') {
     cmd.exe /c "sc config fdPHost start=auto"
     cmd.exe /c "shutdown -r -t 70"
 }
+
+# What you can do next?
+# Activate Windows
+# Set OneDrive files to local
+# Install Xbox app
+# Sign in VSCode to turn on settings sync.
+# Sign in browser extensions to use password manager.
+# Sign in To do.
+# Sign in Sticky Notes.
+# Sign in Mail UWP.
+# Teams turn on dark theme and start in background.
