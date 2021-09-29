@@ -46,22 +46,19 @@ if (-not ([string]::IsNullOrEmpty($computerName)))
 }
 
 if (-not $(Get-Command winget)) {
-     Write-Host "Installing WinGet..." -ForegroundColor Green
-    start "ms-appinstaller:?source=https://aka.ms/getwinget"
-    if (-not $(Get-Command winget)) {
-        start "C:\winget.msixbundle"
-        while($true)
+    Write-Host "Installing WinGet..." -ForegroundColor Green
+    Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+    while($true)
+    {
+        if (-not $(Get-Command winget))
         {
-            if (-not $(Get-Command winget))
-            {
-                Write-Host "Winget is still not found!" -ForegroundColor Yellow
-                Start-Sleep -Seconds 5
-            } 
-            else
-            {
-                break
-            }    
-        }
+            Write-Host "Winget is still not found!" -ForegroundColor Yellow
+            Start-Sleep -Seconds 5
+        } 
+        else
+        {
+            break
+        }    
     }
     Remove-Item -Path "C:\winget.msixbundle" -Force
 }
