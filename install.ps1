@@ -78,7 +78,7 @@ Write-Host "Triggering Store to upgrade all apps..." -ForegroundColor Green
 $namespaceName = "root\cimv2\mdm\dmmap"
 $className = "MDM_EnterpriseModernAppManagement_AppManagement01"
 $wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
-$result = $wmiObj.UpdateScanMethod()
+$wmiObj.UpdateScanMethod() | Format-Table -AutoSize
 
 #apps want to install
 $appList = @(
@@ -193,12 +193,12 @@ New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' 
 New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
 Write-Host "Restarting OneDrive..." -ForegroundColor Yellow
 taskkill.exe /IM OneDrive.exe /F
-
 explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 explorer "$env:LOCALAPPDATA\Microsoft\OneDrive\OneDrive.exe"
 explorer "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 
-while ($OneDrivePath -eq $null -or -not $OneDrivePath.Contains("-")) {
+$OneDrivePath = $null
+while ($null -eq $OneDrivePath -or -not $OneDrivePath.Contains("-")) {
     # Wait till it finds my enterprise OneDrive folder.
     Start-Sleep -Seconds 10
     $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
@@ -214,7 +214,6 @@ if (!(Test-Path $PROFILE))
    Write-Host "Creating PROFILE..." -ForegroundColor Yellow
    New-Item -Path $PROFILE -ItemType "file" -Force
 }
-
 $profileContent = (New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/PROFILE.ps1')
 Set-Content $PROFILE $profileContent
 . $PROFILE
@@ -256,7 +255,7 @@ Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
 [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
 
-if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or (Select-String -Path "$env:APPDATA\Nuget\Nuget.config" -Pattern "nuget.org") -eq $null) {
+if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or $null -eq (Select-String -Path "$env:APPDATA\Nuget\Nuget.config" -Pattern "nuget.org")) {
     $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
     <configuration>`
       <packageSources>`
@@ -274,7 +273,7 @@ if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or (Select-String 
 New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force
 
 Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
-iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
 dotnet tool install --global dotnet-ef --interactive
 dotnet tool update --global dotnet-ef --interactive
 
@@ -385,7 +384,7 @@ if ($pressedKey.Character -eq 'c') {
 
     Write-Host "Scanning missing dlls..." -ForegroundColor Green
     sfc /scannow
-    echo y | chkdsk "$($driveLetter):" /f /r /x
+    Write-Host y | chkdsk "$($driveLetter):" /f /r /x
 
     Write-Host "Checking for windows updates..." -ForegroundColor Green
     Install-Module -Name PSWindowsUpdate -Force
