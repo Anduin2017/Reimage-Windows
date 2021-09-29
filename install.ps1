@@ -9,7 +9,7 @@ function Get-IsElevated {
 
 function Install-StoreApp {
     param (
-        [string]$storeAppId
+        [string]$storeAppId,
         [string]$wingetAppName
     )
 
