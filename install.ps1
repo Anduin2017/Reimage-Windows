@@ -88,31 +88,30 @@ $className = "MDM_EnterpriseModernAppManagement_AppManagement01"
 $wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
 $wmiObj.UpdateScanMethod() | Format-Table -AutoSize
 
-#apps want to install
-$appList = @(
-    "Microsoft.WindowsTerminal",
-    "Microsoft.Teams",
-    "Microsoft.Office",
-    "Microsoft.OneDrive",
-    "Microsoft.PowerShell",
-    "Microsoft.dotnet",
-    "Microsoft.Edge",
-    "Microsoft.EdgeWebView2Runtime",
-    "Microsoft.AzureDataStudio",
-    "Tencent.WeChat",
-    "SoftDeluxe.FreeDownloadManager",
-    "VideoLAN.VLC",
-    "OBSProject.OBSStudio",
-    "Git.Git",
-    "OpenJS.NodeJS",
-    "Postman.Postman",
-    "7zip.7zip"
-)
+Install-IfNotInstalled "Microsoft.WindowsTerminal"
+Install-IfNotInstalled "Microsoft.Teams"
+Install-IfNotInstalled "Microsoft.Office"
+Install-IfNotInstalled "Microsoft.OneDrive"
+Install-IfNotInstalled "Microsoft.PowerShell"
+Install-IfNotInstalled "Microsoft.dotnet"
+Install-IfNotInstalled "Microsoft.Edge"
+Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
+Install-IfNotInstalled "Microsoft.AzureDataStudio"
+Install-IfNotInstalled "Tencent.WeChat"
+Install-IfNotInstalled "SoftDeluxe.FreeDownloadManager"
+Install-IfNotInstalled "VideoLAN.VLC"
+Install-IfNotInstalled "OBSProject.OBSStudio"
+Install-IfNotInstalled "Git.Git"
+Install-IfNotInstalled "OpenJS.NodeJS"
+Install-IfNotInstalled "Postman.Postman"
+Install-IfNotInstalled "7zip.7zip"
 
-Write-Host "Starting to install apps..." -ForegroundColor Yellow
-foreach ($app in $appList){
-    Install-IfNotInstalled $app
-}
+Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
+Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
+Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
+Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
+Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
+Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
@@ -142,26 +141,11 @@ if (-not $(Get-Command git-lfs)) {
     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
 }
 
-if ("$(winget list --id Tencent.WeChat --source winget)".Contains("--")) { 
-    Write-Host "WeChat is already installed!" -ForegroundColor Green
-}
-else {
-    Write-Host "Attempting to download WeChat..." -ForegroundColor Green
-    winget install --exact --id Tencent.WeChat --source winget
-}
-
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2019.Enterprise
 } else {
     Install-IfNotInstalled Microsoft.VisualStudio.2019.Community
 }
-
-Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
-Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
-Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
-Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
-Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
-Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
     Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
