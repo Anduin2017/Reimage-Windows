@@ -13,7 +13,7 @@ function Install-StoreApp {
         [string]$wingetAppName
     )
 
-    if ("winget list --name $wingetAppName --exact --source msstore".Contains("--")) { 
+    if ("$(winget list --name $wingetAppName --exact --source msstore)".Contains("--")) { 
         Write-Host "$wingetAppName is already installed!" -ForegroundColor Green
     }
     else {
