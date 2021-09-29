@@ -217,7 +217,7 @@ Set-Content $PROFILE $profileContent
 Write-Host "Linking back SSH keys..." -ForegroundColor Green
 $oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
 $localSshConfigPath = "$HOME\.ssh\"
-cmd /c "rmdir $localSshConfigPath /s /q"
+cmd /c "rmdir $localSshConfigPath /q"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 
 Write-Host "Configuring git..." -ForegroundColor Green
