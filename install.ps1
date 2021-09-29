@@ -62,22 +62,15 @@ if (-not ([string]::IsNullOrEmpty($computerName)))
     Rename-Computer -NewName $computerName
 }
 
+# Install Winget
 if (-not $(Get-Command winget)) {
     Write-Host "Installing WinGet..." -ForegroundColor Green
     Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-    while($true)
+    while(-not $(Get-Command winget))
     {
-        if (-not $(Get-Command winget))
-        {
-            Write-Host "Winget is still not found!" -ForegroundColor Yellow
-            Start-Sleep -Seconds 5
-        } 
-        else
-        {
-            break
-        }    
+        Write-Host "Winget is still not found!" -ForegroundColor Yellow
+        Start-Sleep -Seconds 5
     }
-    Remove-Item -Path "C:\winget.msixbundle" -Force
 }
 
 $screen = (Get-WmiObject -Class Win32_VideoController)
