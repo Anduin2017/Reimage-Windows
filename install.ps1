@@ -223,6 +223,8 @@ $oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
 $localSshConfigPath = "$HOME\.ssh\"
 cmd /c "rmdir $localSshConfigPath /q"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
+Write-Host "Testing SSH features..." -ForegroundColor Green
+ssh -o "StrictHostKeyChecking no" git@github.com
 
 Write-Host "Configuring git..." -ForegroundColor Green
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
