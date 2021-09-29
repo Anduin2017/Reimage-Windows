@@ -163,6 +163,12 @@ else {
     Remove-Item -Path ".\install-spotify.cmd" -Force
 }
 
+if ("$(winget list --exact --name Xbox)".Contains("--")) { 
+    Write-Host "Xbox is already installed!" -ForegroundColor Green
+} else {
+    winget install --name "Xbox" --id "9MV0B5HZVK9Z" --exact --source msstore --accept-package-agreements --accept-source-agreements
+}
+
 if ("$(winget list --id Todos --source winget)".Contains("--")) { 
     Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
 }
