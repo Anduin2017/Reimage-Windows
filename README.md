@@ -2,6 +2,8 @@
 
 These scripts are for my personal usage to configure a ready-to-use Windows environment for me.
 
+[Edit now](https://github.com/Anduin2017/configuration-script-win/edit/main/install.ps1)
+
 ## Warning
 
 This project may NOT be designed for YOU!
