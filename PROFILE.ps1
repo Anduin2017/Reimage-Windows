@@ -21,3 +21,12 @@ function Watch-RandomVideo {
     }
 }
 
+function Watch-RandomPhoto {
+    $allVideos = Get-ChildItem -Path . -Include ('*.jpg', '*.png', '*.bmp') -Recurse -ErrorAction SilentlyContinue -Force
+    while ($true) {
+        $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
+        Write-Host "Picked to play $pickedVideo" -ForegroundColor Yellow
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 5 $pickedVideo --fullscreen"
+        Start-Sleep -Seconds 4
+    }
+}
