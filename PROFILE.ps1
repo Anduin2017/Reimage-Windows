@@ -13,20 +13,28 @@ function Force-UpdateAll {
 }
 
 function Watch-RandomVideo {
+    Write-Host "Fetching videos..."
     $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4') -Recurse -ErrorAction SilentlyContinue -Force
-    while ($true) {
-        $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
+    $allVideos = $allVideos | Sort-Object { Get-Random }
+    $allVideos | Format-Table -AutoSize | Select-Object -First 20
+    Write-Host "Playing $($allVideos.Count) videos..."
+    foreach ($pickedVideo in $allVideos) {
+        # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
         Write-Host "Picked to play $pickedVideo" -ForegroundColor Yellow
         Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 $pickedVideo" -Wait
     }
 }
 
 function Watch-RandomPhoto {
-    $allVideos = Get-ChildItem -Path . -Include ('*.jpg', '*.png', '*.bmp') -Recurse -ErrorAction SilentlyContinue -Force
-    while ($true) {
-        $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
-        Write-Host "Picked to play $pickedVideo" -ForegroundColor Yellow
-        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 5 $pickedVideo --fullscreen"
+    Write-Host "Fetching photos..."
+    $allPhotos = Get-ChildItem -Path . -Include ('*.jpg', '*.png', '*.bmp') -Recurse -ErrorAction SilentlyContinue -Force
+    $allPhotos = $allPhotos | Sort-Object { Get-Random }
+    $allPhotos | Format-Table -AutoSize | Select-Object -First 20
+    Write-Host "Playing $($allPhotos.Count) photos..."
+    foreach ($pickedPhoto in $allPhotos) {
+        # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
+        Write-Host "Picked to play $pickedPhoto" -ForegroundColor Yellow
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 5 $pickedPhoto --fullscreen"
         Start-Sleep -Seconds 4
     }
 }
