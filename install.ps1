@@ -36,6 +36,8 @@ if (-not $(Get-Command Connect-AzureAD)) {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
 $aad = Connect-AzureAD
+$email = $aad.Account.Id
+$name = (Get-AzureADUser -ObjectId $email).DisplayName
 $driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
@@ -140,6 +142,12 @@ else {
     winget install --exact --id Tencent.WeChat --source winget
 }
 
+if ($email.Contains('microsoft')) {
+    Install-IfNotInstalled Microsoft.VisualStudio.2019.Enterprise
+} else {
+    Install-IfNotInstalled Microsoft.VisualStudio.2019.Community
+}
+
 if ("$(winget list --id Spotify --source winget)".Contains("--")) { 
     Write-Host "Spotify is already installed!" -ForegroundColor Green
     Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify --source winget"
@@ -218,8 +226,6 @@ cmd /c "rmdir $localSshConfigPath /q"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 
 Write-Host "Configuring git..." -ForegroundColor Green
-$email = $aad.Account.Id
-$name = (Get-AzureADUser -ObjectId $email).DisplayName
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
 git config --global user.email $email
