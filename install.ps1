@@ -174,7 +174,7 @@ if ("$(winget list --id Todos --source winget)".Contains("--")) {
 }
 else {
     Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
-    Start-Process "https://www.microsoft.com/en-US/p/microsoft-to-do-lists-tasks-reminders/9nblggh5r558"
+    winget install --id "9NBLGGH5R558" --exact --source msstore --accept-package-agreements --accept-source-agreements
 }
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
