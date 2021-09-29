@@ -18,7 +18,7 @@ function Install-StoreApp {
     }
     else {
         Write-Host "Attempting to download $wingetAppName..." -ForegroundColor Green
-        winget install --id $storeAppId --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
+        winget install --id $storeAppId.ToUpper() --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
     }
 }
 
@@ -156,23 +156,12 @@ if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2019.Community
 }
 
-if ("$(winget list --id Spotify --source winget)".Contains("--")) { 
-    Write-Host "Spotify is already installed!" -ForegroundColor Green
-    Set-Content -Path ".\upgrade-spotify.cmd" -value "winget upgrade Spotify.Spotify --source winget"
-    explorer ".\upgrade-spotify.cmd"
-    Start-Sleep -Seconds 10
-    Remove-Item -Path ".\upgrade-spotify.cmd" -Force
-}
-else {
-    Write-Host "Attempting to download spotify installer..." -ForegroundColor Green
-    Set-Content -Path ".\install-spotify.cmd" -value "winget install Spotify.Spotify --source winget"
-    explorer ".\install-spotify.cmd"
-    Start-Sleep -Seconds 10
-    Remove-Item -Path ".\install-spotify.cmd" -Force
-}
-
 Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
 Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
+Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
+Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
+Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
+Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
     Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
