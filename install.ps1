@@ -7,6 +7,21 @@ function Get-IsElevated {
     { Write-Output $false }   
 }
 
+function Install-StoreApp {
+    param (
+        [string]$storeAppId
+        [string]$wingetAppName
+    )
+
+    if ("winget list --name $wingetAppName --exact --source msstore".Contains("--")) { 
+        Write-Host "$wingetAppName is already installed!" -ForegroundColor Green
+    }
+    else {
+        Write-Host "Attempting to download $wingetAppName..." -ForegroundColor Green
+        winget install --id $storeAppId --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
+    }
+}
+
 function Install-IfNotInstalled {
     param (
         [string]$package
@@ -163,19 +178,8 @@ else {
     Remove-Item -Path ".\install-spotify.cmd" -Force
 }
 
-if ("$(winget list --exact --name Xbox)".Contains("--")) { 
-    Write-Host "Xbox is already installed!" -ForegroundColor Green
-} else {
-    winget install --name "Xbox" --id "9MV0B5HZVK9Z" --exact --source msstore --accept-package-agreements --accept-source-agreements
-}
-
-if ("$(winget list --id Todos --source winget)".Contains("--")) { 
-    Write-Host "Microsoft To do is already installed!" -ForegroundColor Green
-}
-else {
-    Write-Host "Attempting to download Microsoft To do..." -ForegroundColor Green
-    winget install --id "9NBLGGH5R558" --exact --source msstore --accept-package-agreements --accept-source-agreements
-}
+Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
+Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
     Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
