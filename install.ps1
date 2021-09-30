@@ -197,6 +197,7 @@ Set-Content $PROFILE $profileContent
 Write-Host "Linking back SSH keys..." -ForegroundColor Green
 $oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
 $localSshConfigPath = "$HOME\.ssh\"
+$_ = Get-Content $oneDriveSshConfigPath\id_rsa.pub # Ensure file is available.
 cmd /c "rmdir $localSshConfigPath /q"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 Write-Host "Testing SSH features..." -ForegroundColor Green
@@ -212,6 +213,7 @@ git config --global core.autocrlf true
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 $onedriveConfigwt = "$OneDrivePath\Storage\WT\settings.json"
+$_ = Get-Content $onedriveConfigwt # Ensure file is available.
 cmd /c "del `"$wtConfigPath`""
 cmd /c "mklink `"$wtConfigPath`" `"$onedriveConfigwt`""
 
