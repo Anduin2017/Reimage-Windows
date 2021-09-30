@@ -384,10 +384,12 @@ if ($pressedKey.Character -eq 'c') {
 # What you can do next?
 # Activate Windows
 # Set OneDrive files to local
-# Install Xbox app
+# Sign in Visual Studio
+# Sign in the Xbox app
 # Sign in VSCode to turn on settings sync.
 # Sign in browser extensions to use password manager.
 # Sign in To do.
 # Sign in Sticky Notes.
 # Sign in Mail UWP.
 # Teams turn on dark theme and start in background.
+# Manually check store updates.
