@@ -353,7 +353,7 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
-Write-Output "Press the [C] key to continue to steps which requires reboot."
+Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 Write-Host "You pressed: $($pressedKey.Character)"
 
