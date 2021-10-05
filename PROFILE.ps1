@@ -21,7 +21,7 @@ function Watch-RandomVideo {
     foreach ($pickedVideo in $allVideos) {
         # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
         Write-Host "Picked to play $pickedVideo" -ForegroundColor Yellow
-        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 $pickedVideo" -Wait
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 `"$pickedVideo`"" -Wait
     }
 }
 
@@ -34,7 +34,7 @@ function Watch-RandomPhoto {
     foreach ($pickedPhoto in $allPhotos) {
         # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
         Write-Host "Picked to play $pickedPhoto" -ForegroundColor Yellow
-        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 5 $pickedPhoto --fullscreen"
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 5 `"$pickedPhoto`" --fullscreen"
         Start-Sleep -Seconds 4
     }
 }
