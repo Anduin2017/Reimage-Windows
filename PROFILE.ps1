@@ -24,8 +24,10 @@ function Watch-RandomVideo {
     Write-Host "Playing $($allVideos.Count) videos..."
     foreach ($pickedVideo in $allVideos) {
         # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
-        Write-Host "Picked to play $pickedVideo" -ForegroundColor Yellow
-        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 `"$pickedVideo`"" -Wait
+        Write-Host "Picked to play: " -ForegroundColor Yellow -NoNewline
+        Write-Host "$pickedVideo" -ForegroundColor White
+        Start-Sleep -Seconds 1
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 `"$pickedVideo`"" -Wait 2>&1 | out-null
     }
 }
 
