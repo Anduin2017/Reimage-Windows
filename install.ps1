@@ -354,14 +354,14 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStat
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 Write-Host "Press the [C] key to continue to steps which requires reboot."
-$pressedKey = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
-Write-Host "You pressed: $($pressedKey.Character)"
+$pressedKey = Read-Host
+Write-Host "You pressed: $($pressedKey)"
 
-if ($pressedKey.Character -eq 'c') {
-    # Upgrade all.
-    Write-Host "Checking for final app upgrades..." -ForegroundColor Green
-    winget upgrade --all --source winget
-
+# Upgrade all.
+Write-Host "Checking for final app upgrades..." -ForegroundColor Green
+winget upgrade --all --source winget
+    
+if ($pressedKey -eq 'c') {
     Write-Host "Scanning missing dlls..." -ForegroundColor Green
     sfc /scannow
     Write-Host y | chkdsk "$($driveLetter):" /f /r /x
@@ -384,12 +384,14 @@ if ($pressedKey.Character -eq 'c') {
 # What you can do next?
 # Activate Windows
 # Set OneDrive files to local
+# Sign in VSCode to turn on settings sync.
+# Sign in Spotify
+# Sign in WeChat
 # Sign in Visual Studio
 # Sign in the Xbox app
-# Sign in VSCode to turn on settings sync.
 # Sign in browser extensions to use password manager.
 # Sign in To do.
 # Sign in Sticky Notes.
 # Sign in Mail UWP.
 # Teams turn on dark theme and start in background.
-# Manually check store updates.
+# Manually check store updates again.
