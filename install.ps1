@@ -386,16 +386,20 @@ if ($pressedKey -eq 'c') {
 
 # What you can do next?
 # Change your display scale
-# Activate Windows
+# Teams turn on dark theme and start in background.
+# Manually check store updates again.
+# Sign in To do.
+# Sign in Sticky Notes.
+# Sign in Mail UWP.
+# Sign in browser extensions to use password manager.
 # Set OneDrive files to local
 # Sign in VSCode to turn on settings sync.
 # Sign in Spotify
 # Sign in WeChat
 # Sign in Visual Studio
 # Sign in the Xbox app
-# Sign in browser extensions to use password manager.
-# Sign in To do.
-# Sign in Sticky Notes.
-# Sign in Mail UWP.
-# Teams turn on dark theme and start in background.
-# Manually check store updates again.
+# Activate Windows
+
+
+
+
