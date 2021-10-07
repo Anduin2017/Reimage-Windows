@@ -385,6 +385,7 @@ if ($pressedKey -eq 'c') {
 }
 
 # What you can do next?
+# Change your display scale
 # Activate Windows
 # Set OneDrive files to local
 # Sign in VSCode to turn on settings sync.
