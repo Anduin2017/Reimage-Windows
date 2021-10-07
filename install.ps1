@@ -1,3 +1,22 @@
+function Do-Next {
+    Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
+    Write-Host " * Change your display scale" -ForegroundColor White
+    Write-Host " * Teams turn on dark theme and start in background." -ForegroundColor White
+    Write-Host " * Manually check store updates again." -ForegroundColor White
+    Write-Host " * Sign in To do." -ForegroundColor White
+    Write-Host " * Sign in Sticky Notes." -ForegroundColor White
+    Write-Host " * Sign in Mail UWP." -ForegroundColor White
+    Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
+    Write-Host " * Turn on bitlocker" -ForegroundColor White
+    Write-Host " * Set OneDrive files to local" -ForegroundColor White
+    Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
+    Write-Host " * Sign in Spotify" -ForegroundColor White
+    Write-Host " * Sign in WeChat" -ForegroundColor White
+    Write-Host " * Sign in Visual Studio" -ForegroundColor White
+    Write-Host " * Sign in the Xbox app" -ForegroundColor White
+    Write-Host " * Activate Windows" -ForegroundColor White
+}
+
 function Get-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
@@ -81,6 +100,8 @@ Write-Host "Got screen: $screenX x $screenY" -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 2  - Install    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
+
+Do-Next
 
 Write-Host "Triggering Store to upgrade all apps..." -ForegroundColor Green
 $namespaceName = "root\cimv2\mdm\dmmap"
@@ -384,23 +405,4 @@ if ($pressedKey -eq 'c') {
     cmd.exe /c "shutdown -r -t 70"
 }
 
-# What you can do next?
-# Change your display scale
-# Teams turn on dark theme and start in background.
-# Manually check store updates again.
-# Sign in To do.
-# Sign in Sticky Notes.
-# Sign in Mail UWP.
-# Sign in browser extensions to use password manager.
-# Turn on bitlocker
-# Set OneDrive files to local
-# Sign in VSCode to turn on settings sync.
-# Sign in Spotify
-# Sign in WeChat
-# Sign in Visual Studio
-# Sign in the Xbox app
-# Activate Windows
-
-
-
-
+Do-Next
