@@ -392,6 +392,7 @@ if ($pressedKey -eq 'c') {
 # Sign in Sticky Notes.
 # Sign in Mail UWP.
 # Sign in browser extensions to use password manager.
+# Turn on bitlocker
 # Set OneDrive files to local
 # Sign in VSCode to turn on settings sync.
 # Sign in Spotify
