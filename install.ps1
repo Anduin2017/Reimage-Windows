@@ -1,6 +1,7 @@
 function Do-Next {
     Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
     Write-Host " * Change your display scale" -ForegroundColor White
+    Write-Host " * Turn off rubbish focus assistance" -ForegroundColor White
     Write-Host " * Teams turn on dark theme and start in background." -ForegroundColor White
     Write-Host " * Manually check store updates again." -ForegroundColor White
     Write-Host " * Sign in To do." -ForegroundColor White
@@ -10,7 +11,7 @@ function Do-Next {
     Write-Host " * Turn on bitlocker" -ForegroundColor White
     Write-Host " * Set OneDrive files to local" -ForegroundColor White
     Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
-    Write-Host " * Sign in Spotify" -ForegroundColor White
+    Write-Host " * Sign in Spotify and edit start up settings" -ForegroundColor White
     Write-Host " * Sign in WeChat" -ForegroundColor White
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
     Write-Host " * Sign in the Xbox app" -ForegroundColor White
