@@ -377,14 +377,14 @@ Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name
 Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
+# Upgrade all.
+Write-Host "Checking for final app upgrades..." -ForegroundColor Green
+winget upgrade --all --source winget
+
 Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = Read-Host
 Write-Host "You pressed: $($pressedKey)"
 
-# Upgrade all.
-Write-Host "Checking for final app upgrades..." -ForegroundColor Green
-winget upgrade --all --source winget
-    
 if ($pressedKey -eq 'c') {
     Write-Host "Scanning missing dlls..." -ForegroundColor Green
     sfc /scannow
