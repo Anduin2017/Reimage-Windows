@@ -70,7 +70,7 @@ function Set-WallPaper($Image) {
                                                        String lpvParam, 
                                                        Int32 fuWinIni);
     }
-    "@ 
+"@ 
     $SPI_SETDESKWALLPAPER = 0x0014
     $UpdateIniFile = 0x01
     $SendChangeEvent = 0x02
