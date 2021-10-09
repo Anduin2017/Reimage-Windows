@@ -57,6 +57,27 @@ function Install-IfNotInstalled {
     }
 }
 
+function Set-WallPaper($Image) {
+    Add-Type -TypeDefinition @" 
+    using System; 
+    using System.Runtime.InteropServices;
+
+    public class Params
+    { 
+        [DllImport("User32.dll",CharSet=CharSet.Unicode)] 
+        public static extern int SystemParametersInfo (Int32 uAction, 
+                                                       Int32 uParam, 
+                                                       String lpvParam, 
+                                                       Int32 fuWinIni);
+    }
+    "@ 
+    $SPI_SETDESKWALLPAPER = 0x0014
+    $UpdateIniFile = 0x01
+    $SendChangeEvent = 0x02
+    $fWinIni = $UpdateIniFile -bor $SendChangeEvent
+    $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
+}
+
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 1  - Prepare    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -308,6 +329,10 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {645FF040-5081-101B-9F08-00AA002F954E} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
+
+$wallpaper = "$OneDrivePath\Digital\Wallpapers\Dark.jpg"
+Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
+Set-WallPaper -Image $wallpaper
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
