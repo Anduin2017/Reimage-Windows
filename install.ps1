@@ -333,6 +333,10 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "Clearing recycle bin..." -ForegroundColor Green
 Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 
+Write-Host "Clearing start up..." -ForegroundColor Green
+$startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
+Remove-Item -Path $startUp
+
 Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
 Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
 
