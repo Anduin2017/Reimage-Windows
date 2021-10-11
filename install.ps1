@@ -162,7 +162,23 @@ Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
- 
+
+if (Get-Item "D:") { 
+    Write-Host "Installing Chromium as backup browser in vol D ..." -ForegroundColor Green
+    $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
+    $chromiumPath = "D:\Chromium\"
+    Invoke-WebRequest -Uri $chromiumUrl -OutFile "D:\chromium.zip"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x "D:\chromium.zip" "-o$($chromiumPath)" -y
+    Remove-Item -Path "D:\chromium.zip" -Force
+
+    $shortCutPath = $env:USERPROFILE + "\Start Menu\Programs" + "\Chromium.lnk"
+    Remove-Item -Path $shortCutPath -Force -ErrorAction SilentlyContinue
+    $objShell = New-Object -ComObject ("WScript.Shell")
+    $objShortCut = $objShell.CreateShortcut($shortCutPath)
+    $objShortCut.TargetPath = "D:\Chromium\chrome-win\Chrome.exe"
+    $objShortCut.Save()
+}
+
 if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
     $ffmpegPath = "C:\Program Files\FFMPEG"
