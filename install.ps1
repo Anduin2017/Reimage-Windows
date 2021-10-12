@@ -167,7 +167,19 @@ if (Get-Item "D:") {
     Write-Host "Installing Chromium as backup browser in vol D ..." -ForegroundColor Green
     $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
     $chromiumPath = "D:\Chromium\"
-    Invoke-WebRequest -Uri $chromiumUrl -OutFile "D:\chromium.zip"
+    
+    $downloadedChromium = $env:USERPROFILE + "\Downloads\Win_x64.zip"
+    Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
+    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$chromiumUrl -force"
+        
+    while(-not $(Get-Item $downloadedChromium -ErrorAction SilentlyContinue))
+    {
+        Write-Host "Chromium is still not downloaded!"
+        Start-Sleep -Seconds 5
+    }
+    
+    Move-Item $downloadedChromium "D:\chromium.zip" -Force
+    
     & "${env:ProgramFiles}\7-Zip\7z.exe" x "D:\chromium.zip" "-o$($chromiumPath)" -y
     Remove-Item -Path "D:\chromium.zip" -Force
 
@@ -179,11 +191,23 @@ if (Get-Item "D:") {
     $objShortCut.Save()
 }
 
-if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
+if ($true) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
     $ffmpegPath = "C:\Program Files\FFMPEG"
     $downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
-    Invoke-WebRequest -Uri $downloadUri -OutFile "C:\ffmpeg.7z"
+    
+    $downloadedFfmpeg = $env:USERPROFILE + "\Downloads\ffmpeg-git-full.7z"
+    Remove-Item $downloadedFfmpeg -ErrorAction SilentlyContinue
+    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
+        
+    while(-not $(Get-Item $downloadedFfmpeg -ErrorAction SilentlyContinue))
+    {
+        Write-Host "FFmpeg is still not downloaded!"
+        Start-Sleep -Seconds 5
+    }
+    
+    Move-Item $downloadedFfmpeg "C:\ffmpeg.7z" -Force
+    
     & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\ffmpeg.7z" "-o$($ffmpegPath)" -y
     $subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
     $subPath = Join-Path -Path $ffmpegPath -ChildPath $subPath
@@ -194,8 +218,6 @@ if (-not $env:Path.Contains("mpeg") -or -not $(Get-Command ffmpeg)) {
         [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$binPath",
         [EnvironmentVariableTarget]::Machine)
     Remove-Item -Path "C:\ffmpeg.7z" -Force
-} else {
-    Write-Host "FFmpeg is already installed." -ForegroundColor Yellow
 }
 
 if (-not $(Get-Command git-lfs)) {
