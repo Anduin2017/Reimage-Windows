@@ -244,6 +244,12 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+Write-Host "Adding Git-Bash to environment variable..." -ForegroundColor Green
+[Environment]::SetEnvironmentVariable(
+    "Path",
+    [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";C:\Program Files\Git\bin",
+    [EnvironmentVariableTarget]::Machine)
+
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
 $HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
 $DiskSizeregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive\DiskSpaceCheckThresholdMB'##Path to max disk size key
