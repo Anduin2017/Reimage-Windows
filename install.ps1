@@ -4,6 +4,7 @@ function Do-Next {
     Write-Host " * Turn off rubbish focus assistance" -ForegroundColor White
     Write-Host " * Teams turn on dark theme and start in background." -ForegroundColor White
     Write-Host " * Manually check store updates again." -ForegroundColor White
+    Write-Host " * Manually sign in store personal account." -ForegroundColor White
     Write-Host " * Set Google as default search engine." -ForegroundColor White
     Write-Host " * Sign in To do." -ForegroundColor White
     Write-Host " * Sign in Sticky Notes." -ForegroundColor White
