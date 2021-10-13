@@ -369,6 +369,9 @@ Remove-Item -Path $startUp
 Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
 Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
 
+Write-Host "Setting Power Policy to ultimate..." -ForegroundColor Green
+powercfg /s e9a42b02-d5df-448d-aa00-03f14749eb61
+
 Write-Host "Enabling desktop icons..." -ForegroundColor Green
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
