@@ -362,6 +362,9 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "Clearing recycle bin..." -ForegroundColor Green
 Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 
+Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
+
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
 Remove-Item -Path $startUp
