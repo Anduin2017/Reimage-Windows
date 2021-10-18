@@ -360,20 +360,25 @@ Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 Write-Host "Clearing recycle bin..." -ForegroundColor Green
+Write-Host "Recycle bin cleared on $driveLetter..."
 Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 
 Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
+Write-Host "Disabled Active Probing."
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
 Remove-Item -Path $startUp
+Get-ChildItems $startUp
 
 Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
 Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
+Write-Host "3D objects deleted."
 
 Write-Host "Setting Power Policy to ultimate..." -ForegroundColor Green
 powercfg /s e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg /list
 
 Write-Host "Enabling desktop icons..." -ForegroundColor Green
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {20D04FE0-3AEA-1069-A2D8-08002B30309D} /t REG_DWORD /d 0 /f"
@@ -388,15 +393,18 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 $wallpaper = "$OneDrivePath\Digital\Wallpapers\Dark.jpg"
 Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
 Set-WallPaper -Image $wallpaper
+Write-Host "Set to: " (Get-Item "C:\Users\xuef\OneDrive - Microsoft\Digital\Wallpapers\Dark.jpg").Name
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
 Powercfg /Change standby-timeout-ac 0
+Write-Host "Monitor timeout set to 20."
 
 Write-Host "Enabling Chinese input method..." -ForegroundColor Green
 $LanguageList = Get-WinUserLanguageList
 $LanguageList.Add("zh-CN")
 Set-WinUserLanguageList $LanguageList -Force
+$LanguageList | Format-Table -AutoSize
 
 Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
 cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
