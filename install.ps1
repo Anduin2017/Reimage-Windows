@@ -422,6 +422,12 @@ Write-Host "Setting Time zone..." -ForegroundColor Green
 Set-TimeZone -Name "China Standard Time"
 Write-Host "Time zone set to China Standard Time."
 
+Write-Host "Syncing time..." -ForegroundColor Green
+net stop w32time
+net start w32time
+w32tm /resync /force
+w32tm /query /status
+
 Write-Host "Setting mouse speed..." -ForegroundColor Green
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSensitivity /t REG_SZ /d 6 /f"
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSpeed /t REG_SZ /d 0 /f"
