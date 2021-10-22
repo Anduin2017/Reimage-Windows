@@ -369,8 +369,9 @@ Write-Host "Disabled Active Probing."
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
+Get-ChildItem $startUp
 Remove-Item -Path $startUp
-Get-ChildItems $startUp
+Get-ChildItem $startUp
 
 Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
 Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
