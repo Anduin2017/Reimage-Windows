@@ -161,7 +161,7 @@ Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Not
 Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
-
+Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
