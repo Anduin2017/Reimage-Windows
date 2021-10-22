@@ -396,7 +396,7 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 $wallpaper = "$OneDrivePath\Digital\Wallpapers\Dark.jpg"
 Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
 Set-WallPaper -Image $wallpaper
-Write-Host "Set to: " (Get-Item "C:\Users\xuef\OneDrive - Microsoft\Digital\Wallpapers\Dark.jpg").Name
+Write-Host "Set to: " (Get-Item "$OneDrivePath\Digital\Wallpapers\Dark.jpg").Name
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
