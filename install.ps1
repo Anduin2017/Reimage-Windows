@@ -166,7 +166,7 @@ Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
-if (Get-Item "D:") { 
+if (Get-Item "D:" -ErrorAction SilentlyContinue) { 
     Write-Host "Installing Chromium as backup browser in vol D ..." -ForegroundColor Green
     $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
     $chromiumPath = "D:\Chromium\"
