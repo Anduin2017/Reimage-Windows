@@ -14,12 +14,13 @@ function Force-UpdateAll {
 
 function Watch-RandomVideo {
     param(
-        [string]$filter
+        [string]$filter,
+        [int]$take = 99999999
     )
 
     Write-Host "Fetching videos..."
     $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4') -Recurse -ErrorAction SilentlyContinue -Force
-    $allVideos = $allVideos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) }
+    $allVideos = $allVideos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) } | Select-Object -First $take
     $allVideos | Format-Table -AutoSize | Select-Object -First 20
     Write-Host "Playing $($allVideos.Count) videos..."
     foreach ($pickedVideo in $allVideos) {
@@ -33,12 +34,13 @@ function Watch-RandomVideo {
 
 function Watch-RandomPhoto {
     param(
-        [string]$filter
+        [string]$filter,
+        [int]$take = 99999999
     )
     
     Write-Host "Fetching photos..."
     $allPhotos = Get-ChildItem -Path . -Include ('*.jpg', '*.png', '*.bmp') -Recurse -ErrorAction SilentlyContinue -Force
-    $allPhotos = $allPhotos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) }
+    $allPhotos = $allPhotos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) } | Select-Object -First $take
     $allPhotos | Format-Table -AutoSize | Select-Object -First 20
     Write-Host "Playing $($allPhotos.Count) photos..."
     foreach ($pickedPhoto in $allPhotos) {
