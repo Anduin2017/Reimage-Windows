@@ -299,7 +299,7 @@ $_ = Get-Content $oneDriveSshConfigPath\id_rsa.pub # Ensure file is available.
 cmd /c "rmdir $localSshConfigPath /q"
 cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 Write-Host "Testing SSH features..." -ForegroundColor Green
-ssh -o "StrictHostKeyChecking no" git@github.com
+Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
 Write-Host "Configuring git..." -ForegroundColor Green
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
