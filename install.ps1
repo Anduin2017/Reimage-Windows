@@ -490,6 +490,9 @@ $pressedKey = Read-Host
 Write-Host "You pressed: $($pressedKey)"
 
 if ($pressedKey -eq 'c') {
+    Write-Host "Reseting WS..." -ForegroundColor Green
+    WSReset.exe
+    
     Write-Host "Scanning missing dlls..." -ForegroundColor Green
     sfc /scannow
     Write-Host y | chkdsk "$($driveLetter):" /f /r /x
