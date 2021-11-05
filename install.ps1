@@ -171,10 +171,10 @@ Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
-if (Get-Item "D:" -ErrorAction SilentlyContinue) { 
-    Write-Host "Installing Chromium as backup browser in vol D ..." -ForegroundColor Green
+if ($true) { 
+    Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
     $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
-    $chromiumPath = "D:\Chromium\"
+    $chromiumPath = "${env:ProgramFiles}\Chromium"
     
     $downloadedChromium = $env:USERPROFILE + "\Downloads\Win_x64.zip"
     Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
@@ -186,22 +186,22 @@ if (Get-Item "D:" -ErrorAction SilentlyContinue) {
         Start-Sleep -Seconds 5
     }
     
-    Move-Item $downloadedChromium "D:\chromium.zip" -Force
+    Move-Item $downloadedChromium "C:\chromium.zip" -Force
     
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x "D:\chromium.zip" "-o$($chromiumPath)" -y
-    Remove-Item -Path "D:\chromium.zip" -Force
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x "C:\chromium.zip" "-o$($chromiumPath)" -y
+    Remove-Item -Path "C:\chromium.zip" -Force
 
     $shortCutPath = $env:USERPROFILE + "\Start Menu\Programs" + "\Chromium.lnk"
     Remove-Item -Path $shortCutPath -Force -ErrorAction SilentlyContinue
     $objShell = New-Object -ComObject ("WScript.Shell")
     $objShortCut = $objShell.CreateShortcut($shortCutPath)
-    $objShortCut.TargetPath = "D:\Chromium\chrome-win\Chrome.exe"
+    $objShortCut.TargetPath = "$chromiumPath\chrome-win\Chrome.exe"
     $objShortCut.Save()
 }
 
 if ($true) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
-    $ffmpegPath = "C:\Program Files\FFMPEG"
+    $ffmpegPath = "${env:ProgramFiles}\FFMPEG"
     $downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
     
     $downloadedFfmpeg = $env:USERPROFILE + "\Downloads\ffmpeg-git-full.7z"
