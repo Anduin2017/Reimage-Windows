@@ -80,7 +80,7 @@ function Reimage {
     $osIndex = Read-Host
 
     # Get OS Name
-    Write-Host "Please give me a name. Example: Windows VNext: " -ForegroundColor Yellow
+    Write-Host "Please name the new OS. Example: Windows VNext: " -ForegroundColor Yellow
     $osName = Read-Host
 
     Write-Host "Extracting OS..." -ForegroundColor Green
