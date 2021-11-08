@@ -277,8 +277,8 @@ while ($null -eq $OneDrivePath -or -not $OneDrivePath.Contains("-")) {
     # Wait till it finds my enterprise OneDrive folder.
     Start-Sleep -Seconds 10
     $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
-    Get-ChildItem $OneDrivePath
 }
+Get-ChildItem $OneDrivePath | Format-Table -AutoSize
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned
