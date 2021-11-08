@@ -113,6 +113,9 @@ function Reimage {
 
     # Disable Bitlocker
     Disable-BitLocker -MountPoint $diskMount
+    
+    Write-Host "Unmounting hard disk..." -ForegroundColor Green
+    mountvol "$($diskMount):" /P
 
     Write-Host "Job finished! Pending reboot!" -ForegroundColor Green
     Write-Host "Press Enter to reboot now..." -ForegroundColor Yellow
