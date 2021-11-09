@@ -235,9 +235,9 @@ if (-not $(Get-Command git-lfs)) {
 }
 
 if ($email.Contains('microsoft')) {
-    Install-IfNotInstalled Microsoft.VisualStudio.2019.Enterprise
+    Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
 } else {
-    Install-IfNotInstalled Microsoft.VisualStudio.2019.Community
+    Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
 }
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
