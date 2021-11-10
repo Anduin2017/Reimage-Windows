@@ -18,7 +18,7 @@ function Reimage {
 
     # Get disk
     Write-Host "Please provide me a clean disk amount point. Example: 'Q': " -ForegroundColor Yellow
-    $diskMount = Read-Host 
+    $diskMount = $(Read-Host).Trim(':')
 
     # Ensure disk exists
     if (Test-Path -Path "$($diskMount):\") {
