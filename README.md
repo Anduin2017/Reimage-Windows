@@ -2,9 +2,30 @@
 
 These scripts are for my personal usage to configure a ready-to-use Windows environment for me.
 
+## Re-install Windows
+
+The following command will re-install Windows 10\11\insider for you.
+
+Right click the start button, click `Windows PowerShell(Admin)`.
+
+```powershell
+iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
+```
+
+It will ask you the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file.
+
+It will ask you for a clean disk drive. For example: Disk `E:\`. Provide it any disk you like.
+
+
+In China? There is a proxy for China network which bypass the firewall.
+
+```powershell
+iex ((New-Object System.Net.WebClient).DownloadString('https://githubcontent.aiurs.co/Anduin2017/configuration-script-win/main/Reimage.ps1'))
+```
+
 ## Warning
 
-This project may NOT be designed for YOU!
+This next part may NOT be designed for YOU!
 
 Do NOT run it on your computer!!! May ruin your key!
 
