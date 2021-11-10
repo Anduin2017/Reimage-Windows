@@ -12,9 +12,9 @@ Right click the start button, click `Windows PowerShell(Admin)`.
 iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
 ```
 
-It will ask you the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file.
+It will ask you the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file name.
 
-It will ask you for a clean disk drive. For example: Disk `E:\`. Provide it any disk you like.
+It will ask you for a clean disk drive. For example: Disk `E:\`. Provide it with any disk you like. (Except current OS drive)
 
 
 In China? There is a proxy for China network which bypass the firewall.
