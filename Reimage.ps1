@@ -25,7 +25,7 @@ function Reimage {
     }
 
     # Ensure disk enough size
-    if ((Get-Volume $diskMount).Size -lt 53687087104) {
+    if ((Get-Volume $diskMount).Size -lt 50000000000) {
         Write-Host "Disk $diskMount too mall! Please assign at least 50GB!" -ForegroundColor Red
         return
     }
@@ -43,7 +43,7 @@ function Reimage {
     # Disable Bitlocker
     Disable-BitLocker -MountPoint $diskMount
 
-    iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
+    # iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
     
     # Enlist ISO options
     Write-Host "All ISO files here: " -ForegroundColor Yellow
