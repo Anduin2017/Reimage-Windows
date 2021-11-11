@@ -43,6 +43,8 @@ function Reimage {
     # Disable Bitlocker
     Disable-BitLocker -MountPoint $diskMount
 
+    iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
+    
     # Enlist ISO options
     Write-Host "All ISO files here: " -ForegroundColor Yellow
     Get-ChildItem -Filter "*.iso" | Format-Table -AutoSize
