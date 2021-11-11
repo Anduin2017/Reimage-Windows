@@ -12,6 +12,10 @@ function Force-UpdateAll {
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1"))
 }
 
+function Reimage {
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
+}
+
 function Watch-RandomVideo {
     param(
         [string]$filter,
