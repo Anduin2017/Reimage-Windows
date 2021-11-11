@@ -411,10 +411,10 @@ Powercfg /Change standby-timeout-ac 0
 Write-Host "Monitor timeout set to 20."
 
 Write-Host "Enabling Chinese input method..." -ForegroundColor Green
-$LanguageList = Get-WinUserLanguageList
-$LanguageList.Add("zh-CN")
-Set-WinUserLanguageList $LanguageList -Force
-$LanguageList | Format-Table -AutoSize
+$UserLanguageList = New-WinUserLanguageList -Language en-US
+$UserLanguageList.Add("zh-CN")
+Set-WinUserLanguageList $UserLanguageList -Force
+$UserLanguageList | Format-Table -AutoSize
 
 Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
 cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon`" /t REG_DWORD /d 0 /f"
