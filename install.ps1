@@ -40,9 +40,7 @@ function Install-StoreApp {
     }
     else {
         Write-Host "Attempting to download $wingetAppName..." -ForegroundColor Green
-        start powershell {
-            winget install --id $storeAppId.ToUpper() --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
-        }
+        winget install --id $storeAppId.ToUpper() --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
     }
 }
 
@@ -56,9 +54,7 @@ function Install-IfNotInstalled {
     }
     else {
         Write-Host "Attempting to install: $package..." -ForegroundColor Green
-        start powershell {
-            winget install -e --id $package --source winget
-        }
+        winget install -e --id $package --source winget
     }
 }
 
