@@ -184,20 +184,7 @@ Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
 Start-Sleep -Seconds 5
 cmd /c "taskkill.exe /IM fdm.exe /F"
 $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
-Invoke-WebRequest -Uri "http://system.data.sqlite.org/blobs/1.0.113.0/sqlite-netFx45-binary-x64-2012-1.0.113.0.zip" -OutFile "C:\sqlite.zip"
-mkdir "C:\sqlite.net"
-Expand-Archive "C:\sqlite.zip" -DestinationPath "C:\sqlite.net"
-[Reflection.Assembly]::LoadFile("C:\sqlite.net\System.Data.SQLite.dll")
-$sDatabaseConnectionString=[string]::Format("data source={0}",$fdmDbPath)
-$oSQLiteDBConnection = New-Object System.Data.SQLite.SQLiteConnection
-$oSQLiteDBConnection.ConnectionString = $sDatabaseConnectionString
-$oSQLiteDBConnection.open()
-$oSQLiteDBCommand=$oSQLiteDBConnection.CreateCommand()
-$oSQLiteDBCommand.Commandtext="Insert into Settings (Name, Value) values ('SilentModeForNewDownloads', 1)"
-$oSQLiteDBCommand.ExecuteNonQuery()
-$oSQLiteDBConnection.Close()
-Remove-Item -Path "C:\sqlite.net" -Force -Recurse -ErrorAction SilentlyContinue
-Remove-Item -Path "C:\sqlite.zip" -Force -ErrorAction SilentlyContinue
+Invoke-WebRequest -Uri "https://github.com/Anduin2017/configuration-script-win/raw/main/db.sqlite" -OutFile "$fdmDbPath"
 
 if ($true) { 
     Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
