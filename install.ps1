@@ -281,6 +281,7 @@ explorer "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
 
 $OneDrivePath = $null
 while ($null -eq $OneDrivePath -or -not $OneDrivePath.Contains("-")) {
+    Write-Host "OneDrive is still not started!"
     # Wait till it finds my enterprise OneDrive folder.
     Start-Sleep -Seconds 10
     $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
