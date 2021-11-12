@@ -11,13 +11,11 @@ function Do-Next {
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
     Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
     Write-Host " * Turn on bitlocker" -ForegroundColor White
-    Write-Host " * Set OneDrive files to local" -ForegroundColor White
     Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
     Write-Host " * Sign in Spotify and edit start up settings" -ForegroundColor White
     Write-Host " * Sign in WeChat" -ForegroundColor White
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
-    Write-Host " * Set FDM to auto start download" -ForegroundColor White
     Write-Host " * Sign in the Xbox app" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
 }
@@ -137,6 +135,14 @@ $className = "MDM_EnterpriseModernAppManagement_AppManagement01"
 $wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
 $wmiObj.UpdateScanMethod() | Format-Table -AutoSize
 
+if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
+    Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
+    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive --source winget
+}
+
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
 Install-IfNotInstalled "Microsoft.Teams"
 Install-IfNotInstalled "Microsoft.Office"
@@ -170,6 +176,28 @@ Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 
 
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+Write-Host "Configuring FDM..." -ForegroundColor Green
+cmd /c "taskkill.exe /IM fdm.exe /F"
+Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
+Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
+Start-Sleep -Seconds 5
+cmd /c "taskkill.exe /IM fdm.exe /F"
+$fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
+Invoke-WebRequest -Uri "http://system.data.sqlite.org/blobs/1.0.113.0/sqlite-netFx45-binary-x64-2012-1.0.113.0.zip" -OutFile "C:\sqlite.zip"
+mkdir "C:\sqlite.net"
+Expand-Archive "C:\sqlite.zip" -DestinationPath "C:\sqlite.net"
+[Reflection.Assembly]::LoadFile("C:\sqlite.net\System.Data.SQLite.dll")
+$sDatabaseConnectionString=[string]::Format("data source={0}",$fdmDbPath)
+$oSQLiteDBConnection = New-Object System.Data.SQLite.SQLiteConnection
+$oSQLiteDBConnection.ConnectionString = $sDatabaseConnectionString
+$oSQLiteDBConnection.open()
+$oSQLiteDBCommand=$oSQLiteDBConnection.CreateCommand()
+$oSQLiteDBCommand.Commandtext="Insert into Settings (Name, Value) values ('SilentModeForNewDownloads', 1)"
+$oSQLiteDBCommand.ExecuteNonQuery()
+$oSQLiteDBConnection.Close()
+Remove-Item -Path "C:\sqlite.net" -Force -Recurse -ErrorAction SilentlyContinue
+Remove-Item -Path "C:\sqlite.zip" -Force -ErrorAction SilentlyContinue
 
 if ($true) { 
     Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
@@ -238,14 +266,6 @@ if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
 } else {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
-}
-
-if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
-    Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
-}
-else {
-    Write-Host "Attempting to download Microsoft VS Code..." -ForegroundColor Green
-    winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive --source winget
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
