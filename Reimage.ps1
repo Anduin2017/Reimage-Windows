@@ -159,8 +159,8 @@ function Reimage {
     dism /apply-image /imagefile:"$wimFile" /index:"$osIndex" /ApplyDir:"$($diskMount):\"
 
     # Dismount ISO
-    Write-Host "Dismounting the iso..." -ForegroundColor Green
-    Dismount-DiskImage $iso
+    # Write-Host "Dismounting the iso..." -ForegroundColor Green
+    # Dismount-DiskImage $iso -ErrorAction SilentlyContinue
 
     # Create start up registry.
     $created = bcdedit /create /d "$osName" /application osloader
