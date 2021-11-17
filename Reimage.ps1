@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 function Get-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
