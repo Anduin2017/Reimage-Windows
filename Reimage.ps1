@@ -1,5 +1,3 @@
-$ErrorActionPreference = "Stop"
-
 function Get-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
@@ -9,8 +7,47 @@ function Get-IsElevated {
     { Write-Output $false }   
 }
 
-function Get-WIM {
+    
+function Reimage {
+    if (-not(Get-IsElevated)) { 
+        throw "Please run this script as an administrator" 
+    }
 
+    # Get a drive, get the WIM file.
+    $systemDrive = (Get-WmiObject Win32_OperatingSystem).SystemDrive.Trim(':')
+    # Get disk
+    Write-Host "Please provide me a clean disk amount point. Example: 'Q': " -ForegroundColor Yellow
+    $diskMount = $(Read-Host).Trim(':')
+
+    # Ensure disk exists
+    if (Test-Path -Path "$($diskMount):\") {
+        Write-Host "Disk $diskMount exists!" -ForegroundColor Green
+    } else {
+        throw "Disk $diskMount doesn't exist!"
+    }
+
+    if ($systemDrive.ToLower() -eq $diskMount.ToLower()) {
+        throw "You can't install new OS on your existing OS drive: $diskMount!"
+    }
+
+    # Ensure disk enough size
+    if ((Get-Volume $diskMount).Size -lt 50000000000) {
+        throw "Disk $diskMount too mall! Please assign at least 50GB!"
+    }
+
+    # Format to NTFS.
+    Get-ChildItem "$($diskMount):\" -ErrorAction SilentlyContinue
+    Write-Host "Enter 'Y' if you want to format disk $diskMount [Y or N]:" -ForegroundColor Yellow
+    $format = Read-Host
+    if ($format -eq "Y") {
+        Format-Volume -DriveLetter $diskMount -FileSystem NTFS 
+    } else {
+        throw "You must format that disk first!"
+    }
+
+    # Disable Bitlocker
+    Disable-BitLocker -MountPoint $diskMount
+    
     do {
         Write-Host "We need the Windows image file. What do you have now?`n" -ForegroundColor Yellow
         Write-Host -NoNewline "A: " -ForegroundColor White
@@ -77,7 +114,6 @@ function Get-WIM {
 
         # Get OS Index
         $wimFile = "$($mountedLetter):\sources\install.wim"
-        Write-Output $wimFile
     }
 
     if ($userOption.ToLower() -eq "d") {
@@ -96,56 +132,8 @@ function Get-WIM {
             throw "WIM $wim doesn't exist!"
         }
 
-        Write-Output $wim
+        $wimFile = $wim
     }
-}
-
-function Get-CleanDrive {
-    
-    $systemDrive = (Get-WmiObject Win32_OperatingSystem).SystemDrive.Trim(':')
-    # Get disk
-    Write-Host "Please provide me a clean disk amount point. Example: 'Q': " -ForegroundColor Yellow
-    $diskMount = $(Read-Host).Trim(':')
-
-    # Ensure disk exists
-    if (Test-Path -Path "$($diskMount):\") {
-        Write-Host "Disk $diskMount exists!" -ForegroundColor Green
-    } else {
-        throw "Disk $diskMount doesn't exist!"
-    }
-
-    if ($systemDrive.ToLower() -eq $diskMount.ToLower()) {
-        throw "You can't install new OS on your existing OS drive: $diskMount!"
-    }
-
-    # Ensure disk enough size
-    if ((Get-Volume $diskMount).Size -lt 50000000000) {
-        throw "Disk $diskMount too mall! Please assign at least 50GB!"
-    }
-
-    # Format to NTFS.
-    Get-ChildItem "$($diskMount):\" -ErrorAction SilentlyContinue
-    Write-Host "Enter 'Y' if you want to format disk $diskMount [Y or N]:" -ForegroundColor Yellow
-    $format = Read-Host
-    if ($format -eq "Y") {
-        Format-Volume -DriveLetter $diskMount -FileSystem NTFS 
-    } else {
-        throw "You must format that disk first!"
-    }
-
-    # Disable Bitlocker
-    Disable-BitLocker -MountPoint $diskMount
-    Write-Output $diskMount
-}
-    
-function Reimage {
-    if (-not(Get-IsElevated)) { 
-        throw "Please run this script as an administrator" 
-    }
-
-    # Get a drive, get the WIM file.
-    $diskMount = Get-CleanDrive
-    $wimFile = Get-WIM
 
     dism /Get-ImageInfo /imagefile:"$wimFile"
     Write-Host "Please provide the OS Index number. Example: '6': " -ForegroundColor Yellow
