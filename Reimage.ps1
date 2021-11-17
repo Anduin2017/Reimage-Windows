@@ -58,8 +58,7 @@ function Get-WIM {
             Get-Item "$iso" | Format-List
             Write-Host "ISO $iso exists!" -ForegroundColor Green
         } else {
-            Write-Host "ISO $iso doesn't exist!" -ForegroundColor Red
-            return
+            throw "ISO $iso doesn't exist!"
         }
 
         # Mount ISO
@@ -89,8 +88,7 @@ function Get-WIM {
             Get-Item "$wim" | Format-List
             Write-Host "WIM $wim exists!" -ForegroundColor Green
         } else {
-            Write-Host "WIM $wim doesn't exist!" -ForegroundColor Red
-            return
+            throw "WIM $wim doesn't exist!"
         }
 
         Write-Output $wim
@@ -108,19 +106,16 @@ function Get-CleanDrive {
     if (Test-Path -Path "$($diskMount):\") {
         Write-Host "Disk $diskMount exists!" -ForegroundColor Green
     } else {
-        Write-Host "Disk $diskMount doesn't exist!" -ForegroundColor Red
-        return
+        throw "Disk $diskMount doesn't exist!"
     }
 
     if ($systemDrive.ToLower() -eq $diskMount.ToLower()) {
-        Write-Host "You can't install new OS on your existing OS drive: $diskMount!" -ForegroundColor Red
-        return
+        throw "You can't install new OS on your existing OS drive: $diskMount!"
     }
 
     # Ensure disk enough size
     if ((Get-Volume $diskMount).Size -lt 50000000000) {
-        Write-Host "Disk $diskMount too mall! Please assign at least 50GB!" -ForegroundColor Red
-        return
+        throw "Disk $diskMount too mall! Please assign at least 50GB!"
     }
 
     # Format to NTFS.
@@ -130,7 +125,7 @@ function Get-CleanDrive {
     if ($format -eq "Y") {
         Format-Volume -DriveLetter $diskMount -FileSystem NTFS 
     } else {
-        return
+        throw "You must format that disk first!"
     }
 
     # Disable Bitlocker
