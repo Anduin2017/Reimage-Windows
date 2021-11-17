@@ -113,7 +113,8 @@ function Get-CleanDrive {
     }
 
     if ($systemDrive.ToLower() -eq $diskMount.ToLower()) {
-
+        Write-Host "You can't install new OS on your existing OS drive: $diskMount!" -ForegroundColor Red
+        return
     }
 
     # Ensure disk enough size
