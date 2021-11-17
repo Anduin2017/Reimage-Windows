@@ -31,7 +31,9 @@ function Get-WIM {
     } until($false)
 
     if ($userOption.ToLower() -eq "a") {
-        Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
+        Start-Process powershell {
+            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
+        }
         throw "We will quit because you need to download the ISO first."
     } 
     
@@ -52,7 +54,7 @@ function Get-WIM {
         Write-Host "All ISO files here ($($(Get-Location))): " -ForegroundColor White
         Get-ChildItem -Filter "*.iso" | Format-Table -AutoSize
 
-        Write-Host "`nPlease provide me the path of your ISO file:" -ForegroundColor Yellow
+        Write-Host "`nPlease provide me the path of your ISO file (ends with .iso):" -ForegroundColor Yellow
 
         $iso = Read-Host
         $iso = (Resolve-Path $iso).Path
@@ -60,7 +62,7 @@ function Get-WIM {
             Get-Item "$iso" | Format-List
             Write-Host "ISO $iso exists!" -ForegroundColor Green
         } else {
-            throw "ISO $iso doesn't exist!"
+            throw "ISO $iso doesn't exist! Please check your path!"
         }
 
         # Mount ISO
