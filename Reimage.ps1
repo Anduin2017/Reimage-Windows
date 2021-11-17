@@ -34,7 +34,8 @@ function Get-WIM {
         Start-Process powershell {
             Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
         }
-        throw "We will quit because you need to download the ISO first."
+
+        Read-Host "Press [Enter] if you finished downloading the ISO file."
     } 
     
     if ($userOption.ToLower() -eq "b") {
@@ -49,7 +50,7 @@ function Get-WIM {
         Read-Host "Press [Enter] if you finished downloading the ISO file."
     }
 
-    if ($userOption.ToLower() -eq "b" -or $userOption.ToLower() -eq "c") {
+    if ($userOption.ToLower() -eq "a" -or $userOption.ToLower() -eq "b" -or $userOption.ToLower() -eq "c") {
         # Enlist ISO options
         Write-Host "All ISO files here ($($(Get-Location))): " -ForegroundColor White
         Get-ChildItem -Filter "*.iso" | Format-Table -AutoSize
