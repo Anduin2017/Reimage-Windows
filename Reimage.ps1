@@ -183,7 +183,6 @@ function Reimage {
     Write-Host "Press Enter to reboot now..." -ForegroundColor Yellow
     Read-Host
     
-    Start-Sleep -Seconds 10
     Restart-Computer -Force
 }
 
