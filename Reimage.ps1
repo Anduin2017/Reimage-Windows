@@ -69,7 +69,7 @@ function Reimage {
 
     if ($userOption.ToLower() -eq "a") {
         Start-Process powershell {
-            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/pbatard/Fido/raw/master/Fido.ps1'))
+            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://githubcontent.aiurs.co/pbatard/Fido/master/Fido.ps1'))
         }
 
         Read-Host "Press [Enter] if you finished downloading the ISO file."
