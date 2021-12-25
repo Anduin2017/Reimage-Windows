@@ -20,7 +20,8 @@ function Watch-RandomVideo {
     param(
         [string]$filter,
         [string]$exclude,
-        [int]$take = 99999999
+        [int]$take = 99999999,
+        [bool]$auto = $false
     )
 
     Write-Host "Fetching videos..."
@@ -39,12 +40,14 @@ function Watch-RandomVideo {
         Start-Sleep -Seconds 1
         Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 `"$pickedVideo`"" -Wait 2>&1 | out-null
 
-        $vote = Read-Host "How do you like that? (A-B-C-D E-F-G)"
-        if (-not ([string]::IsNullOrEmpty($vote))) {
-            $destination = "Sorted-Level-$vote"
-            Write-Host "Moving $pickedVideo to $destination..." -ForegroundColor Green
-            New-Item -Type "Directory" -Name $destination -ErrorAction SilentlyContinue
-            Move-Item -Path $pickedVideo -Destination $destination
+        if ($auto -eq $false) {
+            $vote = Read-Host "How do you like that? (A-B-C-D E-F-G)"
+            if (-not ([string]::IsNullOrEmpty($vote))) {
+                $destination = "Sorted-Level-$vote"
+                Write-Host "Moving $pickedVideo to $destination..." -ForegroundColor Green
+                New-Item -Type "Directory" -Name $destination -ErrorAction SilentlyContinue
+                Move-Item -Path $pickedVideo -Destination $destination
+            }
         }
     }
 }
@@ -67,5 +70,6 @@ function Watch-RandomPhoto {
         Start-Sleep -Seconds 4
     }
 }
+
 
 
