@@ -189,6 +189,7 @@ cmd /c "taskkill.exe /IM fdm.exe /F"
 $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
 Invoke-WebRequest -Uri "https://github.com/Anduin2017/configuration-script-win/raw/main/db.sqlite" -OutFile "$fdmDbPath"
 
+# Chromium
 if ($true) { 
     Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
     $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
@@ -217,7 +218,7 @@ if ($true) {
     $objShortCut.Save()
 }
 
-
+# Android CLI
 if ($true) {
     Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
     $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
@@ -244,6 +245,7 @@ if ($true) {
     Remove-Item -Path "C:\tools.7z" -Force
 }
 
+# FFmpeg
 if ($true) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
     $ffmpegPath = "${env:ProgramFiles}\FFMPEG"
@@ -271,6 +273,30 @@ if ($true) {
         [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$binPath",
         [EnvironmentVariableTarget]::Machine)
     Remove-Item -Path "C:\ffmpeg.7z" -Force
+}
+
+# Kubernetes CLI
+if ($true) {
+    Write-Host "Downloading Kubernetes CLI..." -ForegroundColor Green
+    $toolsPath = "${env:ProgramFiles}\Kubernetes"
+    $downloadUri = "https://dl.k8s.io/release/v1.23.0/bin/windows/amd64/kubectl.exe"
+    
+    $downloadedTool = $env:USERPROFILE + "\Downloads\kubectl.exe"
+    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
+        
+    while(-not $(Get-Item $downloadedTool -ErrorAction SilentlyContinue))
+    {
+        Write-Host "Kubernetes CLI is still not downloaded!"
+        Start-Sleep -Seconds 5
+    }
+    
+    New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
+    Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$toolsPath",
+        [EnvironmentVariableTarget]::Machine)
 }
 
 if (-not $(Get-Command git-lfs)) {
