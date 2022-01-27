@@ -234,9 +234,9 @@ if ($true) {
         Start-Sleep -Seconds 5
     }
     
-    Move-Item $downloadedTool "C:\tools.7z" -Force
+    Move-Item $downloadedTool "C:\tools.zip" -Force
     
-    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\tools.7z" "-o$($toolsPath)" -y
+    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\tools.zip" "-o$($toolsPath)" -y
     Write-Host "Adding Android Platform Tools to PATH..." -ForegroundColor Green
     [Environment]::SetEnvironmentVariable(
         "Path",
