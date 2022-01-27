@@ -242,7 +242,7 @@ if ($true) {
         "Path",
         [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$toolsPath\platform-tools",
         [EnvironmentVariableTarget]::Machine)
-    Remove-Item -Path "C:\tools.7z" -Force
+    Remove-Item -Path "C:\tools.zip" -Force
 }
 
 # FFmpeg
