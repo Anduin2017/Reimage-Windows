@@ -217,6 +217,33 @@ if ($true) {
     $objShortCut.Save()
 }
 
+
+if ($true) {
+    Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
+    $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
+    $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
+    
+    $downloadedTool = $env:USERPROFILE + "\Downloads\platform-tools-latest-windows.zip"
+    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
+        
+    while(-not $(Get-Item $downloadedTool -ErrorAction SilentlyContinue))
+    {
+        Write-Host "Android platform tools are still not downloaded!"
+        Start-Sleep -Seconds 5
+    }
+    
+    Move-Item $downloadedTool "C:\tools.7z" -Force
+    
+    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\tools.7z" "-o$($toolsPath)" -y
+    Write-Host "Adding Android Platform Tools to PATH..." -ForegroundColor Green
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$toolsPath\platform-tools",
+        [EnvironmentVariableTarget]::Machine)
+    Remove-Item -Path "C:\tools.7z" -Force
+}
+
 if ($true) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
     $ffmpegPath = "${env:ProgramFiles}\FFMPEG"
