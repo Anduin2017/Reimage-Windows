@@ -519,7 +519,10 @@ Add-MpPreference -ExclusionPath "$env:USERPROFILE\source\repos"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.nuget"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.vscode"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.dotnet"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.ssh"
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\.azuredatastudio"
 Add-MpPreference -ExclusionPath "$env:APPDATA\npm"
+Add-MpPreference -ExclusionPath "$OneDrivePath"
 
 Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
