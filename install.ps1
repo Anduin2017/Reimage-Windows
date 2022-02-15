@@ -514,6 +514,9 @@ $load_com = new-object -com shell.application
 $load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
 Write-Host "Repos folder are pinned to file explorer."
 
+Write-Host "Exclude repos from Windows Defender..." -ForegroundColor Green
+Add-MpPreference -ExclusionPath "$env:USERPROFILE\source\repos"
+
 Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name SystemUsesLightTheme -Value 0
