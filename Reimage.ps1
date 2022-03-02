@@ -31,8 +31,8 @@ function Reimage {
     }
 
     # Ensure disk enough size
-    if ((Get-Volume $diskMount).Size -lt 50000000000) {
-        throw "Disk $diskMount too mall! Please assign at least 50GB!"
+    if ((Get-Volume $diskMount).Size -lt 20000000000) {
+        throw "Disk $diskMount too mall! Please assign at least 20GB!"
     }
 
     # Format to NTFS.
