@@ -572,6 +572,8 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
 
+$(curl https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh).Content | bash
+
 Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = Read-Host
 Write-Host "You pressed: $($pressedKey)"
