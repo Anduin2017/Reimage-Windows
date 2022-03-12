@@ -56,3 +56,6 @@ pwsh --version
 
 tput setaf 2; echo "Azure CLI version:"; tput sgr0
 az version | tail -n 5 | head -n 1
+
+tput setaf 2; echo "K8S CLI version:"; tput sgr0
+kubectl version --client
