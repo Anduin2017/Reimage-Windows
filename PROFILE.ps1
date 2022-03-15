@@ -8,7 +8,7 @@ function Update-All {
 }
 
 function View-Context {
-    $(Invoke-WebRequest https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh).Content | bash
+    $(Invoke-WebRequest https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh  -UseBasicParsing).Content | bash
 }
 
 function Force-UpdateAll {
