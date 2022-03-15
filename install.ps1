@@ -428,6 +428,8 @@ git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME\source\repos
 git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\repos\AiursoftWeb\AiurVersionControl"
 git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\Anduin2017\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\JAL"
+git clone https://github.com/Anduin2017/Parser.git "$HOME\source\repos\Anduin2017\Parser"
+dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\Parser"
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
