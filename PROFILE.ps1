@@ -7,6 +7,10 @@ function Update-All {
     Start-Process "PowerShell.exe" -PassThru "Force-UpdateAll" -Verb RunAs
 }
 
+function View-Context {
+    $(Invoke-WebRequest https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh).Content | bash
+}
+
 function Force-UpdateAll {
     # This will run this update script inside current terminal.
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1"))
