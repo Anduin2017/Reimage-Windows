@@ -486,11 +486,12 @@ Powercfg /Change standby-timeout-ac 0
 Write-Host "Monitor timeout set to 20."
 
 Write-Host "Enabling Chinese input method..." -ForegroundColor Green
-$UserLanguageList = New-WinUserLanguageList -Language en-US
-$UserLanguageList.Add("zh-CN")
-Set-WinUserLanguageList $UserLanguageList -Force
-$UserLanguageList | Format-Table -AutoSize
-
+Start-Process powershell {
+    $UserLanguageList = New-WinUserLanguageList -Language en-US
+    $UserLanguageList.Add("zh-CN")
+    Set-WinUserLanguageList $UserLanguageList -Force
+    $UserLanguageList | Format-Table -AutoSize
+}
 Write-Host "Enabling Hardware-Accelerated GPU Scheduling" -ForegroundColor Green
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\" -Name 'HwSchMode' -Value '2' -PropertyType DWORD -Force
 
