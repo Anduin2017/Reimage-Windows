@@ -302,6 +302,33 @@ if ($true) {
         [EnvironmentVariableTarget]::Machine)
 }
 
+# wget
+if ($true) {
+    Write-Host "Downloading Wget..." -ForegroundColor Green
+    $wgetPath = "${env:ProgramFiles}\wget"
+    $downloadUri = "https://eternallybored.org/misc/wget/releases/wget-1.21.3-win64.zip"
+    
+    $downloadedWget = $env:USERPROFILE + "\Downloads\wget-1.21.3-win64.zip"
+    Remove-Item $downloadedWget -ErrorAction SilentlyContinue
+    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
+        
+    while(-not $(Get-Item $downloadedWget -ErrorAction SilentlyContinue))
+    {
+        Write-Host "Wget is still not downloaded!"
+        Start-Sleep -Seconds 5
+    }
+    
+    Move-Item $downloadedWget "C:\wget.zip" -Force
+    
+    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\wget.zip" "-o$($wgetPath)" -y
+    Write-Host "Adding wget to PATH..." -ForegroundColor Green
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$wgetPath",
+        [EnvironmentVariableTarget]::Machine)
+    Remove-Item -Path "C:\wget.zip" -Force
+}
+
 if (-not $(Get-Command git-lfs)) {
     winget install "GitHub.GitLFS" --source winget
 } else {
