@@ -51,6 +51,9 @@ adb --version | head -2
 tput setaf 2; echo "FFmpeg version:"; tput sgr0
 ffmpeg -version | head -1
 
+tput setaf 2; echo "Wget version:"; tput sgr0
+wget --version | head -1
+
 tput setaf 2; echo "PowerShell version:"; tput sgr0
 pwsh --version
 
