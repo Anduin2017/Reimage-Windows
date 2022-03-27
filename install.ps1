@@ -402,7 +402,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 Write-Host "Setting up some node js global tools..." -ForegroundColor Green
 npm install --global npm@latest
-npm install --global node-static typescript @angular/cli yarn
+npm install --global node-static typescript @angular/cli yarn npm-check-updates
 
 Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
 [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
