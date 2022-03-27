@@ -30,7 +30,7 @@ tput setaf 2; echo "Installing Spotify..."; tput sgr0
 sudo snap install spotify
 
 tput setaf 2; echo "Installing ffmpeg..."; tput sgr0
-sudo snap install ffmpeg
+sudo apt install -y ffmpeg
 
 tput setaf 2; echo "Installing ruby..."; tput sgr0
 sudo apt install -y ruby
