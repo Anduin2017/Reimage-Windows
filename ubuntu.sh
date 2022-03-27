@@ -33,7 +33,7 @@ tput setaf 2; echo "Installing ffmpeg..."; tput sgr0
 sudo snap install ffmpeg
 
 tput setaf 2; echo "Installing ruby..."; tput sgr0
-sudo snap install ruby
+sudo apt install -y ruby
 
 tput setaf 2; echo "Installing java..."; tput sgr0
 sudo apt install -y openjdk-17-jdk
