@@ -24,13 +24,13 @@ tput setaf 2; echo "Installing aria2..."; tput sgr0
 sudo apt install -y aria2
 
 tput setaf 2; echo "Installing Spotify..."; tput sgr0
-sudo snap install -y spotify
+sudo snap install spotify
 
 tput setaf 2; echo "Installing ffmpeg..."; tput sgr0
-sudo snap install -y ffmpeg
+sudo snap install ffmpeg
 
 tput setaf 2; echo "Installing ruby..."; tput sgr0
-sudo snap install -y ruby
+sudo snap install ruby
 
 tput setaf 2; echo "Installing java..."; tput sgr0
 sudo apt install -y openjdk-17-jdk
