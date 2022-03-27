@@ -79,4 +79,6 @@ git config --global user.name "Anduin Xue"
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
 git clone https://github.com/Anduin2017/HowToCOok.git "$HOME/source/repos/Anduin2017/HowToCook"
 
+sudo apt --fix-broken install
+sudo apt --fix-missing install
 curl "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh" | bash
