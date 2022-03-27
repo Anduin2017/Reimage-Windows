@@ -54,5 +54,5 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin
 Open bash, and run:
 
 ```bash
-sudo apt install -y curl && curl "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/debian.sh" --output - | sudo bash
+sudo apt install -y curl && curl "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/ubuntu.sh" --output - | sudo bash
 ```
