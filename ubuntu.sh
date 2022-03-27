@@ -23,6 +23,9 @@ sudo apt install -y golang-go
 tput setaf 2; echo "Installing aria2..."; tput sgr0
 sudo apt install -y aria2
 
+tput setaf 2; echo "Installing adb..."; tput sgr0
+sudo apt install -y adb
+
 tput setaf 2; echo "Installing Spotify..."; tput sgr0
 sudo snap install spotify
 
