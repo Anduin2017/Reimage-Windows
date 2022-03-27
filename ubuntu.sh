@@ -74,6 +74,10 @@ sudo apt update
 sudo apt install python3.8
 sudo apt install python3-pip
 
+tput setaf 2; echo "Installing kubectl..."; tput sgr0
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 sudo apt autoremove -y
 
 git config --global user.email "anduin@aiursoft.com"
