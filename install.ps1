@@ -180,6 +180,25 @@ Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
+#aria2
+if ($true)
+{
+    $downloadAddress = "https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip"
+    Invoke-WebRequest $downloadAddress -OutFile "C:\aria2.zip"
+    $installPath = "${env:ProgramFiles}\aria2"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x "C:\aria2.zip" "-o$($installPath)" -y
+    $subPath = $(Get-ChildItem -Path $installPath | Where-Object { $_.Name -like "aria2*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+    $subPath = Join-Path -Path $installPath -ChildPath $subPath
+    Move-Item $subPath\aria2c.exe $installPath
+    
+    Write-Host "Adding aria2 to PATH..." -ForegroundColor Green
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$installPath",
+        [EnvironmentVariableTarget]::Machine)
+    Remove-Item -Path "C:\aria2.zip" -Force
+}
+
 Write-Host "Reloading environment variables..." -ForegroundColor Green
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 
@@ -198,15 +217,9 @@ if ($true) {
     $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
     $chromiumPath = "${env:ProgramFiles}\Chromium"
     
-    $downloadedChromium = $env:USERPROFILE + "\Downloads\Win_x64.zip"
+    $downloadedChromium = $env:USERPROFILE + "\chrome-win.zip"
     Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$chromiumUrl -force"
-        
-    while(-not $(Get-Item $downloadedChromium -ErrorAction SilentlyContinue))
-    {
-        Write-Host "Chromium is still not downloaded!"
-        Start-Sleep -Seconds 5
-    }
+    aria2c.exe $chromiumUrl -d $HOME
     
     Move-Item $downloadedChromium "C:\chromium.zip" -Force
     
@@ -227,15 +240,9 @@ if ($true) {
     $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
     $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
     
-    $downloadedTool = $env:USERPROFILE + "\Downloads\platform-tools-latest-windows.zip"
+    $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
-        
-    while(-not $(Get-Item $downloadedTool -ErrorAction SilentlyContinue))
-    {
-        Write-Host "Android platform tools are still not downloaded!"
-        Start-Sleep -Seconds 5
-    }
+    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip"
     
     Move-Item $downloadedTool "C:\tools.zip" -Force
     
@@ -254,16 +261,10 @@ if ($true) {
     $ffmpegPath = "${env:ProgramFiles}\FFMPEG"
     $downloadUri = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
     
-    $downloadedFfmpeg = $env:USERPROFILE + "\Downloads\ffmpeg-git-full.7z"
+    $downloadedFfmpeg = $env:USERPROFILE + "\ffmpeg-git-full.7z"
     Remove-Item $downloadedFfmpeg -ErrorAction SilentlyContinue
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
-        
-    while(-not $(Get-Item $downloadedFfmpeg -ErrorAction SilentlyContinue))
-    {
-        Write-Host "FFmpeg is still not downloaded!"
-        Start-Sleep -Seconds 5
-    }
-    
+    aria2c.exe $downloadUri -d $HOME -o "ffmpeg-git-full.7z"
+
     Move-Item $downloadedFfmpeg "C:\ffmpeg.7z" -Force
     
     & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\ffmpeg.7z" "-o$($ffmpegPath)" -y
@@ -284,15 +285,9 @@ if ($true) {
     $toolsPath = "${env:ProgramFiles}\Kubernetes"
     $downloadUri = "https://dl.k8s.io/release/v1.23.0/bin/windows/amd64/kubectl.exe"
     
-    $downloadedTool = $env:USERPROFILE + "\Downloads\kubectl.exe"
+    $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
-        
-    while(-not $(Get-Item $downloadedTool -ErrorAction SilentlyContinue))
-    {
-        Write-Host "Kubernetes CLI is still not downloaded!"
-        Start-Sleep -Seconds 5
-    }
+    aria2c.exe $downloadUri -d $HOME -o "kubectl.exe"
     
     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
@@ -308,15 +303,9 @@ if ($true) {
     $wgetPath = "${env:ProgramFiles}\wget"
     $downloadUri = "https://eternallybored.org/misc/wget/releases/wget-1.21.3-win64.zip"
     
-    $downloadedWget = $env:USERPROFILE + "\Downloads\wget-1.21.3-win64.zip"
+    $downloadedWget = $env:USERPROFILE + "\wget-1.21.3-win64.zip"
     Remove-Item $downloadedWget -ErrorAction SilentlyContinue
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe" -PassThru "$downloadUri -force"
-        
-    while(-not $(Get-Item $downloadedWget -ErrorAction SilentlyContinue))
-    {
-        Write-Host "Wget is still not downloaded!"
-        Start-Sleep -Seconds 5
-    }
+    aria2c.exe $downloadUri -d $HOME -o "wget-1.21.3-win64.zip"
     
     Move-Item $downloadedWget "C:\wget.zip" -Force
     
