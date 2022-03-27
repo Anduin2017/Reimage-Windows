@@ -20,6 +20,26 @@ function Do-Next {
     Write-Host " * Activate Windows" -ForegroundColor White
 }
 
+function AddToPath {
+    param (
+        [string]$folder
+    )
+
+    Write-Host "Adding $folder to environment variables..." -ForegroundColor Yellow
+
+    $currentEnv = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine).Trim(";");
+    $addedEnv = $currentEnv + ";$folder"
+    $trimmedEnv = (($addedEnv.Split(';') | Select-Object -Unique) -join ";").Trim(";")
+    [Environment]::SetEnvironmentVariable(
+        "Path",
+        $trimmedEnv,
+        [EnvironmentVariableTarget]::Machine)
+
+    #Write-Host "Reloading environment variables..." -ForegroundColor Green
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+}
+
+
 function Get-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
@@ -180,28 +200,6 @@ Install-StoreApp -storeAppId "9ncbcszsjrsb" -wingetAppName "Spotify Music"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
-#aria2
-if ($true)
-{
-    $downloadAddress = "https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip"
-    Invoke-WebRequest $downloadAddress -OutFile "C:\aria2.zip"
-    $installPath = "${env:ProgramFiles}\aria2"
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x "C:\aria2.zip" "-o$($installPath)" -y
-    $subPath = $(Get-ChildItem -Path $installPath | Where-Object { $_.Name -like "aria2*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
-    $subPath = Join-Path -Path $installPath -ChildPath $subPath
-    Move-Item $subPath\aria2c.exe $installPath
-    
-    Write-Host "Adding aria2 to PATH..." -ForegroundColor Green
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$installPath",
-        [EnvironmentVariableTarget]::Machine)
-    Remove-Item -Path "C:\aria2.zip" -Force
-}
-
-Write-Host "Reloading environment variables..." -ForegroundColor Green
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-
 Write-Host "Configuring FDM..." -ForegroundColor Green
 cmd /c "taskkill.exe /IM fdm.exe /F"
 Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
@@ -211,6 +209,22 @@ cmd /c "taskkill.exe /IM fdm.exe /F"
 $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
 Invoke-WebRequest -Uri "https://github.com/Anduin2017/configuration-script-win/raw/main/db.sqlite" -OutFile "$fdmDbPath"
 
+#aria2
+if ($true)
+{
+    Write-Host "Installing aria2 as download tool..." -ForegroundColor Green
+    $downloadAddress = "https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0-win-64bit-build1.zip"
+    Invoke-WebRequest $downloadAddress -OutFile "$HOME\aria2.zip"
+    $installPath = "${env:ProgramFiles}\aria2"
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x "$HOME\aria2.zip" "-o$($installPath)" -y
+    $subPath = $(Get-ChildItem -Path $installPath | Where-Object { $_.Name -like "aria2-*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
+    $subPath = Join-Path -Path $installPath -ChildPath $subPath
+    Remove-Item $installPath\aria2c.exe -ErrorAction SilentlyContinue
+    Move-Item $subPath\aria2c.exe $installPath
+    AddToPath -folder $installPath
+    Remove-Item -Path "$HOME\aria2.zip" -Force
+}
+
 # Chromium
 if ($true) { 
     Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
@@ -219,19 +233,18 @@ if ($true) {
     
     $downloadedChromium = $env:USERPROFILE + "\chrome-win.zip"
     Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
-    aria2c.exe $chromiumUrl -d $HOME
+    aria2c.exe $chromiumUrl -d $HOME -o "chrome-win.zip"
     
-    Move-Item $downloadedChromium "C:\chromium.zip" -Force
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedChromium "-o$($chromiumPath)" -y
     
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x "C:\chromium.zip" "-o$($chromiumPath)" -y
-    Remove-Item -Path "C:\chromium.zip" -Force
-
     $shortCutPath = $env:USERPROFILE + "\Start Menu\Programs" + "\Chromium.lnk"
     Remove-Item -Path $shortCutPath -Force -ErrorAction SilentlyContinue
     $objShell = New-Object -ComObject ("WScript.Shell")
     $objShortCut = $objShell.CreateShortcut($shortCutPath)
     $objShortCut.TargetPath = "$chromiumPath\chrome-win\Chrome.exe"
     $objShortCut.Save()
+
+    Remove-Item -Path $downloadedChromium -Force
 }
 
 # Android CLI
@@ -244,15 +257,9 @@ if ($true) {
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
     aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip"
     
-    Move-Item $downloadedTool "C:\tools.zip" -Force
-    
-    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\tools.zip" "-o$($toolsPath)" -y
-    Write-Host "Adding Android Platform Tools to PATH..." -ForegroundColor Green
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$toolsPath\platform-tools",
-        [EnvironmentVariableTarget]::Machine)
-    Remove-Item -Path "C:\tools.zip" -Force
+    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
+    AddToPath -folder "$toolsPath\platform-tools"
+    Remove-Item -Path $downloadedTool -Force
 }
 
 # FFmpeg
@@ -265,18 +272,16 @@ if ($true) {
     Remove-Item $downloadedFfmpeg -ErrorAction SilentlyContinue
     aria2c.exe $downloadUri -d $HOME -o "ffmpeg-git-full.7z"
 
-    Move-Item $downloadedFfmpeg "C:\ffmpeg.7z" -Force
-    
-    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\ffmpeg.7z" "-o$($ffmpegPath)" -y
+    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedFfmpeg "-o$($ffmpegPath)" -y
     $subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
     $subPath = Join-Path -Path $ffmpegPath -ChildPath $subPath
     $binPath = Join-Path -Path $subPath -ChildPath "bin"
+    Remove-Item $ffmpegPath\*.exe
+    Move-Item $binPath\*.exe $ffmpegPath
+
     Write-Host "Adding FFmpeg to PATH..." -ForegroundColor Green
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$binPath",
-        [EnvironmentVariableTarget]::Machine)
-    Remove-Item -Path "C:\ffmpeg.7z" -Force
+    AddToPath -folder $ffmpegPath
+    Remove-Item -Path $downloadedFfmpeg -Force
 }
 
 # Kubernetes CLI
@@ -291,10 +296,7 @@ if ($true) {
     
     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$toolsPath",
-        [EnvironmentVariableTarget]::Machine)
+    AddToPath -folder $toolsPath
 }
 
 # wget
@@ -302,20 +304,14 @@ if ($true) {
     Write-Host "Downloading Wget..." -ForegroundColor Green
     $wgetPath = "${env:ProgramFiles}\wget"
     $downloadUri = "https://eternallybored.org/misc/wget/releases/wget-1.21.3-win64.zip"
-    
     $downloadedWget = $env:USERPROFILE + "\wget-1.21.3-win64.zip"
     Remove-Item $downloadedWget -ErrorAction SilentlyContinue
     aria2c.exe $downloadUri -d $HOME -o "wget-1.21.3-win64.zip"
     
-    Move-Item $downloadedWget "C:\wget.zip" -Force
-    
-    & ${env:ProgramFiles}\7-Zip\7z.exe x "C:\wget.zip" "-o$($wgetPath)" -y
+    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedWget "-o$($wgetPath)" -y
     Write-Host "Adding wget to PATH..." -ForegroundColor Green
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$wgetPath",
-        [EnvironmentVariableTarget]::Machine)
-    Remove-Item -Path "C:\wget.zip" -Force
+    AddToPath -folder $wgetPath
+    Remove-Item -Path $downloadedWget -Force
 }
 
 if (-not $(Get-Command git-lfs)) {
@@ -334,11 +330,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-Write-Host "Adding Git-Bash to environment variable..." -ForegroundColor Green
-[Environment]::SetEnvironmentVariable(
-    "Path",
-    [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";C:\Program Files\Git\bin",
-    [EnvironmentVariableTarget]::Machine)
+AddToPath -folder "C:\Program Files\Git\bin"
 
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
 $HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
@@ -447,11 +439,7 @@ dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c 
 git clone https://github.com/Anduin2017/Parser.git "$HOME\source\repos\Anduin2017\Parser"
 $parserPath = "$OneDrivePath\Storage\Tools\Parser"
 dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o $parserPath --self-contained
-
-[Environment]::SetEnvironmentVariable(
-    "Path",
-    [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine) + ";$parserPath",
-    [EnvironmentVariableTarget]::Machine)
+AddToPath -folder $parserPath
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
