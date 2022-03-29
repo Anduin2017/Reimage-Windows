@@ -233,7 +233,7 @@ if ($true) {
     
     $downloadedChromium = $env:USERPROFILE + "\chrome-win.zip"
     Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
-    aria2c.exe $chromiumUrl -d $HOME -o "chrome-win.zip"
+    aria2c.exe $chromiumUrl -d $HOME -o "chrome-win.zip" --check-certificate=false
     
     & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedChromium "-o$($chromiumPath)" -y
     
@@ -255,7 +255,7 @@ if ($true) {
     
     $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip"
+    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
     
     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
     AddToPath -folder "$toolsPath\platform-tools"
@@ -270,7 +270,7 @@ if ($true) {
     
     $downloadedFfmpeg = $env:USERPROFILE + "\ffmpeg-git-full.7z"
     Remove-Item $downloadedFfmpeg -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "ffmpeg-git-full.7z"
+    aria2c.exe $downloadUri -d $HOME -o "ffmpeg-git-full.7z" --check-certificate=false
 
     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedFfmpeg "-o$($ffmpegPath)" -y
     $subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
@@ -292,7 +292,7 @@ if ($true) {
     
     $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "kubectl.exe"
+    aria2c.exe $downloadUri -d $HOME -o "kubectl.exe" --check-certificate=false
     
     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
@@ -306,7 +306,7 @@ if ($true) {
     $downloadUri = "https://eternallybored.org/misc/wget/releases/wget-1.21.3-win64.zip"
     $downloadedWget = $env:USERPROFILE + "\wget-1.21.3-win64.zip"
     Remove-Item $downloadedWget -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "wget-1.21.3-win64.zip"
+    aria2c.exe $downloadUri -d $HOME -o "wget-1.21.3-win64.zip" --check-certificate=false
     
     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedWget "-o$($wgetPath)" -y
     Write-Host "Adding wget to PATH..." -ForegroundColor Green
