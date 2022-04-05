@@ -84,7 +84,7 @@ tput setaf 2; echo "Installing python..."; tput sgr0
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.8
-sudo apt install python3-pip
+sudo apt install python3-pip python-is-python3
 
 tput setaf 2; echo "Installing kubectl..."; tput sgr0
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
