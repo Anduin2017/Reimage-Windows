@@ -89,6 +89,7 @@ sudo apt install python3-pip python-is-python3
 tput setaf 2; echo "Installing kubectl..."; tput sgr0
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+sudo rm ./kubectl
 
 sudo apt autoremove -y
 
