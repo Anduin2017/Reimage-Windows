@@ -36,7 +36,7 @@ tput setaf 2; echo "Installing ruby..."; tput sgr0
 sudo apt install -y ruby
 
 tput setaf 2; echo "Installing java..."; tput sgr0
-sudo apt install -y openjdk-17-jdk
+sudo apt install -y openjdk-17-jdk default-jre
 
 tput setaf 2; echo "Installing Chrome..."; tput sgr0
 rm ./google-chrome-stable_current_amd64.deb
@@ -66,6 +66,14 @@ tput setaf 2; echo "Installing OBS Studio..."; tput sgr0
 sudo add-apt-repository -y ppa:obsproject/obs-studio
 sudo apt update
 sudo apt install -y obs-studio
+
+tput setaf 2; echo "Installing docker..."; tput sgr0
+sudo apt-get install ca-certificates gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 tput setaf 2; echo "Installing .NET..."; tput sgr0
 wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -r -s)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
