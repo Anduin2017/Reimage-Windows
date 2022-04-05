@@ -50,6 +50,12 @@ aria2c -x 16 "https://code.visualstudio.com/sha/download?build=stable&os=linux-d
 sudo dpkg -i ./*.deb
 rm ./*.deb
 
+tput setaf 2; echo "Installing Teams..."; tput sgr0
+rm ./*.deb
+aria2c -x 16 "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&culture=en-us&country=US"
+sudo dpkg -i ./*.deb
+rm ./*.deb
+
 tput setaf 2; echo "Installing OBS Studio..."; tput sgr0
 sudo add-apt-repository -y ppa:obsproject/obs-studio
 sudo apt update
