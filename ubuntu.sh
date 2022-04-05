@@ -56,6 +56,12 @@ aria2c -x 16 "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&cult
 sudo dpkg -i ./*.deb
 rm ./*.deb
 
+tput setaf 2; echo "Installing Minecraft..."; tput sgr0
+rm ./*.deb
+aria2c -x 16 "https://launcher.mojang.com/download/Minecraft.deb"
+sudo dpkg -i ./*.deb
+rm ./*.deb
+
 tput setaf 2; echo "Installing OBS Studio..."; tput sgr0
 sudo add-apt-repository -y ppa:obsproject/obs-studio
 sudo apt update
