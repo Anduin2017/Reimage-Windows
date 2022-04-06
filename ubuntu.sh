@@ -5,7 +5,7 @@ sudo apt upgrade -y
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
 
 tput setaf 2; echo "Installing curl..."; tput sgr0
-sudo apt install -y curl
+sudo apt install -y curl libglib2.0-dev-bin
 
 tput setaf 2; echo "Installing tweaks..."; tput sgr0
 sudo apt install -y gnome-tweaks
@@ -101,6 +101,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 sudo rm ./kubectl
 
+tput setaf 2; echo "Configuring git..."; tput sgr0
 sudo apt autoremove -y
 
 git config --global user.email "anduin@aiursoft.com"
@@ -108,6 +109,13 @@ git config --global user.name "Anduin Xue"
 
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
 git clone https://github.com/Anduin2017/HowToCOok.git "$HOME/source/repos/Anduin2017/HowToCook"
+
+tput setaf 2; echo "Installing themes..."; tput sgr0
+git clone https://github.com/vinceliuice/Mojave-gtk-theme.git "$HOME/source/repos/Others/Mojave-gtk-theme"
+~/source/repos/Others/Mojave-gtk-theme/install.sh
+
+tput setaf 2; echo "Installing icons..."; tput sgr0
+git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git "$HOME/.icons/la-capitaine-icon-theme"
 
 sudo apt --fix-broken install
 sudo apt --fix-missing install
