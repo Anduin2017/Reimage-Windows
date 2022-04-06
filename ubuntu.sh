@@ -2,6 +2,8 @@
 sudo apt update
 sudo apt upgrade -y
 
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+
 tput setaf 2; echo "Installing curl..."; tput sgr0
 sudo apt install -y curl
 
