@@ -41,7 +41,16 @@ function Watch-RandomVideo {
         # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
         Write-Host "Picked to play: " -ForegroundColor Yellow -NoNewline
         Write-Host "$pickedVideo" -ForegroundColor White
-        Start-Sleep -Seconds 1
+
+        $recordedVideos = Get-ChildItem -Path "$env:USERPROFILE\Videos"
+        $pickedVideoName = $pickedVideo.Name
+        if (($recordedVideos | Where-Object {$_.Name.EndsWith("-$pickedVideoName-.mp4") } | Measure-Object).Count -gt 0) {
+            Write-Host "This video you have records!" -ForegroundColor DarkMagenta -NoNewline
+        }
+
+        if ($auto -eq $false) {
+            Start-Sleep -Seconds 1
+        }
         Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 9 `"$pickedVideo`"" -Wait 2>&1 | out-null
 
         if ($auto -eq $false) {
