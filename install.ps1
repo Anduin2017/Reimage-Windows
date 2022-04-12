@@ -184,7 +184,6 @@ Install-IfNotInstalled "Telegram.TelegramDesktop"
 Install-IfNotInstalled "OBSProject.OBSStudio"
 Install-IfNotInstalled "Git.Git"
 Install-IfNotInstalled "OpenJS.NodeJS"
-Install-IfNotInstalled "Spotify.Spotify"
 Install-IfNotInstalled "Postman.Postman"
 Install-IfNotInstalled "7zip.7zip"
 Install-IfNotInstalled "CPUID.CPU-Z"
@@ -223,6 +222,17 @@ if ($true)
     Move-Item $subPath\aria2c.exe $installPath
     AddToPath -folder $installPath
     Remove-Item -Path "$HOME\aria2.zip" -Force
+}
+
+# Spotify
+if ("$(winget list -e --id "Spotify.Spotify" --source winget)".Contains("--")) { 
+    Write-Host "Spotify is already installed!" -ForegroundColor Green
+}
+else {
+    Write-Host "Attempting to install: $package..." -ForegroundColor Green
+    aria2c.exe "https://download.scdn.co/SpotifySetup.exe" -d $HOME -o "spotify.exe" --check-certificate=false
+    
+    explorer "$HOME\spotify.exe"
 }
 
 # Chromium
