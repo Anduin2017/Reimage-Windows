@@ -387,10 +387,6 @@ cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
 Write-Host "Testing SSH features..." -ForegroundColor Green
 Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
-Write-Host "Linking back Videos..." -ForegroundColor Green
-cmd /c "rmdir $env:USERPROFILE\Videos /q"
-cmd /c "mklink /d `"$env:USERPROFILE\Videos`" `"$OneDrivePath\Digital\Pretty\Records\`""
-
 Write-Host "Configuring git..." -ForegroundColor Green
 Write-Host "Setting git email to $email" -ForegroundColor Yellow
 Write-Host "Setting git name to $name" -ForegroundColor Yellow
