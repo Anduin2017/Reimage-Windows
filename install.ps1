@@ -107,6 +107,9 @@ if (-not(Get-IsElevated)) {
     throw "Please run this script as an administrator" 
 }
 
+Write-Host "OS Info:" -ForegroundColor Green
+Get-CimInstance Win32_OperatingSystem | Format-List
+
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
     Install-PackageProvider -Name NuGet -Force
