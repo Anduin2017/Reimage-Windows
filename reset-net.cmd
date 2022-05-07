@@ -1,7 +1,8 @@
-netsh winsock reset catalog
-netsh int ip reset reset.log
+ipconfig /release
 ipconfig /flushdns
-ipconfig /registerdns
+ipconfig /renew
+netsh int ip reset
+netsh winsock reset
 route /f
 sc config FDResPub start=auto
 sc config fdPHost start=auto
