@@ -202,6 +202,22 @@ Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
+Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.ZuneVideo | Remove-AppxPackage -AllUsers
+Get-AppxPackage *549981C3F5F10* | Remove-AppxPackage -AllUsers # Cortana
+Get-AppxPackage Microsoft.WindowsSoundRecorder | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.PowerAutomateDesktop | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage -AllUsers
+Get-AppxPackage king.com.CandyCrushSaga | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.WindowsFeedbackHub | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.MicrosoftOfficeHub | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage -AllUsers
+Get-AppxPackage 4DF9E0F8.Netflix | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.People | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage -AllUsers
+
 Write-Host "Configuring FDM..." -ForegroundColor Green
 cmd /c "taskkill.exe /IM fdm.exe /F"
 Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
