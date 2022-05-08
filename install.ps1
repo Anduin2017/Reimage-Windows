@@ -208,6 +208,7 @@ Get-AppxPackage *549981C3F5F10* | Remove-AppxPackage -AllUsers # Cortana
 Get-AppxPackage Microsoft.WindowsSoundRecorder | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.PowerAutomateDesktop | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage -AllUsers
 Get-AppxPackage king.com.CandyCrushSaga | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.WindowsFeedbackHub | Remove-AppxPackage -AllUsers
