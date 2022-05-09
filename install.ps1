@@ -221,6 +221,9 @@ Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage -AllUsers
 Get-AppxPackage MicrosoftTeams | Remove-AppxPackage -AllUsers # Teams personal. Trash!
 Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.WindowsMaps | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.MixedReality.Portal | Remove-AppxPackage -AllUsers
+Get-AppxPackage Microsoft.SkypeApp | Remove-AppxPackage -AllUsers
 
 Write-Host "Configuring FDM..." -ForegroundColor Green
 cmd /c "taskkill.exe /IM fdm.exe /F"
