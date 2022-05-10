@@ -194,6 +194,7 @@ Install-IfNotInstalled "WinDirStat.WinDirStat"
 Install-IfNotInstalled "FastCopy.FastCopy"
 Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 
+Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
 Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
 Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
 Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
