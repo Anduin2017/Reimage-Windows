@@ -203,6 +203,8 @@ Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
+Get-AppxPackage Microsoft.MSPaint | Remove-AppxPackage
+Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage -AllUsers
 Get-AppxPackage Microsoft.ZuneVideo | Remove-AppxPackage -AllUsers
 Get-AppxPackage *549981C3F5F10* | Remove-AppxPackage -AllUsers # Cortana
