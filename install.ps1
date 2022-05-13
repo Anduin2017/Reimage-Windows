@@ -547,8 +547,12 @@ Start-Process powershell {
     Set-WinUserLanguageList $UserLanguageList -Force
     $UserLanguageList | Format-Table -AutoSize
 }
-Write-Host "Enabling Hardware-Accelerated GPU Scheduling" -ForegroundColor Green
+
+Write-Host "Enabling Hardware-Accelerated GPU Scheduling..." -ForegroundColor Green
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\" -Name 'HwSchMode' -Value '2' -PropertyType DWORD -Force
+
+Write-Host "Disabling the Windows Ink Workspace..." -ForegroundColor Green
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" /V PenWorkspaceButtonDesiredVisibility /T REG_DWORD /D 0 /F
 
 Write-Host "Enabling legacy photo viewer... because the Photos app in Windows 11 sucks!" -ForegroundColor Green
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/restore-photo-viewer.reg" -OutFile ".\restore.reg"
