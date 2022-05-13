@@ -142,7 +142,10 @@ if (-not ([string]::IsNullOrEmpty($computerName)))
 # Install Winget
 if (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
     Write-Host "Installing WinGet..." -ForegroundColor Green
-    Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+    #Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+
+    Install-StoreApp -storeAppId "9NBLGGH4NNS1" -wingetAppName "App Installer"
+
     while(-not $(Get-Command winget -ErrorAction SilentlyContinue))
     {
         Write-Host "Winget is still not found!" -ForegroundColor Yellow
