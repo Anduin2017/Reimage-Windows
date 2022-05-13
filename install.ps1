@@ -39,6 +39,15 @@ function AddToPath {
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
+function RemoveUWP {
+    param (
+        [string]$name
+    )
+
+    Write-Host "Removing UWP $name..." -ForegroundColor Green
+    Get-AppxPackage $name | Remove-AppxPackage
+    Get-AppxPackage $name | Remove-AppxPackage -AllUsers
+}
 
 function Get-IsElevated {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
@@ -203,30 +212,30 @@ Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
 
-Get-AppxPackage Microsoft.MSPaint | Remove-AppxPackage
-Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.ZuneMusic | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.ZuneVideo | Remove-AppxPackage -AllUsers
-Get-AppxPackage *549981C3F5F10* | Remove-AppxPackage -AllUsers # Cortana
-Get-AppxPackage Microsoft.WindowsSoundRecorder | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.PowerAutomateDesktop | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage -AllUsers
-Get-AppxPackage king.com.CandyCrushSaga | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.WindowsFeedbackHub | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.MicrosoftOfficeHub | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.MicrosoftSolitaireCollection | Remove-AppxPackage -AllUsers
-Get-AppxPackage 4DF9E0F8.Netflix | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.People | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.YourPhone | Remove-AppxPackage -AllUsers
-Get-AppxPackage MicrosoftTeams | Remove-AppxPackage -AllUsers # Teams personal. Trash!
-Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.Microsoft3DViewer | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.WindowsMaps | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.MixedReality.Portal | Remove-AppxPackage -AllUsers
-Get-AppxPackage Microsoft.SkypeApp | Remove-AppxPackage -AllUsers
+RemoveUWP Microsoft.MSPaint
+RemoveUWP Microsoft.Microsoft3DViewer
+RemoveUWP Microsoft.ZuneMusic
+RemoveUWP Microsoft.ZuneVideo
+RemoveUWP *549981C3F5F10*
+RemoveUWP Microsoft.WindowsSoundRecorder
+RemoveUWP Microsoft.PowerAutomateDesktop
+RemoveUWP Microsoft.BingWeather
+RemoveUWP Microsoft.BingNews
+RemoveUWP king.com.CandyCrushSaga
+RemoveUWP Microsoft.Messaging
+RemoveUWP Microsoft.WindowsFeedbackHub
+RemoveUWP Microsoft.MicrosoftOfficeHub
+RemoveUWP Microsoft.MicrosoftSolitaireCollection
+RemoveUWP 4DF9E0F8.Netflix
+RemoveUWP Microsoft.GetHelp
+RemoveUWP Microsoft.People
+RemoveUWP Microsoft.YourPhone
+RemoveUWP MicrosoftTeams
+RemoveUWP Microsoft.Getstarted
+RemoveUWP Microsoft.Microsoft3DViewer
+RemoveUWP Microsoft.WindowsMaps
+RemoveUWP Microsoft.MixedReality.Portal
+RemoveUWP Microsoft.SkypeApp
 
 Write-Host "Configuring FDM..." -ForegroundColor Green
 cmd /c "taskkill.exe /IM fdm.exe /F"
