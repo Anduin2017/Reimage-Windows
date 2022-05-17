@@ -3,6 +3,7 @@
 Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 
 Import-Module 'C:\Program Files (x86)\gsudo\gsudoModule.psd1'
+Set-Alias 'sudo' 'gsudo'
 
 function Update-All {
     # This will start a new PowerShell window outside Windows terminal with Admin permission.
