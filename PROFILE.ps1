@@ -2,6 +2,8 @@
 
 Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 
+Import-Module 'C:\Program Files (x86)\gsudo\gsudoModule.psd1'
+
 function Update-All {
     # This will start a new PowerShell window outside Windows terminal with Admin permission.
     Start-Process "PowerShell.exe" -PassThru "Force-UpdateAll" -Verb RunAs
@@ -83,6 +85,4 @@ function Watch-RandomPhoto {
         Start-Sleep -Seconds 4
     }
 }
-
-
 
