@@ -1,6 +1,9 @@
 tput setaf 2; echo "Bash version:"; tput sgr0
 bash --version | head -1
 
+tput setaf 2; echo "gsudo version:"; tput sgr0
+gsudo --version | head -1
+
 tput setaf 2; echo "Winget version:"; tput sgr0
 winget --version; echo ""
 
