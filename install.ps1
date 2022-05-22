@@ -520,9 +520,10 @@ Write-Host "Clearing recycle bin..." -ForegroundColor Green
 Write-Host "Recycle bin cleared on $driveLetter..."
 Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 
-Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
-Write-Host "Disabled Active Probing."
+# Disabling Active Probing may increase performance. But on some machines may cause UWP unable to connect to Internet.
+#Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
+#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
+#Write-Host "Disabled Active Probing."
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
