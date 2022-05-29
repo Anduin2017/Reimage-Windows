@@ -383,6 +383,7 @@ Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 AddToPath -folder "C:\Program Files\Git\bin"
+AddToPath -folder "C:\Program Files\VideoLAN\VLC"
 
 Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
 $HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
