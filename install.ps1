@@ -463,8 +463,8 @@ if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) {
     Write-Host "Task schduler already configured." -ForegroundColor Green
 } else {
     Write-Host "Configuring task scheduler to start WT in the background..." -ForegroundColor Green
-    $taskAction = New-ScheduledTaskAction -Execute 'pwsh.exe' `
-    -Argument "-Command `"Start-Process 'wt.exe' -WindowStyle Hidden`""
+    Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
+    $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
     $trigger = New-ScheduledTaskTrigger -AtLogOn
     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background."
 }
