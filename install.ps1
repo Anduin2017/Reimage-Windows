@@ -219,7 +219,6 @@ Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 
 RemoveUWP Microsoft.MSPaint
 RemoveUWP Microsoft.Microsoft3DViewer
 RemoveUWP Microsoft.ZuneMusic
-RemoveUWP Microsoft.ZuneVideo
 RemoveUWP *549981C3F5F10*
 RemoveUWP Microsoft.WindowsSoundRecorder
 RemoveUWP Microsoft.PowerAutomateDesktop
