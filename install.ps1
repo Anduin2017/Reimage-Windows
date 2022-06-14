@@ -5,6 +5,7 @@ function Do-Next {
     Write-Host " * Teams turn on dark theme and start in background." -ForegroundColor White
     Write-Host " * Manually check store updates again." -ForegroundColor White
     Write-Host " * Manually sign in store personal account." -ForegroundColor White
+    Write-Host " * Install HEVC at https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7" -ForegroundColor White
     Write-Host " * Set Google as default search engine." -ForegroundColor White
     Write-Host " * Sign in To do." -ForegroundColor White
     Write-Host " * Sign in Sticky Notes." -ForegroundColor White
@@ -215,6 +216,8 @@ Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Not
 Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9mspc6mp8fm4" -wingetAppName "Microsoft Whiteboard"
 Install-StoreApp -storeAppId "9wzdncrfhvjl" -wingetAppName "OneNote for Windows 10"
+Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
+Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
 
 RemoveUWP Microsoft.MSPaint
 RemoveUWP Microsoft.Microsoft3DViewer
@@ -694,3 +697,4 @@ if ($pressedKey -eq 'c') {
 }
 
 Do-Next
+
