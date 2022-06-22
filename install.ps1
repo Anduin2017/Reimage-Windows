@@ -413,6 +413,8 @@ Get-ChildItem $OneDrivePath | Format-Table -AutoSize
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned
 
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+
 Write-Host "Installing profile file..." -ForegroundColor Green
 if (!(Test-Path $PROFILE))
 {
@@ -438,6 +440,7 @@ Write-Host "Setting git name to $name" -ForegroundColor Yellow
 git config --global user.email $email
 git config --global user.name $name
 git config --global core.autocrlf true
+git config --global core.longpaths true
 
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
