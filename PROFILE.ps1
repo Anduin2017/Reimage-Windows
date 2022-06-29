@@ -23,6 +23,16 @@ function Reimage {
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
 }
 
+function Enjoy {
+    Write-Host "Fetching videos..."
+    $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4', '*.webm') -Recurse -ErrorAction SilentlyContinue -Force
+    $allVideos = $allVideos | Sort-Object { Get-Random }
+    Write-Host "Playing $($allVideos.Count) videos..."
+    foreach ($pickedVideo in $allVideos) {
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 0.5 --fullscreen --rate 1.5 `"$pickedVideo`"" -Wait 2>&1 | out-null
+    }
+}
+
 function Watch-RandomVideo {
     param(
         [string]$filter,
@@ -32,7 +42,7 @@ function Watch-RandomVideo {
     )
 
     Write-Host "Fetching videos..."
-    $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4') -Recurse -ErrorAction SilentlyContinue -Force
+    $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4', '*.webm') -Recurse -ErrorAction SilentlyContinue -Force
     $allVideos = $allVideos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) }
     if (-not ([string]::IsNullOrEmpty($exclude))) {
         $allVideos = $allVideos | Where-Object { -not $_.VersionInfo.FileName.Contains($exclude) }
