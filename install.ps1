@@ -18,6 +18,7 @@ function Do-Next {
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Sign in the Xbox app" -ForegroundColor White
+    Write-Host " * Enable Chinese pinyin input" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
 }
 
