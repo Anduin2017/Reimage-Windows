@@ -16,6 +16,7 @@ function Do-Next {
     Write-Host " * Sign in Spotify and edit start up settings" -ForegroundColor White
     Write-Host " * Sign in WeChat" -ForegroundColor White
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
+    Write-Host " * Sign in Youtube" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Sign in the Xbox app" -ForegroundColor White
     Write-Host " * Enable Chinese pinyin input" -ForegroundColor White
