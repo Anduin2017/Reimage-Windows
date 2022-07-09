@@ -20,6 +20,7 @@ function Do-Next {
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Sign in the Xbox app" -ForegroundColor White
     Write-Host " * Enable Chinese pinyin input" -ForegroundColor White
+    Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
 }
 
