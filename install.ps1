@@ -520,7 +520,7 @@ git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\re
 git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\Anduin2017\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\JAL" --self-contained
 git clone https://github.com/Anduin2017/Parser.git "$HOME\source\repos\Anduin2017\Parser"
-$parserPath = "$OneDrivePath\Storage\Tools\Parser"
+$parserPath = "$OneDrivePath\Storage\Parser"
 dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o $parserPath --self-contained
 AddToPath -folder $parserPath
 
