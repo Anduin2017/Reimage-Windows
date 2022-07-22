@@ -113,13 +113,7 @@ git config --global user.name "Anduin Xue"
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
 git clone https://github.com/Anduin2017/HowToCOok.git "$HOME/source/repos/Anduin2017/HowToCook"
 
-tput setaf 2; echo "Installing themes..."; tput sgr0
-git clone https://github.com/vinceliuice/Mojave-gtk-theme.git "$HOME/source/repos/Others/Mojave-gtk-theme"
-~/source/repos/Others/Mojave-gtk-theme/install.sh
-
-tput setaf 2; echo "Installing icons..."; tput sgr0
-git clone https://github.com/keeferrourke/la-capitaine-icon-theme.git "$HOME/.icons/la-capitaine-icon-theme"
-
 sudo apt --fix-broken install
 sudo apt --fix-missing install
+sudo apt autoremove -y
 curl "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh" | bash
