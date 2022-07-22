@@ -2,7 +2,12 @@
 sudo apt update
 sudo apt upgrade -y
 
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+# You may need this to sacle.
+#gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+
+# You may need this to unload NVIDIA driver
+# sudo systemctl isolate multi-user.target
+# sudo modprobe -r nvidia-drm
 
 tput setaf 2; echo "Installing curl..."; tput sgr0
 sudo apt install -y curl libglib2.0-dev-bin httping
