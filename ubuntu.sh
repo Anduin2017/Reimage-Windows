@@ -5,7 +5,7 @@ sudo apt upgrade -y
 gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
 
 tput setaf 2; echo "Installing curl..."; tput sgr0
-sudo apt install -y curl libglib2.0-dev-bin
+sudo apt install -y curl libglib2.0-dev-bin httping
 
 tput setaf 2; echo "Installing tweaks..."; tput sgr0
 sudo apt install -y gnome-tweaks
@@ -96,8 +96,8 @@ sudo npm install --global node-static typescript @angular/cli yarn
 tput setaf 2; echo "Installing python..."; tput sgr0
 sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
-sudo apt install python3.8
-sudo apt install python3-pip python-is-python3
+sudo apt install -y python3.8
+sudo apt install -y python3-pip python-is-python3
 
 tput setaf 2; echo "Installing kubectl..."; tput sgr0
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
