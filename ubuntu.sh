@@ -34,6 +34,9 @@ sudo snap install spotify
 tput setaf 2; echo "Installing ffmpeg..."; tput sgr0
 sudo apt install -y ffmpeg
 
+tput setaf 2; echo "Installing Nextcloud..."; tput sgr0
+sudo apt install -y nextcloud-desktop
+
 tput setaf 2; echo "Installing ruby..."; tput sgr0
 sudo apt install -y ruby
 
@@ -85,7 +88,7 @@ sudo DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_PRINT_TELEMETRY_MESSAGE="false" apt in
 dotnet tool update --global dotnet-ef || dotnet tool install --global dotnet-ef
 
 tput setaf 2; echo "Installing node..."; tput sgr0
-curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install --global npm@latest
 sudo npm install --global node-static typescript @angular/cli yarn
