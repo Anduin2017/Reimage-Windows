@@ -476,7 +476,8 @@ if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) {
     Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
     $trigger = New-ScheduledTaskTrigger -AtLogOn
-    Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background."
+    $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
+    Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background." -Settings $settings
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
