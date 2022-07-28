@@ -170,6 +170,8 @@ function Reimage {
     bcdedit /set "$osID" allowedinmemorysettings "0x15000075"
     bcdedit /displayorder "$osID" /addlast
     bcdedit /set "{bootmgr}" default "$osID"
+    bcdedit /set "{current}" bootmenupolicy legacy
+    bcdedit /set "{default}" bootmenupolicy legacy
     Write-Host "Modified boot configuration:" -ForegroundColor Green
     bcdedit
 
