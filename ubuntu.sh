@@ -5,6 +5,9 @@ sudo apt upgrade -y
 # You may need this to sacle.
 #gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
 
+# You may need this to make desktop looks modern.
+# https://www.pling.com/p/1805660/
+
 # You may need this to unload NVIDIA driver
 # sudo systemctl isolate multi-user.target
 # sudo modprobe -r nvidia-drm
