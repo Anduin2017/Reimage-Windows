@@ -247,6 +247,7 @@ RemoveUWP Microsoft.Microsoft3DViewer
 RemoveUWP Microsoft.WindowsMaps
 RemoveUWP Microsoft.MixedReality.Portal
 RemoveUWP Microsoft.SkypeApp
+RemoveUWP MicrosoftWindows.Client.WebExperience # Useless Widgets.
 
 Write-Host "Configuring FDM..." -ForegroundColor Green
 cmd /c "taskkill.exe /IM fdm.exe /F"
