@@ -13,7 +13,7 @@ tput setaf 2; echo "Installing curl..."; tput sgr0
 sudo apt install -y curl libglib2.0-dev-bin httping
 
 tput setaf 2; echo "Installing tweaks..."; tput sgr0
-sudo apt install -y gnome-tweaks
+sudo apt install -y gnome-tweaks gnome-shell-extension-prefs
 
 tput setaf 2; echo "Installing vim..."; tput sgr0
 sudo apt install -y vim
