@@ -212,6 +212,7 @@ Install-IfNotInstalled "WinDirStat.WinDirStat"
 Install-IfNotInstalled "FastCopy.FastCopy"
 Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
+Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 
 Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
 Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
