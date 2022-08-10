@@ -23,6 +23,14 @@ function Reimage {
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
 }
 
+function Qget {
+    param(
+        [string]$address
+    )
+    
+    aria2c.exe -c -s 16 -x 16 -k 1M -j 16 $address
+}
+
 function Enjoy {
     Write-Host "Fetching videos..."
     $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4', '*.webm') -Recurse -ErrorAction SilentlyContinue -Force
