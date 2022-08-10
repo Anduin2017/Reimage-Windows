@@ -448,6 +448,7 @@ git config --global user.email $email
 git config --global user.name $name
 git config --global core.autocrlf true
 git config --global core.longpaths true
+git config --global --add safe.directory '*'
 
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
