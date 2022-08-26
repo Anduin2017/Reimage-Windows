@@ -183,7 +183,7 @@ else {
 }
 
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
-Install-IfNotInstalled "Microsoft.Teams"
+#Install-IfNotInstalled "Microsoft.Teams"
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.OneDrive"
 Install-IfNotInstalled "Microsoft.PowerShell"
