@@ -11,7 +11,6 @@ function Do-Next {
     Write-Host " * Sign in Sticky Notes." -ForegroundColor White
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
     Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
-    Write-Host " * Turn on bitlocker" -ForegroundColor White
     Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
     Write-Host " * Sign in Spotify and edit start up settings" -ForegroundColor White
     Write-Host " * Sign in WeChat" -ForegroundColor White
