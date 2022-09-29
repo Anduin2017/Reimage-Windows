@@ -321,6 +321,21 @@ if ($true) {
     Remove-Item -Path $downloadedTool -Force
 }
 
+# Youtube-dl
+if ($true) {
+    Write-Host "Downloading Youtube dl..." -ForegroundColor Green
+    $toolsPath = "${env:ProgramFiles}\youtube-dl"
+    $downloadUri = "https://yt-dl.org/latest/youtube-dl.exe"
+    
+    $downloadedTool = $env:USERPROFILE + "\youtube-dl.exe"
+    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+    aria2c.exe $downloadUri -d $HOME -o "youtube-dl.exe" --check-certificate=false
+    
+    New-Item -Type Directory -Path "${env:ProgramFiles}\youtube-dl" -ErrorAction SilentlyContinue
+    Move-Item $downloadedTool "$toolsPath\youtube-dl.exe" -Force
+    AddToPath -folder $toolsPath
+}
+
 # FFmpeg
 if ($true) {
     Write-Host "Downloading FFmpeg..." -ForegroundColor Green
