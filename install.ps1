@@ -474,6 +474,9 @@ alias sudo=`"gsudo`"
 alias redis-cli=`"rdcli`""
 Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
 
+Write-Host "Installing spotdl..." -ForegroundColor Green
+pip install spotdl
+
 if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
     Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
 } else {
