@@ -65,3 +65,9 @@ az version | tail -n 5 | head -n 1
 
 tput setaf 2; echo "K8S CLI version:"; tput sgr0
 kubectl version --client
+
+tput setaf 2; echo "Youtube downloader version:"; tput sgr0
+youtube-dl.exe --version
+
+tput setaf 2; echo "Spotify downloader version:"; tput sgr0
+spotdl.exe --version
