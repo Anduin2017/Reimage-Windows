@@ -120,6 +120,7 @@ if (-not(Get-IsElevated)) {
 
 Write-Host "OS Info:" -ForegroundColor Green
 Get-CimInstance Win32_OperatingSystem | Format-List Name, Version, InstallDate, OSArchitecture
+(Get-ItemProperty HKLM:\HARDWARE\DESCRIPTION\System\CentralProcessor\0\).ProcessorNameString
 
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
