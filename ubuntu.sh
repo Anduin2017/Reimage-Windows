@@ -13,7 +13,7 @@ sudo apt upgrade -y
 # sudo modprobe -r nvidia-drm
 
 tput setaf 2; echo "Installing curl..."; tput sgr0
-sudo apt install -y curl libglib2.0-dev-bin httping
+sudo apt install -y w3m git vim sl zip unzip wget curl neofetch jq net-tools libglib2.0-dev-bin httping ffmpeg nano
 
 tput setaf 2; echo "Installing tweaks..."; tput sgr0
 sudo apt install -y gnome-tweaks gnome-shell-extension-prefs
