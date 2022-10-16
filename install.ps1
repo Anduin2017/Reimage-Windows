@@ -184,7 +184,6 @@ else {
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
 #Install-IfNotInstalled "Microsoft.Teams"
 Install-IfNotInstalled "Microsoft.Office"
-Install-IfNotInstalled "Microsoft.OneDrive"
 Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
 Install-IfNotInstalled "Microsoft.Edge"
@@ -396,28 +395,13 @@ Write-Host "-----------------------------" -ForegroundColor Green
 AddToPath -folder "C:\Program Files\Git\bin"
 AddToPath -folder "C:\Program Files\VideoLAN\VLC"
 
-Write-Host "Enabling OneDrive silent sign in..." -ForegroundColor Green
-$HKLMregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive'##Path to HKLM keys
-$DiskSizeregistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\OneDrive\DiskSpaceCheckThresholdMB'##Path to max disk size key
-if(!(Test-Path $HKLMregistryPath)){New-Item -Path $HKLMregistryPath -Force}
-if(!(Test-Path $DiskSizeregistryPath)){New-Item -Path $DiskSizeregistryPath -Force}
-Write-Host "Current AAD Tenant Id is $($aad.TenantId)"
-New-ItemProperty -Path $HKLMregistryPath -Name 'SilentAccountConfig' -Value '1' -PropertyType DWORD -Force | Out-Null ##Enable silent account configuration
-New-ItemProperty -Path $DiskSizeregistryPath -Name $aad.TenantId -Value '102400' -PropertyType DWORD -Force | Out-Null ##Set max OneDrive threshold before prompting
-Write-Host "Restarting OneDrive..." -ForegroundColor Yellow
-taskkill.exe /IM OneDrive.exe /F
-explorer "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
-explorer "$env:LOCALAPPDATA\Microsoft\OneDrive\OneDrive.exe"
-explorer "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk"
-
-$OneDrivePath = $null
-while ($null -eq $OneDrivePath -or -not $OneDrivePath.Contains("-")) {
-    Write-Host "OneDrive is still not started!"
-    # Wait till it finds my enterprise OneDrive folder.
+$NextcloudPath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "Nextcloud*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
+$nextcloudFiles = Get-ChildItem $NextcloudPath | Format-Table -AutoSize
+while ($nextcloudFiles.Count -lt 2) {
+    Write-Host "Waiting for Nextcloud to sync..." -ForegroundColor Yellow
     Start-Sleep -Seconds 10
-    $OneDrivePath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "OneDrive*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
+    $nextcloudFiles = Get-ChildItem $NextcloudPath | Format-Table -AutoSize
 }
-Get-ChildItem $OneDrivePath | Format-Table -AutoSize
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned
@@ -435,11 +419,11 @@ Set-Content $PROFILE $profileContent
 . $PROFILE
 
 Write-Host "Linking back SSH keys..." -ForegroundColor Green
-$oneDriveSshConfigPath = "$OneDrivePath\Storage\SSH\"
+$NextcloudSshConfigPath = "$NextcloudPath\Storage\SSH\"
 $localSshConfigPath = "$HOME\.ssh\"
-$_ = Get-Content $oneDriveSshConfigPath\id_rsa.pub # Ensure file is available.
+$_ = Get-Content $NextcloudSshConfigPath\id_rsa.pub # Ensure file is available.
 cmd /c "rmdir $localSshConfigPath /q"
-cmd /c "mklink /d `"$localSshConfigPath`" `"$oneDriveSshConfigPath`""
+cmd /c "mklink /d `"$localSshConfigPath`" `"$NextcloudSshConfigPath`""
 Write-Host "Testing SSH features..." -ForegroundColor Green
 Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
@@ -454,10 +438,10 @@ git config --global --add safe.directory '*'
 
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-$onedriveConfigwt = "$OneDrivePath\Storage\WT\settings.json"
-$_ = Get-Content $onedriveConfigwt # Ensure file is available.
+$NextcloudConfigwt = "$NextcloudPath\Storage\WT\settings.json"
+$_ = Get-Content $NextcloudConfigwt # Ensure file is available.
 cmd /c "del `"$wtConfigPath`""
-cmd /c "mklink `"$wtConfigPath`" `"$onedriveConfigwt`""
+cmd /c "mklink `"$wtConfigPath`" `"$NextcloudConfigwt`""
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
 git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
@@ -540,10 +524,9 @@ Write-Host "Building some .NET projects to ensure you can develop..." -Foregroun
 git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME\source\repos\AiursoftWeb\Infrastructures"
 git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\repos\AiursoftWeb\AiurVersionControl"
 git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\Anduin2017\Happiness-recorder"
-dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$OneDrivePath\Storage\Tools\JAL" --self-contained
+dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 git clone https://github.com/Anduin2017/Parser.git "$HOME\source\repos\Anduin2017\Parser"
-$parserPath = "$OneDrivePath\Storage\Parser"
-dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o $parserPath --self-contained
+dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Parser" --self-contained
 AddToPath -folder $parserPath
 
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -583,11 +566,11 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 
-$wallpaper = "$OneDrivePath\Digital\Wallpapers\Dark.jpg"
+$wallpaper = "$NextcloudPath\Digital\Wallpapers\Dark.jpg"
 if (Test-Path $wallpaper) {
     Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
     Set-WallPaper -Image $wallpaper
-    Write-Host "Set to: " (Get-Item "$OneDrivePath\Digital\Wallpapers\Dark.jpg").Name
+    Write-Host "Set to: " (Get-Item "$NextcloudPath\Digital\Wallpapers\Dark.jpg").Name
 }
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
@@ -656,7 +639,7 @@ Add-MpPreference -ExclusionPath "$env:USERPROFILE\.dotnet"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.ssh"
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\.azuredatastudio"
 Add-MpPreference -ExclusionPath "$env:APPDATA\npm"
-Add-MpPreference -ExclusionPath "$OneDrivePath"
+Add-MpPreference -ExclusionPath "$NextcloudPath"
 
 Write-Host "Enabling dark theme..." -ForegroundColor Green
 Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
