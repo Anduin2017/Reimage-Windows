@@ -122,18 +122,8 @@ Write-Host "OS Info:" -ForegroundColor Green
 Get-CimInstance Win32_OperatingSystem | Format-List Name, Version, InstallDate, OSArchitecture
 (Get-ItemProperty HKLM:\HARDWARE\DESCRIPTION\System\CentralProcessor\0\).ProcessorNameString
 
-if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
-    Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
-    Install-PackageProvider -Name NuGet -Force
-    Write-Host "Installing AzureAD PowerShell module..." -ForegroundColor Green
-    Install-Module AzureAD -Force
-} else {
-    Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
-}
-
 $email = Read-Host -Prompt 'Input your email:'
 $name = Read-Host -Prompt 'Input your name:'
-
 
 $driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
@@ -184,7 +174,6 @@ else {
 }
 
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
-#Install-IfNotInstalled "Microsoft.Teams"
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
@@ -214,6 +203,15 @@ Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
 Install-IfNotInstalled "PassmarkSoftware.OSFMount"
+
+if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
+    Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
+    Install-PackageProvider -Name NuGet -Force
+    Write-Host "Installing AzureAD PowerShell module..." -ForegroundColor Green
+    Install-Module AzureAD -Force
+} else {
+    Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
+}
 
 Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
 Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
