@@ -609,8 +609,8 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Adva
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f"
 
 Write-Host "Setting Time zone..." -ForegroundColor Green
-Set-TimeZone -Name "China Standard Time"
-Write-Host "Time zone set to China Standard Time."
+Set-TimeZone -Id "UTC"
+Write-Host "Time zone set to UTC."
 
 Write-Host "Syncing time..." -ForegroundColor Green
 net stop w32time
