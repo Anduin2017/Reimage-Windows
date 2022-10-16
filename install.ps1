@@ -130,9 +130,11 @@ if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
 } else {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
-$aad = Connect-AzureAD
-$email = $aad.Account.Id
-$name = (Get-AzureADUser -ObjectId $email).DisplayName
+
+$email = Read-Host -Prompt 'Input your email:'
+$name = Read-Host -Prompt 'Input your name:'
+
+
 $driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
 if (-not ([string]::IsNullOrEmpty($computerName)))
@@ -214,7 +216,6 @@ Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
 Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 
 Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
-Install-StoreApp -storeAppId "9NBLGGH5R558" -wingetAppName "Microsoft To Do"
 Install-StoreApp -storeAppId "9MV0B5HZVK9Z" -wingetAppName "Xbox"
 Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
