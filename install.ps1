@@ -537,11 +537,12 @@ dotnet tool install --global dotnet-ef --interactive
 dotnet tool update --global dotnet-ef --interactive
 
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
-git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME\source\repos\AiursoftWeb\Infrastructures"
-git clone https://github.com/AiursoftWeb/AiurVersionControl.git "$HOME\source\repos\AiursoftWeb\AiurVersionControl"
-git clone https://github.com/Anduin2017/Happiness-recorder.git "$HOME\source\repos\Anduin2017\Happiness-recorder"
+git clone https://git.aiursoft.cn/Aiursoft/Infrastructures.git "$HOME\source\repos\Aiursoft\Infrastructures"
+git clone https://github.com/Aiursoft/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
+git clone https://git.aiursoft.cn/Aiursoft/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
+git clone https://git.aiursoft.cn/Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
-git clone https://github.com/Anduin2017/Parser.git "$HOME\source\repos\Anduin2017\Parser"
+git clone https://git.aiursoft.cn/Parser.git "$HOME\source\repos\Anduin\Parser"
 dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Parser" --self-contained
 AddToPath -folder $parserPath
 
