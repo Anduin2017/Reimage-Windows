@@ -16,11 +16,11 @@ function View-Context {
 
 function Force-UpdateAll {
     # This will run this update script inside current terminal.
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://github.com/Anduin2017/configuration-script-win/raw/main/install.ps1"))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/install.ps1"))
 }
 
 function Reimage {
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://github.com/Anduin2017/configuration-script-win/raw/main/Reimage.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/install.ps1'))
 }
 
 function Qget {
