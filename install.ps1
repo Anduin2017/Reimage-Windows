@@ -122,8 +122,8 @@ Write-Host "OS Info:" -ForegroundColor Green
 Get-CimInstance Win32_OperatingSystem | Format-List Name, Version, InstallDate, OSArchitecture
 (Get-ItemProperty HKLM:\HARDWARE\DESCRIPTION\System\CentralProcessor\0\).ProcessorNameString
 
-$email = Read-Host -Prompt 'Input your email:'
-$name = Read-Host -Prompt 'Input your name:'
+$email = Read-Host -Prompt 'Input your email'
+$name = Read-Host -Prompt 'Input your name'
 
 $driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
