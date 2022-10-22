@@ -271,6 +271,23 @@ if ($true)
     Remove-Item -Path "$HOME\aria2.zip" -Force
 }
 
+#iperf3
+if ($true)
+{
+    Write-Host "Installing iperf3..." -ForegroundColor Green
+    $iperfUrl = "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip"
+    $iperfPath = "${env:ProgramFiles}\Iperf3\iperf-3.1.3-win64"
+    
+    $downloadedIperf = $env:USERPROFILE + "\iperf3.zip"
+    Remove-Item $downloadedIperf -ErrorAction SilentlyContinue
+    aria2c.exe $iperfUrl -d $HOME -o "iperf3.zip" --check-certificate=false
+    
+    & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedIperf "-o$($iperfPath)" -y
+    
+    AddToPath -folder "$iperfPath"
+    Remove-Item -Path $downloadedIperf -Force
+}
+
 # Chromium
 if ($true) { 
     Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
