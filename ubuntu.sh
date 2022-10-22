@@ -36,9 +36,6 @@ sudo apt install -y aria2
 tput setaf 2; echo "Installing adb..."; tput sgr0
 sudo apt install -y adb
 
-tput setaf 2; echo "Installing Spotify..."; tput sgr0
-sudo snap install spotify
-
 tput setaf 2; echo "Installing ffmpeg..."; tput sgr0
 sudo apt install -y ffmpeg
 
@@ -63,12 +60,6 @@ aria2c -x 16 "https://code.visualstudio.com/sha/download?build=stable&os=linux-d
 sudo dpkg -i ./*.deb
 rm ./*.deb
 
-tput setaf 2; echo "Installing Teams..."; tput sgr0
-rm ./*.deb
-aria2c -x 16 "https://go.microsoft.com/fwlink/p/?LinkID=2112886&clcid=0x409&culture=en-us&country=US"
-sudo dpkg -i ./*.deb
-rm ./*.deb
-
 tput setaf 2; echo "Installing Minecraft..."; tput sgr0
 rm ./*.deb
 aria2c -x 16 "https://launcher.mojang.com/download/Minecraft.deb"
@@ -89,14 +80,11 @@ sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
 tput setaf 2; echo "Installing .NET..."; tput sgr0
-wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -r -s)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb && rm ./packages-microsoft-prod.deb
-sudo apt-get update
-sudo DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_PRINT_TELEMETRY_MESSAGE="false" apt install -y apt-transport-https dotnet-sdk-6.0 libgdiplus
+sudo DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_PRINT_TELEMETRY_MESSAGE="false" apt install -y apt-transport-https dotnet6
 dotnet tool update --global dotnet-ef || dotnet tool install --global dotnet-ef
 
 tput setaf 2; echo "Installing node..."; tput sgr0
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install --global npm@latest
 sudo npm install --global node-static typescript @angular/cli yarn
@@ -118,8 +106,7 @@ sudo apt autoremove -y
 git config --global user.email "anduin@aiursoft.com"
 git config --global user.name "Anduin Xue"
 
-git clone https://github.com/AiursoftWeb/Infrastructures.git "$HOME/source/repos/AiursoftWeb/Infrastructures"
-git clone https://github.com/Anduin2017/HowToCOok.git "$HOME/source/repos/Anduin2017/HowToCook"
+git clone https://git.aiursoft.cn/Aiursoft/Infrastructures.git "$HOME/source/repos/Aiursoft/Infrastructures"
 
 sudo apt --fix-broken install
 sudo apt --fix-missing install
