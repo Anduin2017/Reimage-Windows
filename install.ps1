@@ -253,7 +253,7 @@ Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
 Start-Sleep -Seconds 5
 cmd /c "taskkill.exe /IM fdm.exe /F"
 $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
-Invoke-WebRequest -Uri "https://github.com/Anduin2017/configuration-script-win/raw/main/db.sqlite" -OutFile "$fdmDbPath"
+Invoke-WebRequest -Uri "https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/db.sqlite" -OutFile "$fdmDbPath"
 
 #aria2
 if ($true)
