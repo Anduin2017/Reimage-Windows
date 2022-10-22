@@ -10,8 +10,8 @@ function Update-All {
     Start-Process "PowerShell.exe" -PassThru "Force-UpdateAll" -Verb RunAs
 }
 
-function View-Context {
-    $(Invoke-WebRequest https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh  -UseBasicParsing).Content | bash
+function Check-Env {
+    $(Invoke-WebRequest https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/test_env.sh -UseBasicParsing).Content | bash
 }
 
 function Force-UpdateAll {
