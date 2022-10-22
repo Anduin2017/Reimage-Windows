@@ -460,7 +460,7 @@ cmd /c "del `"$wtConfigPath`""
 cmd /c "mklink `"$wtConfigPath`" `"$NextcloudConfigwt`""
 
 Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
-git clone https://github.com/lextm/windowsterminal-shell.git "$HOME\temp"
+git clone https://git.aiursoft.cn/PublicVault/windowsterminal-shell.git "$HOME\temp"
 pwsh -command "$HOME\temp\install.ps1 mini"
 Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
 
@@ -531,14 +531,14 @@ if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or $null -eq (Sele
 }
 New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force
 
-Write-Host "Installing Github.com/microsoft/artifacts-credprovider..." -ForegroundColor Green
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/microsoft/artifacts-credprovider/master/helpers/installcredprovider.ps1'))
+Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Green
+Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
 dotnet tool install --global dotnet-ef --interactive
 dotnet tool update --global dotnet-ef --interactive
 
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
 git clone https://git.aiursoft.cn/Aiursoft/Infrastructures.git "$HOME\source\repos\Aiursoft\Infrastructures"
-git clone https://github.com/Aiursoft/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
+git clone https://git.aiursoft.cn/Aiursoft/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
 git clone https://git.aiursoft.cn/Aiursoft/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
 git clone https://git.aiursoft.cn/Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
@@ -610,7 +610,7 @@ Write-Host "Disabling the Windows Ink Workspace..." -ForegroundColor Green
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" /V PenWorkspaceButtonDesiredVisibility /T REG_DWORD /D 0 /F
 
 Write-Host "Enabling legacy photo viewer... because the Photos app in Windows 11 sucks!" -ForegroundColor Green
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/restore-photo-viewer.reg" -OutFile ".\restore.reg"
+Invoke-WebRequest -Uri "https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/restore-photo-viewer.reg" -OutFile ".\restore.reg"
 regedit /s ".\restore.reg"
 Remove-Item ".\restore.reg"
 
@@ -695,7 +695,7 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
 
-$(Invoke-WebRequest https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh).Content | bash
+$(Invoke-WebRequest https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/test_env.sh).Content | bash
 
 Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = Read-Host
