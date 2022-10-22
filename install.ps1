@@ -476,6 +476,7 @@ alias redis-cli=`"rdcli`""
 Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
 
 Write-Host "Installing spotdl..." -ForegroundColor Green
+python.exe -m pip install --upgrade pip
 pip install spotdl
 
 if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
