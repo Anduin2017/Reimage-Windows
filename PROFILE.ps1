@@ -20,7 +20,7 @@ function Force-UpdateAll {
 }
 
 function Reimage {
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/install.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/Reimage.ps1'))
 }
 
 function Qget {
