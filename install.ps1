@@ -276,7 +276,7 @@ if ($true)
 {
     Write-Host "Installing iperf3..." -ForegroundColor Green
     $iperfUrl = "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip"
-    $iperfPath = "${env:ProgramFiles}\Iperf3\iperf-3.1.3-win64"
+    $iperfPath = "${env:ProgramFiles}\Iperf3"
     
     $downloadedIperf = $env:USERPROFILE + "\iperf3.zip"
     Remove-Item $downloadedIperf -ErrorAction SilentlyContinue
@@ -284,7 +284,7 @@ if ($true)
     
     & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedIperf "-o$($iperfPath)" -y
     
-    AddToPath -folder "$iperfPath"
+    AddToPath -folder "$iperfPath\iperf-3.1.3-win64"
     Remove-Item -Path $downloadedIperf -Force
 }
 
