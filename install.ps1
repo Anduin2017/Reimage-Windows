@@ -176,7 +176,7 @@ else {
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
-Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
+Install-IfNotInstalled "Microsoft.DotNet.SDK.7"
 Install-IfNotInstalled "Microsoft.Edge"
 Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
 Install-IfNotInstalled "Microsoft.AzureCLI"
