@@ -548,9 +548,6 @@ git clone https://git.aiursoft.cn/Aiursoft/AiurVersionControl.git "$HOME\source\
 git clone https://git.aiursoft.cn/Aiursoft/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
 git clone https://git.aiursoft.cn/Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
-git clone https://git.aiursoft.cn/Parser.git "$HOME\source\repos\Anduin\Parser"
-dotnet publish "$HOME\source\repos\Anduin2017\Parser\Parser.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Parser" --self-contained
-AddToPath -folder $parserPath
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
