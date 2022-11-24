@@ -489,7 +489,7 @@ pip install spotdl
 #     Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
 #     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
 #     $trigger = New-ScheduledTaskTrigger -AtLogOn
-#     $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
+#     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
 #     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background." -Settings $settings
 # }
 
@@ -501,7 +501,7 @@ pip install spotdl
 #     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\ramdisk.cmd"
 #     $trigger = New-ScheduledTaskTrigger -AtLogOn
 #     $principal = New-ScheduledTaskPrincipal -RunLevel Highest -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName)
-#     $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
+#     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
 #     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "RamDisk" -Description "Start ramdisk in the background." -Settings $settings -Principal $principal
 # }
 
