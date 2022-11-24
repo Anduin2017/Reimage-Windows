@@ -482,28 +482,28 @@ Write-Host "Installing spotdl..." -ForegroundColor Green
 python.exe -m pip install --upgrade pip
 pip install spotdl
 
-if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
-    Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
-} else {
-    Write-Host "Configuring task scheduler to start WT in the background..." -ForegroundColor Green
-    Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
-    $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
-    $trigger = New-ScheduledTaskTrigger -AtLogOn
-    $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
-    Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background." -Settings $settings
-}
+# if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
+#     Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
+# } else {
+#     Write-Host "Configuring task scheduler to start WT in the background..." -ForegroundColor Green
+#     Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
+#     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
+#     $trigger = New-ScheduledTaskTrigger -AtLogOn
+#     $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
+#     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background." -Settings $settings
+# }
 
-if (Get-ScheduledTask -TaskName "RamDisk" -ErrorAction SilentlyContinue) { 
-    Write-Host "Ramdisk Task schduler already configured." -ForegroundColor Green
-} else {
-    Write-Host "Configuring task scheduler to start Ramdisk in the background..." -ForegroundColor Green
-    Set-Content -Path "$env:APPDATA\ramdisk.cmd" -Value "`"C:\Program Files\OSFMount\osfmount.com`" -a -t vm -o format:ntfs:`"RAM Volume`" -o physical -o gpt -s 4G"
-    $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\ramdisk.cmd"
-    $trigger = New-ScheduledTaskTrigger -AtLogOn
-    $principal = New-ScheduledTaskPrincipal -RunLevel Highest -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName)
-    $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
-    Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "RamDisk" -Description "Start ramdisk in the background." -Settings $settings -Principal $principal
-}
+# if (Get-ScheduledTask -TaskName "RamDisk" -ErrorAction SilentlyContinue) { 
+#     Write-Host "Ramdisk Task schduler already configured." -ForegroundColor Green
+# } else {
+#     Write-Host "Configuring task scheduler to start Ramdisk in the background..." -ForegroundColor Green
+#     Set-Content -Path "$env:APPDATA\ramdisk.cmd" -Value "`"C:\Program Files\OSFMount\osfmount.com`" -a -t vm -o format:ntfs:`"RAM Volume`" -o physical -o gpt -s 4G"
+#     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\ramdisk.cmd"
+#     $trigger = New-ScheduledTaskTrigger -AtLogOn
+#     $principal = New-ScheduledTaskPrincipal -RunLevel Highest -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName)
+#     $settings = New-ScheduledTaskSettingsSet –AllowStartIfOnBatteries –DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
+#     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "RamDisk" -Description "Start ramdisk in the background." -Settings $settings -Principal $principal
+# }
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 4  - SDK    " -ForegroundColor Green
