@@ -569,7 +569,7 @@ Remove-Item -Path $startUp
 Get-ChildItem $startUp
 
 Write-Host "Preventing rubbish folder grouping..." -ForegroundColor Green
-Get-ChildItem 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -Recurse | Where-Object {$_.GetSubkeyNames() -Contains "{885A186E-A440-4ADA-812B-DB871B942259}" } |  Remove-Item -Path { Join-Path $_.PSPath $DLID } -Confirm:$false -Recurse
+(gci 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -s | ? PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' ) | ri -Recurse
 
 Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
 Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
