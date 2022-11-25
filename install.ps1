@@ -541,7 +541,7 @@ git clone https://git.aiursoft.cn/Aiursoft/Infrastructures.git "$HOME\source\rep
 git clone https://git.aiursoft.cn/Aiursoft/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
 git clone https://git.aiursoft.cn/Aiursoft/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
 git clone https://git.aiursoft.cn/Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
-dotnet publish "$HOME\source\repos\Anduin2017\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
+dotnet publish "$HOME\source\repos\Anduin\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
