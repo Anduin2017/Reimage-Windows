@@ -307,20 +307,20 @@ if ($true) {
     Remove-Item -Path $downloadedChromium -Force
 }
 
-# Android CLI
-if ($true) {
-    Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
-    $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
-    $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
+# # Android CLI
+# if ($true) {
+#     Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
+#     $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
+#     $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
     
-    $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
-    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
+#     $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
+#     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+#     aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
     
-    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
-    AddToPath -folder "$toolsPath\platform-tools"
-    Remove-Item -Path $downloadedTool -Force
-}
+#     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
+#     AddToPath -folder "$toolsPath\platform-tools"
+#     Remove-Item -Path $downloadedTool -Force
+# }
 
 # Youtube-dl
 if ($true) {
@@ -359,20 +359,20 @@ if ($true) {
     Remove-Item -Path $downloadedFfmpeg -Force
 }
 
-# Kubernetes CLI
-if ($true) {
-    Write-Host "Downloading Kubernetes CLI..." -ForegroundColor Green
-    $toolsPath = "${env:ProgramFiles}\Kubernetes"
-    $downloadUri = "https://dl.k8s.io/release/v1.23.0/bin/windows/amd64/kubectl.exe"
+# # Kubernetes CLI
+# if ($true) {
+#     Write-Host "Downloading Kubernetes CLI..." -ForegroundColor Green
+#     $toolsPath = "${env:ProgramFiles}\Kubernetes"
+#     $downloadUri = "https://dl.k8s.io/release/v1.23.0/bin/windows/amd64/kubectl.exe"
     
-    $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
-    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "kubectl.exe" --check-certificate=false
+#     $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
+#     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+#     aria2c.exe $downloadUri -d $HOME -o "kubectl.exe" --check-certificate=false
     
-    New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
-    Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
-    AddToPath -folder $toolsPath
-}
+#     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
+#     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
+#     AddToPath -folder $toolsPath
+# }
 
 # wget
 if ($true) {
@@ -389,11 +389,11 @@ if ($true) {
     Remove-Item -Path $downloadedWget -Force
 }
 
-if (-not $(Get-Command git-lfs)) {
-    winget install "GitHub.GitLFS" --source winget
-} else {
-    Write-Host "Git LFS is already installed." -ForegroundColor Yellow
-}
+# if (-not $(Get-Command git-lfs)) {
+#     winget install "GitHub.GitLFS" --source winget
+# } else {
+#     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
+# }
 
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
@@ -417,7 +417,7 @@ while ($nextcloudFiles.Count -lt 2) {
 }
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
-Set-ExecutionPolicy remotesigned
+Set-ExecutionPolicy remotesigned -Force
 
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
