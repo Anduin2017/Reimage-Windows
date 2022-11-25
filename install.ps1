@@ -2,13 +2,9 @@ function Do-Next {
     Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
     Write-Host " * Change your display scale" -ForegroundColor White
     Write-Host " * Turn off rubbish focus assistance" -ForegroundColor White
-    Write-Host " * Teams turn on dark theme and start in background." -ForegroundColor White
     Write-Host " * Manually check store updates again." -ForegroundColor White
     Write-Host " * Manually sign in store personal account." -ForegroundColor White
-    Write-Host " * Install HEVC at https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7" -ForegroundColor White
     Write-Host " * Set Google as default search engine." -ForegroundColor White
-    Write-Host " * Sign in To do." -ForegroundColor White
-    Write-Host " * Sign in Sticky Notes." -ForegroundColor White
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
     Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
     Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
@@ -16,8 +12,6 @@ function Do-Next {
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
     Write-Host " * Sign in Youtube" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
-    Write-Host " * Sign in the Xbox app" -ForegroundColor White
-    Write-Host " * Enable Chinese pinyin input" -ForegroundColor White
     Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
 }
