@@ -412,6 +412,11 @@ AddToPath -folder "C:\Program Files\VideoLAN\VLC"
 
 $NextcloudPath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "Nextcloud*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
 $nextcloudFiles = Get-ChildItem $NextcloudPath | Format-Table -AutoSize
+while (-not $NextcloudPath) {
+    Write-Host "Waiting for Nextcloud to start..." -ForegroundColor Yellow
+    Start-Sleep -Seconds 10
+}
+
 while ($nextcloudFiles.Count -lt 2) {
     Write-Host "Waiting for Nextcloud to sync..." -ForegroundColor Yellow
     Start-Sleep -Seconds 10
