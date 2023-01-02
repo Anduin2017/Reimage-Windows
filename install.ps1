@@ -541,7 +541,7 @@ Write-Host "Building some .NET projects to ensure you can develop..." -Foregroun
 git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/Infrastructures.git "$HOME\source\repos\Aiursoft\Infrastructures"
 git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
 git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
-git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
+git clone git@gitea:Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
 dotnet publish "$HOME\source\repos\Anduin\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 
 Write-Host "-----------------------------" -ForegroundColor Green
