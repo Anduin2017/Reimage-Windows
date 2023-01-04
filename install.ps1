@@ -592,11 +592,11 @@ cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Hide
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel /v {F02C1A0D-BE21-4350-88B0-7367FC96EF3C} /t REG_DWORD /d 0 /f"
 
-$wallpaper = "$NextcloudPath\Digital\Wallpapers\Dark.jpg"
+$wallpaper = "$NextcloudPath\Digital\Wallpapers\default.jpg"
 if (Test-Path $wallpaper) {
     Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
     Set-WallPaper -Image $wallpaper
-    Write-Host "Set to: " (Get-Item "$NextcloudPath\Digital\Wallpapers\Dark.jpg").Name
+    Write-Host "Set to: " (Get-Item "$NextcloudPath\Digital\Wallpapers\default.jpg").Name
 }
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
