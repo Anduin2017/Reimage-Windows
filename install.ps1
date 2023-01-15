@@ -171,7 +171,9 @@ else {
 
 Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
-Install-IfNotInstalled "Microsoft.Office"
+#Install-IfNotInstalled "Microsoft.Office"
+Write-Host "Please manually install office..." -ForegroundColor Green
+Start-Process -FilePath "https://portal.office.com/account"
 Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.DotNet.SDK.7"
 Install-IfNotInstalled "Microsoft.Edge"
