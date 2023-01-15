@@ -1,19 +1,20 @@
 function Do-Next {
     Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
     Write-Host " * Change your display scale" -ForegroundColor White
-    Write-Host " * Turn off rubbish focus assistance" -ForegroundColor White
-    Write-Host " * Manually check store updates again." -ForegroundColor White
     Write-Host " * Manually sign in store personal account." -ForegroundColor White
     Write-Host " * Set Google as default search engine." -ForegroundColor White
+    Write-Host " * Open office once." -ForegroundColor White
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
     Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
-    Write-Host " * Sign in VSCode to turn on settings sync." -ForegroundColor White
-    Write-Host " * Sign in WeChat" -ForegroundColor White
+    Write-Host " * Sign in VSCode and GitHub to turn on settings sync." -ForegroundColor White
+    Write-Host " * Sign in WeChat and change shortcut" -ForegroundColor White
     Write-Host " * Sign in Visual Studio" -ForegroundColor White
-    Write-Host " * Sign in Youtube" -ForegroundColor White
+    Write-Host " * Sign in Youtube and Google" -ForegroundColor White
+    Write-Host " * Modify photos app location" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
+    Write-Host " * Access Vault and pin to quick access" -ForegroundColor White
 }
 
 function AddToPath {
@@ -154,6 +155,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Do-Next
 
 Write-Host "Triggering Store to upgrade all apps..." -ForegroundColor Green
+wsreset.exe -i
 $namespaceName = "root\cimv2\mdm\dmmap"
 $className = "MDM_EnterpriseModernAppManagement_AppManagement01"
 $wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
@@ -167,6 +169,7 @@ else {
     winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive --source winget
 }
 
+Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
@@ -176,7 +179,6 @@ Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
 #Install-IfNotInstalled "Microsoft.AzureCLI"
 #Install-IfNotInstalled "Microsoft.AzureDataStudio"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
-Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
 Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "Python.Python.3.10"
 #Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
@@ -309,20 +311,20 @@ if ($true) {
     Remove-Item -Path $downloadedChromium -Force
 }
 
-# # Android CLI
-# if ($true) {
-#     Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
-#     $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
-#     $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
+# Android CLI
+if ($true) {
+    Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
+    $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
+    $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
     
-#     $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
-#     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-#     aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
+    $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
+    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
+    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
     
-#     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
-#     AddToPath -folder "$toolsPath\platform-tools"
-#     Remove-Item -Path $downloadedTool -Force
-# }
+    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
+    AddToPath -folder "$toolsPath\platform-tools"
+    Remove-Item -Path $downloadedTool -Force
+}
 
 # Youtube-dl
 if ($true) {
@@ -391,11 +393,11 @@ if ($true) {
     Remove-Item -Path $downloadedWget -Force
 }
 
-# if (-not $(Get-Command git-lfs)) {
-#     winget install "GitHub.GitLFS" --source winget
-# } else {
-#     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
-# }
+if (-not $(Get-Command git-lfs)) {
+    winget install "GitHub.GitLFS" --source winget
+} else {
+    Write-Host "Git LFS is already installed." -ForegroundColor Yellow
+}
 
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
@@ -656,6 +658,7 @@ Write-Host "Mouse speed changed. Will apply next reboot." -ForegroundColor Yello
 Write-Host "Pin repos to quick access..." -ForegroundColor Green
 $load_com = new-object -com shell.application
 $load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
+$load_com.Namespace("\\VAULT\").Self.InvokeVerb("pintohome")
 Write-Host "Repos folder are pinned to file explorer."
 
 Write-Host "Exclude repos from Windows Defender..." -ForegroundColor Green
