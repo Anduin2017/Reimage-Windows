@@ -569,6 +569,8 @@ Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 #Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
 #Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
 #Write-Host "Disabled Active Probing."
+Write-Host "Disabling Alt+Tab swiching Edge tabs..." -ForegroundColor Green
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Value 3
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
