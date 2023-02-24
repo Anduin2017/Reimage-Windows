@@ -530,7 +530,7 @@ if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or $null -eq (Sele
     $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
     <configuration>`
       <packageSources>`
-        <add key=`"Home`" value=`"https://dev.aiursoft.cn/Aiursoft/_packaging/Home/nuget/v3/index.json`" protocolVersion=`"3`" />`
+        <add key=`"aiursoft.cn`" value=`"https://nuget.aiursoft.cn/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"Microsoft Visual Studio Offline Packages`" value=`"C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\`" />`
       </packageSources>`
