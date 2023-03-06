@@ -5,16 +5,12 @@ function Do-Next {
     Write-Host " * Set Google as default search engine." -ForegroundColor White
     Write-Host " * Open office once." -ForegroundColor White
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
-    Write-Host " * Sign in browser extensions to use password manager." -ForegroundColor White
     Write-Host " * Sign in VSCode and GitHub to turn on settings sync." -ForegroundColor White
     Write-Host " * Sign in WeChat and change shortcut" -ForegroundColor White
-    Write-Host " * Sign in Visual Studio" -ForegroundColor White
     Write-Host " * Sign in Youtube and Google" -ForegroundColor White
-    Write-Host " * Modify photos app location" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
-    Write-Host " * Access Vault and pin to quick access" -ForegroundColor White
 }
 
 function AddToPath {
@@ -32,7 +28,6 @@ function AddToPath {
         $trimmedEnv,
         [EnvironmentVariableTarget]::Machine)
 
-    #Write-Host "Reloading environment variables..." -ForegroundColor Green
     $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
 }
 
@@ -129,10 +124,13 @@ if (-not ([string]::IsNullOrEmpty($computerName)))
     Rename-Computer -NewName $computerName
 }
 
+Write-Host "Reseting Store..." -ForegroundColor Green
+wsreset.exe -i
+
 # Install Winget
 if (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
     Write-Host "Installing WinGet..." -ForegroundColor Green
-    Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+    Start-Process "ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1&mode=mini"
 
     Install-StoreApp -storeAppId "9NBLGGH4NNS1" -wingetAppName "App Installer"
 
@@ -155,7 +153,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Do-Next
 
 Write-Host "Triggering Store to upgrade all apps..." -ForegroundColor Green
-wsreset.exe -i
 $namespaceName = "root\cimv2\mdm\dmmap"
 $className = "MDM_EnterpriseModernAppManagement_AppManagement01"
 $wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
