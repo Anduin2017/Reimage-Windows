@@ -15,7 +15,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/A
 * It will ask you the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file name.
 * It will ask you for a clean disk drive. For example: Disk `E:\`. Provide it with any disk you like. (Except current OS drive)
 
-# Warning
+# One key post config
 
 This next part may NOT be designed for YOU! It is for my personal usage to config the newly installed Windows as a ready to use state.
 
@@ -35,14 +35,6 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/A
 ```
 
 **Caution: DO NOT RUN this in Windows Terminal!!! Instead, start a pure PowerShell with admin instead!**
-
-### One-key post config for Ubuntu
-
-Open bash, and run:
-
-```bash
-sudo apt install -y curl && curl "https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/ubuntu.sh" --output - | sudo bash
-```
 
 ### One-key test current environment
 
