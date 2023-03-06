@@ -430,6 +430,7 @@ while ($nextcloudFiles.Count -lt 5) {
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned -Force
 
+Write-Host "Enabling long path..." -ForegroundColor Green
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
 Write-Host "Installing profile file..." -ForegroundColor Green
