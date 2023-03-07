@@ -80,7 +80,7 @@ function Watch-RandomVideo {
                 $destination = "Sorted-Level-$vote"
                 Write-Host "Moving $pickedVideo to $destination..." -ForegroundColor Green
                 New-Item -Type "Directory" -Name $destination -ErrorAction SilentlyContinue
-                Move-Item -Path $pickedVideo -Destination $destination
+                Move-Item -Path $pickedVideo -Destination "$destination\$($pickedVideo.Directory.Name)-$($pickedVideoName)"
             }
         }
     }
@@ -104,4 +104,5 @@ function Watch-RandomPhoto {
         Start-Sleep -Seconds 4
     }
 }
+
 
