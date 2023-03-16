@@ -580,6 +580,9 @@ Get-ChildItem $startUp
 Remove-Item -Path $startUp
 Get-ChildItem $startUp
 
+Write-Host "Avoid Edge showing sidebar..." -ForegroundColor Green
+New-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\Edge -Name HubsSidebarEnabled -Type DWORD -Value 0
+
 Write-Host "Preventing rubbish folder grouping..." -ForegroundColor Green
 (gci 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -s | ? PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' ) | ri -Recurse
 
