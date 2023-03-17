@@ -573,7 +573,7 @@ Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 #Write-Host "Disabled Active Probing."
 Write-Host "Disabling Alt+Tab swiching Edge tabs..." -ForegroundColor Green
 New-Item HKLM:\SOFTWARE\Policies\Microsoft\Edge -ErrorAction SilentlyContinue
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Value 3
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Value 3 -ErrorAction SilentlyContinue
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
