@@ -572,8 +572,9 @@ Clear-RecycleBin -DriveLetter $driveLetter -Force -Confirm
 #Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
 #Write-Host "Disabled Active Probing."
 Write-Host "Disabling Alt+Tab swiching Edge tabs..." -ForegroundColor Green
-New-Item HKLM:\SOFTWARE\Policies\Microsoft\Edge -ErrorAction SilentlyContinue
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Value 3 -ErrorAction SilentlyContinue
+New-Item         -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -ErrorAction SilentlyContinue
+New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Type DWORD -Value 3 -ErrorAction SilentlyContinue
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name MultiTaskingAltTabFilter -Type DWORD -Value 3
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
@@ -582,7 +583,9 @@ Remove-Item -Path $startUp
 Get-ChildItem $startUp
 
 Write-Host "Avoid Edge showing sidebar..." -ForegroundColor Green
-New-ItemProperty HKLM:\SOFTWARE\Policies\Microsoft\Edge -Name HubsSidebarEnabled -Type DWORD -Value 0
+New-Item         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -ErrorAction SilentlyContinue
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HubsSidebarEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HubsSidebarEnabled -Type DWORD -Value 0
 
 Write-Host "Preventing rubbish folder grouping..." -ForegroundColor Green
 (gci 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -s | ? PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' ) | ri -Recurse
