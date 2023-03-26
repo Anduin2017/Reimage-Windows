@@ -582,6 +582,9 @@ Get-ChildItem $startUp
 Remove-Item -Path $startUp
 Get-ChildItem $startUp
 
+Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
+Get-ChildItem -Path $HOME -Filter .* -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = $_.Attributes -bor [System.IO.FileAttributes]::Hidden }
+
 Write-Host "Avoid Edge showing sidebar..." -ForegroundColor Green
 New-Item         -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -ErrorAction SilentlyContinue
 New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HubsSidebarEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
