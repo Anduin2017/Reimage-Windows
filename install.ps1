@@ -13,6 +13,22 @@ function Do-Next {
     Write-Host " * Activate Windows" -ForegroundColor White
 }
 
+function Qget {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$address,
+        [string]$path = ""
+    )
+
+    if ($path -eq "") {
+        # 如果没有指定 path，则使用当前目录并保留原有文件名
+        $path = ".\$(Split-Path -Leaf $address)"
+    }
+
+    $aria2cArgs = "-c -s 128 -x 8 -k 4M -j 128 --split 128 `"$address`" -d `"$([System.IO.Path]::GetDirectoryName($path))`" -o `"$([System.IO.Path]::GetFileName($path))`" --check-certificate=false"
+    Invoke-Expression "aria2c.exe $aria2cArgs"
+}
+
 function AddToPath {
     param (
         [string]$folder
@@ -28,7 +44,7 @@ function AddToPath {
         $trimmedEnv,
         [EnvironmentVariableTarget]::Machine)
 
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 function RemoveUWP {
@@ -117,8 +133,7 @@ $name = Read-Host -Prompt 'Input your name'
 
 $driveLetter = (Get-Location).Drive.Name
 $computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
-if (-not ([string]::IsNullOrEmpty($computerName)))
-{
+if (-not ([string]::IsNullOrEmpty($computerName))) {
     Write-Host "Renaming computer to $computerName..." -ForegroundColor Green
     cmd /c "bcdedit /set {current} description `"$computerName`""
     Rename-Computer -NewName $computerName
@@ -134,8 +149,7 @@ if (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
 
     Install-StoreApp -storeAppId "9NBLGGH4NNS1" -wingetAppName "App Installer"
 
-    while(-not $(Get-Command winget -ErrorAction SilentlyContinue))
-    {
+    while (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
         Write-Host "Winget is still not found!" -ForegroundColor Yellow
         Start-Sleep -Seconds 5
     }
@@ -208,7 +222,8 @@ if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
     Install-PackageProvider -Name NuGet -Force
     Write-Host "Installing AzureAD PowerShell module..." -ForegroundColor Green
     Install-Module AzureAD -Force
-} else {
+}
+else {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
 
@@ -264,7 +279,6 @@ if ($true) {
     $downloadAddress = (Invoke-RestMethod -Uri $apiUrl).assets |
         Where-Object { $_.name -like "aria2-*-win-64bit-build1.zip" } |
         Select-Object -ExpandProperty browser_download_url
-
     Write-Host "Downloading aria2 from: $downloadAddress" -ForegroundColor Yellow
 
     $aria2ZipPath = Join-Path -Path $env:TEMP -ChildPath "aria2.zip"
@@ -284,24 +298,29 @@ if ($true) {
     Remove-Item -Path $aria2ZipPath -Force
 }
 
-
-
 #iperf3
-if ($true)
-{
-    Write-Host "Installing iperf3..." -ForegroundColor Green
-    $iperfUrl = "https://iperf.fr/download/windows/iperf-3.1.3-win64.zip"
-    $iperfPath = "${env:ProgramFiles}\Iperf3"
+if ($true) {
+    $apiUrl = "https://iperf.fr/iperf-download.php"
+    $downloadAddress = (Invoke-WebRequest -Uri $apiUrl).Links |
+    Where-Object { $_.href -like "download/windows/iperf-*-win64.zip" } |
+    Select-Object -ExpandProperty href |
+    Sort-Object { $_ -replace ".iperf-(.)-win64.zip", '$1' } -Descending |
+    Select-Object -First 1
     
-    $downloadedIperf = $env:USERPROFILE + "\iperf3.zip"
-    Remove-Item $downloadedIperf -ErrorAction SilentlyContinue
-    aria2c.exe $iperfUrl -d $HOME -o "iperf3.zip" --check-certificate=false
+    $downloadUrl = "https://iperf.fr/$downloadAddress"
+    $downloadPath = Join-Path -Path $env:TEMP -ChildPath "iperf3.zip"
+    Qget $downloadUrl $downloadPath
     
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedIperf "-o$($iperfPath)" -y
+    # 解压文件
+    $installPath = Join-Path -Path $env:ProgramFiles -ChildPath "iperf3"
+    Expand-Archive -Path $downloadPath -DestinationPath $installPath -Force
+    $iperfPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
+    AddToPath -folder $iperfPath
     
-    AddToPath -folder "$iperfPath\iperf-3.1.3-win64"
-    Remove-Item -Path $downloadedIperf -Force
+    # 删除下载的压缩文件
+    Remove-Item $downloadPath
 }
+
 
 # Chromium
 if ($true) { 
@@ -409,13 +428,15 @@ if ($true) {
 
 if (-not $(Get-Command git-lfs)) {
     winget install "GitHub.GitLFS" --source winget
-} else {
+}
+else {
     Write-Host "Git LFS is already installed." -ForegroundColor Yellow
 }
 
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
-} else {
+}
+else {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
 }
 
@@ -448,10 +469,9 @@ Write-Host "Enabling long path..." -ForegroundColor Green
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
 Write-Host "Installing profile file..." -ForegroundColor Green
-if (!(Test-Path $PROFILE))
-{
-   Write-Host "Creating PROFILE..." -ForegroundColor Yellow
-   New-Item -Path $PROFILE -ItemType "file" -Force
+if (!(Test-Path $PROFILE)) {
+    Write-Host "Creating PROFILE..." -ForegroundColor Yellow
+    New-Item -Path $PROFILE -ItemType "file" -Force
 }
 $profileContent = (New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/PROFILE.ps1')
 Set-Content $PROFILE $profileContent
@@ -554,7 +574,8 @@ if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or $null -eq (Sele
       </config>`
     </configuration>"
     Set-Content -Path "$env:APPDATA\Nuget\Nuget.config" -Value $config
-} else {
+}
+else {
     Write-Host "Nuget config file already exists." -ForegroundColor Yellow
 }
 New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force

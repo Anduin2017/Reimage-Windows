@@ -25,10 +25,18 @@ function Reimage {
 
 function Qget {
     param(
-        [string]$address
+        [Parameter(Mandatory = $true)]
+        [string]$address,
+        [string]$path = ""
     )
-    
-    aria2c.exe -c -s 16 -x 16 -k 1M -j 16 $address
+
+    if ($path -eq "") {
+        # 如果没有指定 path，则使用当前目录并保留原有文件名
+        $path = ".\$(Split-Path -Leaf $address)"
+    }
+
+    $aria2cArgs = "-c -s 128 -x 8 -k 4M -j 128 --split 128 `"$address`" -d `"$([System.IO.Path]::GetDirectoryName($path))`" -o `"$([System.IO.Path]::GetFileName($path))`" --check-certificate=false"
+    Invoke-Expression "aria2c.exe $aria2cArgs"
 }
 
 function Enjoy {
