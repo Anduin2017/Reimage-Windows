@@ -21,7 +21,6 @@ function Qget {
     )
 
     if ($path -eq "") {
-        # 如果没有指定 path，则使用当前目录并保留原有文件名
         $path = ".\$(Split-Path -Leaf $address)"
     }
 
@@ -311,37 +310,36 @@ if ($true) {
     $downloadPath = Join-Path -Path $env:TEMP -ChildPath "iperf3.zip"
     Qget $downloadUrl $downloadPath
     
-    # 解压文件
     $installPath = Join-Path -Path $env:ProgramFiles -ChildPath "iperf3"
     Expand-Archive -Path $downloadPath -DestinationPath $installPath -Force
     $iperfPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
     AddToPath -folder $iperfPath
     
-    # 删除下载的压缩文件
     Remove-Item $downloadPath
 }
 
-
 # Chromium
-if ($true) { 
-    Write-Host "Installing Chromium as backup browser ..." -ForegroundColor Green
-    $chromiumUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
-    $chromiumPath = "${env:ProgramFiles}\Chromium"
-    
-    $downloadedChromium = $env:USERPROFILE + "\chrome-win.zip"
-    Remove-Item $downloadedChromium -ErrorAction SilentlyContinue
-    aria2c.exe $chromiumUrl -d $HOME -o "chrome-win.zip" --check-certificate=false
-    
-    & "${env:ProgramFiles}\7-Zip\7z.exe" x $downloadedChromium "-o$($chromiumPath)" -y
-    
-    $shortCutPath = $env:USERPROFILE + "\Start Menu\Programs" + "\Chromium.lnk"
-    Remove-Item -Path $shortCutPath -Force -ErrorAction SilentlyContinue
-    $objShell = New-Object -ComObject ("WScript.Shell")
-    $objShortCut = $objShell.CreateShortcut($shortCutPath)
-    $objShortCut.TargetPath = "$chromiumPath\chrome-win\Chrome.exe"
-    $objShortCut.Save()
+if ($true) {
+    $downloadUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
+    $downloadPath = Join-Path -Path $env:TEMP -ChildPath "chromium.zip"
+    Qget $downloadUrl $downloadPath
 
-    Remove-Item -Path $downloadedChromium -Force
+    $installPath = Join-Path -Path $env:ProgramFiles -ChildPath "Chromium"
+    if (!(Test-Path -Path $installPath)) {
+        New-Item -ItemType Directory -Path $installPath | Out-Null
+    }
+    Expand-Archive -Path $downloadPath -DestinationPath $installPath -Force
+
+    $chromiumPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
+
+    $shortcutPath = Join-Path -Path ([Environment]::GetFolderPath("Programs")) -ChildPath "Chromium.lnk"
+    $WshShell = New-Object -comObject WScript.Shell
+    $Shortcut = $WshShell.CreateShortcut($shortcutPath)
+    $Shortcut.TargetPath = Join-Path -Path $chromiumPath -ChildPath "chrome.exe"
+    $Shortcut.IconLocation = Join-Path -Path $chromiumPath -ChildPath "chrome.exe"
+    $Shortcut.Save()
+
+    Remove-Item $downloadPath
 }
 
 # Android CLI
