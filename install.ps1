@@ -143,21 +143,31 @@ function Clean-Path {
         Write-Host "  - $invalidDirectory"
     }
 
+    # Check if the new PATH value is different from the original value
+    $newPath = $validDirectories -join ';'
+    if ($newPath -eq $currentPath) {
+        Write-Host "No changes needed to the PATH variable."
+        return
+    }
+
     # Prompt the user to confirm the removal of the directories
     $confirmation = Read-Host "Do you want to remove these directories from the PATH variable? (yes/no)"
 
-    if ($confirmation -eq "yes") {
-        # Join the valid directories back into a single PATH string
-        $newPath = $validDirectories -join ';'
+    if ($confirmation.ToLower() -eq "yes") {
+        try {
+            # Set the new PATH environment variable
+            [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine")
 
-        # Set the new PATH environment variable
-        [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine")
-
-        # Print the updated PATH variable
-        Write-Host "Updated PATH: $($newPath)"
+            # Print the updated PATH variable
+            Write-Host "Updated PATH: $($newPath)"
+            Write-Host "Note: You may need to restart your command prompt or PowerShell session for the changes to take effect."
+        } catch {
+            Write-Host "Error: Failed to update the PATH variable. Please ensure you have the necessary permissions."
+        }
     } else {
         Write-Host "No changes made to the PATH variable."
     }
+
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
