@@ -160,7 +160,9 @@ function Clean-Path {
 
             # Print the updated PATH variable
             Write-Host "Updated PATH: $($newPath)"
-            Write-Host "Note: You may need to restart your command prompt or PowerShell session for the changes to take effect."
+            
+            # Update the current session's PATH environment variable
+            $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
         } catch {
             Write-Host "Error: Failed to update the PATH variable. Please ensure you have the necessary permissions."
         }
