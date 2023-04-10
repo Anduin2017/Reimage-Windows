@@ -115,61 +115,57 @@ function Set-WallPaper($Image) {
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
-function Clean-Path {
+function Update-PathVariable {
+    param (
+        [string]$variableScope = "Machine",
+        [switch]$verbose
+    )
+
     # Get the current PATH environment variable
-    $currentPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+    $currentPath = [Environment]::GetEnvironmentVariable("PATH", $variableScope)
 
     # Split the PATH string into an array of directories
     $directories = $currentPath -split ';'
 
-    # Initialize empty arrays to store valid (existing) and invalid (non-existing) directories
-    $validDirectories = @()
-    $invalidDirectories = @()
+    # Initialize an empty array to store updated directories
+    $updatedDirectories = @()
 
     foreach ($directory in $directories) {
         # Check if the directory exists
         if (Test-Path -Path $directory -PathType Container) {
-            # If the directory exists, add it to the valid directories array
-            $validDirectories += $directory
-        } else {
-            # If the directory doesn't exist, add it to the invalid directories array
-            $invalidDirectories += $directory
+            # If the directory exists, add it to the updated directories array
+            $updatedDirectories += $directory
+        } elseif ($verbose) {
+            # If the directory doesn't exist and verbose output is enabled, print the directory to be removed
+            Write-Host "Removing non-existent directory from PATH: $directory"
         }
     }
 
-    # Output the invalid directories to be removed
-    Write-Host "Directories to be removed from PATH:"
-    foreach ($invalidDirectory in $invalidDirectories) {
-        Write-Host "  - $invalidDirectory"
-    }
+    # Join the updated directories back into a single PATH string
+    $newPath = $updatedDirectories -join ';'
 
     # Check if the new PATH value is different from the original value
-    $newPath = $validDirectories -join ';'
     if ($newPath -eq $currentPath) {
-        Write-Host "No changes needed to the PATH variable."
+        if ($verbose) {
+            Write-Host "No changes needed to the $variableScope PATH variable."
+        }
         return
     }
 
-    # Prompt the user to confirm the removal of the directories
-    $confirmation = Read-Host "Do you want to remove these directories from the PATH variable? (yes/no)"
+    try {
+        # Set the new PATH environment variable
+        [Environment]::SetEnvironmentVariable("PATH", $newPath, $variableScope)
 
-    if ($confirmation.ToLower() -eq "yes") {
-        try {
-            # Set the new PATH environment variable
-            [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine")
-
+        if ($verbose) {
             # Print the updated PATH variable
-            Write-Host "Updated PATH: $($newPath)"
-            
-            # Update the current session's PATH environment variable
-            $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-        } catch {
-            Write-Host "Error: Failed to update the PATH variable. Please ensure you have the necessary permissions."
+            Write-Host "Updated $variableScope PATH: $($newPath)"
         }
-    } else {
-        Write-Host "No changes made to the PATH variable."
-    }
 
+        # Update the current session's PATH environment variable
+        $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+    } catch {
+        Write-Host "Error: Failed to update the $variableScope PATH variable. Please ensure you have the necessary permissions."
+    }
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -814,8 +810,9 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
 
-Clean-Path
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+# Call the Update-PathVariable function
+Write-Host "Cleaning path variable..." -ForegroundColor Green
+Update-PathVariable -variableScope "Machine" -verbose
 
 $(Invoke-WebRequest https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/test_env.sh).Content | bash
 
