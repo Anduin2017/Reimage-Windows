@@ -115,6 +115,51 @@ function Set-WallPaper($Image) {
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
+function Clean-Path {
+    # Get the current PATH environment variable
+    $currentPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+
+    # Split the PATH string into an array of directories
+    $directories = $currentPath -split ';'
+
+    # Initialize empty arrays to store valid (existing) and invalid (non-existing) directories
+    $validDirectories = @()
+    $invalidDirectories = @()
+
+    foreach ($directory in $directories) {
+        # Check if the directory exists
+        if (Test-Path -Path $directory -PathType Container) {
+            # If the directory exists, add it to the valid directories array
+            $validDirectories += $directory
+        } else {
+            # If the directory doesn't exist, add it to the invalid directories array
+            $invalidDirectories += $directory
+        }
+    }
+
+    # Output the invalid directories to be removed
+    Write-Host "Directories to be removed from PATH:"
+    foreach ($invalidDirectory in $invalidDirectories) {
+        Write-Host "  - $invalidDirectory"
+    }
+
+    # Prompt the user to confirm the removal of the directories
+    $confirmation = Read-Host "Do you want to remove these directories from the PATH variable? (yes/no)"
+
+    if ($confirmation -eq "yes") {
+        # Join the valid directories back into a single PATH string
+        $newPath = $validDirectories -join ';'
+
+        # Set the new PATH environment variable
+        [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine")
+
+        # Print the updated PATH variable
+        Write-Host "Updated PATH: $($newPath)"
+    } else {
+        Write-Host "No changes made to the PATH variable."
+    }
+}
+
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 1  - Prepare    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -756,6 +801,9 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 # Upgrade all.
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
+
+Clean-Path
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 
 $(Invoke-WebRequest https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/test_env.sh).Content | bash
 
