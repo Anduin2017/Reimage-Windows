@@ -575,6 +575,7 @@ Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
 Write-Host "Installing spotdl..." -ForegroundColor Green
 python.exe -m pip install --upgrade pip
 pip install spotdl
+pip install torch torchvision
 
 # if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
 #     Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
