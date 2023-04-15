@@ -287,6 +287,8 @@ Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
 Install-IfNotInstalled "PassmarkSoftware.OSFMount"
+Install-IfNotInstalled "Maxon.CinebenchR23"
+
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
