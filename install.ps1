@@ -252,25 +252,6 @@ Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
 #Install-IfNotInstalled "Microsoft.AzureDataStudio"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
-
-if ($true) {
-    winget uninstall Python.Python.3.10
-    Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Force -ErrorAction SilentlyContinue
-    $currentPath = [Environment]::GetEnvironmentVariable("PATH")
-    $pathDirs = $currentPath -split ";"
-    $pythonDirs = $pathDirs | Where-Object { $_ -like "*python*" }
-    $pythonDirs | ForEach-Object { $currentPath = $currentPath.Replace($_ + ";", "") }
-    [Environment]::SetEnvironmentVariable("PATH", $currentPath, "Machine")
-    $searchFolder = 'C:\Program Files'
-    $folders = Get-ChildItem -Path $searchFolder -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*python*" }
-    foreach ($folder in $folders) {
-        Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
-    }
-    winget install Python.Python.3.10 --scope machine
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-    python.exe -m pip install --upgrade pip
-}
-
 #Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
 #Install-IfNotInstalled "GoLang.Go.1.19"
 Install-IfNotInstalled "SoftDeluxe.FreeDownloadManager"
@@ -294,6 +275,29 @@ Install-IfNotInstalled "CPUID.HWMonitor"
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
+
+Write-Host "Installing python tools..." -ForegroundColor Green
+if ($true) {
+    winget uninstall Python.Python.3.10
+    Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:APPDATA\Python\" -Recurse -Force -ErrorAction SilentlyContinue
+    $currentPath = [Environment]::GetEnvironmentVariable("PATH")
+    $pathDirs = $currentPath -split ";"
+    $pythonDirs = $pathDirs | Where-Object { $_ -like "*python*" }
+    $pythonDirs | ForEach-Object { $currentPath = $currentPath.Replace($_ + ";", "") }
+    [Environment]::SetEnvironmentVariable("PATH", $currentPath, "Machine")
+    $searchFolder = 'C:\Program Files'
+    $folders = Get-ChildItem -Path $searchFolder -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*python*" }
+    foreach ($folder in $folders) {
+        Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
+    }
+    winget install Python.Python.3.10 --scope machine
+    AddToPath $env:APPDATA\Python\Python310\Scripts
+    
+    python.exe -m pip install --upgrade pip
+    pip install spotdl
+    pip install torch torchvision
+}
 
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
@@ -434,21 +438,6 @@ if ($true) {
     & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
     AddToPath -folder "$toolsPath\platform-tools"
     Remove-Item -Path $downloadedTool -Force
-}
-
-# Youtube-dl
-if ($true) {
-    Write-Host "Downloading Youtube dl..." -ForegroundColor Green
-    $toolsPath = "${env:ProgramFiles}\youtube-dl"
-    $downloadUri = "https://yt-dl.org/latest/youtube-dl.exe"
-    
-    $downloadedTool = $env:USERPROFILE + "\youtube-dl.exe"
-    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "youtube-dl.exe" --check-certificate=false
-    
-    New-Item -Type Directory -Path "${env:ProgramFiles}\youtube-dl" -ErrorAction SilentlyContinue
-    Move-Item $downloadedTool "$toolsPath\youtube-dl.exe" -Force
-    AddToPath -folder $toolsPath
 }
 
 # FFmpeg
@@ -597,11 +586,6 @@ alias qget=`"aria2c.exe -c -s 16 -x 16 -k 1M -j 16`"
 alias sudo=`"gsudo`"
 alias redis-cli=`"rdcli`""
 Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
-
-Write-Host "Installing spotdl..." -ForegroundColor Green
-python.exe -m pip install --upgrade pip
-pip install spotdl
-pip install torch torchvision
 
 # if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
 #     Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
