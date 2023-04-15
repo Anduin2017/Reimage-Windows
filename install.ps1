@@ -279,23 +279,27 @@ Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForN
 Write-Host "Installing python tools..." -ForegroundColor Green
 if ($true) {
     winget uninstall Python.Python.3.10
+    Write-Host "Removing existing python..." -ForegroundColor Green
     Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:APPDATA\Python\" -Recurse -Force -ErrorAction SilentlyContinue
     $currentPath = [Environment]::GetEnvironmentVariable("PATH")
     $pathDirs = $currentPath -split ";"
     $pythonDirs = $pathDirs | Where-Object { $_ -like "*python*" }
+    Write-Host "Removing existing path $pythonDirs..." -ForegroundColor Green
     $pythonDirs | ForEach-Object { $currentPath = $currentPath.Replace($_ + ";", "") }
     [Environment]::SetEnvironmentVariable("PATH", $currentPath, "Machine")
     $searchFolder = 'C:\Program Files'
     $folders = Get-ChildItem -Path $searchFolder -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*python*" }
     foreach ($folder in $folders) {
+        Write-Host "Removing existing folder $folder..." -ForegroundColor Green
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
     winget install Python.Python.3.10 --scope machine
     AddToPath $env:APPDATA\Python\Python310\Scripts
     
+    Write-Host "Installing some python tools..." -ForegroundColor Green
     python.exe -m pip install --upgrade pip
-    pip install spotdl
+    pip install spotdl youtube-dl
     pip install torch torchvision
 }
 
