@@ -1,7 +1,7 @@
 function Do-Next {
     Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
     Write-Host " * Change your display scale" -ForegroundColor White
-    Write-Host " * Manually sign in store personal account." -ForegroundColor White
+    Write-Host " * Sign in Nextcloud Desktop." -ForegroundColor White
     Write-Host " * Set Google as default search engine." -ForegroundColor White
     Write-Host " * Open office once." -ForegroundColor White
     Write-Host " * Sign in Mail UWP." -ForegroundColor White
