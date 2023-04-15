@@ -252,6 +252,21 @@ Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
 #Install-IfNotInstalled "Microsoft.AzureDataStudio"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
+
+if ($true) {
+    Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Force -ErrorAction SilentlyContinue
+    $currentPath = [Environment]::GetEnvironmentVariable("PATH")
+    $pathDirs = $currentPath -split ";"
+    $pythonDirs = $pathDirs | Where-Object { $_ -like "*python*" }
+    $pythonDirs | ForEach-Object { $currentPath = $currentPath.Replace($_ + ";", "") }
+    [Environment]::SetEnvironmentVariable("PATH", $currentPath, "Machine")
+    $searchFolder = 'C:\Program Files'
+    $folders = Get-ChildItem -Path $searchFolder -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*python*" }
+    foreach ($folder in $folders) {
+        Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
+    }
+}
+
 Install-IfNotInstalled "Python.Python.3.10"
 #Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
 #Install-IfNotInstalled "GoLang.Go.1.19"
