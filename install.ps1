@@ -9,9 +9,10 @@ function Do-Next {
     Write-Host " * Sign in WeChat and change shortcut" -ForegroundColor White
     Write-Host " * Sign in Youtube and Google" -ForegroundColor White
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
-    Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
+    Write-Host " * (Optional)Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
     Write-Host " * Sign in https://git.aiursoft.cn" -ForegroundColor White
+    Write-Host " * Install V2rayN" -ForegroundColor White
     Write-Host " * (Optional) Download and sign in ASUS Armoury Crate" -ForegroundColor White
     Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
     Write-Host " * (Optional) Sync Logitech shortcuts" -ForegroundColor White
