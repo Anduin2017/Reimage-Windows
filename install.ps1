@@ -11,6 +11,10 @@ function Do-Next {
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
+    Write-Host " * (Optional) Download and sign inASUS Armoury Crate" -ForegroundColor White
+    Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
+    Write-Host " * (Optional) Sync Logitech shortcuts" -ForegroundColor White
+    Write-Host " * (Optional) Run HDR Caliboration https://apps.microsoft.com/store/detail/windows-hdr-calibration/9N7F2SM5D1LR" -ForegroundColor White
 }
 
 function Qget {
