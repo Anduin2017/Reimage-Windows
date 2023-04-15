@@ -11,6 +11,7 @@ function Do-Next {
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
+    Write-Host " * Sign in https://git.aiursoft.cn" -ForegroundColor White
     Write-Host " * (Optional) Download and sign inASUS Armoury Crate" -ForegroundColor White
     Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
     Write-Host " * (Optional) Sync Logitech shortcuts" -ForegroundColor White
