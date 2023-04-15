@@ -267,6 +267,8 @@ if ($true) {
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
     winget install Python.Python.3.10 --scope machine
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+    python.exe -m pip install --upgrade pip
 }
 
 #Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
