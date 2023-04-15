@@ -254,6 +254,7 @@ Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
 
 if ($true) {
+    winget uninstall Python.Python.3.10
     Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Force -ErrorAction SilentlyContinue
     $currentPath = [Environment]::GetEnvironmentVariable("PATH")
     $pathDirs = $currentPath -split ";"
@@ -265,9 +266,9 @@ if ($true) {
     foreach ($folder in $folders) {
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
+    winget install Python.Python.3.10 --scope machine
 }
 
-Install-IfNotInstalled "Python.Python.3.10"
 #Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
 #Install-IfNotInstalled "GoLang.Go.1.19"
 Install-IfNotInstalled "SoftDeluxe.FreeDownloadManager"
