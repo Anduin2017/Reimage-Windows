@@ -272,6 +272,7 @@ Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
 Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 Install-IfNotInstalled "Maxon.CinebenchR23"
 Install-IfNotInstalled "CPUID.HWMonitor"
+Install-IfNotInstalled "MediaArea.MediaInfo.GUI"
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
