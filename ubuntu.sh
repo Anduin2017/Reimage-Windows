@@ -106,9 +106,7 @@ sudo apt autoremove -y
 git config --global user.email "anduin@aiursoft.com"
 git config --global user.name "Anduin Xue"
 
-git clone https://git.aiursoft.cn/Aiursoft/Infrastructures.git "$HOME/source/repos/Aiursoft/Infrastructures"
-
 sudo apt --fix-broken install
 sudo apt --fix-missing install
 sudo apt autoremove -y
-curl "https://raw.githubusercontent.com/Anduin2017/configuration-script-win/main/test_env.sh" | bash
+curl "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/test_env.sh" | bash

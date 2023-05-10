@@ -11,7 +11,7 @@ function Do-Next {
     Write-Host " * Set Windows Terminal as default" -ForegroundColor White
     Write-Host " * (Optional)Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Activate Windows" -ForegroundColor White
-    Write-Host " * Sign in https://git.aiursoft.cn" -ForegroundColor White
+    Write-Host " * Sign in https://gitlab.aiursoft.cn" -ForegroundColor White
     Write-Host " * Install V2rayN" -ForegroundColor White
     Write-Host " * (Optional) Download and sign in ASUS Armoury Crate" -ForegroundColor White
     Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
@@ -371,7 +371,7 @@ Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
 Start-Sleep -Seconds 5
 cmd /c "taskkill.exe /IM fdm.exe /F"
 $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
-Invoke-WebRequest -Uri "https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/db.sqlite" -OutFile "$fdmDbPath"
+Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/db.sqlite?inline=false" -OutFile "$fdmDbPath"
 
 #aria2
 if ($true) {
@@ -559,7 +559,7 @@ if (!(Test-Path $PROFILE)) {
     Write-Host "Creating PROFILE..." -ForegroundColor Yellow
     New-Item -Path $PROFILE -ItemType "file" -Force
 }
-$profileContent = (New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/PROFILE.ps1')
+$profileContent = (New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/PROFILE.ps1')
 Set-Content $PROFILE $profileContent
 . $PROFILE
 
@@ -772,7 +772,7 @@ Write-Host "Disabling the Windows Ink Workspace..." -ForegroundColor Green
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" /V PenWorkspaceButtonDesiredVisibility /T REG_DWORD /D 0 /F
 
 Write-Host "Enabling legacy photo viewer... because the Photos app in Windows 11 sucks!" -ForegroundColor Green
-Invoke-WebRequest -Uri "https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/restore-photo-viewer.reg" -OutFile ".\restore.reg"
+Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/restore-photo-viewer.reg" -OutFile ".\restore.reg"
 regedit /s ".\restore.reg"
 Remove-Item ".\restore.reg"
 
@@ -862,7 +862,7 @@ winget upgrade --all --source winget
 Write-Host "Cleaning path variable..." -ForegroundColor Green
 Update-PathVariable -variableScope "Machine" -verbose
 
-$(Invoke-WebRequest https://git.aiursoft.cn/Anduin/configuration-script-win/raw/branch/main/test_env.sh).Content | bash
+$(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/test_env.sh).Content | bash
 
 Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = Read-Host
