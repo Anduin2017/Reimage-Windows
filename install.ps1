@@ -19,6 +19,21 @@ function Do-Next {
     Write-Host " * (Optional) Run HDR Caliboration https://apps.microsoft.com/store/detail/windows-hdr-calibration/9N7F2SM5D1LR" -ForegroundColor White
 }
 
+function CloneReposToPath($repos, $destinationPath) {
+    foreach ($repo in $repos) {
+        $repoName = $repo.name
+        $repoUrl = $repo.ssh_url_to_repo
+        $repoPath = Join-Path $destinationPath $repoName
+
+        if (!(Test-Path -Path $repoPath)) {
+            git clone $repoUrl $repoPath
+            Write-Host "Cloned $repoName to $repoPath"
+        } else {
+            Write-Host "$repoName already exists at $repoPath, skipping."
+        }
+    }
+}
+
 function Qget {
     param(
         [Parameter(Mandatory = $true)]
@@ -592,29 +607,6 @@ alias sudo=`"gsudo`"
 alias redis-cli=`"rdcli`""
 Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
 
-# if (Get-ScheduledTask -TaskName "WT" -ErrorAction SilentlyContinue) { 
-#     Write-Host "Windows Terminal Task schduler already configured." -ForegroundColor Green
-# } else {
-#     Write-Host "Configuring task scheduler to start WT in the background..." -ForegroundColor Green
-#     Set-Content -Path "$env:APPDATA\terminal.vbs" -Value "CreateObject(`"WScript.Shell`").Run `"wt.exe`", 0, True"
-#     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\terminal.vbs"
-#     $trigger = New-ScheduledTaskTrigger -AtLogOn
-#     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
-#     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "WT" -Description "Start WT in the background." -Settings $settings
-# }
-
-# if (Get-ScheduledTask -TaskName "RamDisk" -ErrorAction SilentlyContinue) { 
-#     Write-Host "Ramdisk Task schduler already configured." -ForegroundColor Green
-# } else {
-#     Write-Host "Configuring task scheduler to start Ramdisk in the background..." -ForegroundColor Green
-#     Set-Content -Path "$env:APPDATA\ramdisk.cmd" -Value "`"C:\Program Files\OSFMount\osfmount.com`" -a -t vm -o format:ntfs:`"RAM Volume`" -o physical -o gpt -s 4G"
-#     $taskAction = New-ScheduledTaskAction -Execute "$env:APPDATA\ramdisk.cmd"
-#     $trigger = New-ScheduledTaskTrigger -AtLogOn
-#     $principal = New-ScheduledTaskPrincipal -RunLevel Highest -UserId (Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -expand UserName)
-#     $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden -ExecutionTimeLimit (New-TimeSpan -Minutes 5) -RestartCount 3
-#     Register-ScheduledTask -Action $taskAction -Trigger $trigger -TaskName "RamDisk" -Description "Start ramdisk in the background." -Settings $settings -Principal $principal
-# }
-
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 4  - SDK    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -660,15 +652,22 @@ dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive
 
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
 if ($true) {
+    
     # 设置变量
     $gitlabBaseUrl = "https://gitlab.aiursoft.cn"
     $apiUrl = "$gitlabBaseUrl/api/v4"
     $groupName = "Aiursoft"
-    $destinationPath = "$HOME\source\repos\Aiursoft"
+    $userName = "Anduin"
+
+    $destinationPathAiursoft = "$HOME\source\repos\Aiursoft"
+    $destinationPathAnduin = "$HOME\source\repos\Anduin"
 
     # 创建目标文件夹
-    if (!(Test-Path -Path $destinationPath)) {
-        New-Item -ItemType Directory -Path $destinationPath | Out-Null
+    if (!(Test-Path -Path $destinationPathAiursoft)) {
+        New-Item -ItemType Directory -Path $destinationPathAiursoft | Out-Null
+    }
+    if (!(Test-Path -Path $destinationPathAnduin)) {
+        New-Item -ItemType Directory -Path $destinationPathAnduin | Out-Null
     }
 
     # 获取组织ID
@@ -676,23 +675,21 @@ if ($true) {
     $groupRequest = Invoke-RestMethod -Uri $groupUrl
     $groupId = $groupRequest[0].id
 
+    # 获取用户ID
+    $userUrl = "$apiUrl/users?username=$userName"
+    $userRequest = Invoke-RestMethod -Uri $userUrl
+    $userId = $userRequest[0].id
+
     # 获取仓库列表
-    $repoUrl = "$apiUrl/groups/$groupId/projects?simple=true&per_page=100"
-    $repos = Invoke-RestMethod -Uri $repoUrl
+    $repoUrlAiursoft = "$apiUrl/groups/$groupId/projects?simple=true&per_page=100"
+    $repoUrlAnduin = "$apiUrl/users/$userId/projects?simple=true&per_page=100"
+
+    $reposAiursoft = Invoke-RestMethod -Uri $repoUrlAiursoft
+    $reposAnduin = Invoke-RestMethod -Uri $repoUrlAnduin
 
     # 克隆仓库
-    foreach ($repo in $repos) {
-        $repoName = $repo.name
-        $repoUrl = $repo.ssh_url_to_repo
-        $repoPath = Join-Path $destinationPath $repoName
-
-        if (!(Test-Path -Path $repoPath)) {
-            git clone $repoUrl $repoPath
-            Write-Host "Cloned $repoName to $repoPath"
-        } else {
-            Write-Host "$repoName already exists at $repoPath, skipping."
-        }
-    }
+    CloneReposToPath $reposAiursoft $destinationPathAiursoft
+    CloneReposToPath $reposAnduin $destinationPathAnduin
 }
 dotnet publish "$HOME\source\repos\Anduin\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 
