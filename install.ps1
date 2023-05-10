@@ -659,10 +659,41 @@ dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive # jb
 dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive
 
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
-git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/Infrastructures.git "$HOME\source\repos\Aiursoft\Infrastructures"
-git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/AiurVersionControl.git "$HOME\source\repos\Aiursoft\AiurVersionControl"
-git clone ssh://dev.aiursoft.cn:2200/Aiursoft/Core/_git/NugetNinja.git "$HOME\source\repos\Aiursoft\NugetNinja"
-git clone git@gitea:Anduin/Happiness-recorder.git "$HOME\source\repos\Anduin\Happiness-recorder"
+if ($true) {
+    # 设置变量
+    $gitlabBaseUrl = "https://gitlab.aiursoft.cn"
+    $apiUrl = "$gitlabBaseUrl/api/v4"
+    $groupName = "Aiursoft"
+    $destinationPath = "$HOME\source\repos\Aiursoft"
+
+    # 创建目标文件夹
+    if (!(Test-Path -Path $destinationPath)) {
+        New-Item -ItemType Directory -Path $destinationPath | Out-Null
+    }
+
+    # 获取组织ID
+    $groupUrl = "$apiUrl/groups?search=$groupName"
+    $groupRequest = Invoke-RestMethod -Uri $groupUrl
+    $groupId = $groupRequest[0].id
+
+    # 获取仓库列表
+    $repoUrl = "$apiUrl/groups/$groupId/projects?simple=true&per_page=100"
+    $repos = Invoke-RestMethod -Uri $repoUrl
+
+    # 克隆仓库
+    foreach ($repo in $repos) {
+        $repoName = $repo.name
+        $repoUrl = $repo.ssh_url_to_repo
+        $repoPath = Join-Path $destinationPath $repoName
+
+        if (!(Test-Path -Path $repoPath)) {
+            git clone $repoUrl $repoPath
+            Write-Host "Cloned $repoName to $repoPath"
+        } else {
+            Write-Host "$repoName already exists at $repoPath, skipping."
+        }
+    }
+}
 dotnet publish "$HOME\source\repos\Anduin\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 
 Write-Host "-----------------------------" -ForegroundColor Green
