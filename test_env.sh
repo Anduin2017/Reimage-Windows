@@ -54,23 +54,11 @@ adb --version | head -2
 tput setaf 2; echo "FFmpeg version:"; tput sgr0
 ffmpeg -version | head -1
 
-tput setaf 2; echo "Wget version:"; tput sgr0
+tput setaf 2; echo "wget version:"; tput sgr0
 wget --version | head -1
 
 tput setaf 2; echo "PowerShell version:"; tput sgr0
 pwsh --version
 
-tput setaf 2; echo "Azure CLI version:"; tput sgr0
-az version | tail -n 5 | head -n 1
-
-tput setaf 2; echo "K8S CLI version:"; tput sgr0
-kubectl version --client
-
 tput setaf 2; echo "iperf3 version:"; tput sgr0
 iperf3 --version | head -1
-
-tput setaf 2; echo "Youtube downloader version:"; tput sgr0
-youtube-dl.exe --version
-
-tput setaf 2; echo "Spotify downloader version:"; tput sgr0
-spotdl.exe --version
