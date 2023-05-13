@@ -643,10 +643,8 @@ Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Gre
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
 dotnet tool install --global dotnet-ef --interactive
 dotnet tool update --global dotnet-ef --interactive
-dotnet tool install --global Aiursoft.Parser --interactive # parser
-dotnet tool update --global Aiursoft.Parser --interactive
-dotnet tool install --global trx2junit --interactive # trx2junit
-dotnet tool update --global trx2junit --interactive
+dotnet tool install --global Anduin.Parser --interactive # parser
+dotnet tool update --global Anduin.Parser --interactive
 dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive # jb
 dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive
 
