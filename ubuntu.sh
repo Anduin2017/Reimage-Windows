@@ -109,4 +109,4 @@ git config --global user.name "Anduin Xue"
 sudo apt --fix-broken install
 sudo apt --fix-missing install
 sudo apt autoremove -y
-curl "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/test_env.sh" | bash
+curl "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh" | bash

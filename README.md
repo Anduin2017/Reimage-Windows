@@ -9,7 +9,7 @@ The following command will re-install Windows 10\11\insider for you.
 Right click the start button, click `Windows PowerShell(Admin)`.
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/Reimage.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/Reimage.ps1'))
 ```
 
 * It will ask you the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file name.
@@ -31,7 +31,7 @@ For example:
 Right click the start button, click `Windows PowerShell(Admin)`.
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/install.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.ps1'))
 ```
 
 **Caution: DO NOT RUN this in Windows Terminal!!! Instead, start a pure PowerShell with admin instead!**
@@ -41,5 +41,5 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.c
 Open PowerShell and run:
 
 ```powershell
-$(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/test_env.sh).Content | bash
+$(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash
 ```

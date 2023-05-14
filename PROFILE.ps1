@@ -11,16 +11,16 @@ function Update-All {
 }
 
 function Check-Env {
-    $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/test_env.sh -UseBasicParsing).Content | bash
+    $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh -UseBasicParsing).Content | bash
 }
 
 function Force-UpdateAll {
     # This will run this update script inside current terminal.
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/install.ps1"))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.ps1"))
 }
 
 function Reimage {
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/main/Reimage.ps1'))
+    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/Reimage.ps1'))
 }
 
 function Qget {
