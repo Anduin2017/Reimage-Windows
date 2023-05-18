@@ -648,6 +648,8 @@ dotnet tool install --global Anduin.Parser --interactive # parser
 dotnet tool update --global Anduin.Parser --interactive
 dotnet tool install --global Aiursoft.NugetNinja --interactive # ninja
 dotnet tool update --global Aiursoft.NugetNinja --interactive
+dotnet tool install --global Aiursoft.Dotlang --interactive # dotlang
+dotnet tool update --global Aiursoft.Dotlang --interactive
 dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive # jb
 dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive
 
