@@ -644,13 +644,13 @@ Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Gre
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
 dotnet tool install --global dotnet-ef --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global dotnet-ef --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Anduin.Parser --interactive --add-source https://nuget.aiursoft.cn/v3/index.json # parser
+dotnet tool install --global Anduin.Parser --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global Anduin.Parser --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Aiursoft.NugetNinja --interactive --add-source https://nuget.aiursoft.cn/v3/index.json# ninja
+dotnet tool install --global Aiursoft.NugetNinja --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global Aiursoft.NugetNinja --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json# dotlang
+dotnet tool install --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json# jb
+dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 
 Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
