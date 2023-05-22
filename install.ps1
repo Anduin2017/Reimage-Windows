@@ -294,7 +294,9 @@ Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
 
 Write-Host "Installing python tools..." -ForegroundColor Green
-if ($true) {
+if (Get-Command -ErrorAction SilentlyContinue "spotdl.exe") {
+    Write-Host "Python is fine!"
+} else {
     winget uninstall Python.Python.3.10
     Write-Host "Removing existing python..." -ForegroundColor Green
     Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Recurse -Force -ErrorAction SilentlyContinue
