@@ -253,7 +253,6 @@ else {
     winget install --exact --id Microsoft.VisualStudioCode --scope Machine --interactive --source winget
 }
 
-Install-IfNotInstalled "Mozilla.Firefox"
 Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
 #Install-IfNotInstalled "Microsoft.Office"
