@@ -55,7 +55,7 @@ tput setaf 2; echo "FFmpeg version:"; tput sgr0
 ffmpeg -version | head -1
 
 tput setaf 2; echo "Docker version:"; tput sgr0
-Docker --version | head -1
+docker --version | head -1
 
 tput setaf 2; echo "wget version:"; tput sgr0
 wget --version | head -1
