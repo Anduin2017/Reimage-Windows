@@ -65,3 +65,6 @@ pwsh --version
 
 tput setaf 2; echo "iperf3 version:"; tput sgr0
 iperf3 --version | head -1
+
+tput setaf 2; echo "docker version:"; tput sgr0
+docker --version | head -1
