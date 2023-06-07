@@ -590,11 +590,6 @@ $_ = Get-Content $NextcloudConfigwt # Ensure file is available.
 cmd /c "del `"$wtConfigPath`""
 cmd /c "mklink `"$wtConfigPath`" `"$NextcloudConfigwt`""
 
-Write-Host "Configuring windows terminal context menu..." -ForegroundColor Green
-git clone https://git.aiursoft.cn/PublicVault/windowsterminal-shell.git "$HOME\temp"
-pwsh -command "$HOME\temp\install.ps1 mini"
-Remove-Item $HOME\temp -Force -Recurse -Confirm:$false
-
 Write-Host "Configuring double click ps1 file to run it..." -ForegroundColor Green
 Set-ItemProperty "Registry::HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command" -Name "(default)" -Value "`"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`" -noLogo -ExecutionPolicy unrestricted -file `"%1`""
 
