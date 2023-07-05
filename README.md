@@ -39,6 +39,7 @@ Caution: **DO NOT RUN** this in Windows Terminal!!! Instead, start a pure PowerS
 #### V2
 
 ```powershell
+Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue
 $destinationPath = "$env:TEMP\reimage-windows-master.zip"
 Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath
 Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP
