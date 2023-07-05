@@ -1,12 +1,4 @@
-Import-Module ".\actions\ManualDoNext.psm1" -Force -DisableNameChecking
-Import-Module ".\actions\EnsureElevated.psm1" -Force -DisableNameChecking
-Import-Module ".\actions\ShowOsInfo.psm1" -Force -DisableNameChecking
-Import-Module ".\actions\RenameComputer.psm1" -Force -DisableNameChecking
-Import-Module ".\actions\ResetStore.psm1" -Force -DisableNameChecking
-Import-Module ".\actions\UpdateStoreApps.psm1" -Force -DisableNameChecking
-
-Import-Module ".\components\DownloadMyRepos.psm1" -Force -DisableNameChecking
-Import-Module ".\components\InstallWinget.psm1" -Force -DisableNameChecking
+Get-ChildItem -Path . -Recurse -Filter *.psm1 | ForEach-Object { Import-Module $_.FullName }
 
 Clear-Host
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -27,4 +19,11 @@ RenameComputer
 ResetStore
 UpdateStoreApps
 InstallWinget
+
+
+Write-Host "-----------------------------" -ForegroundColor Green
+Write-Host "        PART 2  - Install    " -ForegroundColor Green
+Write-Host "-----------------------------" -ForegroundColor Green
+
+InstallVSCode
 DownloadMyRepos
