@@ -26,12 +26,12 @@ function InstallGit {
     $name = $(git config --global user.name)
     
     if (-not $email) {
-        $email = Read-Host "Please enter your email address:"
+        $email = Read-Host "Please enter your email address"
         git config --global user.email $email
     }
     
     if (-not $name) {
-        $name = Read-Host "Please enter your name:"
+        $name = Read-Host "Please enter your name"
         git config --global user.name $name
     }
 
