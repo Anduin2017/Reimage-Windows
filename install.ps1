@@ -372,23 +372,7 @@ $profileContent = (New-Object System.Net.WebClient).DownloadString('https://gitl
 Set-Content $PROFILE $profileContent
 . $PROFILE
 
-Write-Host "Linking back SSH keys..." -ForegroundColor Green
-$NextcloudSshConfigPath = "$NextcloudPath\Storage\SSH\"
-$localSshConfigPath = "$HOME\.ssh\"
-$_ = Get-Content $NextcloudSshConfigPath\id_rsa.pub # Ensure file is available.
-cmd /c "rmdir $localSshConfigPath /q"
-cmd /c "mklink /d `"$localSshConfigPath`" `"$NextcloudSshConfigPath`""
-Write-Host "Testing SSH features..." -ForegroundColor Green
-Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
-Write-Host "Configuring git..." -ForegroundColor Green
-Write-Host "Setting git email to $email" -ForegroundColor Yellow
-Write-Host "Setting git name to $name" -ForegroundColor Yellow
-git config --global user.email $email
-git config --global user.name $name
-git config --global core.autocrlf true
-git config --global core.longpaths true
-git config --global --add safe.directory '*'
 
 Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
 $wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
