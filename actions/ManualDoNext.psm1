@@ -1,4 +1,5 @@
 function ManualDoNext {
+    Write-Host "This script is for Anduin to prepare an ready-to-use Windows environment. Based on a new clean Windows.`n" -ForegroundColor DarkMagenta
     Write-Host "Even this is an automation script to prepare the Windows, there are still several items requires manual operation:`n" -ForegroundColor Yellow
     Write-Host " * Change your display scale and resolution." -ForegroundColor White
     Write-Host " * Sign in Nextcloud Desktop." -ForegroundColor White

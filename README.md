@@ -36,6 +36,16 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.c
 
 Caution: **DO NOT RUN** this in Windows Terminal!!! Instead, start a pure PowerShell with admin instead!
 
+#### V2
+
+```powershell
+$destinationPath = "$env:TEMP\reimage-windows-master.zip"
+Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath
+Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP
+Remove-Item $destinationPath
+. "$env:TEMP\reimage-windows-master\install_v2.ps1"
+```
+
 ### One-key test current environment
 
 Open PowerShell and run:

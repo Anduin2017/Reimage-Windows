@@ -32,21 +32,6 @@ function Qget {
 
 
 
-function Install-StoreApp {
-    param (
-        [string]$storeAppId,
-        [string]$wingetAppName
-    )
-
-    if ("$(winget list --name $wingetAppName --exact --source msstore --accept-source-agreements)".Contains("--")) { 
-        Write-Host "$wingetAppName is already installed!" -ForegroundColor Green
-    }
-    else {
-        Write-Host "Attempting to download $wingetAppName..." -ForegroundColor Green
-        winget install --id $storeAppId.ToUpper() --name $wingetAppName  --exact --source msstore --accept-package-agreements --accept-source-agreements
-    }
-}
-
 function Install-IfNotInstalled {
     param (
         [string]$package
@@ -137,41 +122,17 @@ function Update-PathVariable {
 
 
 
-Write-Host "OS Info:" -ForegroundColor Green
-Get-CimInstance Win32_OperatingSystem | Format-List Name, Version, InstallDate, OSArchitecture
-(Get-ItemProperty HKLM:\HARDWARE\DESCRIPTION\System\CentralProcessor\0\).ProcessorNameString
 
-$email = Read-Host -Prompt 'Input your email'
-$name = Read-Host -Prompt 'Input your name'
+
 
 $driveLetter = (Get-Location).Drive.Name
-$computerName = Read-Host "Enter New Computer Name if you want to rename it: ($($env:COMPUTERNAME))"
-if (-not ([string]::IsNullOrEmpty($computerName))) {
-    Write-Host "Renaming computer to $computerName..." -ForegroundColor Green
-    cmd /c "bcdedit /set {current} description `"$computerName`""
-    Rename-Computer -NewName $computerName
-}
 
-Write-Host "Reseting Store..." -ForegroundColor Green
-wsreset.exe -i
 
-# Install Winget
-if (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
-    Write-Host "Installing WinGet..." -ForegroundColor Green
-    Start-Process "ms-windows-store://pdp/?ProductId=9NBLGGH4NNS1&mode=mini"
 
-    Install-StoreApp -storeAppId "9NBLGGH4NNS1" -wingetAppName "App Installer"
 
-    while (-not $(Get-Command winget -ErrorAction SilentlyContinue)) {
-        Write-Host "Winget is still not found!" -ForegroundColor Yellow
-        Start-Sleep -Seconds 5
-    }
-}
 
-$screen = (Get-WmiObject -Class Win32_VideoController)
-$screenX = $screen.CurrentHorizontalResolution
-$screenY = $screen.CurrentVerticalResolution
-Write-Host "Got screen: $screenX x $screenY" -ForegroundColor Green
+
+
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 2  - Install    " -ForegroundColor Green
@@ -179,11 +140,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 Do-Next
 
-Write-Host "Triggering Store to upgrade all apps..." -ForegroundColor Green
-$namespaceName = "root\cimv2\mdm\dmmap"
-$className = "MDM_EnterpriseModernAppManagement_AppManagement01"
-$wmiObj = Get-WmiObject -Namespace $namespaceName -Class $className
-$wmiObj.UpdateScanMethod() | Format-Table -AutoSize
+
 
 if ("$(winget list --id Microsoft.VisualStudioCode --source winget)".Contains("--")) { 
     Write-Host "Microsoft.VisualStudioCode is already installed!" -ForegroundColor Green
