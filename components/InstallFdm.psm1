@@ -1,5 +1,4 @@
-Import-Module "..\tools\Install-IfNotInstalled.psm1"
-Import-Module "..\tools\AddToPath.psm1"
+Import-Module "..\tools\Qget.psm1"
 
 function InstallFdm {
     if ("$(winget list -e --id "SoftDeluxe.FreeDownloadManager" --source winget)".Contains("--")) { 
@@ -12,7 +11,8 @@ function InstallFdm {
     else {
         $url = "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe"
         $output = "$env:USERPROFILE\fdm_x64_setup.exe"
-        Invoke-WebRequest -Uri $url -OutFile $output
+        Write-Host "Downloading SoftDeluxe.FreeDownloadManager... It may costs around 1 minute." -ForegroundColor Green
+        Qget $url $output
         Start-Process -FilePath $output -ArgumentList "/VERYSILENT" -Wait
     }
 
