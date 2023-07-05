@@ -9,7 +9,7 @@ function InstallGit {
     $NextcloudSshConfigPath = "$HOME\Nextcloud\Storage\SSH\"
     $localSshConfigPath = "$HOME\.ssh\"
 
-    Remove-Item -Path $localSshConfigPath -Recurse -Force
+    Remove-Item -Path $localSshConfigPath -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force
 
     Write-Host "Testing SSH features..." -ForegroundColor Green

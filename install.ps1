@@ -69,8 +69,6 @@ $driveLetter = (Get-Location).Drive.Name
 
 
 
-Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
-Install-IfNotInstalled "Microsoft.WindowsTerminal"
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.DotNet.SDK.7"

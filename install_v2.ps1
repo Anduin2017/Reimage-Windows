@@ -25,6 +25,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 InstallVSCode
 InstallNextcloud
 InstallGit
+InstallWindowsTerminal
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal   " -ForegroundColor Green
