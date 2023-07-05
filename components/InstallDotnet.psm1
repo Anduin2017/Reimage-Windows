@@ -36,20 +36,20 @@ function InstallDotnet {
     Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Green
     Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
     Write-Host "Installing .NET Entity Framework..." -ForegroundColor Green
-    dotnet tool install --global dotnet-ef --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
-    dotnet tool update --global dotnet-ef --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
+    dotnet tool install --global dotnet-ef --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global dotnet-ef --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
     Write-Host "Installing .NET Anduin.Parser.." -ForegroundColor Green
-    dotnet tool install --global Anduin.Parser --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
-    dotnet tool update --global Anduin.Parser --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
+    dotnet tool install --global Anduin.Parser --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global Anduin.Parser --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
     Write-Host "Installing .NET Aiursoft.NugetNinja.." -ForegroundColor Green
-    dotnet tool install --global Aiursoft.NugetNinja --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
-    dotnet tool update --global Aiursoft.NugetNinja --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
+    dotnet tool install --global Aiursoft.NugetNinja --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global Aiursoft.NugetNinja --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
     Write-Host "Installing .NET Aiursoft.Dotlang.." -ForegroundColor Green
-    dotnet tool install --global Aiursoft.Dotlang --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
-    dotnet tool update --global Aiursoft.Dotlang --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
+    dotnet tool install --global Aiursoft.Dotlang --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global Aiursoft.Dotlang --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
     Write-Host "Installing .NET JetBrains.ReSharper.GlobalTools.." -ForegroundColor Green
-    dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
-    dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json"
+    dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
 }
 
 Export-ModuleMember -Function InstallDotnet

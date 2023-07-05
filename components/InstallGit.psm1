@@ -3,8 +3,7 @@ Import-Module "..\tools\AddToPath.psm1"
 
 function InstallGit {
     param(
-        [string]$email,
-        [string]$name
+        [string]$mail
     )
 
     Install-IfNotInstalled "Git.Git"
@@ -26,8 +25,7 @@ function InstallGit {
     $name = $(git config --global user.name)
     
     if (-not $email) {
-        $email = Read-Host "Please enter your email address"
-        git config --global user.email $email
+        git config --global user.email $mail
     }
     
     if (-not $name) {

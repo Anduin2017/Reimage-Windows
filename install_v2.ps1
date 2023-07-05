@@ -14,6 +14,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 EnsureElevated   # Manual Approve
 RenameComputer   # Manual Enter
+$mail = GetUserEmail
 InstallWinget    # Manual Approve
 SignInAccount    # Manual Sign in
 
@@ -21,7 +22,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 2  - Install    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-InstallVSCode    # Manual Sign in
+InstallVSCode    # Manual Sign in to sync settings.
 InstallNextcloud # Manual Sign in. Slow
 InstallDotnet
 Install7Zip
@@ -29,7 +30,7 @@ InstallVlc
 
 WaitLinkForNextcloud
 
-InstallGit       # Manual Sign in
+InstallGit -mail $mail
 InstallWindowsTerminal
 InstallFdm
 InstallOffice
