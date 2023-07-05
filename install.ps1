@@ -71,7 +71,6 @@ $driveLetter = (Get-Location).Drive.Name
 
 Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
-Install-IfNotInstalled "Microsoft.DotNet.SDK.7"
 Install-IfNotInstalled "Microsoft.Edge"
 Install-IfNotInstalled "Microsoft.NuGet"
 Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
@@ -339,21 +338,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 AddToPath -folder "C:\Program Files\Git\bin"
 AddToPath -folder "C:\Program Files\VideoLAN\VLC"
-
-$NextcloudPath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "Nextcloud*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
-while (-not $NextcloudPath) {
-    Write-Host "Waiting for Nextcloud to start..." -ForegroundColor Yellow
-    Start-Sleep -Seconds 10
-    $NextcloudPath = $(Get-ChildItem -Path $HOME | Where-Object { $_.Name -like "Nextcloud*" } | Sort-Object Name -Descending | Select-Object -First 1).FullName
-}
-
-$nextcloudFiles = Get-ChildItem $NextcloudPath | Format-Table -AutoSize
-
-while ($nextcloudFiles.Count -lt 5) {
-    Write-Host "Waiting for Nextcloud to sync..." -ForegroundColor Yellow
-    Start-Sleep -Seconds 10
-    $nextcloudFiles = Get-ChildItem $NextcloudPath | Format-Table -AutoSize
-}
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned -Force
