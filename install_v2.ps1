@@ -14,7 +14,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 EnsureElevated   # Manual Approve
 RenameComputer   # Manual Enter
-$mail = GetUserEmail
+$mail = GetUserEmail # Manual Enter
 InstallWinget    # Manual Approve
 SignInAccount    # Manual Sign in
 

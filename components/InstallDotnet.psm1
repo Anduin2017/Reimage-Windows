@@ -5,6 +5,8 @@ function InstallDotnet {
     Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
 
     Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
+    AddToPath "$env:ProgramFiles\dotnet\"
+    dotnet --version
     [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
     [Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
     [Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
