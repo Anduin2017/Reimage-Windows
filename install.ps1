@@ -255,9 +255,7 @@ else {
 
 Install-IfNotInstalled "Nextcloud.NextcloudDesktop"
 Install-IfNotInstalled "Microsoft.WindowsTerminal"
-#Install-IfNotInstalled "Microsoft.Office"
-Write-Host "Please manually install office..." -ForegroundColor Green
-Start-Process -FilePath "https://portal.office.com/account"
+Install-IfNotInstalled "Microsoft.Office"
 Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.DotNet.SDK.7"
 Install-IfNotInstalled "Microsoft.Edge"
@@ -274,6 +272,7 @@ Install-IfNotInstalled "VideoLAN.VLC"
 #Install-IfNotInstalled "Telegram.TelegramDesktop"
 Install-IfNotInstalled "OBSProject.OBSStudio"
 Install-IfNotInstalled "Git.Git"
+AddToPath "$env:ProgramFiles\Git\bin"
 Install-IfNotInstalled "gerardog.gsudo"
 Install-IfNotInstalled "OpenJS.NodeJS"
 Install-IfNotInstalled "Postman.Postman"
@@ -293,9 +292,8 @@ Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
 
 Write-Host "Installing python tools..." -ForegroundColor Green
-if (Get-Command -ErrorAction SilentlyContinue "spotdl.exe") {
-    Write-Host "Python is fine!"
-} else {
+if (Get-Command -ErrorAction SilentlyContinue "python.exe") {
+    Write-Host "Python is found! Removing Python..."
     winget uninstall Python.Python.3.10
     Write-Host "Removing existing python..." -ForegroundColor Green
     Remove-Item -Path "C:\Users\AnduinXue\AppData\Local\Microsoft\WindowsApps\python.exe" -Recurse -Force -ErrorAction SilentlyContinue
@@ -312,13 +310,6 @@ if (Get-Command -ErrorAction SilentlyContinue "spotdl.exe") {
         Write-Host "Removing existing folder $folder..." -ForegroundColor Green
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
-    winget install Python.Python.3.10 --scope machine
-    AddToPath $env:APPDATA\Python\Python310\Scripts
-    
-    Write-Host "Installing some python tools..." -ForegroundColor Green
-    python.exe -m pip install --upgrade pip
-    pip install spotdl youtube-dl
-    pip install torch torchvision
 }
 
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
