@@ -21,6 +21,11 @@ function InstallDotnet {
         <add key=`"repositoryPath`" value=`"D:\CxCache`" />`
       </config>`
     </configuration>"
+
+        $nugetFolderPath = "$env:APPDATA\Nuget"
+        if (!(Test-Path $nugetFolderPath)) {
+            New-Item -ItemType Directory -Path $nugetFolderPath | Out-Null
+        }
         Set-Content -Path "$env:APPDATA\Nuget\Nuget.config" -Value $config
     }
     else {

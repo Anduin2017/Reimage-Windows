@@ -1,18 +1,4 @@
 
-function CloneReposToPath($repos, $destinationPath) {
-    foreach ($repo in $repos) {
-        $repoName = $repo.name
-        $repoUrl = $repo.ssh_url_to_repo
-        $repoPath = Join-Path $destinationPath $repoName
-
-        if (!(Test-Path -Path $repoPath)) {
-            git clone $repoUrl $repoPath
-            Write-Host "Cloned $repoName to $repoPath"
-        } else {
-            Write-Host "$repoName already exists at $repoPath, skipping."
-        }
-    }
-}
 
 function Qget {
     param(
@@ -28,9 +14,6 @@ function Qget {
     $aria2cArgs = "-c -s 128 -x 8 -k 4M -j 128 --split 128 `"$address`" -d `"$([System.IO.Path]::GetDirectoryName($path))`" -o `"$([System.IO.Path]::GetFileName($path))`" --check-certificate=false"
     Invoke-Expression "aria2c.exe $aria2cArgs"
 }
-
-
-
 
 
 function Set-WallPaper($Image) {
@@ -54,22 +37,7 @@ function Set-WallPaper($Image) {
     $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
 }
 
-
-
-
 $driveLetter = (Get-Location).Drive.Name
-
-
-
-
-
-
-
-
-
-
-
-
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
@@ -314,49 +282,6 @@ dotnet tool install --global Aiursoft.Dotlang --interactive --add-source https:/
 dotnet tool update --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
 dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-
-Write-Host "Building some .NET projects to ensure you can develop..." -ForegroundColor Green
-if ($true) {
-    
-    # 设置变量
-    $gitlabBaseUrl = "https://gitlab.aiursoft.cn"
-    $apiUrl = "$gitlabBaseUrl/api/v4"
-    $groupName = "Aiursoft"
-    $userName = "Anduin"
-
-    $destinationPathAiursoft = "$HOME\source\repos\Aiursoft"
-    $destinationPathAnduin = "$HOME\source\repos\Anduin"
-
-    # 创建目标文件夹
-    if (!(Test-Path -Path $destinationPathAiursoft)) {
-        New-Item -ItemType Directory -Path $destinationPathAiursoft | Out-Null
-    }
-    if (!(Test-Path -Path $destinationPathAnduin)) {
-        New-Item -ItemType Directory -Path $destinationPathAnduin | Out-Null
-    }
-
-    # 获取组织ID
-    $groupUrl = "$apiUrl/groups?search=$groupName"
-    $groupRequest = Invoke-RestMethod -Uri $groupUrl
-    $groupId = $groupRequest[0].id
-
-    # 获取用户ID
-    $userUrl = "$apiUrl/users?username=$userName"
-    $userRequest = Invoke-RestMethod -Uri $userUrl
-    $userId = $userRequest[0].id
-
-    # 获取仓库列表
-    $repoUrlAiursoft = "$apiUrl/groups/$groupId/projects?simple=true&per_page=100"
-    $repoUrlAnduin = "$apiUrl/users/$userId/projects?simple=true&per_page=100"
-
-    $reposAiursoft = Invoke-RestMethod -Uri $repoUrlAiursoft
-    $reposAnduin = Invoke-RestMethod -Uri $repoUrlAnduin
-
-    # 克隆仓库
-    CloneReposToPath $reposAiursoft $destinationPathAiursoft
-    CloneReposToPath $reposAnduin $destinationPathAnduin
-}
-dotnet publish "$HOME\source\repos\Anduin\Happiness-recorder\JAI.csproj" -c Release -r win-x64 -o "$NextcloudPath\Storage\Tools\JAL" --self-contained
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
