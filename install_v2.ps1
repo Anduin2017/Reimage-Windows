@@ -13,8 +13,6 @@ Write-Host "        PART 1  - Prepare    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 EnsureElevated
-$email = Read-Host -Prompt 'Input your email'
-$name = Read-Host -Prompt 'Input your name'
 RenameComputer
 InstallWinget
 SignInAccount
@@ -25,7 +23,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 InstallVSCode
 InstallNextcloud
-InstallGit -name $name -email $email
+InstallGit
 InstallWindowsTerminal
 InstallDotnet
 
