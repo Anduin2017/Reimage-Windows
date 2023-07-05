@@ -25,13 +25,13 @@ InstallVSCode    # Manual Sign in
 InstallNextcloud # Manual Sign in. Slow
 InstallDotnet
 Install7Zip
+InstallVlc
 
 WaitLinkForNextcloud
 
 InstallGit       # Manual Sign in
 InstallWindowsTerminal
 InstallFdm
-InstallVlc
 
 
 Install-IfNotInstalled "Microsoft.Office"

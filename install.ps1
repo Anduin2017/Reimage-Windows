@@ -262,7 +262,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-AddToPath -folder "C:\Program Files\Git\bin"
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned -Force
@@ -279,14 +278,6 @@ $profileContent = (New-Object System.Net.WebClient).DownloadString('https://gitl
 Set-Content $PROFILE $profileContent
 . $PROFILE
 
-
-
-Write-Host "Linking back windows terminal configuration file..." -ForegroundColor Green
-$wtConfigPath = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-$NextcloudConfigwt = "$NextcloudPath\Storage\WT\settings.json"
-$_ = Get-Content $NextcloudConfigwt # Ensure file is available.
-cmd /c "del `"$wtConfigPath`""
-cmd /c "mklink `"$wtConfigPath`" `"$NextcloudConfigwt`""
 
 Write-Host "Configuring double click ps1 file to run it..." -ForegroundColor Green
 Set-ItemProperty "Registry::HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command" -Name "(default)" -Value "`"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`" -noLogo -ExecutionPolicy unrestricted -file `"%1`""
@@ -310,29 +301,6 @@ Write-Host "Setting up some node js global tools..." -ForegroundColor Green
 npm install --global npm@latest
 npm install --global node-static typescript @angular/cli yarn npm-check-updates redis-cli
 
-Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
-[Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
-[Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")
-[Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", "Machine")
-
-if (-not (Test-Path -Path "$env:APPDATA\Nuget\Nuget.config") -or $null -eq (Select-String -Path "$env:APPDATA\Nuget\Nuget.config" -Pattern "nuget.org")) {
-    $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
-    <configuration>`
-      <packageSources>`
-        <add key=`"aiursoft.cn`" value=`"https://nuget.aiursoft.cn/v3/index.json`" protocolVersion=`"3`" />`
-        <add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`" protocolVersion=`"3`" />`
-        <add key=`"Microsoft Visual Studio Offline Packages`" value=`"C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\`" />`
-      </packageSources>`
-      <config>`
-        <add key=`"repositoryPath`" value=`"D:\CxCache`" />`
-      </config>`
-    </configuration>"
-    Set-Content -Path "$env:APPDATA\Nuget\Nuget.config" -Value $config
-}
-else {
-    Write-Host "Nuget config file already exists." -ForegroundColor Yellow
-}
-New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force
 
 Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Green
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))

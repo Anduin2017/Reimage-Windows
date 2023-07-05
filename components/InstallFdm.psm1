@@ -2,11 +2,19 @@ Import-Module "..\tools\Install-IfNotInstalled.psm1"
 Import-Module "..\tools\AddToPath.psm1"
 
 function InstallFdm {
-    Install-IfNotInstalled "SoftDeluxe.FreeDownloadManager"
+    if ("$(winget list -e --id "SoftDeluxe.FreeDownloadManager" --source winget)".Contains("--")) { 
+        Write-Host "SoftDeluxe.FreeDownloadManager is already installed!" -ForegroundColor Green
 
-    Write-Host "Clean up FDM..." -ForegroundColor Green
-    Get-Process -Name fdm | Stop-Process
-    Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
+        Write-Host "Clean up FDM..."
+        Get-Process -Name fdm | Stop-Process
+        Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
+    }
+    else {
+        $url = "https://files2.freedownloadmanager.org/6/latest/fdm_x64_setup.exe"
+        $output = "$env:USERPROFILE\fdm_x64_setup.exe"
+        Invoke-WebRequest -Uri $url -OutFile $output
+        Start-Process -FilePath $output -ArgumentList "/VERYSILENT" -Wait
+    }
 
     Write-Host "Start new FDM and kill it..." -ForegroundColor Green
     Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
@@ -19,10 +27,6 @@ function InstallFdm {
 
     Write-Host "Avoid FDM auto start..." -ForegroundColor Green
     Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Free Download Manager" -Force
-
-    Write-Host "OOBE FDM..." -ForegroundColor Green
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
-    
 }
 
 Export-ModuleMember -Function InstallFdm
