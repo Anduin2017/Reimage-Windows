@@ -8,7 +8,12 @@ function Install-IfNotInstalled {
     }
     else {
         Write-Host "Attempting to install: $package..." -ForegroundColor Green
-        winget install -e --id $package --source winget
+        try {
+            winget install -e --id $package --source winget --scope Machine
+        } catch {
+            Write-Warning "Failed to install $package as machine scope. Try user scope! $_"
+            winget install -e --id $package --source winget
+        }
     }
 }
 

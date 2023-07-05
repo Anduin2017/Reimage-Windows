@@ -13,7 +13,7 @@ function InstallFdm {
         $output = "$env:USERPROFILE\fdm_x64_setup.exe"
         Write-Host "Downloading SoftDeluxe.FreeDownloadManager... It may costs around 1 minute." -ForegroundColor Green
         Qget $url $output
-        Start-Process -FilePath $output -ArgumentList "/VERYSILENT" -Wait
+        Start-Process -FilePath $output -ArgumentList "/VERYSILENT /ALLUSERS" -Wait
     }
 
     Write-Host "Start new FDM and kill it..."
