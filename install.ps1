@@ -270,19 +270,6 @@ npm install --global npm@latest
 npm install --global node-static typescript @angular/cli yarn npm-check-updates redis-cli
 
 
-Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Green
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
-dotnet tool install --global dotnet-ef --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool update --global dotnet-ef --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Anduin.Parser --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool update --global Anduin.Parser --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Aiursoft.NugetNinja --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool update --global Aiursoft.NugetNinja --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool update --global Aiursoft.Dotlang --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool install --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-dotnet tool update --global JetBrains.ReSharper.GlobalTools --interactive --add-source https://nuget.aiursoft.cn/v3/index.json
-
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -392,18 +379,11 @@ Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseSensitivity -Value
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseSpeed -Value 0
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseThreshold1 -Value 0
 Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseThreshold2 -Value 0
-
-
-cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSensitivity /t REG_SZ /d 6 /f"
-cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSpeed /t REG_SZ /d 0 /f"
-cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseThreshold1 /t REG_SZ /d 0 /f"
-cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseThreshold2 /t REG_SZ /d 0 /f"
 Write-Host "Mouse speed changed. Will apply next reboot." -ForegroundColor Yellow
 
 Write-Host "Pin repos to quick access..." -ForegroundColor Green
 $load_com = new-object -com shell.application
 $load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
-$load_com.Namespace("\\VAULT\").Self.InvokeVerb("pintohome")
 Write-Host "Repos folder are pinned to file explorer."
 
 Write-Host "Exclude repos from Windows Defender..." -ForegroundColor Green

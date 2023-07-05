@@ -16,7 +16,13 @@ function Check-Env {
 
 function Force-UpdateAll {
     # This will run this update script inside current terminal.
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString("https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.ps1"))
+    Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue
+    $destinationPath = "$env:TEMP\reimage-windows-master.zip"
+    Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath
+    Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP
+    Remove-Item $destinationPath
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
+    . "$env:TEMP\reimage-windows-master\install_v2.ps1"
 }
 
 function Reimage {
@@ -73,7 +79,7 @@ function Watch-RandomVideo {
 
         $recordedVideos = Get-ChildItem -Path "$env:USERPROFILE\Videos"
         $pickedVideoName = $pickedVideo.Name
-        if (($recordedVideos | Where-Object {$_.Name.EndsWith("-$pickedVideoName-.mp4") } | Measure-Object).Count -gt 0) {
+        if (($recordedVideos | Where-Object { $_.Name.EndsWith("-$pickedVideoName-.mp4") } | Measure-Object).Count -gt 0) {
             Write-Host "This video you have records!" -ForegroundColor DarkMagenta -NoNewline
         }
 

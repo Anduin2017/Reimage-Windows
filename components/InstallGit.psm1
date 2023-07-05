@@ -31,9 +31,14 @@ function InstallGit {
     }
     
     if (-not $name) {
-        $name = Read-Host "Please enter your name"
+        $name = $env:USERNAME
         git config --global user.name $name
     }
+
+    $email = $(git config --global user.email)
+    $name = $(git config --global user.name)
+    Write-Host "Git Email was set to $email." -ForegroundColor Yellow
+    Write-Host "Git name was set to $name." -ForegroundColor Yellow
 
     git config --global core.autocrlf true
     git config --global core.longpaths true
