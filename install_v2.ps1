@@ -26,4 +26,9 @@ Write-Host "        PART 2  - Install    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 InstallVSCode
+InstallNextclooud
+
+
+
+
 DownloadMyRepos
