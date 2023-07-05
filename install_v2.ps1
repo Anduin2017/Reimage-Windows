@@ -24,8 +24,9 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 InstallVSCode
 InstallNextcloud
-InstallGit
+InstallGit -name $name -email $email
 InstallWindowsTerminal
+InstallDotnet
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal   " -ForegroundColor Green
