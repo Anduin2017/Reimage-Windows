@@ -1,4 +1,4 @@
-Get-ChildItem -Path . -Recurse -Filter *.psm1 | ForEach-Object { Import-Module $_.FullName }
+Get-ChildItem -Path $PSScriptRoot -Recurse -Filter *.psm1 | ForEach-Object { Import-Module $_.FullName }
 
 Clear-Host
 Write-Host "-----------------------------" -ForegroundColor Green
