@@ -526,6 +526,7 @@ if ($email.Contains('microsoft')) {
 }
 else {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
+    winget remove Microsoft.OneDrive
 }
 
 Write-Host "-----------------------------" -ForegroundColor Green
