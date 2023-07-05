@@ -6,7 +6,7 @@ function InstallGit {
         [string]$email,
         [string]$name
     )
-    
+
     Install-IfNotInstalled "Git.Git"
     AddToPath "$env:ProgramFiles\Git\bin\"
 
@@ -21,10 +21,20 @@ function InstallGit {
     Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
     Write-Host "Configuring git..." -ForegroundColor Green
-    Write-Host "Setting git email to $email" -ForegroundColor Yellow
-    Write-Host "Setting git name to $name" -ForegroundColor Yellow
-    git config --global user.email $email
-    git config --global user.name $name
+
+    $email = $(git config --global user.email)
+    $name = $(git config --global user.name)
+    
+    if (-not $email) {
+        $email = Read-Host "Please enter your email address:"
+        git config --global user.email $email
+    }
+    
+    if (-not $name) {
+        $name = Read-Host "Please enter your name:"
+        git config --global user.name $name
+    }
+
     git config --global core.autocrlf true
     git config --global core.longpaths true
     git config --global --add safe.directory '*'
