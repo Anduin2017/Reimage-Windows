@@ -25,16 +25,14 @@ Write-Host "-----------------------------" -ForegroundColor Green
 InstallVSCode    # Manual Sign in to sync settings.
 InstallNextcloud # Manual Sign in. Slow
 
-Write-Host "The next part is 100% automatic. You can have a coffee!`n" -ForegroundColor DarkMagenta
-
+Write-Host "The next part is 100% automatic. You can have a cup of coffee!`n" -ForegroundColor DarkMagenta
 InstallDotnet
 Install7Zip
 InstallVlc
 
 WaitLinkForNextcloud
-
-InstallGit -mail $mail
-InstallWindowsTerminal
+InstallGit -mail $mail # Requires Nextcloud for SSH keys
+InstallWindowsTerminal # Requires Nextcloud for profile
 InstallAria2
 InstallFdm
 InstallOffice
