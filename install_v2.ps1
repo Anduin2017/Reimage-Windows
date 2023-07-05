@@ -32,14 +32,13 @@ WaitLinkForNextcloud
 InstallGit       # Manual Sign in
 InstallWindowsTerminal
 InstallFdm
+InstallOffice
+InstallAzureDataStudio
+InstallPwsh
 
-
-Install-IfNotInstalled "Microsoft.Office"
-Install-IfNotInstalled "Microsoft.PowerShell"
 Install-IfNotInstalled "Microsoft.Edge"
 Install-IfNotInstalled "Microsoft.NuGet"
 Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
-Install-IfNotInstalled "Microsoft.AzureDataStudio"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "OBSProject.OBSStudio"
