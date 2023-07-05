@@ -1,6 +1,5 @@
 Get-ChildItem -Path $PSScriptRoot -Recurse -Filter *.psm1 | ForEach-Object { Import-Module $_.FullName }
 
-Clear-Host
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 0  - Introduce  " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -20,13 +19,12 @@ ResetStore
 UpdateStoreApps
 InstallWinget
 
-
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 2  - Install    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 InstallVSCode
-InstallNextclooud
+InstallNextcloud
 
 
 
