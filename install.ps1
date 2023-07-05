@@ -69,36 +69,7 @@ $driveLetter = (Get-Location).Drive.Name
 
 
 
-Install-IfNotInstalled "Microsoft.Office"
-Install-IfNotInstalled "Microsoft.PowerShell"
-Install-IfNotInstalled "Microsoft.Edge"
-Install-IfNotInstalled "Microsoft.NuGet"
-Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
-#Install-IfNotInstalled "Microsoft.AzureCLI"
-#Install-IfNotInstalled "Microsoft.AzureDataStudio"
-Install-IfNotInstalled "Microsoft.OpenJDK.17"
-Install-IfNotInstalled "Tencent.WeChat"
-#Install-IfNotInstalled "RubyInstallerTeam.Ruby.3.1"
-#Install-IfNotInstalled "GoLang.Go.1.19"
-Install-IfNotInstalled "SoftDeluxe.FreeDownloadManager"
-Install-IfNotInstalled "VideoLAN.VLC"
-#Install-IfNotInstalled "Telegram.TelegramDesktop"
-Install-IfNotInstalled "OBSProject.OBSStudio"
-AddToPath "$env:ProgramFiles\Git\bin"
-Install-IfNotInstalled "gerardog.gsudo"
-Install-IfNotInstalled "OpenJS.NodeJS"
-Install-IfNotInstalled "Postman.Postman"
-Install-IfNotInstalled "7zip.7zip"
-Install-IfNotInstalled "CPUID.CPU-Z"
-Install-IfNotInstalled "WinDirStat.WinDirStat"
-Install-IfNotInstalled "FastCopy.FastCopy"
-Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
-Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
-Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
-Install-IfNotInstalled "PassmarkSoftware.OSFMount"
-Install-IfNotInstalled "Maxon.CinebenchR23"
-Install-IfNotInstalled "CPUID.HWMonitor"
-Install-IfNotInstalled "MediaArea.MediaInfo.GUI"
+
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
@@ -119,7 +90,7 @@ if (Get-Command -ErrorAction SilentlyContinue "python.exe") {
     $searchFolder = 'C:\Program Files'
     $folders = Get-ChildItem -Path $searchFolder -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -like "*python*" }
     foreach ($folder in $folders) {
-        Write-Host "Removing existing folder $folder..." -ForegroundColor Green
+        Write-Host "Removing existing folder $($folder.FullName)..." -ForegroundColor Green
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
 }
@@ -134,49 +105,10 @@ else {
     Write-Host "Azure AD PowerShell Module is already installed!" -ForegroundColor Green
 }
 
-Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
-Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
-Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
-Install-StoreApp -storeAppId "9MZ95KL8MR0L" -wingetAppName "Snip & Sketch"
-Install-StoreApp -storeAppId "9WZDNCRFJ3PR" -wingetAppName "Windows Clock"
-Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
-Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"
-Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
-Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
 
-RemoveUWP Microsoft.MSPaint
-RemoveUWP Microsoft.Microsoft3DViewer
-RemoveUWP Microsoft.ZuneMusic
-RemoveUWP *549981C3F5F10*
-RemoveUWP Microsoft.WindowsSoundRecorder
-RemoveUWP Microsoft.PowerAutomateDesktop
-RemoveUWP Microsoft.BingWeather
-RemoveUWP Microsoft.BingNews
-RemoveUWP king.com.CandyCrushSaga
-RemoveUWP Microsoft.Messaging
-RemoveUWP Microsoft.WindowsFeedbackHub
-RemoveUWP Microsoft.MicrosoftOfficeHub
-RemoveUWP Microsoft.MicrosoftSolitaireCollection
-RemoveUWP 4DF9E0F8.Netflix
-RemoveUWP Microsoft.GetHelp
-RemoveUWP Microsoft.People
-RemoveUWP Microsoft.YourPhone
-RemoveUWP MicrosoftTeams
-RemoveUWP Microsoft.Getstarted
-RemoveUWP Microsoft.Microsoft3DViewer
-RemoveUWP Microsoft.WindowsMaps
-RemoveUWP Microsoft.MixedReality.Portal
-RemoveUWP Microsoft.SkypeApp
-RemoveUWP MicrosoftWindows.Client.WebExperience # Useless Widgets.
 
-Write-Host "Configuring FDM..." -ForegroundColor Green
-cmd /c "taskkill.exe /IM fdm.exe /F"
-Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
-Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
-Start-Sleep -Seconds 5
-cmd /c "taskkill.exe /IM fdm.exe /F"
-$fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
-Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/db.sqlite?inline=false" -OutFile "$fdmDbPath"
+
+
 
 #aria2
 if ($true) {
@@ -317,12 +249,6 @@ if ($true) {
     Remove-Item -Path $downloadedWget -Force
 }
 
-if (-not $(Get-Command git-lfs)) {
-    winget install "GitHub.GitLFS" --source winget
-}
-else {
-    Write-Host "Git LFS is already installed." -ForegroundColor Yellow
-}
 
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
@@ -337,7 +263,6 @@ Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 AddToPath -folder "C:\Program Files\Git\bin"
-AddToPath -folder "C:\Program Files\VideoLAN\VLC"
 
 Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
 Set-ExecutionPolicy remotesigned -Force
@@ -553,7 +478,6 @@ cmd.exe /c "reg add `"HKCU\Control Panel\Bluetooth`" /v `"Notification Area Icon
 
 Write-Host "Disabling apps auto start..." -ForegroundColor Green
 cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v Wechat /f"
-cmd.exe /c "reg delete  HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run /v `"Free Download Manager`" /f"
 
 Write-Host "Applying file explorer settings..." -ForegroundColor Green
 cmd.exe /c "reg add HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v HideFileExt /t REG_DWORD /d 0 /f"
@@ -571,6 +495,12 @@ w32tm /resync /force
 w32tm /query /status
 
 Write-Host "Setting mouse speed..." -ForegroundColor Green
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseSensitivity -Value 6
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseSpeed -Value 0
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseThreshold1 -Value 0
+Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseThreshold2 -Value 0
+
+
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSensitivity /t REG_SZ /d 6 /f"
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseSpeed /t REG_SZ /d 0 /f"
 cmd.exe /c "reg add `"HKCU\Control Panel\Mouse`" /v MouseThreshold1 /t REG_SZ /d 0 /f"

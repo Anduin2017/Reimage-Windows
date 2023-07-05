@@ -38,6 +38,13 @@ function InstallGit {
     git config --global core.autocrlf true
     git config --global core.longpaths true
     git config --global --add safe.directory '*'
+
+    if (-not $(Get-Command git-lfs)) {
+        winget install "GitHub.GitLFS" --source winget
+    }
+    else {
+        Write-Host "Git LFS is already installed." -ForegroundColor Yellow
+    }
 }
 
 Export-ModuleMember -Function InstallGit
