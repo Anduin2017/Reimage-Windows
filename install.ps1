@@ -1,23 +1,3 @@
-function Do-Next {
-    Write-Host "What you can do next?`n`n" -ForegroundColor Yellow
-    Write-Host " * Change your display scale" -ForegroundColor White
-    Write-Host " * Sign in Nextcloud Desktop." -ForegroundColor White
-    Write-Host " * Set Google as default search engine." -ForegroundColor White
-    Write-Host " * Open office once." -ForegroundColor White
-    Write-Host " * Sign in Mail UWP." -ForegroundColor White
-    Write-Host " * Sign in VSCode and GitHub to turn on settings sync." -ForegroundColor White
-    Write-Host " * Sign in WeChat and change shortcut" -ForegroundColor White
-    Write-Host " * Sign in Youtube and Google" -ForegroundColor White
-    Write-Host " * Set Windows Terminal as default" -ForegroundColor White
-    Write-Host " * (Optional)Manually install latest NVIDIA drivers" -ForegroundColor White
-    Write-Host " * Activate Windows" -ForegroundColor White
-    Write-Host " * Sign in https://gitlab.aiursoft.cn" -ForegroundColor White
-    Write-Host " * Install V2rayN" -ForegroundColor White
-    Write-Host " * (Optional) Download and sign in ASUS Armoury Crate" -ForegroundColor White
-    Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
-    Write-Host " * (Optional) Sync Logitech shortcuts" -ForegroundColor White
-    Write-Host " * (Optional) Run HDR Caliboration https://apps.microsoft.com/store/detail/windows-hdr-calibration/9N7F2SM5D1LR" -ForegroundColor White
-}
 
 function CloneReposToPath($repos, $destinationPath) {
     foreach ($repo in $repos) {
@@ -49,42 +29,8 @@ function Qget {
     Invoke-Expression "aria2c.exe $aria2cArgs"
 }
 
-function AddToPath {
-    param (
-        [string]$folder
-    )
 
-    Write-Host "Adding $folder to environment variables..." -ForegroundColor Yellow
 
-    $currentEnv = [Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine).Trim(";");
-    $addedEnv = $currentEnv + ";$folder"
-    $trimmedEnv = (($addedEnv.Split(';') | Select-Object -Unique) -join ";").Trim(";")
-    [Environment]::SetEnvironmentVariable(
-        "Path",
-        $trimmedEnv,
-        [EnvironmentVariableTarget]::Machine)
-
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
-}
-
-function RemoveUWP {
-    param (
-        [string]$name
-    )
-
-    Write-Host "Removing UWP $name..." -ForegroundColor Green
-    Get-AppxPackage $name | Remove-AppxPackage
-    Get-AppxPackage $name | Remove-AppxPackage -AllUsers
-}
-
-function Get-IsElevated {
-    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
-    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator))
-    { Write-Output $true }      
-    else
-    { Write-Output $false }   
-}
 
 function Install-StoreApp {
     param (
@@ -189,13 +135,7 @@ function Update-PathVariable {
     }
 }
 
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 1  - Prepare    " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
 
-if (-not(Get-IsElevated)) { 
-    throw "Please run this script as an administrator" 
-}
 
 Write-Host "OS Info:" -ForegroundColor Green
 Get-CimInstance Win32_OperatingSystem | Format-List Name, Version, InstallDate, OSArchitecture
