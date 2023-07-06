@@ -50,6 +50,11 @@ function SetupDesktop {
     Set-ItemProperty -Path "HKCU:\Control Panel\Mouse" -Name MouseThreshold2 -Value 0
     Write-Host "Mouse speed changed. Will apply next reboot." -ForegroundColor Yellow
 
+    Write-Host "Pin repos to quick access..." -ForegroundColor Green
+    $load_com = new-object -com shell.application
+    $load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
+    Write-Host "Repos folder are pinned to file explorer."
+
     Write-Host "Cleaning desktop..." -ForegroundColor Green
     Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
     Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue

@@ -1,32 +1,8 @@
 
-
-
-function Set-WallPaper($Image) {
-    Add-Type -TypeDefinition @" 
-    using System; 
-    using System.Runtime.InteropServices;
-
-    public class Params
-    { 
-        [DllImport("User32.dll",CharSet=CharSet.Unicode)] 
-        public static extern int SystemParametersInfo (Int32 uAction, 
-                                                       Int32 uParam, 
-                                                       String lpvParam, 
-                                                       Int32 fuWinIni);
-    }
-"@ 
-    $SPI_SETDESKWALLPAPER = 0x0014
-    $UpdateIniFile = 0x01
-    $SendChangeEvent = 0x02
-    $fWinIni = $UpdateIniFile -bor $SendChangeEvent
-    $ret = [Params]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Image, $fWinIni)
-}
-
 $driveLetter = (Get-Location).Drive.Name
 
 Write-Host "Installing NFS client..." -ForegroundColor Green
 Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
-
 
 
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
@@ -190,14 +166,9 @@ Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
 Get-ChildItem -Path $HOME -Filter .* -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = $_.Attributes -bor [System.IO.FileAttributes]::Hidden }
 
 
-
-
-
 Write-Host "Setting Power Policy to ultimate..." -ForegroundColor Green
 powercfg /s e9a42b02-d5df-448d-aa00-03f14749eb61
 powercfg /list
-
-
 
 Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
 Powercfg /Change monitor-timeout-ac 20
@@ -224,11 +195,6 @@ w32tm /resync /force
 w32tm /query /status
 
 
-
-Write-Host "Pin repos to quick access..." -ForegroundColor Green
-$load_com = new-object -com shell.application
-$load_com.Namespace("$env:USERPROFILE\source\repos").Self.InvokeVerb("pintohome")
-Write-Host "Repos folder are pinned to file explorer."
 
 Write-Host "Exclude repos from Windows Defender..." -ForegroundColor Green
 Add-MpPreference -ExclusionPath "$env:USERPROFILE\source\repos"
