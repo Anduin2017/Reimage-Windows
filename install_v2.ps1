@@ -119,6 +119,8 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 6  - Security   " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+SetupWindowsDefender
+
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 7  - Updates    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
@@ -126,3 +128,9 @@ Write-Host "-----------------------------" -ForegroundColor Green
 ResetStore
 UpdateStoreApps
 ResetNet
+
+Write-Host "Job finished! Pending reboot!" -ForegroundColor Green
+Write-Host "Press Enter to reboot now..." -ForegroundColor Yellow
+Read-Host
+
+Restart-Computer -Force

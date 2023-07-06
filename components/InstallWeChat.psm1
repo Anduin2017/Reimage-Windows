@@ -4,7 +4,7 @@ function InstallWeChat {
     Install-IfNotInstalled "Tencent.WeChat"
 
     Write-Host "Disabling WeChat auto start..." -ForegroundColor Green
-    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run\Wechat" -Force
+    Remove-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run\Wechat" -Force -ErrorAction SilentlyContinue
 }
 
 Export-ModuleMember -Function InstallWeChat

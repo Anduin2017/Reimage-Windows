@@ -9,7 +9,6 @@ function ResetNet {
     cmd.exe /c "netcfg -d"
     cmd.exe /c "sc config FDResPub start=auto"
     cmd.exe /c "sc config fdPHost start=auto"
-    cmd.exe /c "shutdown -r -t 10"
     Start-Sleep -Seconds 3
 }
 
