@@ -1,3 +1,5 @@
+Import-Module "..\tools\Install-IfNotInstalled.psm1"
+
 function RemovePython {
     Write-Host "Removing python..." -ForegroundColor Green
     if (Get-Command -ErrorAction SilentlyContinue "python.exe") {
@@ -24,4 +26,20 @@ function RemovePython {
     }
 }
 
-Export-ModuleMember -Function RemovePython
+function CleanPython {
+    $pyPath = $(where.exe python)
+    $isClean = $pyPath -match "WindowsApps"
+    if ($isClean) {
+        Write-Host "Python is clean!" -ForegroundColor Green
+    } else {
+        Write-Host "Python is not clean! Cleaning it..." -ForegroundColor Green
+        RemovePython
+    }
+}
+
+function InstallPython {
+    CleanPython
+    Install-IfNotInstalled "Python.Python.3.10"
+}
+
+Export-ModuleMember -Function InstallPython

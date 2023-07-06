@@ -33,14 +33,13 @@ InstallVlc
 WaitLinkForNextcloud
 InstallGit -mail $mail # Requires Nextcloud for SSH keys
 InstallWindowsTerminal # Requires Nextcloud for profile
+InstallPython
 InstallAria2
 InstallFdm
 InstallOffice
 InstallAzureDataStudio
 InstallPwsh
 InstallChrome
-
-RemovePython
 
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
