@@ -14,7 +14,7 @@ function InstallGit {
     $localSshConfigPath = "$HOME\.ssh\"
 
     Remove-Item -Path $localSshConfigPath -Recurse -Force -ErrorAction SilentlyContinue
-    New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force
+    New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
     Write-Host "Testing SSH features..." -ForegroundColor Green
     Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
