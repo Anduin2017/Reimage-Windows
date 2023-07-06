@@ -5,7 +5,8 @@ function InstallFdm {
         Write-Host "SoftDeluxe.FreeDownloadManager is already installed!" -ForegroundColor Green
 
         Write-Host "Clean up FDM..."
-        Get-Process -Name fdm -ErrorAction SilentlyContinue | Stop-Process
+        Get-Process helperservice -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+        Get-Process -Name fdm     -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
         Remove-Item -Path "$env:LOCALAPPDATA\Softdeluxe" -Force -Recurse -ErrorAction SilentlyContinue
     }
     else {
@@ -16,19 +17,14 @@ function InstallFdm {
         Start-Process -FilePath $output -ArgumentList "/VERYSILENT /ALLUSERS" -Wait
     }
 
-    Write-Host "Start new FDM and kill it..." -ForegroundColor Yellow
-    Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
-    Start-Sleep -Seconds 2
-    Get-Process -Name msedge -ErrorAction SilentlyContinue | Stop-Process
-    Start-Sleep -Seconds 1
-    Get-Process -Name fdm | Stop-Process
-
+    
     Write-Host "Replace FDM config files..." -ForegroundColor Yellow
+    New-Item -ItemType Directory -Path "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager" -ErrorAction SilentlyContinue | Out-Null
     $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
     Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/db.sqlite?inline=false" -OutFile "$fdmDbPath"
 
     Write-Host "Avoid FDM auto start..." -ForegroundColor Yellow
-    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Free Download Manager" -Force
+    Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Free Download Manager" -Force -ErrorAction SilentlyContinue
 }
 
 Export-ModuleMember -Function InstallFdm
