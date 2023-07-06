@@ -15,6 +15,8 @@ function InstallEdge {
     New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HubsSidebarEnabled -Type DWORD -Value 0 -ErrorAction SilentlyContinue
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Edge" -Name HubsSidebarEnabled -Type DWORD -Value 0
 
+    Write-Host "Kill Edge to force reload..." -ForegroundColor Green
+    Get-Process -Name msedge -ErrorAction SilentlyContinue | Stop-Process
 }
 
 Export-ModuleMember -Function InstallEdge
