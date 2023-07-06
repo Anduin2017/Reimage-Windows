@@ -25,7 +25,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 InstallVSCode
 InstallNextcloud # Manual Sign in. Slow
 
-Write-Host "The next part is 100% automatic. You can have a cup of coffee!`n" -ForegroundColor DarkMagenta
+Write-Host "After signing in to Nextcloud, the following part is 100% automatic. You can have a cup of coffee!`n" -ForegroundColor DarkMagenta
 InstallDotnet
 Install7Zip
 InstallVlc
