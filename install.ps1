@@ -112,30 +112,6 @@ if ($true) {
     Remove-Item $downloadPath
 }
 
-# Chromium
-if ($true) {
-    $downloadUrl = "https://download-chromium.appspot.com/dl/Win_x64?type=snapshots"
-    $downloadPath = Join-Path -Path $env:TEMP -ChildPath "chromium.zip"
-    Qget $downloadUrl $downloadPath
-
-    $installPath = Join-Path -Path $env:ProgramFiles -ChildPath "Chromium"
-    if (!(Test-Path -Path $installPath)) {
-        New-Item -ItemType Directory -Path $installPath | Out-Null
-    }
-    Expand-Archive -Path $downloadPath -DestinationPath $installPath -Force
-
-    $chromiumPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
-
-    $shortcutPath = Join-Path -Path ([Environment]::GetFolderPath("Programs")) -ChildPath "Chromium.lnk"
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($shortcutPath)
-    $Shortcut.TargetPath = Join-Path -Path $chromiumPath -ChildPath "chrome.exe"
-    $Shortcut.IconLocation = Join-Path -Path $chromiumPath -ChildPath "chrome.exe"
-    $Shortcut.Save()
-
-    Remove-Item $downloadPath
-}
-
 # Android CLI
 if ($true) {
     Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green

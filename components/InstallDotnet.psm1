@@ -5,18 +5,28 @@ function TryInstallDotnetTool {
   param(
     [string]$toolName
   )
-  Write-Host "Installing .NET tool $toolName.." -ForegroundColor Green
-  try {
-    dotnet tool install --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
-  }
-  catch {
+  $globalTools = dotnet tool list --global
+
+  if ($globalTools -match $toolName) {
+    Write-Host "$toolName is already installed. Updating it.."  -ForegroundColor Green
     dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
-    Write-Warning "Failed to install or update .NET $toolName $_"
+  }
+  else {
+    try {
+      Write-Host "$toolName is not installed. Installing it.."  -ForegroundColor Green
+      dotnet tool install --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    }
+    catch {
+      Write-Host "$toolName failed to be installed. Trying updating it.." -ForegroundColor Yellow
+      dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+      Write-Warning "Failed to install or update .NET $toolName $_"
+    }
   }
 }
 
 function InstallDotnet {
   Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
+  Install-IfNotInstalled "Microsoft.NuGet"
 
   Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
   AddToPath "$env:ProgramFiles\dotnet\"

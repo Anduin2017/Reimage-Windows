@@ -38,9 +38,8 @@ InstallFdm
 InstallOffice
 InstallAzureDataStudio
 InstallPwsh
+InstallChrome
 
-Install-IfNotInstalled "Microsoft.Edge"
-Install-IfNotInstalled "Microsoft.NuGet"
 Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
@@ -68,30 +67,30 @@ Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
 
-RemoveUWP Microsoft.MSPaint
-RemoveUWP Microsoft.Microsoft3DViewer
-RemoveUWP Microsoft.ZuneMusic
-RemoveUWP *549981C3F5F10*
-RemoveUWP Microsoft.WindowsSoundRecorder
-RemoveUWP Microsoft.PowerAutomateDesktop
-RemoveUWP Microsoft.BingWeather
-RemoveUWP Microsoft.BingNews
-RemoveUWP king.com.CandyCrushSaga
-RemoveUWP Microsoft.Messaging
-RemoveUWP Microsoft.WindowsFeedbackHub
-RemoveUWP Microsoft.MicrosoftOfficeHub
-RemoveUWP Microsoft.MicrosoftSolitaireCollection
-RemoveUWP 4DF9E0F8.Netflix
-RemoveUWP Microsoft.GetHelp
-RemoveUWP Microsoft.People
-RemoveUWP Microsoft.YourPhone
-RemoveUWP MicrosoftTeams
-RemoveUWP Microsoft.Getstarted
-RemoveUWP Microsoft.Microsoft3DViewer
-RemoveUWP Microsoft.WindowsMaps
-RemoveUWP Microsoft.MixedReality.Portal
-RemoveUWP Microsoft.SkypeApp
-RemoveUWP MicrosoftWindows.Client.WebExperience # Useless Widgets.
+RemoveUwp Microsoft.MSPaint
+RemoveUwp Microsoft.Microsoft3DViewer
+RemoveUwp Microsoft.ZuneMusic
+RemoveUwp *549981C3F5F10*
+RemoveUwp Microsoft.WindowsSoundRecorder
+RemoveUwp Microsoft.PowerAutomateDesktop
+RemoveUwp Microsoft.BingWeather
+RemoveUwp Microsoft.BingNews
+RemoveUwp king.com.CandyCrushSaga
+RemoveUwp Microsoft.Messaging
+RemoveUwp Microsoft.WindowsFeedbackHub
+RemoveUwp Microsoft.MicrosoftOfficeHub
+RemoveUwp Microsoft.MicrosoftSolitaireCollection
+RemoveUwp 4DF9E0F8.Netflix
+RemoveUwp Microsoft.GetHelp
+RemoveUwp Microsoft.People
+RemoveUwp Microsoft.YourPhone
+RemoveUwp MicrosoftTeams
+RemoveUwp Microsoft.Getstarted
+RemoveUwp Microsoft.Microsoft3DViewer
+RemoveUwp Microsoft.WindowsMaps
+RemoveUwp Microsoft.MixedReality.Portal
+RemoveUwp Microsoft.SkypeApp
+RemoveUwp MicrosoftWindows.Client.WebExperience # Useless Widgets.
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal   " -ForegroundColor Green
