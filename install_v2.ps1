@@ -40,7 +40,8 @@ InstallAzureDataStudio
 InstallPwsh
 InstallChrome
 
-Install-IfNotInstalled "Microsoft.EdgeWebView2Runtime"
+RemovePython
+
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "OBSProject.OBSStudio"
@@ -66,6 +67,7 @@ Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
+
 
 RemoveUwp Microsoft.MSPaint
 RemoveUwp Microsoft.Microsoft3DViewer
@@ -116,3 +118,4 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetStore
 UpdateStoreApps
+ResetNet
