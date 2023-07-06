@@ -37,11 +37,14 @@ InstallGSudo
 InstallPython
 InstallAria2
 InstallFdm
+InstallChrome
+InstallEdge
+InstallJava
 InstallOffice
 InstallAzureDataStudio
 InstallPwsh
-InstallChrome
 InstallBlender
+InstallWeChat
 
 # V2Ray, ChatGPT Next
 Install-IfNotInstalled "Tencent.WeChat"
