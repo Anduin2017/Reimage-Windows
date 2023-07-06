@@ -18,22 +18,22 @@ $mail = GetUserEmail # Manual Enter
 InstallWinget    # Manual Approve
 SignInAccount    # Manual Sign in
 
+InstallNextcloud # Manual Sign in. Slow
+WaitLinkForNextcloud -path "$HOME\Nextcloud\Aiursoft\Box\costs.xlsx"
+
+Write-Host "The following part is 100% automatic. You can have a cup of coffee!`n" -ForegroundColor DarkMagenta
+
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 2  - Install    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 InstallVSCode
-InstallNextcloud # Manual Sign in. Slow
-
-Write-Host "After signing in to Nextcloud, the following part is 100% automatic. You can have a cup of coffee!`n" -ForegroundColor DarkMagenta
 InstallDotnet
 Install7Zip
 InstallVlc
-
-WaitLinkForNextcloud
+InstallGSudo
 InstallGit -mail $mail # Requires Nextcloud for SSH keys
 InstallWindowsTerminal # Requires Nextcloud for profile
-InstallGSudo
 InstallPython
 InstallAria2
 InstallFdm
@@ -127,6 +127,9 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetStore
 UpdateStoreApps
+
+Write-Host "Most of the job finished. Do you want to do auto fix? Press Enter to disconnect now..." -ForegroundColor Yellow
+Read-Host
 ResetNet
 
 Write-Host "Job finished! Pending reboot!" -ForegroundColor Green

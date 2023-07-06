@@ -1,5 +1,8 @@
 function WaitLinkForNextcloud {
-    while (-not $(Get-Content -Path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub" -ErrorAction SilentlyContinue)) {
+    param(
+        [string]$path
+    )
+    while (-not $(Get-Content -Path $path -ErrorAction SilentlyContinue)) {
         Write-Host "Nextcloud is not ready yet!" -ForegroundColor Yellow
         Start-Sleep -Seconds 15
     }

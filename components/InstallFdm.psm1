@@ -16,16 +16,16 @@ function InstallFdm {
         Start-Process -FilePath $output -ArgumentList "/VERYSILENT /ALLUSERS" -Wait
     }
 
-    Write-Host "Start new FDM and kill it..."
+    Write-Host "Start new FDM and kill it..." -ForegroundColor Yellow
     Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
     Start-Sleep -Seconds 5
     Get-Process -Name fdm | Stop-Process
 
-    Write-Host "Replace FDM config files..."
+    Write-Host "Replace FDM config files..." -ForegroundColor Yellow
     $fdmDbPath = "$env:LOCALAPPDATA\Softdeluxe\Free Download Manager\db.sqlite"
     Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/db.sqlite?inline=false" -OutFile "$fdmDbPath"
 
-    Write-Host "Avoid FDM auto start..."
+    Write-Host "Avoid FDM auto start..." -ForegroundColor Yellow
     Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Free Download Manager" -Force
 }
 

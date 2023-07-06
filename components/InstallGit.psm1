@@ -1,14 +1,18 @@
 Import-Module "..\tools\Install-IfNotInstalled.psm1"
 Import-Module "..\tools\AddToPath.psm1"
+Import-Module "..\actions\WaitLinkForNextcloud.psm1"
 
 function InstallGit {
     param(
         [string]$mail
     )
 
+
     Install-IfNotInstalled "Git.Git"
     AddToPath "$env:ProgramFiles\Git\bin\"
 
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub"
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa"
     Write-Host "Linking back SSH keys..." -ForegroundColor Green
     $NextcloudSshConfigPath = "$HOME\Nextcloud\Storage\SSH\"
     $localSshConfigPath = "$HOME\.ssh\"
