@@ -59,8 +59,6 @@ Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
 Install-IfNotInstalled "PassmarkSoftware.OSFMount"
-Install-IfNotInstalled "Maxon.CinebenchR23"
-Install-IfNotInstalled "MediaArea.MediaInfo.GUI"
 
 Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
@@ -70,7 +68,6 @@ Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
-
 
 RemoveUwp Microsoft.MSPaint
 RemoveUwp Microsoft.Microsoft3DViewer
