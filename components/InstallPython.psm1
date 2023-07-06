@@ -32,7 +32,7 @@ function CleanPython {
     if ($isClean) {
         Write-Host "Python is clean!" -ForegroundColor Green
     } else {
-        Write-Host "Python is not clean! Cleaning it..." -ForegroundColor Green
+        Write-Host "Python is not clean! Cleaning it..." -ForegroundColor Red
         RemovePython
     }
 }
