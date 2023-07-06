@@ -41,7 +41,7 @@ InstallAzureDataStudio
 InstallPwsh
 InstallChrome
 
-
+# V2Ray, ChatGPT Next
 Install-IfNotInstalled "BlenderFoundation.Blender"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
