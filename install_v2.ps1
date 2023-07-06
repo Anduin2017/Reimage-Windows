@@ -41,6 +41,8 @@ InstallAzureDataStudio
 InstallPwsh
 InstallChrome
 
+
+Install-IfNotInstalled "BlenderFoundation.Blender"
 Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "OBSProject.OBSStudio"
