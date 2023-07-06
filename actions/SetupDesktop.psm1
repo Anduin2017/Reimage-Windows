@@ -10,9 +10,7 @@ function SetupDesktop {
     }
 
     Write-Host "Avoid folder grouping..." -ForegroundColor Green
-    Get-ChildItem 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -Recurse`
-    | Where-Object { $_.PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' }`
-    | Remove-Item -Recurse
+    Get-ChildItem 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -Recurse | Where-Object { $_.PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' } | Remove-Item -Recurse
 
     Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
     Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue

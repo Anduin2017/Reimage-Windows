@@ -18,7 +18,9 @@ function InstallFdm {
 
     Write-Host "Start new FDM and kill it..." -ForegroundColor Yellow
     Start-Process "$env:ProgramFiles\Softdeluxe\Free Download Manager\fdm.exe"
-    Start-Sleep -Seconds 5
+    Start-Sleep -Seconds 2
+    Get-Process -Name msedge -ErrorAction SilentlyContinue | Stop-Process
+    Start-Sleep -Seconds 1
     Get-Process -Name fdm | Stop-Process
 
     Write-Host "Replace FDM config files..." -ForegroundColor Yellow

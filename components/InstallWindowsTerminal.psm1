@@ -12,9 +12,6 @@ function InstallWindowsTerminal {
     Get-Content -Path $NextcloudConfigwt -ErrorAction SilentlyContinue | Out-Null
     Remove-Item -Path $wtConfigPath -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $wtConfigPath -Target $NextcloudConfigwt -Force -ErrorAction SilentlyContinue | Out-Null
-    
-    Start-Sleep -Seconds 1
-    explorer $(where.exe wt.exe)
 }
 
 Export-ModuleMember -Function InstallWindowsTerminal

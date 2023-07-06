@@ -11,9 +11,6 @@ function InstallVSCode {
         New-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Directory\Background\shell\VSCode" -Name "Icon" -Value "C:\Program Files\Microsoft VS Code\Code.exe" -Force | Out-Null
         New-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Directory\Background\shell\VSCode" -Name "MUIVerb" -Value "Open with VSCode" -Force | Out-Null
         New-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Directory\Background\shell\VSCode\command" -Name "(Default)" -Value """C:\Program Files\Microsoft VS Code\Code.exe"" ""%V""" -Force | Out-Null
-        
-        Write-Host "Start normal user Microsoft VS Code..." -ForegroundColor Gray
-        explorer.exe "$env:ProgramFiles\Microsoft VS Code\Code.exe"
     }
 }
 
