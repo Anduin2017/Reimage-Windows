@@ -25,7 +25,7 @@ function RemovePython {
 
 function CleanPython {
     $pyPath = $(where.exe python)
-    $isClean = -not $pyPath -match "WindowsApps"
+    $isClean = $pyPath -notmatch "WindowsApps"
     if ($isClean) {
         Write-Host "Python is clean!" -ForegroundColor Green
     } else {
