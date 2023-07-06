@@ -1,4 +1,4 @@
-Import-Module "..\tools\SetWallpaper.psm1"
+Import-Module ..\tools\SetWallpaper.psm1
 
 function SetupDesktop {
 
