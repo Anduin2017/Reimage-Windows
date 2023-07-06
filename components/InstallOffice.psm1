@@ -1,7 +1,10 @@
 Import-Module "..\tools\Install-IfNotInstalled.psm1"
 
 function InstallOffice {
-    Install-IfNotInstalled "Microsoft.Office"
+    Start-Process powershell {
+        Import-Module "..\tools\Install-IfNotInstalled.psm1"
+        Install-IfNotInstalled "Microsoft.Office"
+    }
 }
 
 Export-ModuleMember -Function InstallOffice
