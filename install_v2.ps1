@@ -33,6 +33,7 @@ InstallVlc
 WaitLinkForNextcloud
 InstallGit -mail $mail # Requires Nextcloud for SSH keys
 InstallWindowsTerminal # Requires Nextcloud for profile
+InstallGSudo
 InstallPython
 InstallAria2
 InstallFdm
@@ -40,13 +41,11 @@ InstallOffice
 InstallAzureDataStudio
 InstallPwsh
 InstallChrome
+InstallBlender
 
 # V2Ray, ChatGPT Next
-Install-IfNotInstalled "BlenderFoundation.Blender"
-Install-IfNotInstalled "Microsoft.OpenJDK.17"
 Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "OBSProject.OBSStudio"
-Install-IfNotInstalled "gerardog.gsudo"
 Install-IfNotInstalled "OpenJS.NodeJS"
 Install-IfNotInstalled "Postman.Postman"
 Install-IfNotInstalled "CPUID.CPU-Z"
@@ -108,6 +107,10 @@ DownloadMyRepos
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
+
+ClearRecycleBin
+SetupIME
+SetupDesktop
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 6  - Security   " -ForegroundColor Green
