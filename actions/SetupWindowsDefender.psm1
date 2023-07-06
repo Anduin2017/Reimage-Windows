@@ -9,7 +9,7 @@ function SetupWindowsDefender {
     Add-MpPreference -ExclusionPath "$env:USERPROFILE\.ssh"
     Add-MpPreference -ExclusionPath "$env:USERPROFILE\.azuredatastudio"
     Add-MpPreference -ExclusionPath "$env:APPDATA\npm"
-    Add-MpPreference -ExclusionPath "$NextcloudPath"
+    Add-MpPreference -ExclusionPath "$env:USERPROFILE\Nextcloud"
 }
 
 Export-ModuleMember -Function SetupWindowsDefender
