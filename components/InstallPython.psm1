@@ -18,8 +18,9 @@ function RemovePython {
         Write-Host "Removing existing folder $($folder.FullName)..." -ForegroundColor Green
         Remove-Item $folder.FullName -Recurse -ErrorAction SilentlyContinue
     }
-
-    Remove-Item (Get-Command python).Source -Force -ErrorAction SilentlyContinue
+    if (Get-Command python -ErrorAction SilentlyContinue) {
+        Remove-Item (Get-Command python -ErrorAction SilentlyContinue).Source -Force -ErrorAction SilentlyContinue
+    }
 }
 
 function CleanPython {
