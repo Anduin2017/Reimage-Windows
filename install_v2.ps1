@@ -45,6 +45,8 @@ InstallAzureDataStudio
 InstallPwsh
 InstallBlender
 InstallWeChat
+InstallIPerf3
+InstallFFmpeg
 
 # V2Ray, ChatGPT Next
 Install-IfNotInstalled "OBSProject.OBSStudio"
