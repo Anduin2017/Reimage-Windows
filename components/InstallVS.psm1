@@ -10,7 +10,6 @@ function InstallVS {
     }
     else {
         Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
-        winget remove Microsoft.OneDrive
     }
     
 }
