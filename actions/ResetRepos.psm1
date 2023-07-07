@@ -49,3 +49,4 @@ function ResetRepos {
     CloneReposToPath $reposAnduin $destinationPathAnduin
 }
 
+Export-ModuleMember -Function ResetRepos
