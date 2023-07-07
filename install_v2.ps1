@@ -47,10 +47,11 @@ InstallBlender
 InstallWeChat
 InstallIPerf3
 InstallFFmpeg
+InstallAdb
+InstallNodeJs
 
 # V2Ray, ChatGPT Next
 Install-IfNotInstalled "OBSProject.OBSStudio"
-Install-IfNotInstalled "OpenJS.NodeJS"
 Install-IfNotInstalled "Postman.Postman"
 Install-IfNotInstalled "CPUID.CPU-Z"
 Install-IfNotInstalled "CPUID.HWMonitor"
@@ -99,11 +100,13 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal   " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+SetupPowershell
+
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 4  - SDK        " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-DownloadMyRepos
+ResetRepos
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green

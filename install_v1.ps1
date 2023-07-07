@@ -61,7 +61,6 @@ if ($true) {
     Remove-Item -Path $downloadedWget -Force
 }
 
-
 if ($email.Contains('microsoft')) {
     Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
 }
@@ -74,13 +73,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-
-Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
-Set-ExecutionPolicy remotesigned -Force
-
-Write-Host "Enabling long path..." -ForegroundColor Green
-New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
-
 Write-Host "Installing profile file..." -ForegroundColor Green
 if (!(Test-Path $PROFILE)) {
     Write-Host "Creating PROFILE..." -ForegroundColor Yellow
@@ -90,29 +82,9 @@ $profileContent = (New-Object System.Net.WebClient).DownloadString('https://gitl
 Set-Content $PROFILE $profileContent
 . $PROFILE
 
-
-Write-Host "Configuring double click ps1 file to run it..." -ForegroundColor Green
-Set-ItemProperty "Registry::HKEY_CLASSES_ROOT\Microsoft.PowerShellScript.1\Shell\open\command" -Name "(default)" -Value "`"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`" -noLogo -ExecutionPolicy unrestricted -file `"%1`""
-
-
-
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 4  - SDK    " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
-
-Write-Host "Setting up some node js global tools..." -ForegroundColor Green
-npm install --global npm@latest
-npm install --global node-static typescript @angular/cli yarn npm-check-updates redis-cli
-
-
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
-
-# Disabling Active Probing may increase performance. But on some machines may cause UWP unable to connect to Internet.
-#Write-Host "Disabling rubbish Active Probing..." -ForegroundColor Green
-#Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters\Internet\" -Name EnableActiveProbing -Value 0 -Force
-#Write-Host "Disabled Active Probing."
 
 Write-Host "Clearing start up..." -ForegroundColor Green
 $startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
@@ -120,8 +92,6 @@ Get-ChildItem $startUp
 Remove-Item -Path $startUp
 Get-ChildItem $startUp
 
-Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
-Get-ChildItem -Path $HOME -Filter .* -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = $_.Attributes -bor [System.IO.FileAttributes]::Hidden }
 
 
 Write-Host "Setting Power Policy to ultimate..." -ForegroundColor Green

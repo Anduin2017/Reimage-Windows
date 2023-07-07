@@ -9,6 +9,10 @@ function SetupDesktop {
         Write-Host "Set to: " (Get-Item "$NextcloudPath\Digital\Wallpapers\default.jpg").Name
     }
 
+    Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
+    Get-ChildItem -Path $HOME -Filter .* -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = $_.Attributes -bor [System.IO.FileAttributes]::Hidden }
+    Write-Host "Hidden file hidded."
+
     Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
     Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
     Write-Host "3D objects Removed."
