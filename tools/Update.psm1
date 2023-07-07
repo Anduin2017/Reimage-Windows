@@ -14,5 +14,5 @@ function Force-UpdateAll {
     . "$env:TEMP\reimage-windows-master\install_v2.ps1"
 }
 
-Export-ModuleMember -Function ReloadPath
-Export-ModuleMember -Function AddToPath
+Export-ModuleMember -Function Update-All
+Export-ModuleMember -Function Force-UpdateAll
