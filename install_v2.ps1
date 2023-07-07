@@ -49,7 +49,7 @@ InstallIPerf3
 InstallFFmpeg
 InstallAdb
 InstallNodeJs
-InstallVS
+InstallVS -mail $mail
 
 if ($mail.Contains('microsoft')) {
     Write-Host "Welcome, Microsoft Employee!`n" -ForegroundColor DarkYellow
