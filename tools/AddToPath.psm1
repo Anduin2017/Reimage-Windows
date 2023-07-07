@@ -1,3 +1,7 @@
+function ReloadPath {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+}
+
 function Update-PathVariable {
     param (
         [string]$variableScope = "Machine",
@@ -67,7 +71,7 @@ function AddToPath {
         [EnvironmentVariableTarget]::Machine)
 
     Update-PathVariable
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
+    ReloadPath
 }
 
-Export-ModuleMember -Function AddToPath
+Export-ModuleMember -Function AddToPath ReloadPath
