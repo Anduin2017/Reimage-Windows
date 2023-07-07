@@ -5,7 +5,7 @@ function Enjoy {
     $allVideos = $allVideos | Sort-Object { Get-Random }
     Write-Host "Playing $($allVideos.Count) videos..."
     foreach ($pickedVideo in $allVideos) {
-        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--start-time 0.5 --fullscreen --rate 1.5 `"$pickedVideo`"" -Wait 2>&1 | out-null
+        Start-Process "C:\Program Files\VideoLAN\VLC\vlc.exe" -PassThru "--no-repeat --play-and-exit --no-video-title-show --start-time=5 --fullscreen --rate 1.5 `"$pickedVideo`"" -Wait 2>&1 | out-null
     }
 }
 
