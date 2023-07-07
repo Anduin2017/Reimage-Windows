@@ -103,7 +103,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 SetupPowershell
 
 Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 4  - SDK        " -ForegroundColor Green
+Write-Host "        PART 4  - Code       " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetRepos
@@ -112,15 +112,22 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+SetupGPU
+SetupPower
+ClearStartUp
 ClearRecycleBin
 SetupIME
+SetTime
 SetupDesktop
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 6  - Security   " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+SetupNetwork
+SetupRDP
 SetupWindowsDefender
+SetupUAC
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 7  - Updates    " -ForegroundColor Green
@@ -128,6 +135,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetStore
 UpdateStoreApps
+ManualDoNext
 
 Write-Host "Most of the job finished. Do you want to do auto fix? Press Enter to disconnect now..." -ForegroundColor Yellow
 Read-Host

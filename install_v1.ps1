@@ -86,25 +86,11 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-Write-Host "Clearing start up..." -ForegroundColor Green
-$startUp = $env:USERPROFILE + "\Start Menu\Programs\StartUp\*"
-Get-ChildItem $startUp
-Remove-Item -Path $startUp
-Get-ChildItem $startUp
 
 
 
-Write-Host "Setting Power Policy to ultimate..." -ForegroundColor Green
-powercfg /s e9a42b02-d5df-448d-aa00-03f14749eb61
-powercfg /list
 
-Write-Host "Disable Sleep on AC Power..." -ForegroundColor Green
-Powercfg /Change monitor-timeout-ac 20
-Powercfg /Change standby-timeout-ac 0
-Write-Host "Monitor timeout set to 20."
 
-Write-Host "Enabling Hardware-Accelerated GPU Scheduling..." -ForegroundColor Green
-New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\" -Name 'HwSchMode' -Value '2' -PropertyType DWORD -Force
 
 Write-Host "Enabling legacy photo viewer... because the Photos app in Windows 11 sucks!" -ForegroundColor Green
 Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/restore-photo-viewer.reg" -OutFile ".\restore.reg"
@@ -112,36 +98,14 @@ regedit /s ".\restore.reg"
 Remove-Item ".\restore.reg"
 
 
-Write-Host "Setting Time zone..." -ForegroundColor Green
-Set-TimeZone -Id "UTC"
-Write-Host "Time zone set to UTC."
-
-Write-Host "Syncing time..." -ForegroundColor Green
-net stop w32time
-net start w32time
-w32tm /resync /force
-w32tm /query /status
 
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 6  - Security    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-$networkProfiles = Get-NetConnectionProfile
-foreach ($networkProfile in $networkProfiles) {
-    Write-Host "Setting network $($networkProfile.Name) to home network to enable more features..." -ForegroundColor Green
-    Write-Host "This is dangerous because your roommates may detect your device is online." -ForegroundColor Yellow
-    Set-NetConnectionProfile -Name $networkProfile.Name -NetworkCategory Private
-}
 
-Write-Host "Setting UAC..." -ForegroundColor Green
-Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "ConsentPromptBehaviorAdmin" -Value 5
-Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop" -Value 1
 
-Write-Host "Enable Remote Desktop..." -ForegroundColor Green
-Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\" -Name "fDenyTSConnections" -Value 0
-Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\" -Name "UserAuthentication" -Value 0
-Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
 # Upgrade all.
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green

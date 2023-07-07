@@ -6,6 +6,9 @@ function InstallChrome {
 
     Write-Host "Installing Chromium as your private browser...`n" -ForegroundColor Green
     Install-IfNotInstalled "eloston.ungoogled-chromium"
+
+    Start-Sleep -Seconds 2
+    Get-Process -Name Chrome -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
 }
 
 Export-ModuleMember -Function InstallChrome
