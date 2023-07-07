@@ -61,42 +61,6 @@ if ($true) {
     Remove-Item -Path $downloadedWget -Force
 }
 
-if ($email.Contains('microsoft')) {
-    Install-IfNotInstalled Microsoft.VisualStudio.2022.Enterprise
-}
-else {
-    Install-IfNotInstalled Microsoft.VisualStudio.2022.Community
-    winget remove Microsoft.OneDrive
-}
-
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 3  - Terminal    " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
-
-Write-Host "Installing profile file..." -ForegroundColor Green
-if (!(Test-Path $PROFILE)) {
-    Write-Host "Creating PROFILE..." -ForegroundColor Yellow
-    New-Item -Path $PROFILE -ItemType "file" -Force
-}
-$profileContent = (New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/PROFILE.ps1')
-Set-Content $PROFILE $profileContent
-. $PROFILE
-
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
-
-
-
-
-
-
-
-Write-Host "Enabling legacy photo viewer... because the Photos app in Windows 11 sucks!" -ForegroundColor Green
-Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/restore-photo-viewer.reg" -OutFile ".\restore.reg"
-regedit /s ".\restore.reg"
-Remove-Item ".\restore.reg"
-
 
 
 
@@ -111,9 +75,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "Checking for final app upgrades..." -ForegroundColor Green
 winget upgrade --all --source winget
 
-# Call the Update-PathVariable function
-Write-Host "Cleaning path variable..." -ForegroundColor Green
-Update-PathVariable -variableScope "Machine" -verbose
 
 $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash
 

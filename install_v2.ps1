@@ -49,6 +49,16 @@ InstallIPerf3
 InstallFFmpeg
 InstallAdb
 InstallNodeJs
+InstallVS
+
+if ($mail.Contains('microsoft')) {
+    Write-Host "Welcome, Microsoft Employee!`n" -ForegroundColor DarkYellow
+}
+else {
+    Write-Host "Remove MS trash!!!`n" -ForegroundColor DarkYellow
+    RemoveOneDrive
+    RemoveTeams
+}
 
 # V2Ray, ChatGPT Next
 Install-IfNotInstalled "OBSProject.OBSStudio"
@@ -107,6 +117,7 @@ Write-Host "        PART 4  - Code       " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetRepos
+Update-PathVariable
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
