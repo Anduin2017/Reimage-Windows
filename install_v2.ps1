@@ -74,7 +74,7 @@ Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 
 Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
-Install-StoreApp -storeAppId "9MZ95KL8MR0L" -wingetAppName "Snip & Sketch"
+Install-StoreApp -storeAppId "9MZ95KL8MR0L" -wingetAppName "Snipping Tool"
 Install-StoreApp -storeAppId "9WZDNCRFJ3PR" -wingetAppName "Windows Clock"
 Install-StoreApp -storeAppId "9wzdncrfhvqm" -wingetAppName "Mail and Calendar"
 Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"

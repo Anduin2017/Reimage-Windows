@@ -16,7 +16,7 @@ function SetupDesktop {
     }
     else
     {
-        Write-Host "Wallpaper already set to: $currentWallpaper" -ForegroundColor Yellow
+        Write-Host "Wallpaper already set to: $currentWallpaper. Unchanged." -ForegroundColor Yellow
     }
 
     Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
