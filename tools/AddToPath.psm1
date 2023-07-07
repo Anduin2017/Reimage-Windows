@@ -74,4 +74,5 @@ function AddToPath {
     ReloadPath
 }
 
-Export-ModuleMember -Function AddToPath ReloadPath
+Export-ModuleMember -Function ReloadPath
+Export-ModuleMember -Function AddToPath

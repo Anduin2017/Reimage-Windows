@@ -1,7 +1,6 @@
 Import-Module "..\tools\GetWallpaper.psm1"
 Import-Module "..\tools\AddToPath.psm1"
 
-
 function SetupDesktop {
 
     $currentWallpaper = GetWallpaper
