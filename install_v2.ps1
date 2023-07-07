@@ -47,7 +47,6 @@ InstallBlender
 InstallWeChat
 
 # V2Ray, ChatGPT Next
-Install-IfNotInstalled "Tencent.WeChat"
 Install-IfNotInstalled "OBSProject.OBSStudio"
 Install-IfNotInstalled "OpenJS.NodeJS"
 Install-IfNotInstalled "Postman.Postman"

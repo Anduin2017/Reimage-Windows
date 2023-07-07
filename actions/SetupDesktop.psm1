@@ -9,11 +9,9 @@ function SetupDesktop {
         Write-Host "Set to: " (Get-Item "$NextcloudPath\Digital\Wallpapers\default.jpg").Name
     }
 
-    Write-Host "Avoid folder grouping..." -ForegroundColor Green
-    Get-ChildItem 'HKCU:\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags' -Recurse | Where-Object { $_.PSChildName -eq '{885a186e-a440-4ada-812b-db871b942259}' } | Remove-Item -Recurse
-
     Write-Host "Remove rubbish 3D objects..." -ForegroundColor Green
     Remove-Item 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}' -ErrorAction SilentlyContinue
+    Write-Host "3D objects Removed."
 
     Write-Host "Enabling desktop icons..." -ForegroundColor Green
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Name "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" -Value 0
@@ -24,17 +22,21 @@ function SetupDesktop {
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Name "{645FF040-5081-101B-9F08-00AA002F954E}" -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu" -Name "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" -Value 0
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel" -Name "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}" -Value 0
+    Write-Host "Desktop icons added."
 
     Write-Host "Disabling the Windows Ink Workspace..." -ForegroundColor Green
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PenWorkspace" -Name PenWorkspaceButtonDesiredVisibility -Value 0 -Type DWORD
+    Write-Host "Ink Workspace disabled."
 
     Write-Host "Removing Bluetooth icons..." -ForegroundColor Green
     Set-ItemProperty -Path "HKCU:\Control Panel\Bluetooth" -Name "Notification Area Icon" -Value 0 -Type DWORD
+    Write-Host "Bluetooth icon removed."
 
     Write-Host "Hide explroer checkbox and launch to this PC..." -ForegroundColor Green
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Value 0 -Type DWORD
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "AutoCheckSelect" -Value 0 -Type DWORD
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Value 1 -Type DWORD
+    Write-Host "Explorer settings changed."
 
     Write-Host "Enabling dark theme..." -ForegroundColor Green
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" -Name AppsUseLightTheme -Value 0
