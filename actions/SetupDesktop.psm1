@@ -1,12 +1,23 @@
-Import-Module ..\tools\SetWallpaper.psm1
+Import-Module "..\tools\GetWallpaper.psm1"
+Import-Module "..\tools\AddToPath.psm1"
+
 
 function SetupDesktop {
 
-    $wallpaper = "$HOME\Nextcloud\Digital\Wallpapers\default.jpg"
-    if (Test-Path $wallpaper) {
-        Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
-        Set-WallPaper -Image $wallpaper
-        Write-Host "Set to: " (Get-Item "$HOME\Nextcloud\Digital\Wallpapers\default.jpg").Name
+    $currentWallpaper = GetWallpaper
+    if ($currentWallpaper -match "Windows")
+    {
+        Write-Host "Using default wallpaper!" -ForegroundColor Yellow
+        $wallpaper = "$HOME\Nextcloud\Digital\Wallpapers\default.jpg"
+        if (Test-Path $wallpaper) {
+            Write-Host "Setting wallpaper to $wallpaper..." -ForegroundColor Green
+            Set-WallPaper -Image $wallpaper
+            Write-Host "Set to: " (Get-Item "$HOME\Nextcloud\Digital\Wallpapers\default.jpg").Name
+        }
+    }
+    else
+    {
+        Write-Host "Wallpaper already set to: $currentWallpaper" -ForegroundColor Yellow
     }
 
     Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
