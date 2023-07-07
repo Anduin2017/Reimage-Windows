@@ -3,6 +3,7 @@ Import-Module "..\tools\AddToPath.psm1"
 
 function SetupDesktop {
 
+    Write-Host "Changing wallpaper..." -ForegroundColor Green
     $currentWallpaper = GetWallpaper
     if ($currentWallpaper -match "Windows")
     {
