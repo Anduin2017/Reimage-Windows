@@ -1,6 +1,4 @@
 
-Import-Module ".\tools\CloneReposToPath.psm1"
-
 function CloneReposToPath($repos, $destinationPath) {
     foreach ($repo in $repos) {
         $repoName = $repo.name

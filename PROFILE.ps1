@@ -4,7 +4,7 @@
 $modulePath = "$HOME\source\repos\Anduin\Reimage-Windows\tools\"
 $modules = Get-ChildItem -Path $modulePath -Filter *.psm1
 foreach ($module in $modules) {
-    Import-Module $module.FullName
+    Import-Module $module.FullName -DisableNameChecking
     Write-Host "Imported module: $module" -ForegroundColor Yellow
 }
 
