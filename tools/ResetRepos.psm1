@@ -1,6 +1,22 @@
 
 Import-Module ".\tools\CloneReposToPath.psm1"
 
+function CloneReposToPath($repos, $destinationPath) {
+    foreach ($repo in $repos) {
+        $repoName = $repo.name
+        $repoUrl = $repo.ssh_url_to_repo
+        $repoPath = Join-Path $destinationPath $repoName
+
+        if (!(Test-Path -Path $repoPath)) {
+            git clone $repoUrl $repoPath
+            Write-Host "Cloned $repoName to $repoPath"
+        } else {
+            Write-Host "$repoName already exists at $repoPath, skipping."
+        }
+    }
+}
+
+Export-ModuleMember -Function CloneReposToPath
 function ResetRepos {
     Write-Host "Deleting items..."
     Remove-Item "$HOME\source\repos\Aiursoft\" -Recurse -Force -ErrorAction SilentlyContinue
@@ -50,3 +66,4 @@ function ResetRepos {
 }
 
 Export-ModuleMember -Function ResetRepos
+Export-ModuleMember -Function CloneReposToPath
