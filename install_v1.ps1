@@ -71,9 +71,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 
 
-# Upgrade all.
-Write-Host "Checking for final app upgrades..." -ForegroundColor Green
-winget upgrade --all --source winget
+
 
 
 $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash

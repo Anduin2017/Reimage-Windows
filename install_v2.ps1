@@ -144,6 +144,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 7  - Updates    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
+UpgradeAll
 ResetStore
 UpdateStoreApps
 ManualDoNext
