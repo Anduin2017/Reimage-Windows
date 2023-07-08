@@ -28,8 +28,11 @@ function Set-CurrentProfileVersion {
 }
 
 function Prompt-UpdateLocalProfile {
-    $currentVersion = Get-CurrentProfileVersion
-    $latestVersion = Get-LatestProfileVersion
+    $cv = Get-CurrentProfileVersion
+    $currentVersion = [datetime]::Parse($cv);
+    $lv = Get-LatestProfileVersion
+    $latestVersion = [datetime]::Parse($lv);
+
     # if Current Version is less than latest version:
     if ($currentVersion -lt $latestVersion) {
         Write-Host "Your profile is out of date." -ForegroundColor Red
