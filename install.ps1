@@ -151,6 +151,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 UpgradeAll
 ResetStore
 UpdateStoreApps
+Set-CurrentProfileVersion
 TestEnv
 ManualDoNext
 
