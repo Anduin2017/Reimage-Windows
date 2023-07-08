@@ -11,7 +11,7 @@ function Force-UpdateAll {
     Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP
     Remove-Item $destinationPath
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
-    . "$env:TEMP\reimage-windows-master\install_v2.ps1"
+    . "$env:TEMP\reimage-windows-master\install.ps1"
 }
 
 Export-ModuleMember -Function Update-All
