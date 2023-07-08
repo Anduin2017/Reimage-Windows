@@ -74,8 +74,6 @@ Write-Host "-----------------------------" -ForegroundColor Green
 
 
 
-$(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash
-
 Write-Host "Press the [C] key to continue to steps which requires reboot."
 $pressedKey = Read-Host
 Write-Host "You pressed: $($pressedKey)"
