@@ -23,7 +23,7 @@ function Set-CurrentProfileVersion {
     # Set current time to file
     $currentVersion = Get-Date
     $currentVersionString = $currentVersion.ToString("yyyy-MM-dd HH:mm:ss")
-    $currentVersionString | Out-File $markerLocation
+    Set-Content -Value $currentVersionString -Path $markerLocation
     Write-Host "Profile version updated to $currentVersionString" -ForegroundColor Green
 }
 
