@@ -1,4 +1,3 @@
-Import-Module "..\tools\Qget.psm1"
 
 function DownloadAndExtract {
     param(
@@ -6,6 +5,7 @@ function DownloadAndExtract {
         [string]$tempFileName,
         [string]$name
     )
+    $OutputEncoding = [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding $false
     Write-Host "Download $name from $url.."  -ForegroundColor Yellow
 
     $downloadPath = Join-Path -Path $env:TEMP -ChildPath $tempFileName

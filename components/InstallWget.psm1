@@ -9,17 +9,11 @@ function GetWgetLink {
 
 function InstallWget {
     Write-Host "Downloading Wget..." -ForegroundColor Green
-    $wgetPath = "${env:ProgramFiles}\wget"
 
     $wgetLink = GetWgetLink
-    $downloadedWget = $env:USERPROFILE + "\wget.zip"
-    Remove-Item $downloadedWget -ErrorAction SilentlyContinue
-    aria2c.exe $wgetLink -d $HOME -o "wget.zip" --check-certificate=false
-        
-    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedWget "-o$($wgetPath)" -y
-    Write-Host "Adding wget to PATH..." -ForegroundColor Green
-    AddToPath -folder $wgetPath
-    Remove-Item -Path $downloadedWget -Force
+    DownloadAndExtract -url $wgetLink -tempFileName "wget.zip" -name "Wget"
+    $installPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Wget"
+    AddToPath -folder $installPath
 }
 
 Export-ModuleMember -Function InstallWget
