@@ -4,7 +4,6 @@ function Get-LatestKubectlVersion {
     return $latestVersion.Trim()
 }
 
-
 function InstallKubectl {
     Write-Host "Downloading Kubernetes CLI..." -ForegroundColor Green
     $toolsPath = "${env:ProgramFiles}\Kubernetes"
@@ -13,7 +12,7 @@ function InstallKubectl {
     
     $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "kubectl.exe" --check-certificate=false
+    Qget $downloadUri $downloadedTool
     
     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
