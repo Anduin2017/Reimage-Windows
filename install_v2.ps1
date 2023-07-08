@@ -154,6 +154,7 @@ ManualDoNext
 
 Write-Host "Most of the job finished. Do you want to do auto fix? Press Enter to disconnect now..." -ForegroundColor Yellow
 Read-Host
+FixDisk
 ResetNet
 
 Write-Host "Job finished! Pending reboot!" -ForegroundColor Green

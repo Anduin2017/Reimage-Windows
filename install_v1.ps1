@@ -9,10 +9,6 @@ else {
 }
 
 
-# Kubernetes CLI
-if ($true) {
-
-}
 
 # wget
 if ($true) {
@@ -30,37 +26,5 @@ if ($true) {
 }
 
 
-
-
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 6  - Security    " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
-
-
-
-
-
-
-
-Write-Host "Press the [C] key to continue to steps which requires reboot."
-$pressedKey = Read-Host
-Write-Host "You pressed: $($pressedKey)"
-
-if ($pressedKey -eq 'c') {
-    Write-Host "Reseting WS..." -ForegroundColor Green
-    WSReset.exe
-    
-    Write-Host "Scanning missing dlls..." -ForegroundColor Green
-    sfc /scannow
-    Write-Host y | chkdsk "$($driveLetter):" /f /r /x
-
-    Write-Host "Checking for windows updates..." -ForegroundColor Green
-    Install-Module -Name PSWindowsUpdate -Force
-    Write-Host "Installing updates... (Computer will reboot in minutes...)" -ForegroundColor Green
-    Get-WindowsUpdate -AcceptAll -Install -ForceInstall -AutoReboot
-
-}
-
-Do-Next
 
 
