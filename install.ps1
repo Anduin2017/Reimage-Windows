@@ -111,17 +111,17 @@ RemoveUwp Microsoft.SkypeApp
 RemoveUwp MicrosoftWindows.Client.WebExperience # Useless Widgets.
 
 Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 3  - Terminal   " -ForegroundColor Green
-Write-Host "-----------------------------" -ForegroundColor Green
-
-SetupPowershell
-
-Write-Host "-----------------------------" -ForegroundColor Green
-Write-Host "        PART 4  - Code       " -ForegroundColor Green
+Write-Host "        PART 3  - Code       " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 ResetRepos
 Update-PathVariable
+
+Write-Host "-----------------------------" -ForegroundColor Green
+Write-Host "        PART 4  - Terminal   " -ForegroundColor Green
+Write-Host "-----------------------------" -ForegroundColor Green
+
+SetupPowershell
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
