@@ -13,17 +13,11 @@ function Get-LatestIperf3Version {
 
 function InstallIPerf3 {
     Write-Host "Installing iperf3.."  -ForegroundColor Green
-
     $downloadUrl = Get-LatestIperf3Version
-    $downloadPath = Join-Path -Path $env:TEMP -ChildPath "iperf3.zip"
-    Qget $downloadUrl $downloadPath
-    
-    $installPath = Join-Path -Path $env:ProgramFiles -ChildPath "iperf3"
-    Expand-Archive -Path $downloadPath -DestinationPath $installPath -Force
+    DownloadAndExtract -url $downloadUrl -tempFileName "iperf3.zip" -name "IPerf"
+    $installPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "IPerf"
     $iperfPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
     AddToPath -folder $iperfPath
-    
-    Remove-Item $downloadPath
 }
 
 Export-ModuleMember -Function InstallIPerf3
