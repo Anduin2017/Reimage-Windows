@@ -46,6 +46,7 @@ InstallPwsh
 InstallBlender
 InstallWeChat
 InstallWget
+InstallV2rayN
 InstallIPerf3
 InstallFFmpeg
 InstallAdb

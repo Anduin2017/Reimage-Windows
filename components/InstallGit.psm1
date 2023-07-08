@@ -7,7 +7,6 @@ function InstallGit {
         [string]$mail
     )
 
-
     Install-IfNotInstalled "Git.Git"
     AddToPath "$env:ProgramFiles\Git\bin\"
 
