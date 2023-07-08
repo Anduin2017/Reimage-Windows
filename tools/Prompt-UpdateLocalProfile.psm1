@@ -33,7 +33,13 @@ function Prompt-UpdateLocalProfile {
     # if Current Version is less than latest version:
     if ($currentVersion -lt $latestVersion) {
         Write-Host "Your profile is out of date." -ForegroundColor Red
-        Write-Host "Latest version is $latestVersion. Current version is $currentVersion." -ForegroundColor Gray
+        Write-Host "Latest version: $latestVersion. Current version: $currentVersion." -ForegroundColor Yellow
+    }
+
+    # If Current Version is one month ago
+    $oneMonthAgo = (Get-Date).AddMonths(-1)
+    if ($currentVersion -lt $oneMonthAgo) {
+        Write-Host "UpdateAll hasn't been run for a month!" -ForegroundColor Red
     }
 }
 
