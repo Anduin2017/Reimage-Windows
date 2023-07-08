@@ -1,10 +1,3 @@
-
-$driveLetter = (Get-Location).Drive.Name
-
-Write-Host "Installing NFS client..." -ForegroundColor Green
-Enable-WindowsOptionalFeature -FeatureName ServicesForNFS-ClientOnly, ClientForNFS-Infrastructure -Online -NoRestart
-
-
 if (-not $(Get-Command Connect-AzureAD -ErrorAction SilentlyContinue)) {
     Write-Host "Installing Nuget PowerShell Package Provider..." -ForegroundColor Green
     Install-PackageProvider -Name NuGet -Force
@@ -16,35 +9,10 @@ else {
 }
 
 
-# Android CLI
+# Kubernetes CLI
 if ($true) {
-    Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green
-    $toolsPath = "${env:ProgramFiles}\Android-Platform-Tools"
-    $downloadUri = "https://dl.google.com/android/repository/platform-tools-latest-windows.zip"
-    
-    $downloadedTool = $env:USERPROFILE + "\platform-tools-latest-windows.zip"
-    Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-    aria2c.exe $downloadUri -d $HOME -o "platform-tools-latest-windows.zip" --check-certificate=false
-    
-    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadedTool "-o$($toolsPath)" -y
-    AddToPath -folder "$toolsPath\platform-tools"
-    Remove-Item -Path $downloadedTool -Force
-}
 
-# # Kubernetes CLI
-# if ($true) {
-#     Write-Host "Downloading Kubernetes CLI..." -ForegroundColor Green
-#     $toolsPath = "${env:ProgramFiles}\Kubernetes"
-#     $downloadUri = "https://dl.k8s.io/release/v1.23.0/bin/windows/amd64/kubectl.exe"
-    
-#     $downloadedTool = $env:USERPROFILE + "\kubectl.exe"
-#     Remove-Item $downloadedTool -ErrorAction SilentlyContinue
-#     aria2c.exe $downloadUri -d $HOME -o "kubectl.exe" --check-certificate=false
-    
-#     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
-#     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
-#     AddToPath -folder $toolsPath
-# }
+}
 
 # wget
 if ($true) {

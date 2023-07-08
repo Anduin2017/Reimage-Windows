@@ -54,9 +54,6 @@ adb --version | head -2
 tput setaf 2; echo "FFmpeg version:"; tput sgr0
 ffmpeg -version | head -1
 
-tput setaf 2; echo "Docker version:"; tput sgr0
-docker --version | head -1
-
 tput setaf 2; echo "wget version:"; tput sgr0
 wget --version | head -1
 
@@ -68,3 +65,6 @@ iperf3 --version | head -1
 
 tput setaf 2; echo "docker version:"; tput sgr0
 docker --version | head -1
+
+tput setaf 2; echo "Kubectl version:"; tput sgr0
+kubectl version --client=true --output=yaml | grep gitVersion | head -n 1

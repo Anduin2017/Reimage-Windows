@@ -1,6 +1,4 @@
-function InstallIPerf3 {
-    Write-Host "Installing iperf3.."  -ForegroundColor Green
-
+function Get-LatestIperf3Version {
     $apiUrl = "https://iperf.fr/iperf-download.php"
     $downloadAddress = (Invoke-WebRequest -Uri $apiUrl).Links |
     Where-Object { $_.href -like "download/windows/iperf-*-win64.zip" } |
@@ -9,6 +7,14 @@ function InstallIPerf3 {
     Select-Object -First 1
     
     $downloadUrl = "https://iperf.fr/$downloadAddress"
+    return $downloadUrl
+}
+
+
+function InstallIPerf3 {
+    Write-Host "Installing iperf3.."  -ForegroundColor Green
+
+    $downloadUrl = Get-LatestIperf3Version
     $downloadPath = Join-Path -Path $env:TEMP -ChildPath "iperf3.zip"
     Qget $downloadUrl $downloadPath
     

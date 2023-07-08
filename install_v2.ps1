@@ -48,7 +48,9 @@ InstallWeChat
 InstallIPerf3
 InstallFFmpeg
 InstallAdb
+InstallKubectl
 InstallNodeJs
+InstallNFSClient
 InstallVS -mail $mail
 
 if ($mail.Contains('microsoft')) {
