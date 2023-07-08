@@ -32,7 +32,8 @@ function Prompt-UpdateLocalProfile {
     $latestVersion = Get-LatestProfileVersion
     # if Current Version is less than latest version:
     if ($currentVersion -lt $latestVersion) {
-        Write-Host "Your profile is out of date. Please update it." -ForegroundColor Red
+        Write-Host "Your profile is out of date." -ForegroundColor Red
+        Write-Host "Latest version is $latestVersion. Current version is $currentVersion." -ForegroundColor Gray
     }
 }
 

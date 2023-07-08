@@ -14,5 +14,5 @@ Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete
 Import-Module 'C:\Program Files\gsudo\Current\gsudoModule.psd1'
 Set-Alias 'sudo' 'gsudo'
 
-Prompt-UpdateLocalProfile
 Write-Host "Welcome, Anduin! Enjoy your personal Windows!" -ForegroundColor DarkMagenta
+Prompt-UpdateLocalProfile
