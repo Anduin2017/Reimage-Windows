@@ -45,6 +45,7 @@ InstallAzureDataStudio
 InstallPwsh
 InstallBlender
 InstallWeChat
+InstallWget
 InstallIPerf3
 InstallFFmpeg
 InstallAdb
