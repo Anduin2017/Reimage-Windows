@@ -1,9 +1,7 @@
 $modules = Get-ChildItem -Path $PSScriptRoot  -Recurse -Filter *.psm1
-$modules | ForEach-Object {
-    Write-Host $_
-    #Import-Module (Join-Path -Path $PSScriptRoot -ChildPath $_ | Resolve-Path)
+$modules.FullName | ForEach-Object {
+    Import-Module $_
 }
-Read-Host
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 0  - Introduce  " -ForegroundColor Green
