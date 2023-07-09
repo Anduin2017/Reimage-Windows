@@ -1,9 +1,9 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path)
 
 function InstallFFmpeg {
     Write-Host "Installing FFmpeg..." -ForegroundColor Green
     $ffmpegLink = "https://www.gyan.dev/ffmpeg/builds/ffmpeg-git-full.7z"
-    DownloadAndExtract -url $ffmpegLink -tempFileName "ffmpeg.7z" -name "FFmpeg"
+    Download-AndExtract -url $ffmpegLink -tempFileName "ffmpeg.7z" -name "FFmpeg"
     $ffmpegPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "FFmpeg"
 
     $subPath = $(Get-ChildItem -Path $ffmpegPath | Where-Object { $_.Name -like "ffmpeg*" } | Sort-Object Name -Descending | Select-Object -First 1).Name
@@ -14,7 +14,7 @@ function InstallFFmpeg {
     Move-Item "$binPath\*.exe" $ffmpegPath
 
     Write-Host "Adding FFmpeg to PATH..." -ForegroundColor Green
-    AddToPath -folder $ffmpegPath
+    Add-PathToEnv -folder $ffmpegPath
 }
 
 Export-ModuleMember -Function InstallFFmpeg

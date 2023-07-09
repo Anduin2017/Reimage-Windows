@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path)
 
 
 function InstallAria2 {
@@ -24,7 +24,7 @@ function InstallAria2 {
     Move-Item -Path "$fullSubPath\*" -Destination $installPath -Force
     Remove-Item -Path $fullSubPath -Recurse -Force
 
-    AddToPath -folder $installPath
+    Add-PathToEnv -folder $installPath
     Remove-Item -Path $aria2ZipPath -Force
 }
 

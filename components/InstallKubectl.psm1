@@ -1,5 +1,5 @@
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Qget.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path)
 
 function Get-LatestKubectlVersion {
     $url = "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
@@ -19,7 +19,7 @@ function InstallKubectl {
     
     New-Item -Type Directory -Path "${env:ProgramFiles}\Kubernetes" -ErrorAction SilentlyContinue
     Move-Item $downloadedTool "$toolsPath\kubectl.exe" -Force
-    AddToPath -folder $toolsPath
+    Add-PathToEnv -folder $toolsPath
 }
 
 Export-ModuleMember -Function InstallKubectl

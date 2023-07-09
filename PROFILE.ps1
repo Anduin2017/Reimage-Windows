@@ -15,4 +15,4 @@ Import-Module 'C:\Program Files\gsudo\Current\gsudoModule.psd1'
 Set-Alias 'sudo' 'gsudo'
 
 Write-Host "Welcome, Anduin! Enjoy your personal Windows!" -ForegroundColor DarkMagenta
-Prompt-UpdateLocalProfile
+Invoke-PromptUpdateLocalProfile

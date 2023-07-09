@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path)
 
 
 function GetWgetLink {
@@ -14,9 +14,9 @@ function InstallWget {
     Write-Host "Downloading Wget..." -ForegroundColor Green
 
     $wgetLink = GetWgetLink
-    DownloadAndExtract -url $wgetLink -tempFileName "wget.zip" -name "Wget"
+    Download-AndExtract -url $wgetLink -tempFileName "wget.zip" -name "Wget"
     $installPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Wget"
-    AddToPath -folder $installPath
+    Add-PathToEnv -folder $installPath
 }
 
 Export-ModuleMember -Function InstallWget

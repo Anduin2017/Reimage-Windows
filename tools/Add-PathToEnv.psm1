@@ -55,7 +55,7 @@ function Update-PathVariable {
     }
 }
 
-function AddToPath {
+function Add-PathToEnv {
     param (
         [string]$folder
     )
@@ -75,5 +75,5 @@ function AddToPath {
 }
 
 Export-ModuleMember -Function ReloadPath
-Export-ModuleMember -Function AddToPath
+Export-ModuleMember -Function Add-PathToEnv
 Export-ModuleMember -Function Update-PathVariable

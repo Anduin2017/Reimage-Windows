@@ -1,4 +1,4 @@
-function SetupPowershell {
+function Setup-PowerShellEnvironment {
     Write-Host "Setting execution policy to remotesigned..." -ForegroundColor Green
     Set-ExecutionPolicy remotesigned -Force
 
@@ -25,4 +25,4 @@ function SetupPowershell {
     . $PROFILE
 }
 
-Export-ModuleMember -Function SetupPowershell
+Export-ModuleMember -Function Setup-PowerShellEnvironment

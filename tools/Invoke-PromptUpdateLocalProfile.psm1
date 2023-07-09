@@ -27,7 +27,7 @@ function Set-CurrentProfileVersion {
     Write-Host "Profile version updated to $currentVersionString" -ForegroundColor Green
 }
 
-function Prompt-UpdateLocalProfile {
+function Invoke-PromptUpdateLocalProfile {
     $cv = Get-CurrentProfileVersion
     $currentVersion = [datetime]::Parse($cv);
     $lv = Get-LatestProfileVersion
@@ -49,4 +49,4 @@ function Prompt-UpdateLocalProfile {
 Export-ModuleMember -Function Get-LatestProfileVersion
 Export-ModuleMember -Function Get-CurrentProfileVersion
 Export-ModuleMember -Function Set-CurrentProfileVersion
-Export-ModuleMember -Function Prompt-UpdateLocalProfile
+Export-ModuleMember -Function Invoke-PromptUpdateLocalProfile

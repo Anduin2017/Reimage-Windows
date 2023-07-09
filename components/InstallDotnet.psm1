@@ -1,7 +1,7 @@
 
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Install-IfNotInstalled.psm1" | Resolve-Path)
 
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path)
 
 
 function TryInstallDotnetTool {
@@ -32,7 +32,7 @@ function InstallDotnet {
   Install-IfNotInstalled "Microsoft.NuGet"
 
   Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
-  AddToPath "$env:ProgramFiles\dotnet\"
+  Add-PathToEnv "$env:ProgramFiles\dotnet\"
   dotnet --version
   [Environment]::SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", "Development", "Machine")
   [Environment]::SetEnvironmentVariable("DOTNET_PRINT_TELEMETRY_MESSAGE", "false", "Machine")

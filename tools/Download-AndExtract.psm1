@@ -1,7 +1,7 @@
 
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\Qget.psm1" | Resolve-Path)
 
-function DownloadAndExtract {
+function Download-AndExtract {
     param(
         [string]$url,
         [string]$tempFileName,
@@ -21,4 +21,4 @@ function DownloadAndExtract {
     Write-Host "$name was downloaded and put as $installPath"  -ForegroundColor Yellow
 }
 
-Export-ModuleMember -Function DownloadAndExtract
+Export-ModuleMember -Function Download-AndExtract

@@ -1,7 +1,5 @@
 $modules = Get-ChildItem -Path $PSScriptRoot  -Recurse -Filter *.psm1
-$modules.FullName | ForEach-Object {
-    Import-Module $_
-}
+$modules.FullName | ForEach-Object { Import-Module $_ }
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 0  - Introduce  " -ForegroundColor Green
@@ -116,14 +114,14 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Code       " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-ResetRepos
+Reset-GitRepos
 Update-PathVariable
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 4  - Terminal   " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-SetupPowershell
+Setup-PowerShellEnvironment
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 5  - Desktop    " -ForegroundColor Green
@@ -150,7 +148,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 7  - Updates    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-UpgradeAll
+Upgrade-AllApplications
 ResetStore
 UpdateStoreApps
 Set-CurrentProfileVersion

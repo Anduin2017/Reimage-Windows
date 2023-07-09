@@ -1,5 +1,5 @@
 
-function CloneReposToPath($repos, $destinationPath) {
+function Clone-GitRepositories($repos, $destinationPath) {
     foreach ($repo in $repos) {
         $repoName = $repo.name
         $repoUrl = $repo.ssh_url_to_repo
@@ -14,8 +14,8 @@ function CloneReposToPath($repos, $destinationPath) {
     }
 }
 
-Export-ModuleMember -Function CloneReposToPath
-function ResetRepos {
+Export-ModuleMember -Function Clone-GitRepositories
+function Reset-GitRepos {
     Write-Host "Deleting items..."
     Remove-Item "$HOME\source\repos\Aiursoft\" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item "$HOME\source\repos\Anduin\" -Recurse  -Force -ErrorAction SilentlyContinue
@@ -59,9 +59,9 @@ function ResetRepos {
     $reposAnduin = Invoke-RestMethod -Uri $repoUrlAnduin
     
     # 克隆仓库
-    CloneReposToPath $reposAiursoft $destinationPathAiursoft
-    CloneReposToPath $reposAnduin $destinationPathAnduin
+    Clone-GitRepositories $reposAiursoft $destinationPathAiursoft
+    Clone-GitRepositories $reposAnduin $destinationPathAnduin
 }
 
-Export-ModuleMember -Function ResetRepos
-Export-ModuleMember -Function CloneReposToPath
+Export-ModuleMember -Function Reset-GitRepos
+Export-ModuleMember -Function Clone-GitRepositories

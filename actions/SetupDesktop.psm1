@@ -1,11 +1,11 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\GetWallpaper.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Get-Wallpaper.psm1" | Resolve-Path)
 
 
 function SetupDesktop {
 
     Write-Host "Changing wallpaper..." -ForegroundColor Green
-    $currentWallpaper = GetWallpaper
+    $currentWallpaper = Get-Wallpaper
     if ($currentWallpaper -match "Windows")
     {
         Write-Host "Using default wallpaper!" -ForegroundColor Yellow

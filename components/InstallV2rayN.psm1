@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path)
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\CreateShortcut.psm1" | Resolve-Path)
 
 function GetV2rayNLink {
@@ -13,7 +13,7 @@ function InstallV2rayN {
     Write-Host "Downloading V2rayN..." -ForegroundColor Green
     
     $v2rayNlink = GetV2rayNLink
-    DownloadAndExtract -url $v2rayNlink -tempFileName "v2ray.zip" -name "V2rayN"
+    Download-AndExtract -url $v2rayNlink -tempFileName "v2ray.zip" -name "V2rayN"
     CreateShortcut -path "${env:LOCALAPPDATA}\V2rayN\v2rayN-With-Core\v2rayN.exe" -name "V2ray"
 }
 

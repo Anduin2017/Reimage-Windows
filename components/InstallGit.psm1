@@ -1,5 +1,5 @@
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Install-IfNotInstalled.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path)
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path)
 
 function InstallGit {
@@ -8,7 +8,7 @@ function InstallGit {
     )
 
     Install-IfNotInstalled "Git.Git"
-    AddToPath "$env:ProgramFiles\Git\bin\"
+    Add-PathToEnv "$env:ProgramFiles\Git\bin\"
 
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub"
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa"

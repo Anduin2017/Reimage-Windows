@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path)
 
 
 function Get-LatestIperf3Version {
@@ -17,10 +17,10 @@ function Get-LatestIperf3Version {
 function InstallIPerf3 {
     Write-Host "Installing iperf3.."  -ForegroundColor Green
     $downloadUrl = Get-LatestIperf3Version
-    DownloadAndExtract -url $downloadUrl -tempFileName "iperf3.zip" -name "IPerf"
+    Download-AndExtract -url $downloadUrl -tempFileName "iperf3.zip" -name "IPerf"
     $installPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath "IPerf"
     $iperfPath = (Get-ChildItem -Path $installPath -Directory | Sort-Object -Property LastWriteTime -Descending)[0].FullName
-    AddToPath -folder $iperfPath
+    Add-PathToEnv -folder $iperfPath
 }
 
 Export-ModuleMember -Function InstallIPerf3

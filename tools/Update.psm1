@@ -1,9 +1,9 @@
-function Update-All {
+function Invoke-ComputerInitialization {
     # This will start a new PowerShell window outside Windows terminal with Admin permission.
-    Start-Process "PowerShell.exe" -PassThru "Force-UpdateAll" -Verb RunAs
+    Start-Process "PowerShell.exe" -PassThru "Invoke-ComputerInitializationInCurrentSession" -Verb RunAs
 }
 
-function Force-UpdateAll {
+function Invoke-ComputerInitializationInCurrentSession {
     # This will run this update script inside current terminal.
     Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue
     $destinationPath = "$env:TEMP\reimage-windows-master.zip"
@@ -14,5 +14,5 @@ function Force-UpdateAll {
     . "$env:TEMP\reimage-windows-master\install.ps1"
 }
 
-Export-ModuleMember -Function Update-All
-Export-ModuleMember -Function Force-UpdateAll
+Export-ModuleMember -Function Invoke-ComputerInitialization
+Export-ModuleMember -Function Invoke-ComputerInitializationInCurrentSession
