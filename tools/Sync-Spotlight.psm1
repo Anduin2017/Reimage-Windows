@@ -30,4 +30,4 @@ function Get-ImageSize {
 }
 
 
-Export-ModuleMember -Function Sync-Spoptlight
+Export-ModuleMember -Function Sync-Spotlight

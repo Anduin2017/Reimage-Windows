@@ -134,7 +134,7 @@ ClearRecycleBin
 SetupIME
 SetTime
 SetupDesktop
-Sync-Spoptlight
+Sync-Spotlight
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 6  - Security   " -ForegroundColor Green
