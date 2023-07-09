@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\DownloadAndExtract.psm1" | Resolve-Path)
 
 
 function Get-LatestIperf3Version {

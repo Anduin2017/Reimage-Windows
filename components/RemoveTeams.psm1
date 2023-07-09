@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\RemoveUwp.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\RemoveUwp.psm1" | Resolve-Path)
 
 function RemoveTeams {
     Get-Process -Name Teams -ErrorAction SilentlyContinue | Stop-Process
