@@ -14,7 +14,7 @@ function Get-CurrentProfileVersion {
         $currentVersion = Get-Content $markerLocation
         return $currentVersion
     } else {
-        return $null
+        return "1970-01-01 00:00:00"
     }
 }
 
