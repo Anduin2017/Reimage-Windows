@@ -1,8 +1,6 @@
-Import-Module "..\tools\Install-IfNotInstalled.psm1"
-Import-Module "..\tools\AddToPath.psm1"
-
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\Install-IfNotInstalled.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\AddToPath.psm1" | Resolve-Path)
 Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path)
-
 
 function InstallGit {
     param(
