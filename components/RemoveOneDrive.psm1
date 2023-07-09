@@ -2,7 +2,7 @@ Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\RemoveUwp.
 
 function RemoveOneDrive {
     Get-Process -Name OneDrive -ErrorAction SilentlyContinue | Stop-Process
-    winget remove "Microsoft.OneDrive"
+    winget uninstall "Microsoft.OneDrive"
     Remove-Item -Path "$env:ProgramFiles(x86)\Microsoft OneDrive" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Recurse -Force -ErrorAction SilentlyContinue
 }

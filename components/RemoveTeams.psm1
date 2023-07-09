@@ -3,8 +3,8 @@ Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\RemoveUwp.
 function RemoveTeams {
     Get-Process -Name Teams -ErrorAction SilentlyContinue | Stop-Process
     RemoveUwp MicrosoftTeams
-    winget remove "Microsoft.Teams"
-    winget remove "Teams Machine-Wide Installer"
+    winget uninstall "Microsoft.Teams"
+    winget uninstall "Teams Machine-Wide Installer"
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\TeamsMeetingAddin" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\TeamsPresenceAddin" -Recurse -Force -ErrorAction SilentlyContinue
