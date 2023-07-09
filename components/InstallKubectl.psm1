@@ -1,5 +1,5 @@
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Qget.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\AddToPath.psm1" | Resolve-Path)
 
 function Get-LatestKubectlVersion {
     $url = "https://storage.googleapis.com/kubernetes-release/release/stable.txt"
