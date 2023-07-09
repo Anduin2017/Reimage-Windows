@@ -14,6 +14,8 @@ function Sync-Spotlight {
             Copy-Item $_.FullName "$destinationFolder\$($_.Name).jpg"
         }
     }
+
+    Copy-Item -Path "$env:HOMEPATH\Pictures\" -Destination "$env:HOMEPATH\Nextcloud\Digital\Wallpapers\"
 }
 
 function Get-ImageSize {
