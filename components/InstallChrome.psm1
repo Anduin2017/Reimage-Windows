@@ -1,4 +1,6 @@
-Import-Module "..\tools\Install-IfNotInstalled.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\actions\Install-IfNotInstalled.psm1" | Resolve-Path)
+
+
 
 function InstallChrome {
     Write-Host "Installing Google Chrome as your personal browser...`n" -ForegroundColor Green

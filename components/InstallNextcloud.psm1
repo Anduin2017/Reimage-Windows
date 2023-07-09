@@ -1,4 +1,5 @@
-Import-Module "..\tools\Install-IfNotInstalled.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\actions\Install-IfNotInstalled.psm1" | Resolve-Path)
+
 
 function InstallNextcloud {
     if ("$(winget list -e --id "Nextcloud.NextcloudDesktop" --source winget)".Contains("--")) { 

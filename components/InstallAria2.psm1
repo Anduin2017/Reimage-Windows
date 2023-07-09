@@ -1,4 +1,5 @@
-Import-Module "..\tools\AddToPath.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\AddToPath.psm1" | Resolve-Path)
+
 
 function InstallAria2 {
     #aria2

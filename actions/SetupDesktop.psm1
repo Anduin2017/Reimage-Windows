@@ -1,5 +1,6 @@
-Import-Module "..\tools\GetWallpaper.psm1"
-Import-Module "..\tools\AddToPath.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\AddToPath.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\GetWallpaper.psm1" | Resolve-Path)
+
 
 function SetupDesktop {
 

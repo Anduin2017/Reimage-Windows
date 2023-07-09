@@ -1,4 +1,4 @@
-Import-Module ".\tools\Get-IsElevated.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\Get-IsElevated.psm1" | Resolve-Path)
 
 function EnsureElevated {
     if (-not(Get-IsElevated)) { 

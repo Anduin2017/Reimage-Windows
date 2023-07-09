@@ -1,3 +1,5 @@
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+
 function InstallAdb {
 
     Write-Host "Downloading Android-Platform-Tools..." -ForegroundColor Green

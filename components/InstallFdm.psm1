@@ -1,4 +1,5 @@
-Import-Module "..\tools\Qget.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\Qget.psm1" | Resolve-Path)
+
 
 function InstallFdm {
     if ("$(winget list -e --id "SoftDeluxe.FreeDownloadManager" --source winget)".Contains("--")) { 

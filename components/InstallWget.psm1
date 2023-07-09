@@ -1,3 +1,6 @@
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+
+
 function GetWgetLink {
     # 获取最新版本的 wget 下载链接
     $url = "https://eternallybored.org/misc/wget/releases/"

@@ -1,4 +1,6 @@
 
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath ".\Qget.psm1" | Resolve-Path)
+
 function DownloadAndExtract {
     param(
         [string]$url,

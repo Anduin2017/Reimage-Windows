@@ -1,4 +1,5 @@
-Import-Module "..\tools\Install-IfNotInstalled.psm1"
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\actions\Install-IfNotInstalled.psm1" | Resolve-Path)
+
 
 function InstallVS {
     param(

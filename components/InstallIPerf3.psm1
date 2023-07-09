@@ -1,3 +1,6 @@
+Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+
+
 function Get-LatestIperf3Version {
     $apiUrl = "https://iperf.fr/iperf-download.php"
     $downloadAddress = (Invoke-WebRequest -Uri $apiUrl).Links |
