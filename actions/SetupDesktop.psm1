@@ -77,6 +77,9 @@ function SetupDesktop {
 
     Write-Host "Resetting desktop..." -ForegroundColor Yellow
     Stop-Process -Name explorer -Force
+
+    Remove-Item $HOME\Desktop\* -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
+    Remove-Item "C:\Users\Public\Desktop\*" -Force -Recurse -Confirm:$false -ErrorAction SilentlyContinue
 }
 
 Export-ModuleMember -Function SetupDesktop
