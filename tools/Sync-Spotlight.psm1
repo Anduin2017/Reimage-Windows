@@ -15,7 +15,7 @@ function Sync-Spotlight {
         }
     }
 
-    Copy-Item -Path "$env:HOMEPATH\Pictures\" -Destination "$env:HOMEPATH\Nextcloud\Digital\Wallpapers\"
+    Copy-Item -Path "$env:HOMEPATH\Pictures\" -Destination "$env:HOMEPATH\Nextcloud\Digital\Wallpapers\" -ErrorAction SilentlyContinue
 }
 
 function Get-ImageSize {
