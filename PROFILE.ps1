@@ -1,11 +1,8 @@
 # PROFILE FILE
 
 # Basic modules
-$modulePath = "$HOME\source\repos\Anduin\Reimage-Windows\tools\"
-$modules = Get-ChildItem -Path $modulePath -Filter *.psm1
-foreach ($module in $modules) {
-    Import-Module $module.FullName -DisableNameChecking
-}
+$modules = Get-ChildItem -Path "$PSScriptRoot\Tools\"  -Recurse -Filter *.psm1
+$modules.FullName | ForEach-Object { Import-Module $_ -DisableNameChecking }
 
 # Easier to use
 Set-PSReadlineKeyHandler -Chord Tab -Function MenuComplete

@@ -15,6 +15,11 @@ function Setup-PowerShellEnvironment {
     Write-Host "Enabling long path..." -ForegroundColor Green
     New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
+    Write-Host "Installing PowerShell tools..." -ForegroundColor Green
+    $toolsPath = Join-Path -Path (Join-Path -Path $PROFILE -ChildPath "..\" | Resolve-Path) -ChildPath "Tools"
+    New-Item -Type Directory -Path $toolsPath -ErrorAction SilentlyContinue | Out-Null
+    Copy-Item -Path "$env:TEMP\reimage-windows-master\tools\*" -Destination $toolsPath -Recurse -Force
+
     Write-Host "Installing profile file..." -ForegroundColor Green
     Copy-Item -Path "$env:TEMP\reimage-windows-master\PROFILE.ps1" -Destination $PROFILE
     . $PROFILE
