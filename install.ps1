@@ -150,14 +150,15 @@ Write-Host "        PART 7  - Updates    " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
 Upgrade-AllApplications
-ResetStore
-UpdateStoreApps
+
 Set-CurrentProfileVersion
 TestEnv
 ManualDoNext
 
 Write-Host "Most of the job finished. Do you want to do auto fix? Press Enter to disconnect now..." -ForegroundColor Yellow
 Read-Host
+ResetStore
+UpdateStoreApps
 FixDisk
 ResetNet
 
