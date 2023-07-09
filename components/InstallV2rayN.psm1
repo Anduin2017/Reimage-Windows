@@ -1,5 +1,5 @@
-Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\CreateShortcut.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\CreateShortcut.psm1" | Resolve-Path)
 
 function GetV2rayNLink {
     $repoUrl = "https://api.github.com/repos/2dust/v2rayN/releases/latest"

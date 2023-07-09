@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\DownloadAndExtract.psm1" | Resolve-Path)
 
 function InstallFFmpeg {
     Write-Host "Installing FFmpeg..." -ForegroundColor Green

@@ -1,5 +1,5 @@
-Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\tools\Install-StoreApp.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSScriptRoot -ChildPath "..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\tools\Install-StoreApp.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path)
 
 function InstallWindowsTerminal {
     Install-StoreApp -storeAppId "9N0DX20HK701" -wingetAppName "Windows Terminal"
