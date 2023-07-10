@@ -10,7 +10,6 @@ function ManualDoNext {
     Write-Host " * Sign in Youtube and Google" -ForegroundColor White
     Write-Host " * (Optional)Manually install latest NVIDIA drivers" -ForegroundColor White
     Write-Host " * Sign in https://gitlab.aiursoft.cn" -ForegroundColor White
-    Write-Host " * Install V2rayN" -ForegroundColor White
     Write-Host " * (Optional) Download and sign in ASUS Armoury Crate" -ForegroundColor White
     Write-Host " * (Optional) Sync NVIDIA Geforce experience settings and set shortcuts" -ForegroundColor White
     Write-Host " * (Optional) Run HDR Caliboration https://apps.microsoft.com/store/detail/windows-hdr-calibration/9N7F2SM5D1LR" -ForegroundColor White
