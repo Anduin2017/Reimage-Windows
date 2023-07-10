@@ -56,7 +56,7 @@ function InstallGit {
     alias redis-cli=`"rdcli`""
     Set-Content -Path "$env:HOMEPATH\.bashrc" -Value $bashRC
 
-    if (-not $(Get-Command git-lfs)) {
+    if (-not $(Get-Command git-lfs -ErrorAction SilentlyContinue)) {
         winget install "GitHub.GitLFS" --source winget
     }
     else {
