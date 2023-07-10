@@ -43,6 +43,7 @@ function Install-IfNotInstalled {
     }
     else {
         Write-Host "Attempting to install: $package..." -ForegroundColor Green
+        winget source update
         Install $package
     }
 }
