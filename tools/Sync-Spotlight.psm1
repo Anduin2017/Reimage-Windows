@@ -15,7 +15,7 @@ function Sync-Spotlight {
         }
     }
 
-    Copy-Item -Path "$env:HOMEPATH\Pictures\Spotlight\" -Recurse -Destination "$env:HOMEPATH\Nextcloud\Digital\Wallpapers\Spotlight\" -Verbose
+    Copy-Item -Path "$env:HOMEPATH\Pictures\Spotlight\" -Recurse -Destination "$env:HOMEPATH\Nextcloud\Digital\Wallpapers\" -Verbose -ErrorAction SilentlyContinue
 }
 
 function Get-ImageSize {
