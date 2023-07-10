@@ -1,5 +1,5 @@
 
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\Qget.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\Qget.psm1" | Resolve-Path) -DisableNameChecking
 
 function Download-AndExtract {
     param(
@@ -15,7 +15,10 @@ function Download-AndExtract {
     
     $installPath = Join-Path -Path $env:LOCALAPPDATA -ChildPath $name
 
-    & ${env:ProgramFiles}\7-Zip\7z.exe x $downloadPath "-o$($installPath)" -y
+    $7ZipPath = "${env:ProgramFiles}\7-Zip\7z.exe"
+    $arguments = "x", $downloadPath, "-o$($installPath)", "-y", "-bso0", "-bsp0"
+    Start-Process -FilePath $7ZipPath -ArgumentList $arguments -Wait -NoNewWindow
+    
     
     Remove-Item $downloadPath
     Write-Host "$name was downloaded and put as $installPath"  -ForegroundColor Yellow

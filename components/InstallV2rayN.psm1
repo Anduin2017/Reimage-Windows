@@ -1,5 +1,5 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path)
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\CreateShortcut.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-AndExtract.psm1" | Resolve-Path) -DisableNameChecking
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\CreateShortcut.psm1" | Resolve-Path) -DisableNameChecking
 
 function GetV2rayNLink {
     $repoUrl = "https://api.github.com/repos/2dust/v2rayN/releases/latest"

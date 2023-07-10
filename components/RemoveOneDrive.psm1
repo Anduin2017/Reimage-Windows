@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\RemoveUwp.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\RemoveUwp.psm1" | Resolve-Path) -DisableNameChecking
 
 function RemoveOneDrive {
     Get-Process -Name OneDrive -ErrorAction SilentlyContinue | Stop-Process

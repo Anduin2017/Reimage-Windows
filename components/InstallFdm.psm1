@@ -1,4 +1,4 @@
-Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Qget.psm1" | Resolve-Path)
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Qget.psm1" | Resolve-Path) -DisableNameChecking
 
 
 function InstallFdm {
