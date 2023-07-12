@@ -62,6 +62,8 @@ else {
     Write-Host "Remove MS trash!!!`n" -ForegroundColor DarkYellow
     RemoveOneDrive
     RemoveTeams
+
+    Install-IfNotInstalled "JetBrains.Rider"
 }
 
 # V2Ray, ChatGPT Next
