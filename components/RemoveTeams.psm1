@@ -12,6 +12,9 @@ function RemoveTeams {
     Remove-Item -Path "$env:APPDATA\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:ProgramData\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
 
+    Write-Host "Hide chat button on task bar..." -ForegroundColor Green
+    New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name TaskbarMn -Value 0 -PropertyType DWORD -Force
+    Write-Host "Chat button on taskbar was disabled."
 }
 
 Export-ModuleMember -Function RemoveTeams

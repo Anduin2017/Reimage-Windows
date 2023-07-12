@@ -15,6 +15,11 @@ function Setup-PowerShellEnvironment {
     Write-Host "Enabling long path..." -ForegroundColor Green
     New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
+    Write-Host "Ensure profile file exists..."
+    if (-not (Test-Path $PROFILE)) {
+        New-Item -Type File -Path $PROFILE -Force
+    }
+
     Write-Host "Installing PowerShell tools..." -ForegroundColor Green
     $toolsPath = Join-Path -Path (Join-Path -Path $PROFILE -ChildPath "..\" | Resolve-Path) -ChildPath "Tools"
     New-Item -Type Directory -Path $toolsPath -ErrorAction SilentlyContinue | Out-Null

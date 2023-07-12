@@ -21,6 +21,10 @@ function SetupDesktop {
         Write-Host "Wallpaper already set to: $currentWallpaper. Unchanged." -ForegroundColor Yellow
     }
 
+    Write-Host "Setting Search as button..." -ForegroundColor Green
+    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name 'SearchboxTaskbarMode' -Value 1
+    Write-Host "Search on taskbar is a button now."
+
     Write-Host "Set home path hidden folders and files..." -ForegroundColor Green
     Get-ChildItem -Path $HOME -Filter .* -Recurse -Force -ErrorAction SilentlyContinue | ForEach-Object { $_.Attributes = $_.Attributes -bor [System.IO.FileAttributes]::Hidden }
     Write-Host "Hidden file hidded."
