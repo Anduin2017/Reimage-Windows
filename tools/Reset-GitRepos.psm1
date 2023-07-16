@@ -1,3 +1,4 @@
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\PinRepos.psm1" | Resolve-Path) -DisableNameChecking
 
 function Clone-GitRepositories($repos, $destinationPath) {
     foreach ($repo in $repos) {
@@ -61,6 +62,8 @@ function Reset-GitRepos {
     # 克隆仓库
     Clone-GitRepositories $reposAiursoft $destinationPathAiursoft
     Clone-GitRepositories $reposAnduin $destinationPathAnduin
+
+    PinRepos
 }
 
 Export-ModuleMember -Function Reset-GitRepos
