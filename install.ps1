@@ -146,6 +146,7 @@ SetupNetwork
 SetupRDP
 SetupWindowsDefender
 SetupUAC
+SetupRE
 
 Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 7  - Updates    " -ForegroundColor Green
