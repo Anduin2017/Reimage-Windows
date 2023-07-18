@@ -12,7 +12,7 @@ function InstallAria2 {
     Write-Host "Downloading aria2 from: $downloadAddress" -ForegroundColor Yellow
 
     $aria2ZipPath = Join-Path -Path $env:TEMP -ChildPath "aria2.zip"
-    Invoke-WebRequest $downloadAddress -OutFile $aria2ZipPath
+    Invoke-WebRequest $downloadAddress -OutFile $aria2ZipPath -UseBasicParsing
 
     $installPath = "${env:ProgramFiles}\aria2"
     New-Item -ItemType Directory -Force -Path $installPath | Out-Null

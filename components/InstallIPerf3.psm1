@@ -3,7 +3,7 @@ Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Download-A
 
 function Get-LatestIperf3Version {
     $apiUrl = "https://iperf.fr/iperf-download.php"
-    $downloadAddress = (Invoke-WebRequest -Uri $apiUrl).Links |
+    $downloadAddress = (Invoke-WebRequest -Uri $apiUrl -UseBasicParsing).Links |
     Where-Object { $_.href -like "download/windows/iperf-*-win64.zip" } |
     Select-Object -ExpandProperty href |
     Sort-Object { $_ -replace ".iperf-(.)-win64.zip", '$1' } -Descending |

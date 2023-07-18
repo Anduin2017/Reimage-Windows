@@ -7,7 +7,7 @@ function Invoke-ComputerInitializationInCurrentSession {
     # This will run this update script inside current terminal.
     Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue
     $destinationPath = "$env:TEMP\reimage-windows-master.zip"
-    Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath
+    Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -UseBasicParsing -OutFile $destinationPath
     Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP
     Remove-Item $destinationPath
     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force
