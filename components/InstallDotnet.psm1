@@ -67,8 +67,11 @@ function InstallDotnet {
 
   TryInstallDotnetTool -toolName "dotnet-ef"
   TryInstallDotnetTool -toolName "Anduin.Parser"
+  TryInstallDotnetTool -toolName "Anduin.HappyRecorder"
+  happy-recorder.exe config set-db-location --path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\"
   TryInstallDotnetTool -toolName "Aiursoft.NugetNinja"
   TryInstallDotnetTool -toolName "Aiursoft.Dotlang"
+  TryInstallDotnetTool -toolName "Aiursoft.NiBot"
   TryInstallDotnetTool -toolName "JetBrains.ReSharper.GlobalTools"
 }
 
