@@ -1,6 +1,6 @@
 
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Install-IfNotInstalled.psm1" | Resolve-Path) -DisableNameChecking
-
+Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path) -DisableNameChecking
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path) -DisableNameChecking
 
 
@@ -68,6 +68,7 @@ function InstallDotnet {
   TryInstallDotnetTool -toolName "dotnet-ef"
   TryInstallDotnetTool -toolName "Anduin.Parser"
   TryInstallDotnetTool -toolName "Anduin.HappyRecorder"
+  WaitLinkForNextcloud -path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\database.json"
   happy-recorder.exe config set-db-location --path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\"
   TryInstallDotnetTool -toolName "Aiursoft.NugetNinja"
   TryInstallDotnetTool -toolName "Aiursoft.Dotlang"
