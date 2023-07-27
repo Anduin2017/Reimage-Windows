@@ -5,6 +5,7 @@ function RemoveOneDrive {
     winget uninstall "Microsoft.OneDrive"
     Remove-Item -Path "$env:ProgramFiles(x86)\Microsoft OneDrive" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:HOMEPATH\OneDrive" -Recurse -Force -ErrorAction SilentlyContinue
 }
 
 Export-ModuleMember -Function RemoveOneDrive
