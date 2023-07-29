@@ -55,7 +55,11 @@ sudo apt install nodejs google-chrome-stable\
 
 # Repos
 mkdir ~/Source
-mkdir ~/Source/repos
+mkdir ~/Source/Repos
+
+# Git
+git config --global user.email "anduin@aiursoft.com"
+git config --global user.name "Anduin Xue"
 
 # SSH Keys
 mkdir ~/.ssh
@@ -80,8 +84,8 @@ sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a
 sleep 1
 
 # Script
-cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/repos/
-chmod +x ~/Source/repos/sync_lab_to_hub.sh
+cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/Repos/
+chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 
 # Dotnet tools
 function TryInstallDotnetTool {
