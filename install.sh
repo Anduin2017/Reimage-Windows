@@ -16,6 +16,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 
 # Chrome
 echo "Setting google..."
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
 # Code
@@ -34,7 +35,7 @@ sudo snap remove snapd-desktop-integration
 sudo snap remove core20
 sudo snap remove bare
 sudo snap remove snapd
-sudo apt remove snapd
+sudo apt remove snapd -y
 sudo rm ~/snap -rvf
 sudo rm  /snap -rvf
 
@@ -59,6 +60,8 @@ mkdir ~/Source/repos
 # SSH Keys
 mkdir ~/.ssh
 cp ~/Nextcloud/Storage/SSH/* ~/.ssh/
+chmod 644 ~/.ssh/id_rsa.pub
+chmod 600 ~/.ssh/id_rsa
 
 # Upgrade
 echo "Upgrading..."
