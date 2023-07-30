@@ -1,4 +1,8 @@
 export DEBIAN_FRONTEND=noninteractive
+
+# Sudo
+echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/anduin
+
 sudo pro config set apt_news=false
 sudo rm /var/lib/ubuntu-advantage/messages/*
 
@@ -42,16 +46,15 @@ sudo rm  /snap -rvf
 # Node
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 
-sudo apt install nodejs google-chrome-stable\
-  apt-transport-https code vim clevis clevis-luks\
+sudo apt install nodejs google-chrome-stable ibus-pinyin\
+  apt-transport-https code vim remmina remmina-plugin-rdp\
   w3m git vim sl zip unzip wget curl neofetch jq\
   net-tools libglib2.0-dev-bin httping ffmpeg nano\
-  gnome-tweaks gnome-shell-extension-prefs vim git\
+  gnome-tweaks gnome-shell-extension-prefs\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates\
   gnupg lsb-release  docker-ce docker-ce-cli pinta\
-  containerd.io jq htop iotop iftop ntp ntpdate ntpstat\
-  cockpit pass
+  containerd.io jq htop iotop iftop ntp ntpdate ntpstat
 
 # Repos
 mkdir ~/Source
@@ -115,3 +118,18 @@ TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
 
 gsettings set org.gnome.shell.extensions.ding show-trash true
+
+
+# Other settings:
+
+# * Setup scale
+# * Login Chrome
+# * Login Nextcloud
+# * Login VSCode & GitHub
+# * Install Outlook PWA
+# * Configure Theme
+# * Configure weather plugin
+# * Setup mouse speed
+# * Install Rider
+# * Install Docker Desktop
+# * Install fingerprint driver
