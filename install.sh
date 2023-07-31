@@ -30,6 +30,10 @@ sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
 
+# Spotify
+curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+
 # Snap
 sudo snap remove firefox
 sudo snap remove snap-store
@@ -54,7 +58,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   apt-transport-https code vim remmina remmina-plugin-rdp\
   w3m git vim sl zip unzip wget curl neofetch jq\
   net-tools libglib2.0-dev-bin httping ffmpeg nano\
-  gnome-tweaks gnome-shell-extension-prefs\
+  gnome-tweaks gnome-shell-extension-prefs spotify-client\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates\
   gnupg lsb-release  docker-ce docker-ce-cli pinta\
