@@ -109,6 +109,13 @@ cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/Repos/
 chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 
 # Rider
+
+# Install rider...
+echo "Installing Rider..."
+wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.1.4.tar.gz
+tar -xzf JetBrains.Rider-2023.1.4.tar.gz
+sudo mv JetBrains\ Rider-2023.1.4/ /opt/rider
+rm JetBrains.Rider-2023.1.4.tar.gz
 echo "[Desktop Entry]
 Name=JetBrains Rider
 Comment=Integrated Development Environment
@@ -117,6 +124,17 @@ Icon=/opt/rider/bin/rider.png
 Terminal=false
 Type=Application
 Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.desktop
+
+# Nextcloud talk
+echo "Installing Nextcloud talk... (INOP)"
+echo "[Desktop Entry]
+Name=Nextcloud talk
+Comment=Social
+Exec=/opt/nct/nct
+Icon=/opt/nct/nct.png
+Terminal=false
+Type=Application
+Categories=Social;" | sudo tee /usr/share/applications/nct.desktop
 
 # Dotnet tools
 function TryInstallDotnetTool {
