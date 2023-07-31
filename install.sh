@@ -37,13 +37,16 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packag
 rm -f packages.microsoft.gpg
 
 # Spotify
+echo "Setting spotify..."
 curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
 # Nextcloud
+echo "Setting nextcloud..."
 sudo add-apt-repository ppa:nextcloud-devs/client --yes
 
 # Snap
+echo "Removing snap..."
 sudo snap remove firefox
 sudo snap remove snap-store
 sudo snap remove gnome-3-38-2004
@@ -57,12 +60,15 @@ sudo rm ~/snap -rvf
 sudo rm  /snap -rvf
 
 # Firefox
+echo "Setting firefox..."
 sudo add-apt-repository ppa:mozillateam/ppa --yes
 echo -e '\nPackage: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1002' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
 # Node
+echo "Setting node..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 
+echo "Installing node, google, firefox, ibus-rime, apt-transport-https, code, vim, remmina, remmina-plugin-rdp, w3m, git, vim, sl, zip, unzip, wget, curl, neofetch, jq, net-tools, libglib2.0-dev-bin, httping, ffmpeg, nano, gnome-tweaks, gnome-shell-extension-prefs, spotify-client, vlc, golang-go, aria2, adb, ffmpeg, nextcloud-desktop, ruby, openjdk-17-jdk, default-jre, dotnet6, ca-certificates, gnupg, lsb-release, docker-ce, docker-ce-cli, pinta, aisleriot, containerd.io, jq, htop, iotop, iftop, ntp, ntpdate, ntpstat, docker-compose, tree, smartmontools..."
 sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   apt-transport-https code vim remmina remmina-plugin-rdp\
   w3m git vim sl zip unzip wget curl neofetch jq\
@@ -75,10 +81,12 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   docker-compose tree smartmontools\
 
 # Repos
+echo "Adding repos..."
 mkdir ~/Source
 mkdir ~/Source/Repos
 
 # Chinese input
+echo "Setting Chinese input..."
 wget https://github.com/iDvel/rime-ice/archive/refs/heads/main.zip
 unzip main.zip -d rime-ice-main
 mkdir -p ~/.config/ibus/rime
@@ -87,12 +95,13 @@ rm -rf rime-ice-main
 rm main.zip
 echo "Rime configured!"
 
-
 # Git
+echo "Setting git..."
 git config --global user.email "anduin@aiursoft.com"
 git config --global user.name "Anduin Xue"
 
 # SSH Keys
+echo "Setting SSH keys..."
 mkdir ~/.ssh
 cp ~/Nextcloud/Storage/SSH/* ~/.ssh/
 chmod 644 ~/.ssh/id_rsa.pub
