@@ -48,7 +48,7 @@ sudo rm ~/snap -rvf
 sudo rm  /snap -rvf
 
 # Firefox
-sudo add-apt-repository ppa:mozillateam/ppa
+sudo add-apt-repository ppa:mozillateam/ppa --yes
 echo -e '\nPackage: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1002' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
 # Node
