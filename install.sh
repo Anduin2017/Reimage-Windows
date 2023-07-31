@@ -61,8 +61,9 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   gnome-tweaks gnome-shell-extension-prefs spotify-client\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates\
-  gnupg lsb-release  docker-ce docker-ce-cli pinta\
-  containerd.io jq htop iotop iftop ntp ntpdate ntpstat
+  gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
+  containerd.io jq htop iotop iftop ntp ntpdate ntpstat\
+  docker-compose tree
 
 # Repos
 mkdir ~/Source
