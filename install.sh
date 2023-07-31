@@ -63,7 +63,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat\
-  docker-compose tree
+  docker-compose tree smartmontools\
 
 # Repos
 mkdir ~/Source
