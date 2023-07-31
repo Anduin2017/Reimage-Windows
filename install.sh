@@ -64,6 +64,16 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
 mkdir ~/Source
 mkdir ~/Source/Repos
 
+# Chinese input
+wget https://github.com/iDvel/rime-ice/archive/refs/heads/main.zip
+unzip main.zip -d rime-ice-main
+mkdir -p ~/.config/ibus/rime
+mv rime-ice-main/*/* ~/.config/ibus/rime/
+rm -rf rime-ice-main
+rm main.zip
+echo "Rime configured!"
+
+
 # Git
 git config --global user.email "anduin@aiursoft.com"
 git config --global user.name "Anduin Xue"
@@ -95,9 +105,6 @@ cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/Repos/
 chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 
 # Rider
-
-#!/bin/bash
-
 echo "[Desktop Entry]
 Name=JetBrains Rider
 Comment=Integrated Development Environment
@@ -133,7 +140,7 @@ TryInstallDotnetTool "Aiursoft.Dotlang"
 TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
-
+# Trash bin
 gsettings set org.gnome.shell.extensions.ding show-trash true
 
 
