@@ -94,6 +94,19 @@ sleep 1
 cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/Repos/
 chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 
+# Rider
+
+#!/bin/bash
+
+echo "[Desktop Entry]
+Name=JetBrains Rider
+Comment=Integrated Development Environment
+Exec=/opt/rider/bin/rider.sh
+Icon=/opt/rider/bin/rider.png
+Terminal=false
+Type=Application
+Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.desktop
+
 # Dotnet tools
 function TryInstallDotnetTool {
   toolName=$1
