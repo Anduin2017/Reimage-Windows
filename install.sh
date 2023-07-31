@@ -130,11 +130,8 @@ chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 # Rider
 
 # Install rider...
-echo "Installing Rider..."
-wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.1.4.tar.gz
-tar -xzf JetBrains.Rider-2023.1.4.tar.gz
-sudo mv JetBrains\ Rider-2023.1.4/ /opt/rider
-rm JetBrains.Rider-2023.1.4.tar.gz
+echo "Installing Rider... (INOP)"
+echo "Please download Rider from https://www.jetbrains.com/rider/download/#section=linux"
 echo "[Desktop Entry]
 Name=JetBrains Rider
 Comment=Integrated Development Environment
@@ -146,6 +143,7 @@ Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.
 
 # Nextcloud talk
 echo "Installing Nextcloud talk... (INOP)"
+echo "Please download Nextcloud talk from https://github.com/nextcloud/talk-desktop"
 echo "[Desktop Entry]
 Name=Nextcloud talk
 Comment=Social
