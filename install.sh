@@ -43,10 +43,14 @@ sudo apt remove snapd -y
 sudo rm ~/snap -rvf
 sudo rm  /snap -rvf
 
+# Firefox
+sudo add-apt-repository ppa:mozillateam/ppa
+echo -e '\nPackage: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1002' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+
 # Node
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 
-sudo apt install nodejs google-chrome-stable ibus-pinyin\
+sudo apt install nodejs google-chrome-stable firefox ibus-pinyin\
   apt-transport-https code vim remmina remmina-plugin-rdp\
   w3m git vim sl zip unzip wget curl neofetch jq\
   net-tools libglib2.0-dev-bin httping ffmpeg nano\
