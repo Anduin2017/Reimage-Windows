@@ -176,6 +176,5 @@ gsettings set org.gnome.shell.extensions.ding show-trash true
 # * Configure Theme
 # * Configure weather plugin
 # * Setup mouse speed
-# * Install Rider
 # * Install Docker Desktop
 # * Install fingerprint driver
