@@ -1,7 +1,13 @@
 export DEBIAN_FRONTEND=noninteractive
 
 # Sudo
-echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/anduin
+# Avoid appending to sudoers file if already exists
+if ! sudo grep -q "$USER ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/anduin; then
+  echo "Adding $USER to sudoers..."
+  sudo mkdir -p /etc/sudoers.d
+  sudo touch /etc/sudoers.d/anduin
+  echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/anduin
+fi
 
 sudo pro config set apt_news=false
 sudo rm /var/lib/ubuntu-advantage/messages/*
