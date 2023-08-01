@@ -12,6 +12,8 @@ function InstallGit {
 
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub"
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa"
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\GPG\pubring.kbx"
+
     Write-Host "Linking back SSH keys..." -ForegroundColor Green
     $NextcloudSshConfigPath = "$HOME\Nextcloud\Storage\SSH\"
     $localSshConfigPath = "$HOME\.ssh\"
@@ -19,9 +21,10 @@ function InstallGit {
     Remove-Item -Path $localSshConfigPath -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
+    Write-Host "Linking back GPG keys..." -ForegroundColor Green
     $NextcloudGpgConfigPath = "$HOME\Nextcloud\Storage\GPG\"
     $localGpgConfigPath = "$HOME\.gnupg\"
-
+    
     Remove-Item -Path $localGpgConfigPath -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $localGpgConfigPath -Target $NextcloudGpgConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
