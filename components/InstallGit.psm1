@@ -19,6 +19,16 @@ function InstallGit {
     Remove-Item -Path $localSshConfigPath -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
+    $NextcloudGpgConfigPath = "$HOME\Nextcloud\Storage\GPG\"
+    $localGpgConfigPath = "$HOME\.gnupg\"
+
+    Remove-Item -Path $localGpgConfigPath -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item -ItemType SymbolicLink -Path $localGpgConfigPath -Target $NextcloudGpgConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
+
+    $signKey = $(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}' | awk -F' ' '{print $1}')
+    git config --global user.signingkey $signKey
+    git config --global commit.gpgsign true
+
     Write-Host "Testing SSH features..." -ForegroundColor Green
     Write-Host "yes" | ssh -o "StrictHostKeyChecking no" git@github.com
 
