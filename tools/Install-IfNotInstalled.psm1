@@ -40,14 +40,19 @@ function Install-IfNotInstalled {
         [string]$package
     )
     $installed = ($packages |  Where-Object { $_ -ne $null } | Where-Object { $_.Contains($package) } | Measure-Object).Count -gt 0
-
     if ($installed) { 
-        Write-Host "$package is already installed!" -ForegroundColor Green
+        Write-Host "$package is already in the installed list!" -ForegroundColor Green
     }
     else {
-        Write-Host "Attempting to install: $package..." -ForegroundColor Green
-        winget source update
-        Install $package
+        $hasPackage = winget list -e --id $package --source winget
+        if ($hasPackage) {
+            Write-Host "$package is already shown from the winget list!" -ForegroundColor Green
+        } 
+        else {
+            Write-Host "Attempting to install: $package..." -ForegroundColor Green
+            winget source update
+            Install $package
+        }
     }
 }
 
