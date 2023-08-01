@@ -107,6 +107,15 @@ cp ~/Nextcloud/Storage/SSH/* ~/.ssh/
 chmod 644 ~/.ssh/id_rsa.pub
 chmod 600 ~/.ssh/id_rsa
 
+# GPG Keys
+echo "Setting GPG keys..."
+mkdir ~/.gnupg
+cp ~/Nextcloud/Storage/GPG/* ~/.gnupg/
+chmod 600 ~/.gnupg/*
+SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
+git config --global user.signingkey $SIGNKEY
+git config --global commit.gpgsign true
+
 # Upgrade
 echo "Upgrading..."
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
