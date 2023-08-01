@@ -1,3 +1,5 @@
+$packages = winget list --source winget
+
 function Install {
     param (
         [string]$package
@@ -17,7 +19,7 @@ function Install {
             }
         }
         catch {
-            if ($attempt -eq 5) {
+            if ($attempt -eq 2) {
                 # You can do some extra logging here.
                 Write-Error "Task failed. With all $attempt attempts. Error: $($Error[0])"
                 throw
@@ -37,8 +39,9 @@ function Install-IfNotInstalled {
     param (
         [string]$package
     )
+    $installed = ($packages |  Where-Object { $_ -ne $null } | Where-Object { $_.Contains($package) } | Measure-Object).Count -gt 0
 
-    if ("$(winget list -e --id $package --source winget)".Contains("--")) { 
+    if ($installed) { 
         Write-Host "$package is already installed!" -ForegroundColor Green
     }
     else {
