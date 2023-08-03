@@ -9,6 +9,7 @@ function InstallGit {
 
     Install-IfNotInstalled "Git.Git"
     Add-PathToEnv "$env:ProgramFiles\Git\bin\"
+    Add-PathToEnv "$env:ProgramFiles\Git\usr\bin\"
 
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub"
     WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa"
