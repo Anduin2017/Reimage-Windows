@@ -80,6 +80,15 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat\
   docker-compose tree smartmontools blender\
 
+# XRay
+echo "Installing xray..."
+sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
+sudo cp ~/Nextcloud/Storage/XRay/xray.json /usr/local/etc/xray/config.json
+sudo systemctl restart xray.service
+#echo "Setting system proxy settings to use xray..."
+#export http_proxy="http://localhost:10809/"
+#export https_proxy="http://localhost:10809/"
+
 # Repos
 echo "Adding repos..."
 mkdir ~/Source
