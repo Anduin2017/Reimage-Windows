@@ -215,9 +215,14 @@ TryInstallDotnetTool "Aiursoft.Dotlang"
 TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
-# Trash bin
-gsettings set org.gnome.shell.extensions.ding show-trash true
-
+# Theme
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git
+./Fluent-icon-theme/install.sh
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
+./Fluent-gtk-theme/install.sh --tweak noborder
+#rm -rf ~~/.local/share/gnome-shell/extensions/
+unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
+dconf load /org/gnome/ < ~/Nextcloud/Storage/Gnome/backup.txt
 
 # Other settings:
 
