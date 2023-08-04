@@ -159,6 +159,20 @@ Terminal=false
 Type=Application
 Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.desktop
 
+# Installing wps-office
+if ! dpkg -s wps-office > /dev/null 2>&1; then
+    echo "wps-office is not installed, downloading and installing..."
+    # Download the deb package
+    wget https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11698/wps-office_11.1.0.11698.XA_amd64.deb
+    # Install the package
+    sudo dpkg -i wps-office_11.1.0.11698.XA_amd64.deb
+    # Remove the package file
+    rm wps-office_11.1.0.11698.XA_amd64.deb
+else
+    echo "wps-office is already installed"
+fi
+
+
 # Nextcloud talk
 echo "Installing Nextcloud talk... (INOP)"
 echo "Please download Nextcloud talk from https://github.com/nextcloud/talk-desktop"
