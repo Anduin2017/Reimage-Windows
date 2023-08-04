@@ -129,25 +129,11 @@ git config --global commit.gpgsign true
 echo "Upgrading..."
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
 
-# Fix
-echo "Removing deprecated packages..."
-sleep 1
-sudo DEBIAN_FRONTEND=noninteractive apt --purge autoremove -y
-sleep 1
-sudo DEBIAN_FRONTEND=noninteractive apt install --fix-broken  -y
-sleep 1
-sudo DEBIAN_FRONTEND=noninteractive apt install --fix-missing  -y
-sleep 1
-sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a
-sleep 1
-
 # Script
 cp ~/Nextcloud/Storage/Scripts/sync_lab_to_hub.sh ~/Source/Repos/
 chmod +x ~/Source/Repos/sync_lab_to_hub.sh
 
 # Rider
-
-# Install rider...
 echo "Installing Rider... (INOP)"
 echo "Please download Rider from https://www.jetbrains.com/rider/download/#section=linux"
 echo "[Desktop Entry]
@@ -173,7 +159,6 @@ else
 fi
 
 # Installing docker-desktop
-# Check if docker-desktop is installed
 if ! dpkg -s docker-desktop > /dev/null 2>&1; then
     echo "docker-desktop is not installed, downloading and installing..."
     # Download the deb package
@@ -241,3 +226,15 @@ gsettings set org.gnome.shell.extensions.ding show-trash true
 # * Setup mouse speed
 # * Install Docker Desktop
 # * Install fingerprint driver
+
+# Fix
+echo "Removing deprecated packages..."
+sleep 1
+sudo DEBIAN_FRONTEND=noninteractive apt --purge autoremove -y
+sleep 1
+sudo DEBIAN_FRONTEND=noninteractive apt install --fix-broken  -y
+sleep 1
+sudo DEBIAN_FRONTEND=noninteractive apt install --fix-missing  -y
+sleep 1
+sudo DEBIAN_FRONTEND=noninteractive dpkg --configure -a
+sleep 1
