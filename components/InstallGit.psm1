@@ -23,11 +23,11 @@ function InstallGit {
     New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
     Write-Host "Linking back GPG keys..." -ForegroundColor Green
-    $NextcloudGpgConfigPath = "$HOME\Nextcloud\Storage\GPG\"
+    $NextcloudGpgConfigPath = "$HOME\Nextcloud\Storage\GPG\private.key"
     $localGpgConfigPath = "$HOME\.gnupg\"
     
     Remove-Item -Path $localGpgConfigPath -Recurse -Force -ErrorAction SilentlyContinue
-    New-Item -ItemType SymbolicLink -Path $localGpgConfigPath -Target $NextcloudGpgConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
+    gpg --import $NextcloudGpgConfigPath
 
     $signKey = $(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}' | awk -F' ' '{print $1}')
     git config --global user.signingkey $signKey
