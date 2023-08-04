@@ -172,6 +172,20 @@ else
     echo "wps-office is already installed"
 fi
 
+# Installing docker-desktop
+# Check if docker-desktop is installed
+if ! dpkg -s docker-desktop > /dev/null 2>&1; then
+    echo "docker-desktop is not installed, downloading and installing..."
+    # Download the deb package
+    wget https://desktop.docker.com/linux/main/amd64/docker-desktop-4.22.0-amd64.deb
+    # Install the package
+    sudo dpkg -i docker-desktop-4.22.0-amd64.deb
+    # Remove the package file
+    rm docker-desktop-4.22.0-amd64.deb
+else
+    echo "docker-desktop is already installed"
+fi
+
 
 # Nextcloud talk
 echo "Installing Nextcloud talk... (INOP)"
