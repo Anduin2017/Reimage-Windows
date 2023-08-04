@@ -9,7 +9,7 @@ if ! sudo grep -q "$USER ALL=(ALL) NOPASSWD:ALL" /etc/sudoers.d/anduin; then
   echo "$USER ALL=(ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/anduin
 fi
 
-sudo pro config set apt_news=false
+#sudo pro config set apt_news=false
 sudo rm /var/lib/ubuntu-advantage/messages/*
 
 echo "Preinstall..."
@@ -119,8 +119,10 @@ chmod 600 ~/.ssh/id_rsa
 # GPG Keys
 echo "Setting GPG keys..."
 mkdir ~/.gnupg
-cp -r ~/Nextcloud/Storage/GPG/* ~/.gnupg/
-chmod 600 ~/.gnupg/*
+sudo cp -r ~/Nextcloud/Storage/GPG/* ~/.gnupg/
+sudo chmod 600 ~/.gnupg/*
+sudo chmod 700 ~/.gnupg
+sudo chown -R anduin:anduin ~/.gnupg/
 SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
 git config --global user.signingkey $SIGNKEY
 git config --global commit.gpgsign true
@@ -201,6 +203,7 @@ function TryInstallDotnetTool {
     fi
   fi
 }
+
 TryInstallDotnetTool "dotnet-ef"
 TryInstallDotnetTool "Anduin.Parser"
 TryInstallDotnetTool "Anduin.HappyRecorder"
