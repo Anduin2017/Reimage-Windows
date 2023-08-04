@@ -118,11 +118,9 @@ chmod 600 ~/.ssh/id_rsa
 
 # GPG Keys
 echo "Setting GPG keys..."
+sudo rm ~/.gnupg -rf
 mkdir ~/.gnupg
-sudo cp -r ~/Nextcloud/Storage/GPG/* ~/.gnupg/
-sudo chmod 600 ~/.gnupg/*
-sudo chmod 700 ~/.gnupg
-sudo chown -R anduin:anduin ~/.gnupg/
+gpg --import ~/Nextcloud/Storage/GPG/private.key
 SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
 git config --global user.signingkey $SIGNKEY
 git config --global commit.gpgsign true
