@@ -121,6 +121,7 @@ echo "Setting GPG keys..."
 sudo rm ~/.gnupg -rf
 mkdir ~/.gnupg
 gpg --import ~/Nextcloud/Storage/GPG/private.key
+chmod 700 ~/.gnupg
 SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
 git config --global user.signingkey $SIGNKEY
 git config --global commit.gpgsign true
