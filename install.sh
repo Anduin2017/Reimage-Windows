@@ -49,15 +49,10 @@ sudo add-apt-repository ppa:nextcloud-devs/client --yes
 echo "Removing snap..."
 sudo snap remove firefox
 sudo snap remove snap-store
-sudo snap remove gnome-3-38-2004
 sudo snap remove gtk-common-themes
 sudo snap remove snapd-desktop-integration
-sudo snap remove core20
 sudo snap remove bare
-sudo snap remove snapd
-sudo apt remove snapd -y
-sudo rm ~/snap -rvf
-sudo rm  /snap -rvf
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/BryanDollery/remove-snap/main/remove-snap.sh)"
 
 # Firefox
 echo "Setting firefox..."
