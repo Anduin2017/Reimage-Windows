@@ -228,9 +228,8 @@ git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme /opt/themes/Fluen
 unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/ < ~/Nextcloud/Storage/Gnome/backup.txt
 
-sleep 10
-rm ./Fluent-icon-theme -rf
-rm ./Fluent-gtk-theme -rf
+sudo ln -s /home/anduin/Nextcloud/ /home/anduin/Desktop/
+sudo ln -s /home/anduin/Source/Repos/ /home/anduin/Desktop/
 
 # Other settings:
 
