@@ -220,6 +220,9 @@ git clone https://github.com/vinceliuice/Fluent-icon-theme.git
 ./Fluent-icon-theme/install.sh
 git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
 ./Fluent-gtk-theme/install.sh --tweak noborder
+
+rm ./Fluent-icon-theme -rvf
+rm ./Fluent-gtk-tehem -rvf
 #rm -rf ~~/.local/share/gnome-shell/extensions/
 unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/ < ~/Nextcloud/Storage/Gnome/backup.txt
