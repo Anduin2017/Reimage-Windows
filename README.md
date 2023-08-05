@@ -49,5 +49,5 @@ $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/mast
 Some of my machines are running Ubuntu. I also have a script to initialize Ubuntu environment.
 
 ```bash
-sudo bash -c "$(curl -L https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.sh)"
+bash -c "$(curl -L https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.sh)"
 ```
