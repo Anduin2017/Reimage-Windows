@@ -216,16 +216,21 @@ TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
 # Theme
-git clone https://git.aiursoft.cn/PublicVault/Fluent-icon-theme
-./Fluent-icon-theme/install.sh
-git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme
-./Fluent-gtk-theme/install.sh --tweak noborder
+rm /opt/themes -rvf > /dev/null 2>&1
+sudo mkdir /opt/themes > /dev/null 2>&1
+sudo chown anduin:anduin /opt/themes
+git clone https://git.aiursoft.cn/PublicVault/Fluent-icon-theme /opt/themes/Fluent-icon-theme
+/opt/themes/Fluent-icon-theme/install.sh
+git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme /opt/themes/Fluent-gtk-theme
+/opt/themes/Fluent-gtk-theme/install.sh
 
-rm ./Fluent-icon-theme -rvf
-rm ./Fluent-gtk-tehem -rvf
 #rm -rf ~~/.local/share/gnome-shell/extensions/
 unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/ < ~/Nextcloud/Storage/Gnome/backup.txt
+
+sleep 10
+rm ./Fluent-icon-theme -rf
+rm ./Fluent-gtk-theme -rf
 
 # Other settings:
 
