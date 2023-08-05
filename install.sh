@@ -216,9 +216,9 @@ TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
 # Theme
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git
+git clone https://git.aiursoft.cn/PublicVault/Fluent-icon-theme
 ./Fluent-icon-theme/install.sh
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git
+git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme
 ./Fluent-gtk-theme/install.sh --tweak noborder
 
 rm ./Fluent-icon-theme -rvf
