@@ -63,10 +63,14 @@ echo -e '\nPackage: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1002' | 
 echo "Setting node..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 
+# WeChat
+echo "Setting wechat..."
+wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
+
 echo "Installing node, google, firefox, ibus-rime, apt-transport-https, code, vim, remmina, remmina-plugin-rdp, w3m, git, vim, sl, zip, unzip, wget, curl, neofetch, jq, net-tools, libglib2.0-dev-bin, httping, ffmpeg, nano, gnome-tweaks, gnome-shell-extension-prefs, spotify-client, vlc, golang-go, aria2, adb, ffmpeg, nextcloud-desktop, ruby, openjdk-17-jdk, default-jre, dotnet6, ca-certificates, gnupg, lsb-release, docker-ce, docker-ce-cli, pinta, aisleriot, containerd.io, jq, htop, iotop, iftop, ntp, ntpdate, ntpstat, docker-compose, tree, smartmontools..."
 sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   apt-transport-https code vim remmina remmina-plugin-rdp\
-  w3m git vim sl zip unzip wget curl neofetch jq\
+  w3m git vim sl zip unzip wget curl neofetch jq 	com.qq.weixin.deepin\
   net-tools libglib2.0-dev-bin httping ffmpeg nano\
   gnome-tweaks gnome-shell-extension-prefs spotify-client\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop\
