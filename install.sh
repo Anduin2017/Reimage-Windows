@@ -82,6 +82,9 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
 # NPM
 sudo npm i -g node-static yarn
 
+echo "Please press [Enter] if your Nextcloud account is ready..."
+read
+
 # XRay
 echo "Installing xray..."
 sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
@@ -93,8 +96,8 @@ sudo systemctl restart xray.service
 
 # Repos
 echo "Adding repos..."
-mkdir ~/Source
-mkdir ~/Source/Repos
+mkdir ~/Source > /dev/null 2>&1
+mkdir ~/Source/Repos > /dev/null 2>&1
 
 # Chinese input
 echo "Setting Chinese input..."
@@ -128,6 +131,10 @@ SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2
 git config --global user.signingkey $SIGNKEY
 git config --global commit.gpgsign true
 
+# Test ssh with ssh to git@github
+echo "Testing SSH connection to github.com..."
+echo "yes" | ssh git@github.com
+
 # Upgrade
 echo "Upgrading..."
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y
@@ -159,6 +166,19 @@ if ! dpkg -s wps-office > /dev/null 2>&1; then
     rm wps-office_11.1.0.11698.XA_amd64.deb
 else
     echo "wps-office is already installed"
+fi
+
+# Install Minecraft
+if ! dpkg -s minecraft-launcher > /dev/null 2>&1; then
+    echo "minecraft-launcher is not installed, downloading and installing..."
+    # Download the deb package
+    wget https://launcher.mojang.com/download/Minecraft.deb
+    # Install the package
+    sudo dpkg -i Minecraft.deb
+    # Remove the package file
+    rm Minecraft.deb
+else
+    echo "minecraft-launcher is already installed"
 fi
 
 # Installing docker-desktop
