@@ -77,7 +77,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
-  docker-compose tree smartmontools blender hugo baobab\
+  docker-compose tree smartmontools blender hugo baobab sqlitebrowser\
 
 # Add current user as docker.
 sudo gpasswd -a $USER docker
