@@ -79,6 +79,9 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
   docker-compose tree smartmontools blender hugo baobab\
 
+# Add current user as docker.
+sudo gpasswd -a $USER docker
+
 # NPM
 sudo npm i -g node-static yarn
 
