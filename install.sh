@@ -71,7 +71,7 @@ echo "Installing node, google, firefox, ibus-rime, apt-transport-https, code, vi
 sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   apt-transport-https code vim remmina remmina-plugin-rdp cifs-utils\
   w3m git vim sl zip unzip wget curl neofetch jq 	com.qq.weixin.deepin\
-  net-tools libglib2.0-dev-bin httping ffmpeg nano iperf3\
+  net-tools libglib2.0-dev-bin httping ffmpeg nano iperf3 usb-creator-gtk\
   gnome-tweaks gnome-shell-extension-prefs spotify-client\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
