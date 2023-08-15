@@ -13,7 +13,7 @@ fi
 sudo rm /var/lib/ubuntu-advantage/messages/*
 
 echo "Preinstall..."
-sudo apt-get install wget gpg curl
+sudo apt-get install wget gpg curl  apt-transport-https software-properties-common
 
 echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
@@ -35,6 +35,11 @@ wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pa
 sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
+
+# Microsoft
+wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+sudo dpkg -i ./packages-microsoft-prod.deb
+rm ./packages-microsoft-prod.deb
 
 # Spotify
 echo "Setting spotify..."
@@ -72,7 +77,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   apt-transport-https code vim remmina remmina-plugin-rdp cifs-utils\
   w3m git vim sl zip unzip wget curl neofetch jq 	com.qq.weixin.deepin\
   net-tools libglib2.0-dev-bin httping ffmpeg nano iperf3 usb-creator-gtk\
-  gnome-tweaks gnome-shell-extension-prefs spotify-client\
+  gnome-tweaks gnome-shell-extension-prefs spotify-client powershell\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
