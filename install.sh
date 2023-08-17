@@ -94,8 +94,8 @@ sudo gpasswd -a $USER docker
 
 # Powershell Profile
 URL="https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/PROFILE_LINUX.ps1"
-DEST_FILE="~/.config/powershell/Microsoft.PowerShell_profile.ps1"
-mkdir -p $(dirname "$DEST_FILE")
+mkdir -p ~/.config
+mkdir -p ~/.config/powershell
 curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 # NPM
