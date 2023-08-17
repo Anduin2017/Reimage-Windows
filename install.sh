@@ -94,7 +94,7 @@ mkdir -p $(dirname "$DEST_FILE")
 curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 # NPM
-sudo npm i -g node-static yarn
+sudo npm i -g yarn
 
 echo "Please press [Enter] if your Nextcloud account is ready..."
 read
@@ -248,6 +248,7 @@ function TryInstallDotnetTool {
 
 TryInstallDotnetTool "dotnet-ef"
 TryInstallDotnetTool "Anduin.Parser"
+TryInstallDotnetTool "Aiursoft.Static"
 TryInstallDotnetTool "Anduin.HappyRecorder"
 ~/.dotnet/tools/happy-recorder config set-db-location --path ~/Nextcloud/Storage/HappyRecords/
 TryInstallDotnetTool "Aiursoft.NugetNinja"

@@ -12,7 +12,7 @@ function InstallNodeJs {
     if (Get-Command static -ErrorAction SilentlyContinue) {
         Write-Host "static is already installed!" -ForegroundColor Yellow
     } else {
-        npm install --global node-static typescript @angular/cli yarn npm-check-updates redis-cli
+        npm install --global typescript @angular/cli yarn npm-check-updates redis-cli
     }
 }
 
