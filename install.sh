@@ -36,11 +36,6 @@ sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
 
-# Microsoft
-wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
-sudo dpkg -i ./packages-microsoft-prod.deb
-rm ./packages-microsoft-prod.deb
-
 # Spotify
 echo "Setting spotify..."
 curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
@@ -83,6 +78,16 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
   docker-compose tree smartmontools blender hugo baobab gedit\
+
+# Microsoft
+echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
+wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+sudo dpkg -i ./packages-microsoft-prod.deb
+rm ./packages-microsoft-prod.deb
+sudo apt update
+sudo apt install powershell
+sudo rm /etc/apt/sources.list.d/microsoft-prod.list
+sudo apt update
 
 # Add current user as docker.
 sudo gpasswd -a $USER docker
