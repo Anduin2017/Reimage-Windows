@@ -44,7 +44,7 @@ function Install-IfNotInstalled {
         Write-Host "$package is already in the installed list!" -ForegroundColor Green
     }
     else {
-        $hasPackage = winget list -e --id $package --source winget
+        $hasPackage = $(winget list -e --id $package --source winget).Length -gt 2
         if ($hasPackage) {
             Write-Host "$package is already shown from the winget list!" -ForegroundColor Green
         } 
