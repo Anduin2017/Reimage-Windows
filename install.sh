@@ -268,7 +268,7 @@ sudo chown anduin:anduin /opt/themes
 git clone https://git.aiursoft.cn/PublicVault/Fluent-icon-theme /opt/themes/Fluent-icon-theme
 /opt/themes/Fluent-icon-theme/install.sh 
 git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme /opt/themes/Fluent-gtk-theme
-/opt/themes/Fluent-gtk-theme/install.sh -i ubuntu --tweaks round
+/opt/themes/Fluent-gtk-theme/install.sh -i ubuntu --tweaks noborder round
 
 #rm -rf ~~/.local/share/gnome-shell/extensions/
 unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
