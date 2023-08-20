@@ -9,8 +9,8 @@ function InstallNodeJs {
 
     Write-Host "Setting up some node js global tools..." -ForegroundColor Green
     npm install --global npm@latest
-    if (Get-Command static -ErrorAction SilentlyContinue) {
-        Write-Host "static is already installed!" -ForegroundColor Yellow
+    if (Get-Command yarn -ErrorAction SilentlyContinue) {
+        Write-Host "yarn is already installed!" -ForegroundColor Yellow
     } else {
         npm install --global typescript @angular/cli yarn npm-check-updates redis-cli
     }

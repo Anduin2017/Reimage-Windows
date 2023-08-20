@@ -253,7 +253,7 @@ function TryInstallDotnetTool {
 
 TryInstallDotnetTool "dotnet-ef"
 TryInstallDotnetTool "Anduin.Parser"
-TryInstallDotnetTool "Static"
+TryInstallDotnetTool "Aiursoft.Static"
 TryInstallDotnetTool "Anduin.HappyRecorder"
 ~/.dotnet/tools/happy-recorder config set-db-location --path ~/Nextcloud/Storage/HappyRecords/
 TryInstallDotnetTool "Aiursoft.NugetNinja"
