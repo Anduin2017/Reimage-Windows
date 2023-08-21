@@ -214,6 +214,19 @@ else
     echo "wps-office is already installed"
 fi
 
+# Installing Free Download Manager
+if ! dpkg -s freedownloadmanager > /dev/null 2>&1; then
+    echo "Free Download Manager is not installed, downloading and installing..."
+    # Download the deb package
+    wget https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb
+    # Install the package
+    sudo dpkg -i freedownloadmanager.deb
+    # Remove the package file
+    rm freedownloadmanager.deb
+else
+    echo "Free Download Manager is already installed"
+fi
+
 # Install Minecraft
 if ! dpkg -s minecraft-launcher > /dev/null 2>&1; then
     echo "minecraft-launcher is not installed, downloading and installing..."
