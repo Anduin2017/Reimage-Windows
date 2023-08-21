@@ -13,7 +13,8 @@ fi
 sudo rm /var/lib/ubuntu-advantage/messages/*
 
 echo "Preinstall..."
-sudo apt-get install wget gpg curl  apt-transport-https software-properties-common
+sudo add-apt-repository -y multiverse
+sudo apt-get install wget gpg curl apt-transport-https software-properties-common
 
 echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
@@ -77,7 +78,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot stellarium\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
-  docker-compose tree smartmontools blender hugo baobab gedit\
+  docker-compose tree smartmontools blender hugo baobab gedit steam\
 
 # Microsoft
 echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
