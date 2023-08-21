@@ -75,7 +75,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   gnome-tweaks gnome-shell-extension-prefs spotify-client shotwell\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
-  gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot\
+  gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot stellarium\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
   docker-compose tree smartmontools blender hugo baobab gedit\
 
@@ -100,6 +100,26 @@ curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 # NPM
 sudo npm i -g yarn
+
+# Postman
+wget https://dl.pstmn.io/download/latest/linux_64 -O postman-linux-x64.tar.gz
+sudo rm -rf /opt/Postman/
+sudo tar xzf postman-linux-x64.tar.gz -C /opt/
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+cat > ~/.local/share/applications/postman.desktop <<EOL
+[Desktop Entry]
+Encoding=UTF-8
+Name=Postman
+X-GNOME-FullName=Postman API Client
+Exec=/usr/bin/postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+EOL
+chmod +x ~/.local/share/applications/postman.desktop
+rm ./postman-linux-x64.tar.gz
+echo "Postman has been installed successfully!"
 
 echo "Please press [Enter] if your Nextcloud account is ready..."
 read
