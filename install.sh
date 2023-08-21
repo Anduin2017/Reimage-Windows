@@ -80,7 +80,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip google-earth-pro-stable\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot stellarium\
-  containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
+  containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo shotcut\
   docker-compose tree smartmontools blender hugo baobab gedit steam\
 
 # Microsoft
