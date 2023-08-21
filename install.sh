@@ -30,6 +30,9 @@ echo "Setting google..."
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' 
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 
+# Google Earth Pro
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/earth/deb/ stable main" > /etc/apt/sources.list.d/google.list'
+
 # Code
 echo "Setting ms..."
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -74,7 +77,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime\
   w3m git vim sl zip unzip wget curl neofetch jq 	com.qq.weixin.deepin\
   net-tools libglib2.0-dev-bin httping ffmpeg nano iperf3 usb-creator-gtk\
   gnome-tweaks gnome-shell-extension-prefs spotify-client shotwell\
-  vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip\
+  vlc golang-go aria2 adb ffmpeg nextcloud-desktop python3-pip google-earth-pro-stable\
   ruby openjdk-17-jdk default-jre dotnet6 ca-certificates python-is-python3\
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot stellarium\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo\
