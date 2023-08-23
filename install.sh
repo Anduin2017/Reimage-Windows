@@ -82,6 +82,7 @@ sudo apt install nodejs google-chrome-stable firefox ibus-rime nautilus-nextclou
   gnupg lsb-release  docker-ce docker-ce-cli pinta aisleriot stellarium\
   containerd.io jq htop iotop iftop ntp ntpdate ntpstat clinfo shotcut\
   docker-compose tree smartmontools blender hugo baobab gedit steam\
+  libfuse2 libapr1 libaprutil1 libxcb-cursor0
 
 # Microsoft
 echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
