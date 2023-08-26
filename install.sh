@@ -306,7 +306,7 @@ git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme /opt/themes/Fluen
 
 #rm -rf ~~/.local/share/gnome-shell/extensions/
 unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
-dconf load /org/gnome/ < ~/Nextcloud/Storage/Gnome/backup.txt
+dconf load /org/gnome/ < <(curl https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/config/gnome-settings.txt)
 
 sudo ln -s ~/Nextcloud/ ~/Desktop/
 sudo ln -s ~/Source/Repos/ ~/Desktop/
