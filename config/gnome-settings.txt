@@ -1,53 +1,6 @@
-[Sudoku]
-window-height=630
-window-is-maximized=false
-window-width=730
-
-[baobab/ui]
-is-maximized=false
-window-size=(960, 600)
-
-[calculator]
-accuracy=9
-angle-units='degrees'
-base=10
-button-mode='basic'
-number-format='automatic'
-show-thousands=false
-show-zeroes=false
-source-currency=''
-source-units='degree'
-target-currency=''
-target-units='radian'
-word-size=64
-
-[control-center]
-last-panel='background'
-window-state=(1194, 806, true)
-
-[deja-dup]
-backend='google'
-prompt-check='2023-08-25T15:10:45.691113Z'
-
-[desktop/app-folders]
-folder-children=['Utilities', 'YaST']
-
-[desktop/app-folders/folders/Utilities]
-apps=['gnome-abrt.desktop', 'gnome-system-log.desktop', 'nm-connection-editor.desktop', 'org.gnome.baobab.desktop', 'org.gnome.Connections.desktop', 'org.gnome.DejaDup.desktop', 'org.gnome.Dictionary.desktop', 'org.gnome.DiskUtility.desktop', 'org.gnome.eog.desktop', 'org.gnome.Evince.desktop', 'org.gnome.FileRoller.desktop', 'org.gnome.fonts.desktop', 'org.gnome.seahorse.Application.desktop', 'org.gnome.tweaks.desktop', 'org.gnome.Usage.desktop', 'vinagre.desktop']
-categories=['X-GNOME-Utilities']
-name='X-GNOME-Utilities.directory'
-translate=true
-
-[desktop/app-folders/folders/YaST]
-categories=['X-SuSE-YaST']
-name='suse-yast.directory'
-translate=true
-
 [desktop/background]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/anduin/.local/share/backgrounds/Fluent-building-night.png'
-picture-uri-dark='file:///home/anduin/.local/share/backgrounds/Fluent-building-night.png'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -63,48 +16,6 @@ font-hinting='slight'
 gtk-theme='Fluent-round-Dark'
 icon-theme='Fluent-dark'
 
-[desktop/notifications]
-application-children=['org-gnome-characters', 'org-gnome-shell-extensions', 'com-nextcloud-desktopclient-nextcloud', 'apport-gtk', 'org-gnome-terminal', 'google-chrome', 'chrome-akpamiohjfcnimfljfndmaldlcfphjmp-default', 'ca-desrt-dconf-editor', 'org-gnome-extensions-desktop', 'jetbrains-rider']
-
-[desktop/notifications/application/apport-gtk]
-application-id='apport-gtk.desktop'
-
-[desktop/notifications/application/ca-desrt-dconf-editor]
-application-id='ca.desrt.dconf-editor.desktop'
-
-[desktop/notifications/application/chrome-akpamiohjfcnimfljfndmaldlcfphjmp-default]
-application-id='chrome-akpamiohjfcnimfljfndmaldlcfphjmp-Default.desktop'
-
-[desktop/notifications/application/code]
-application-id='code.desktop'
-
-[desktop/notifications/application/com-nextcloud-desktopclient-nextcloud]
-application-id='com.nextcloud.desktopclient.nextcloud.desktop'
-
-[desktop/notifications/application/firefox-firefox]
-application-id='firefox_firefox.desktop'
-
-[desktop/notifications/application/google-chrome]
-application-id='google-chrome.desktop'
-
-[desktop/notifications/application/jetbrains-rider]
-application-id='jetbrains-rider.desktop'
-
-[desktop/notifications/application/org-gnome-characters]
-application-id='org.gnome.Characters.desktop'
-
-[desktop/notifications/application/org-gnome-extensions-desktop]
-application-id='org.gnome.Extensions.desktop.desktop'
-
-[desktop/notifications/application/org-gnome-shell-extensions]
-application-id='org.gnome.Shell.Extensions.desktop'
-
-[desktop/notifications/application/org-gnome-terminal]
-application-id='org.gnome.Terminal.desktop'
-
-[desktop/notifications/application/update-manager]
-application-id='update-manager.desktop'
-
 [desktop/peripherals/keyboard]
 numlock-state=true
 
@@ -115,13 +26,9 @@ speed=0.0
 [desktop/peripherals/touchpad]
 two-finger-scrolling-enabled=true
 
-[desktop/privacy]
-report-technical-problems=true
-
 [desktop/screensaver]
 color-shading-type='solid'
 picture-options='zoom'
-picture-uri='file:///home/anduin/.local/share/backgrounds/Fluent-building-night.png'
 primary-color='#000000000000'
 secondary-color='#000000000000'
 
@@ -151,11 +58,6 @@ maximized=false
 network-total-in-bits=false
 show-dependencies=false
 show-whose-processes='user'
-window-state=(700, 500, 26, 23)
-
-[gnome-system-monitor/disktreenew]
-col-6-visible=true
-col-6-width=290
 
 [mutter]
 experimental-features=['x11-randr-fractional-scaling', 'scale-monitor-framebuffer']
@@ -176,18 +78,11 @@ migrated-gtk-settings=true
 search-filter-time-type='last_modified'
 search-view='list-view'
 
-[nautilus/window-state]
-initial-size=(890, 550)
-maximized=true
-
 [settings-daemon/plugins/color]
 night-light-enabled=false
-night-light-last-coordinates=(22.299799280057595, 114.15009999999999)
 
 [shell]
-command-history=['r']
 disable-user-extensions=false
-disabled-extensions=['dash-to-dock@micxgx.gmail.com', 'azclock@azclock.gitlab.com']
 enabled-extensions=['user-theme@gnome-shell-extensions.gcampax.github.com', 'arcmenu@arcmenu.com', 'openweather-extension@jenslody.de', 'network-stats@gnome.noroadsleft.xyz', 'customize-ibus@hollowman.ml', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'blur-my-shell@aunetx', 'ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'stocks@infinicode.de', 'dash-to-panel@jderose9.github.com', 'backslide@codeisland.org', 'system-monitor-next@paradoxxx.zero.gmail.com', 'extension-list@tu.berry', 'no-overview@fthx']
 favorite-apps=['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Terminal.desktop', 'code.desktop']
 last-selected-power-profile='performance'
@@ -195,14 +90,13 @@ welcome-dialog-last-shown-version='44.0'
 
 [shell/extensions/arcmenu]
 arc-menu-icon=71
-custom-menu-button-icon='/home/anduin/Nextcloud/Digital/Identity/Icons/win11.png'
 custom-menu-button-icon-size=38.0
 dash-to-panel-standalone=true
 distro-icon=5
 enable-menu-hotkey=true
 force-menu-location='BottomCentered'
 left-panel-width=375
-menu-background-color='rgba(28,28,28,0.98)'
+menu-background-color='rgba(28,28,128,0.9)'
 menu-border-color='rgb(63,62,64)'
 menu-button-appearance='Icon'
 menu-button-icon='Menu_Icon'
@@ -222,29 +116,20 @@ recently-installed-apps=['wps-office-pdf.desktop', 'wps-office-wps.desktop', 'do
 right-panel-width=200
 search-entry-border-radius=(true, 25)
 
-[shell/extensions/azclock]
-changed-data=@a{ss} {}
-widget-data=[[{'Name': 'Digital Clock Widget', 'Widget_Type': 'Widget_Box', 'Lock_Widget': 'false', 'Location_X': '1228', 'Location_Y': '200', 'Box_BackgroundEnabled': 'true', 'Box_BackgroundColor': 'rgba(0,0,0,0.2)', 'Box_BorderEnabled': 'false', 'Box_BorderWidth': '0', 'Box_BorderRadius': '21', 'Box_BorderColor': 'black', 'Box_Spacing': '8', 'Box_Padding': '25', 'Box_VerticalLayout': 'true'}, {'Name': 'Time Label', 'Element_Type': 'Digital_Clock', 'Element_Margin_Top': '0', 'Element_Margin_Left': '0', 'Element_Margin_Bottom': '0', 'Element_Margin_Right': '0', 'Element_Padding_Top': '0', 'Element_Padding_Left': '0', 'Element_Padding_Bottom': '0', 'Element_Padding_Right': '0', 'TimeZoneOverrideEnabled': 'false', 'TimeZoneOverride': 'UTC', 'Text_ShadowEnabled': 'true', 'Text_ShadowColor': 'black', 'Text_ShadowX': '2', 'Text_ShadowY': '2', 'Text_ShadowSpread': '0', 'Text_ShadowBlur': '4', 'Text_Color': 'white', 'Text_BackgroundEnabled': 'false', 'Text_BackgroundColor': 'rgba(0, 0, 0, .2)', 'Text_BorderEnabled': 'false', 'Text_BorderWidth': '0', 'Text_BorderRadius': '20', 'Text_BorderColor': 'black', 'Text_CustomFontEnabled': 'false', 'Text_CustomFontFamily': 'Cantarell', 'Text_Size': '64', 'Text_DateFormat': '%H∶%M', 'Text_AlignmentX': 'Center', 'Text_AlignmentY': 'Center', 'Text_LineAlignment': 'Center'}, {'Name': 'Date Label', 'Element_Type': 'Digital_Clock', 'Element_Margin_Top': '0', 'Element_Margin_Left': '0', 'Element_Margin_Bottom': '0', 'Element_Margin_Right': '0', 'Element_Padding_Top': '0', 'Element_Padding_Left': '0', 'Element_Padding_Bottom': '0', 'Element_Padding_Right': '0', 'TimeZoneOverrideEnabled': 'false', 'TimeZoneOverride': 'UTC', 'Text_ShadowEnabled': 'true', 'Text_ShadowColor': 'black', 'Text_ShadowX': '2', 'Text_ShadowY': '2', 'Text_ShadowSpread': '0', 'Text_ShadowBlur': '4', 'Text_Color': 'white', 'Text_BackgroundEnabled': 'false', 'Text_BackgroundColor': 'rgba(0, 0, 0, .2)', 'Text_BorderEnabled': 'false', 'Text_BorderWidth': '0', 'Text_BorderRadius': '20', 'Text_BorderColor': 'black', 'Text_CustomFontEnabled': 'false', 'Text_CustomFontFamily': 'Cantarell', 'Text_Size': '32', 'Text_DateFormat': '%A %b %d', 'Text_AlignmentX': 'Center', 'Text_AlignmentY': 'Center', 'Text_LineAlignment': 'Center'}]]
-
 [shell/extensions/backslide]
 delay=11
 elapsed-time=0
-image-list=['/home/anduin/Nextcloud/Digital/Wallpapers/0e74d98b0c0a0ae8828ab71cbec97df8cc98cb148ec5a9182dc2c9f268ad9037.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/0e68826dfa5943c1bf55737f613c77d8.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/0f96cc9b3c8c72fa4cc616fe7ff8a5b0713141e7c3fa3dc09687085a531fa0a3.bmp', '/home/anduin/Nextcloud/Digital/Wallpapers/1 (50).jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/1 (53).jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/1 (56).jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/7e2d44d428354b4028595972e09c149332ff633a0188ec9397e077e794eddae4.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/00236cd3537859c0b7ee96d14a73d2d53fd48230bab2d1face2f7a9630448cce.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/0288abe26b444f8fa9c80b5180b71d50a0ae37b925ab84f9be631751d9a8cf72.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/606accc9cff9018c45df4447ac420d8d2071b469794959bcfcec0b987afd0b4b.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/937ea8fcb5316ec069b1b1a3f128e77241528cfda65034b31891f170ad1e2a8a.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/994b7d04e3cba7e14345d7c003aecfaf03fc7c5b30ec97ebf3f429fb88848a78.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/8627b7f8b80a5495e33f65ea0860024143a748cdf0eb8292950a3b1f699afb58.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/96399fe96a3eb09e9f8de9d007c1fd5462d4549361dcaebc55c59d840889018f.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/119991f059b995449935e0bd4993f7edccd8a916900110f7c7e737bad1511c0e.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/17485476.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/a0a6a2c7b2b10e2a9709cbd715bb3d7027601329d7edff3e75ed5de40f216c0b.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/a74f9832bd4b22a9ae7b082b6a691ad82b859e97b813db26b21e43d1a3f7065b.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/a78ab62d25911296dd01fbc24b6b6184244e8f2ec0f51f2e6cd5d98acbba031d.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/apple-sierra-original-stock-on.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/c1a83e5c9f3fc4e1c3b719861d02bba9dcc46fdb6feed7875bc04b394b285779.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/c3026675cf617202613db3ba3c21f248fffee33e72237b2157bb87f5377b8fa1.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/CA-wp3.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/CA-wp4.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/CA-wp6.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/dee116c382b4f058be61e483f5ee281437844e7635a65c5628954648cb4fa505.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/default.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/eb874e10c3317346eec35d81f39df4144d437c699ae92b1d6525d1bf98082a45.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/ef2cf67a650cdcb431fa471adbcb20f4b230bb9d9c0c74e79bb5dc375c56a59d.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/f6180f9ca2bc00946e400b9f63a26af345808477fa14e1c73470dfed85c1f6b8.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/f56513788384645db768d0ec542dec33_r.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/faba428cc6a17499e7504b5715f9f0bc85e320cb516d25e1976a25cbafb2e68e.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/GB-wp3.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/GB-wp5.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/img3.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/img8.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/img9.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/NatGeo17.jpg', '/home/anduin/Nextcloud/Digital/Wallpapers/olddark.jpg']
 random=true
 
 [shell/extensions/blur-my-shell]
-brightness=0.89000000000000001
+brightness=0.80000000000000000
 hacks-level=0
 noise-amount=0.0
 noise-lightness=0.0
-sigma=11
+sigma=20
 
 [shell/extensions/blur-my-shell/applications]
 blur=false
-blur-on-overview=true
-customize=false
-enable-all=true
-opacity=255
 
 [shell/extensions/blur-my-shell/panel]
 blur=true
@@ -266,28 +151,6 @@ menu-ibus-preference=true
 menu-ibus-restart=true
 menu-ibus-version=true
 use-input-indicator=false
-
-[shell/extensions/dash-to-dock]
-apply-custom-theme=true
-background-opacity=0.80000000000000004
-custom-background-color=false
-custom-theme-shrink=true
-customize-alphas=true
-dash-max-icon-size=54
-dock-fixed=true
-dock-position='LEFT'
-extend-height=true
-height-fraction=0.92000000000000004
-max-alpha=0.80000000000000004
-min-alpha=0.54000000000000004
-preferred-monitor=-2
-preferred-monitor-by-connector='HDMI-0'
-preview-size-scale=0.29999999999999999
-show-apps-at-top=true
-show-mounts=true
-show-trash=true
-show-windows-preview=true
-transparency-mode='DYNAMIC'
 
 [shell/extensions/dash-to-panel]
 animate-appicon-hover-animation-extent={'RIPPLE': 4, 'PLANK': 4, 'SIMPLE': 1}
@@ -345,12 +208,6 @@ icon-display=true
 
 [shell/extensions/user-theme]
 name='Fluent-round-Dark'
-
-[solitaire/window-state]
-fullscreen=false
-height=756
-maximized=false
-width=1182
 
 [system/location]
 enabled=true
