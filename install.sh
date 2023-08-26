@@ -303,9 +303,14 @@ git clone https://git.aiursoft.cn/PublicVault/Fluent-icon-theme /opt/themes/Flue
 /opt/themes/Fluent-icon-theme/install.sh 
 git clone https://git.aiursoft.cn/PublicVault/Fluent-gtk-theme /opt/themes/Fluent-gtk-theme
 /opt/themes/Fluent-gtk-theme/install.sh -i ubuntu --tweaks noborder round
+git clone -b Wallpaper https://github.com/vinceliuice/Fluent-gtk-theme.git /opt/themes/Fluent-gtk-theme-wallpaper
+/opt/themes/Fluent-gtk-theme-wallpaper/install-wallpapers.sh
 
 #rm -rf ~~/.local/share/gnome-shell/extensions/
-unzip -o ~/Nextcloud/Storage/Gnome/extensions.zip -d ~/.local/share/gnome-shell/extensions/
+cd ~
+wget https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/config/gnome-extensions.zip -O e.zip
+unzip -o e.zip
+rm e.zip
 dconf load /org/gnome/ < <(curl https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/config/gnome-settings.txt)
 
 sudo ln -s ~/Nextcloud/ ~/Desktop/
