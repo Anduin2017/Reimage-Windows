@@ -100,7 +100,6 @@ function TryInstallDotnetTool {
     if ! dotnet tool install --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>/dev/null; then
       echo "$toolName failed to be installed. Trying updating it.."
       dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>/dev/null
-      echo "Failed to install or update .NET $toolName"
     fi
   fi
 }
