@@ -48,8 +48,8 @@ function Reset-GitRepos {
     $userRequest = Invoke-RestMethod -Uri $userUrl
     $userId = $userRequest[0].id
     
-    $repoUrlAiursoft = "$apiUrl/groups/$groupId/projects?simple=true&per_page=100"
-    $repoUrlAnduin = "$apiUrl/users/$userId/projects?simple=true&per_page=100"
+    $repoUrlAiursoft = "$apiUrl/groups/$groupId/projects?simple=true&per_page=999&visibility=public&page=1"
+    $repoUrlAnduin = "$apiUrl/users/$userId/projects?simple=true&per_page=999&visibility=public&page=1"
     
     $reposAiursoft = Invoke-RestMethod -Uri $repoUrlAiursoft
     $reposAnduin = Invoke-RestMethod -Uri $repoUrlAnduin
