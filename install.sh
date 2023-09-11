@@ -117,3 +117,11 @@ TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 sudo ln -s ~/Nextcloud/ ~/Desktop/
 sudo ln -s ~/Source/Repos/ ~/Desktop/
 
+#!/bin/bash
+
+echo "Setting grub..."
+sudo cp /etc/default/grub /etc/default/grub.bak
+sudo sed -i 's/quiet//g; s/splash//g' /etc/default/grub
+sudo update-grub
+
+
