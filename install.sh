@@ -111,6 +111,7 @@ TryInstallDotnetTool "Anduin.HappyRecorder"
 ~/.dotnet/tools/happy-recorder config set-db-location --path ~/Nextcloud/Storage/HappyRecords/
 TryInstallDotnetTool "Aiursoft.NugetNinja"
 TryInstallDotnetTool "Aiursoft.Dotlang"
+TryInstallDotnetTool "Aiursoft.DotDownload"
 TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
