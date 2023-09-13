@@ -57,6 +57,7 @@ chmod 700 ~/.gnupg
 SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
 git config --global user.signingkey $SIGNKEY
 git config --global commit.gpgsign true
+git config --global pull.rebase false 
 
 # Test ssh with ssh to git@github
 echo "Testing SSH connection to github.com..."
