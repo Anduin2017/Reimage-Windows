@@ -21,8 +21,8 @@ function Install {
         catch {
             if ($attempt -eq 2) {
                 # You can do some extra logging here.
-                Write-Error "Task failed. With all $attempt attempts. Error: $($Error[0])"
-                throw
+                Write-Error "Task failed. With all $attempt attempts. Error: $($Error[0]). Gave up..."
+                # throw
             }
 
             Write-Host "Task failed. Attempt $attempt. Will retry in next $(5 * $attempt) seconds. Error: $($Error[0])" -ForegroundColor Yellow
