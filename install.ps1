@@ -76,7 +76,7 @@ Install-IfNotInstalled "FastCopy.FastCopy"
 Install-IfNotInstalled "DBBrowserForSQLite.DBBrowserForSQLite"
 Install-IfNotInstalled "CrystalDewWorld.CrystalDiskInfo"
 #Install-IfNotInstalled "CrystalDewWorld.CrystalDiskMark"
-Install-IfNotInstalled "PassmarkSoftware.OSFMount"
+# Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 Install-IfNotInstalled "Famatech.AdvancedIPScanner"
 Install-IfNotInstalled "jqlang.jq"
 
