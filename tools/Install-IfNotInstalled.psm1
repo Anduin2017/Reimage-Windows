@@ -22,6 +22,7 @@ function Install {
             if ($attempt -eq 2) {
                 # You can do some extra logging here.
                 Write-Error "Task failed. With all $attempt attempts. Error: $($Error[0]). Gave up..."
+                return
                 # throw
             }
 
