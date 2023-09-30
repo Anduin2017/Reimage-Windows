@@ -28,8 +28,8 @@ function TryInstallDotnetTool {
 }
 
 function InstallDotnet {
-  Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
   Install-IfNotInstalled "Microsoft.DotNet.SDK.7"
+  Install-IfNotInstalled "Microsoft.DotNet.SDK.6"
   Install-IfNotInstalled "Microsoft.NuGet"
 
   Write-Host "Setting up .NET environment variables..." -ForegroundColor Green
