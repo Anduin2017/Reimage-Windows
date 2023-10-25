@@ -90,10 +90,11 @@ Install-StoreApp -storeAppId "9WZDNCRFJBH4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "VP9 Video Extensions"
 Install-StoreApp -storeAppId "9N4D0MSMP0PT" -wingetAppName "AV1 Video Extension"
 
-RemoveUwp Microsoft.MSPaint
+RemoveUwp Clipchamp.Clipchamp
+RemoveUwp Microsoft.MSPaint # Paint 3D
 RemoveUwp Microsoft.Microsoft3DViewer
 RemoveUwp Microsoft.ZuneMusic
-RemoveUwp *549981C3F5F10*
+RemoveUwp *549981C3F5F10* # Cortana
 RemoveUwp Microsoft.WindowsSoundRecorder
 RemoveUwp Microsoft.PowerAutomateDesktop
 RemoveUwp Microsoft.BingWeather
