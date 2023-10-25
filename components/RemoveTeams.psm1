@@ -5,6 +5,16 @@ function RemoveTeams {
     RemoveUwp MicrosoftTeams
     winget uninstall "Microsoft.Teams"
     winget uninstall "Teams Machine-Wide Installer"
+
+    # Kill Teams
+    Get-Process -Name Teams -ErrorAction SilentlyContinue | Stop-Process
+
+    # Remove Teams
+    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:APPDATA\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:ProgramData\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:ProgramFiles\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
+    Remove-Item -Path "$env:ProgramFiles(x86)\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\Teams" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\TeamsMeetingAddin" -Recurse -Force -ErrorAction SilentlyContinue
     Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\TeamsPresenceAddin" -Recurse -Force -ErrorAction SilentlyContinue
