@@ -166,7 +166,7 @@ function CheckWindowsHelloStatus {
 }
 
 function CheckModernStandbyStatus {
-    $availableStates = powercfg /a
+    $availableStates = powercfg /a 2>&1
     $availableStatesStartIndex = $availableStates.IndexOf("The following sleep states are available on this system:")
     $availableStatesEndIndex = $availableStates.IndexOf("The following sleep states are not available on this system:")
 
