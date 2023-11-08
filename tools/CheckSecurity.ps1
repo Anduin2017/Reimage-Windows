@@ -55,7 +55,9 @@ function CheckDmaProtectionStatus {
     }
 "@
 
-    Add-Type -TypeDefinition $bootDMAProtectionCheck -Language CSharp -ErrorAction SilentlyContinue
+    if (-not([System.Management.Automation.PSTypeName]'SystemInfo.NativeMethods').Type) {
+        Add-Type -TypeDefinition $bootDMAProtectionCheck -Language CSharp -ErrorAction SilentlyContinue
+    }
 
     # returns true or false depending on whether Kernel DMA Protection is on or off
     $bootDMAProtection = ([SystemInfo.NativeMethods]::BootDmaCheck()) -ne 0
@@ -246,4 +248,4 @@ function CheckSecurity {
     }
 }
 
-Export-ModuleMember -Function CheckSecurity
+CheckSecurity
