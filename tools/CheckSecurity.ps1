@@ -107,16 +107,15 @@ function CheckBitlockerStatus {
     $systemDrive = (Get-WmiObject Win32_OperatingSystem).SystemDrive
 
     $bitlockerStatus = Get-BitLockerVolume -MountPoint $systemDrive -ErrorAction SilentlyContinue
-    return $bitlockerStatus.ProtectionStatus -eq "On"
+    $volumeEncryptionStatus = Get-CimInstance -ClassName Win32_EncryptableVolume -Namespace root\cimv2\security\microsoftvolumeencryption -Filter "DriveLetter = '$systemDrive'"
+
+    return $bitlockerStatus.ProtectionStatus -eq "On" -and $volumeEncryptionStatus.ProtectionStatus -eq 1 -and $volumeEncryptionStatus.IsVolumeInitializedForProtection -eq $true
 }
 
 function CheckDeviceEncryptionStatus {
     $systemDrive = (Get-WmiObject Win32_OperatingSystem).SystemDrive
-
-    $deviceEncryptionStatus = Get-CimInstance -ClassName Win32_EncryptableVolume -Namespace root\cimv2\security\microsoftvolumeencryption -Filter "DriveLetter = '$systemDrive'"
-    
-    # https://learn.microsoft.com/en-us/windows/win32/secprov/win32-encryptablevolume
-    return $deviceEncryptionStatus.ProtectionStatus -eq 1 -and $deviceEncryptionStatus.IsVolumeInitializedForProtection -eq $true
+    $bdeStatus = manage-bde -protectors -get $systemDrive
+    return ($bdeStatus -match "[ \t]*\(Uses Secure Boot for integrity validation\)").count -gt 0
 }
 
 function CheckWindowsHelloStatus {
