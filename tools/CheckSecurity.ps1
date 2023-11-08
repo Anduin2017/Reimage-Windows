@@ -269,7 +269,7 @@ function CheckSecurity {
         Write-Host "[  OK  ] Modern Standby is enabled" -ForegroundColor Green
     }
     else {
-        Write-Host "[ FAIL ] Modern Standby is disabled" -ForegroundColor Red
+        Write-Host "[ WARN ] Modern Standby is disabled" -ForegroundColor Yellow
     }
 
     $windowsRecoveryEnvironmentStatus = CheckWindowsRecoveryEnvironmentStatus
