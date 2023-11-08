@@ -18,7 +18,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.c
 ## Check Windows Security
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/tools/CheckSecurity.psm1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/tools/CheckSecurity.ps1'))
 ```
 
 ## Warning
