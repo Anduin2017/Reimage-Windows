@@ -118,6 +118,15 @@ function CheckDeviceEncryptionStatus {
     return ($bdeStatus -match "[ \t]*\(Uses Secure Boot for integrity validation\)").count -gt 0
 }
 
+function CheckAutoLockScreenStatus {
+    # HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+    $autoLockScreenStatus = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs"
+
+    # Less or equal than 900
+    return $autoLockScreenStatus.InactivityTimeoutSecs -le 900
+}
+
 function CheckWindowsHelloStatus {
     $loggedOnUserSID = ([System.Security.Principal.WindowsIdentity]::GetCurrent()).User.Value
     $credentialProvider = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{D6886603-9D2F-4EB2-B667-1971041FA96B}"
@@ -210,11 +219,15 @@ function CheckNetworkPrivacyStatus {
 }
 
 function CheckUACEnabled {
-    # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" "ConsentPromptBehaviorAdmin"  should be 5
-    # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop" should be 1
     $consentPromptBehaviorAdmin = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "ConsentPromptBehaviorAdmin"
     $promptOnSecureDesktop = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop"
-    return $consentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin -eq 5 -and $promptOnSecureDesktop.PromptOnSecureDesktop -eq 1
+    return ($consentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin -eq 5 -or $consentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin -eq 2) `
+        -and $promptOnSecureDesktop.PromptOnSecureDesktop -eq 1
+}
+
+function CheckWindowsUpdateStatus {
+    $windowsUpdateStatus = Get-Service -Name wuauserv
+    return $windowsUpdateStatus.Status -eq "Running"
 }
 
 function CheckWindowsDefenderStatus {
@@ -226,9 +239,20 @@ function CheckWindowsDefenderStatus {
         -and $windowsDefenderStatus.AntispywareEnabled -eq $true
 }
 
+function CheckPasswordlessStatus {
+    $passwordlessStatus = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Passwordless\Device" -Name "DevicePasswordLessBuildVersion"
+    return $passwordlessStatus.DevicePasswordLessBuildVersion -eq 2
+}
+
+function CheckAdministatorUserDisabled {
+    $administatorUserDisabled = Get-LocalUser -Name "Administrator"
+    return $administatorUserDisabled.Enabled -eq $false
+}
+
 function CheckSecurity {
     EnsureElevated
 
+    # Hardware settings.
     $dmaProtection = CheckDmaProtectionStatus
     if ($dmaProtection) {
         Write-Host "[  OK  ] Kernel DMA Protection is enabled" -ForegroundColor Green
@@ -269,6 +293,15 @@ function CheckSecurity {
         Write-Host "[ FAIL ] Secure Boot is disabled" -ForegroundColor Red
     }
 
+    $modernStandbyStatus = CheckModernStandbyStatus
+    if ($modernStandbyStatus) {
+        Write-Host "[  OK  ] Modern Standby is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ WARN ] Modern Standby is disabled" -ForegroundColor Yellow
+    }
+
+    # Disk settings.
     $bitlockerStatus = CheckBitlockerStatus
     if ($bitlockerStatus) {
         Write-Host "[  OK  ] Bitlocker is enabled" -ForegroundColor Green
@@ -285,22 +318,7 @@ function CheckSecurity {
         Write-Host "[ FAIL ] Device Encryption is disabled" -ForegroundColor Red
     }
 
-    $windowsHelloStatus = CheckWindowsHelloStatus
-    if ($windowsHelloStatus) {
-        Write-Host "[  OK  ] Windows Hello is enabled" -ForegroundColor Green
-    }
-    else {
-        Write-Host "[ FAIL ] Windows Hello is disabled" -ForegroundColor Red
-    }
-
-    $modernStandbyStatus = CheckModernStandbyStatus
-    if ($modernStandbyStatus) {
-        Write-Host "[  OK  ] Modern Standby is enabled" -ForegroundColor Green
-    }
-    else {
-        Write-Host "[ WARN ] Modern Standby is disabled" -ForegroundColor Yellow
-    }
-
+    # Windows security settings.
     $windowsRecoveryEnvironmentStatus = CheckWindowsRecoveryEnvironmentStatus
     if ($windowsRecoveryEnvironmentStatus) {
         Write-Host "[  OK  ] Windows Recovery Environment is enabled" -ForegroundColor Green
@@ -322,15 +340,7 @@ function CheckSecurity {
         Write-Host "[  OK  ] UAC is enabled" -ForegroundColor Green
     }
     else {
-        Write-Host "[ FAIL ] UAC is not correctly configured!" -ForegroundColor Red
-    }
-
-    $networkPrivacyStatus = CheckNetworkPrivacyStatus
-    if ($networkPrivacyStatus) {
-        Write-Host "[  OK  ] All networks are set to public" -ForegroundColor Green
-    }
-    else {
-        Write-Host "[ WARN ] Some network enabled discovery!" -ForegroundColor Yellow
+        Write-Host "[ FAIL ] UAC is not correctly configured" -ForegroundColor Red
     }
 
     $windowsDefenderStatus = CheckWindowsDefenderStatus
@@ -339,6 +349,55 @@ function CheckSecurity {
     }
     else {
         Write-Host "[ FAIL ] Windows Defender is disabled" -ForegroundColor Red
+    }
+
+    $networkPrivacyStatus = CheckNetworkPrivacyStatus
+    if ($networkPrivacyStatus) {
+        Write-Host "[  OK  ] All networks are set to public" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ WARN ] Some networks enabled discovery" -ForegroundColor Yellow
+    }
+
+    $windowsUpdateStatus = CheckWindowsUpdateStatus
+    if ($windowsUpdateStatus) {
+        Write-Host "[  OK  ] Windows Update is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Windows Update is disabled" -ForegroundColor Red
+    }
+
+    # User settings.
+    $windowsHelloStatus = CheckWindowsHelloStatus
+    if ($windowsHelloStatus) {
+        Write-Host "[  OK  ] Windows Hello is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Windows Hello is disabled" -ForegroundColor Red
+    }
+
+    $passwordlessStatus = CheckPasswordlessStatus
+    if ($passwordlessStatus) {
+        Write-Host "[  OK  ] Sign-in with passwordless is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Sign-in with passwordless is disabled" -ForegroundColor Red
+    }
+
+    $lockScreenStatus = CheckAutoLockScreenStatus
+    if ($lockScreenStatus) {
+        Write-Host "[  OK  ] Lock screen is set within 15 minutes" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Lock screen is not set within 15 minutes" -ForegroundColor Red
+    }
+
+    $administatorUserDisabled = CheckAdministatorUserDisabled
+    if ($administatorUserDisabled) {
+        Write-Host "[  OK  ] Administrator user is disabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Administrator user is enabled" -ForegroundColor Red
     }
 }
 
