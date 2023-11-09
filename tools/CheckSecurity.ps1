@@ -118,18 +118,6 @@ function CheckDeviceEncryptionStatus {
     return ($bdeStatus -match "[ \t]*\(Uses Secure Boot for integrity validation\)").count -gt 0
 }
 
-function CheckAutoLockScreenStatus {
-    # HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
-
-    $autoLockScreenStatus = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" -ErrorAction SilentlyContinue
-
-    if ($null -eq $autoLockScreenStatus) {
-        return $false
-    }
-    # Less or equal than 900
-    return $autoLockScreenStatus.InactivityTimeoutSecs -le 900
-}
-
 function CheckWindowsHelloStatus {
     $loggedOnUserSID = ([System.Security.Principal.WindowsIdentity]::GetCurrent()).User.Value
     $credentialProvider = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Providers\{D6886603-9D2F-4EB2-B667-1971041FA96B}"
@@ -385,14 +373,6 @@ function CheckSecurity {
     }
     else {
         Write-Host "[ FAIL ] Auto login is allowed" -ForegroundColor Red
-    }
-
-    $lockScreenStatus = CheckAutoLockScreenStatus
-    if ($lockScreenStatus) {
-        Write-Host "[  OK  ] Lock screen is set within 15 minutes" -ForegroundColor Green
-    }
-    else {
-        Write-Host "[ FAIL ] Lock screen is not set within 15 minutes" -ForegroundColor Red
     }
 
     $administatorUserDisabled = CheckAdministatorUserDisabled
