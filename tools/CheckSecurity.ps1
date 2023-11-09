@@ -198,12 +198,32 @@ function CheckRemoteDesktopEnabled {
     return $remoteDesktopEnabled.fDenyTSConnections -eq 0
 }
 
+function CheckNetworkPrivacyStatus {
+    $networkProfiles = Get-NetConnectionProfile
+    foreach ($networkProfile in $networkProfiles) {
+        if ($networkProfile.NetworkCategory -ne "Public") {
+            return $false
+        }
+    }
+
+    return $true;
+}
+
 function CheckUACEnabled {
     # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" "ConsentPromptBehaviorAdmin"  should be 5
     # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop" should be 1
     $consentPromptBehaviorAdmin = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "ConsentPromptBehaviorAdmin"
     $promptOnSecureDesktop = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop"
     return $consentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin -eq 5 -and $promptOnSecureDesktop.PromptOnSecureDesktop -eq 1
+}
+
+function CheckWindowsDefenderStatus {
+    $windowsDefenderStatus = Get-MpComputerStatus
+    return $windowsDefenderStatus.AntivirusEnabled -eq $true`
+        -and $windowsDefenderStatus.RealTimeProtectionEnabled -eq $true`
+        -and $windowsDefenderStatus.BehaviorMonitorEnabled -eq $true`
+        -and $windowsDefenderStatus.OnAccessProtectionEnabled -eq $true`
+        -and $windowsDefenderStatus.AntispywareEnabled -eq $true
 }
 
 function CheckSecurity {
@@ -303,6 +323,22 @@ function CheckSecurity {
     }
     else {
         Write-Host "[ FAIL ] UAC is not correctly configured!" -ForegroundColor Red
+    }
+
+    $networkPrivacyStatus = CheckNetworkPrivacyStatus
+    if ($networkPrivacyStatus) {
+        Write-Host "[  OK  ] All networks are set to public" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ WARN ] Some network enabled discovery!" -ForegroundColor Yellow
+    }
+
+    $windowsDefenderStatus = CheckWindowsDefenderStatus
+    if ($windowsDefenderStatus) {
+        Write-Host "[  OK  ] Windows Defender is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] Windows Defender is disabled" -ForegroundColor Red
     }
 }
 
