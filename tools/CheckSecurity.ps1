@@ -121,8 +121,11 @@ function CheckDeviceEncryptionStatus {
 function CheckAutoLockScreenStatus {
     # HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
-    $autoLockScreenStatus = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs"
+    $autoLockScreenStatus = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "InactivityTimeoutSecs" -ErrorAction SilentlyContinue
 
+    if ($null -eq $autoLockScreenStatus) {
+        return $false
+    }
     # Less or equal than 900
     return $autoLockScreenStatus.InactivityTimeoutSecs -le 900
 }
@@ -373,15 +376,15 @@ function CheckSecurity {
         Write-Host "[  OK  ] Windows Hello is enabled" -ForegroundColor Green
     }
     else {
-        Write-Host "[ FAIL ] Windows Hello is disabled" -ForegroundColor Red
+        Write-Host "[ WARN ] Windows Hello is disabled" -ForegroundColor Yellow
     }
 
     $passwordlessStatus = CheckPasswordlessStatus
     if ($passwordlessStatus) {
-        Write-Host "[  OK  ] Sign-in with passwordless is enabled" -ForegroundColor Green
+        Write-Host "[  OK  ] Auto login in not allowed" -ForegroundColor Green
     }
     else {
-        Write-Host "[ FAIL ] Sign-in with passwordless is disabled" -ForegroundColor Red
+        Write-Host "[ FAIL ] Auto login is allowed" -ForegroundColor Red
     }
 
     $lockScreenStatus = CheckAutoLockScreenStatus
