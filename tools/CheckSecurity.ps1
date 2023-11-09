@@ -193,6 +193,19 @@ function CheckWindowsRecoveryEnvironmentStatus {
     return ($(ReAgentc.exe /info) -match "Windows RE status:         Enabled").count -gt 0
 }
 
+function CheckRemoteDesktopEnabled {
+    $remoteDesktopEnabled = Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections"
+    return $remoteDesktopEnabled.fDenyTSConnections -eq 0
+}
+
+function CheckUACEnabled {
+    # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" "ConsentPromptBehaviorAdmin"  should be 5
+    # "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop" should be 1
+    $consentPromptBehaviorAdmin = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "ConsentPromptBehaviorAdmin"
+    $promptOnSecureDesktop = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\" -Name "PromptOnSecureDesktop"
+    return $consentPromptBehaviorAdmin.ConsentPromptBehaviorAdmin -eq 5 -and $promptOnSecureDesktop.PromptOnSecureDesktop -eq 1
+}
+
 function CheckSecurity {
     EnsureElevated
 
@@ -274,6 +287,22 @@ function CheckSecurity {
     }
     else {
         Write-Host "[ FAIL ] Windows Recovery Environment is disabled" -ForegroundColor Red
+    }
+
+    $remoteDesktopEnabled = CheckRemoteDesktopEnabled
+    if ($remoteDesktopEnabled) {
+        Write-Host "[ WARN ] Remote Desktop is enabled" -ForegroundColor Yellow
+    }
+    else {
+        Write-Host "[  OK  ] Remote Desktop is disabled" -ForegroundColor Green
+    }
+
+    $uacEnabled = CheckUACEnabled
+    if ($uacEnabled) {
+        Write-Host "[  OK  ] UAC is enabled" -ForegroundColor Green
+    }
+    else {
+        Write-Host "[ FAIL ] UAC is not correctly configured!" -ForegroundColor Red
     }
 }
 
