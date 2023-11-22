@@ -15,12 +15,6 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.c
 * It will ask you for the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file name.
 * It will ask you for a clean disk drive. For example Disk `E:\``. Provide it with any disk you like. (Except current OS drive)
 
-## Check Windows Security
-
-```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/tools/CheckSecurity.ps1'))
-```
-
 ## Warning
 
 This next part may NOT be designed for YOU! It is for my usage to config the newly installed Windows as a ready-to-use state.
