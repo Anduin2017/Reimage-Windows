@@ -1,5 +1,7 @@
 # Re-image the Windows
 
+[![ManHours](https://manhours.aiursoft.cn/gitlab/gitlab.aiursoft.cn/anduin/reimage-windows)](https://gitlab.aiursoft.cn/anduin/reimage-windows/-/commits/master?ref_type=heads)
+
 These scripts configure a ready-to-use Windows environment.
 
 ## Re-install Windows
