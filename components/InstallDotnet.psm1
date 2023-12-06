@@ -1,4 +1,3 @@
-
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Install-IfNotInstalled.psm1" | Resolve-Path) -DisableNameChecking
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\actions\WaitLinkForNextcloud.psm1" | Resolve-Path) -DisableNameChecking
 Import-Module (Join-Path -Path $PSCommandPath -ChildPath "..\..\tools\Add-PathToEnv.psm1" | Resolve-Path) -DisableNameChecking
@@ -75,6 +74,7 @@ function InstallDotnet {
   happy-recorder.exe config set-db-location --path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\"
   TryInstallDotnetTool -toolName "Aiursoft.NugetNinja"
   TryInstallDotnetTool -toolName "Aiursoft.Dotlang"
+  TryInstallDotnetTool -toolName "Aiursoft.Httping"
   TryInstallDotnetTool -toolName "Aiursoft.NiBot"
   TryInstallDotnetTool -toolName "JetBrains.ReSharper.GlobalTools"
 }
