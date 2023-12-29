@@ -70,7 +70,7 @@ function Reimage {
     if ($userOption.ToLower() -eq "a") {
         Write-Host "To download Insider builds, you can go to https://uupdump.net/ ." -ForegroundColor Green
         Start-Process powershell {
-            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://githubcontent.aiurs.co/pbatard/Fido/master/Fido.ps1'))
+            Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/pbatard/Fido/master/Fido.ps1'))
         }
 
         Read-Host "Press [Enter] if you finished downloading the ISO file."
