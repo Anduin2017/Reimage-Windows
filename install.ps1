@@ -68,6 +68,7 @@ else {
 
 # V2Ray, ChatGPT Next
 Install-IfNotInstalled "OBSProject.OBSStudio"
+Install-IfNotInstalled "icsharpcode.ILSpy"
 Install-IfNotInstalled "Postman.Postman"
 Install-IfNotInstalled "CPUID.CPU-Z"
 Install-IfNotInstalled "CPUID.HWMonitor"
