@@ -24,7 +24,7 @@ curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
 # XRay
 echo "Installing xray..."
-sudo bash -c "$(curl -L https://git.aiursoft.cn/PublicVault/Xray-install/raw/branch/main/install-release.sh)" @ install
+sudo bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install
 sudo cp ~/Nextcloud/Storage/XRay/xray.json /usr/local/etc/xray/config.json
 sudo systemctl restart xray.service
 #echo "Setting system proxy settings to use xray..."
