@@ -38,7 +38,7 @@ InstallPython
 InstallAria2
 InstallFdm
 InstallChrome
-InstallEdge
+#InstallEdge
 InstallJava
 InstallOffice
 InstallAzureDataStudio
