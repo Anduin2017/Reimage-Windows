@@ -82,7 +82,7 @@ Install-IfNotInstalled "nepnep.neofetch-win"
 # Install-IfNotInstalled "PassmarkSoftware.OSFMount"
 Install-IfNotInstalled "Famatech.AdvancedIPScanner"
 Install-IfNotInstalled "jqlang.jq"
-Install-IfNotInstalled "SomePythonThings.WingetUIStore"
+#Install-IfNotInstalled "SomePythonThings.WingetUIStore"
 
 Install-StoreApp -storeAppId "9wzdncrfjbh4" -wingetAppName "Microsoft Photos"
 Install-StoreApp -storeAppId "9nblggh4qghw" -wingetAppName "Microsoft Sticky Notes"
