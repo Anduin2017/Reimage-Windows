@@ -1,11 +1,6 @@
 echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
 
-bash -c "$(wget -O- https://gitlab.aiursoft.cn/anduin/anduinos/-/raw/master/install.sh)"
-
-echo "Anduin OS Deployed! The following steps require your Nextcloud account to be logged in."
-echo "Please press [Enter] to continue..."
-
 # Microsoft
 echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
 wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
@@ -63,31 +58,6 @@ git config --global pull.rebase false
 echo "Testing SSH connection to github.com..."
 echo "yes" | ssh git@github.com
 
-# Rider
-echo "Installing Rider... (INOP)"
-echo "Please download Rider from https://www.jetbrains.com/rider/download/#section=linux"
-echo "[Desktop Entry]
-Name=JetBrains Rider
-Comment=Integrated Development Environment
-Exec=/opt/rider/bin/rider.sh
-Icon=/opt/rider/bin/rider.png
-Terminal=false
-Type=Application
-Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.desktop
-
-# Install Minecraft
-if ! dpkg -s minecraft-launcher > /dev/null 2>&1; then
-    echo "minecraft-launcher is not installed, downloading and installing..."
-    # Download the deb package
-    wget https://launcher.mojang.com/download/Minecraft.deb
-    # Install the package
-    sudo dpkg -i Minecraft.deb
-    # Remove the package file
-    rm Minecraft.deb
-else
-    echo "minecraft-launcher is already installed"
-fi
-
 # Dotnet tools
 function TryInstallDotnetTool {
   toolName=$1
@@ -118,12 +88,3 @@ TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
 sudo ln -s ~/Nextcloud/ ~/Desktop/
 sudo ln -s ~/Source/Repos/ ~/Desktop/
-
-#!/bin/bash
-
-echo "Setting grub..."
-sudo cp /etc/default/grub /etc/default/grub.bak
-sudo sed -i 's/quiet//g; s/splash//g' /etc/default/grub
-sudo update-grub
-
-
