@@ -1,6 +1,8 @@
 echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
 
+sudo apt install dotnet8
+
 # Microsoft
 echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
 wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
