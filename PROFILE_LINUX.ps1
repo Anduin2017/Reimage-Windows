@@ -54,3 +54,46 @@ function Reset-GitRepos {
     Clone-GitRepositories $reposAiursoft $destinationPathAiursoft
     Clone-GitRepositories $reposAnduin $destinationPathAnduin
 }
+
+
+function Watch-RandomVideo {
+    param(
+        [string]$filter,
+        [string]$exclude,
+        [int]$take = 99999999,
+        [bool]$auto = $false
+    )
+
+    Write-Host "Fetching videos..."
+    $allVideos = Get-ChildItem -Path . -Include ('*.wmv', '*.avi', '*.mp4', '*.webm', '*.mkv') -Recurse -ErrorAction SilentlyContinue -Force
+    $allVideos = $allVideos | Sort-Object { Get-Random } | Where-Object { $_.VersionInfo.FileName.Contains($filter) }
+    if (-not ([string]::IsNullOrEmpty($exclude))) {
+        $allVideos = $allVideos | Where-Object { -not $_.VersionInfo.FileName.Contains($exclude) }
+    }
+    $allVideos = $allVideos | Select-Object -First $take
+    $allVideos | Format-Table -AutoSize | Select-Object -First 20
+    Write-Host "Playing $($allVideos.Count) videos..."
+    foreach ($pickedVideo in $allVideos) {
+        # $pickedVideo = $(Get-Random -InputObject $allVideos).FullName
+        Write-Host "Picked to play: " -ForegroundColor Yellow -NoNewline
+        Write-Host "$pickedVideo" -ForegroundColor White
+
+        $pickedVideoName = $pickedVideo.Name
+        if ($auto -eq $false) {
+            Start-Sleep -Seconds 1
+        }
+        Start-Process "mpv" -PassThru "--no-repeat --play-and-exit --no-video-title-show --start-time=3 `"$pickedVideo`"" -Wait 2>&1 | out-null
+
+        if ($auto -eq $false) {
+            $vote = Read-Host "How do you like that? (A-B-C-D E-F-G)"
+            if (-not ([string]::IsNullOrEmpty($vote))) {
+                $destination = "Sorted-Level-$vote"
+                Write-Host "Moving $pickedVideo to $destination..." -ForegroundColor Green
+                New-Item -Type "Directory" -Name $destination -ErrorAction SilentlyContinue
+                Move-Item -Path $pickedVideo -Destination "$destination\$($pickedVideo.Directory.Name)-$($pickedVideoName)"
+            }
+        }
+    }
+}
+
+
