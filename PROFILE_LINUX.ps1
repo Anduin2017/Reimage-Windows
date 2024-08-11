@@ -82,7 +82,7 @@ function Watch-RandomVideo {
         if ($auto -eq $false) {
             Start-Sleep -Seconds 1
         }
-        Start-Process "mpv" -PassThru "--no-repeat --play-and-exit --no-video-title-show --start-time=3 `"$pickedVideo`"" -Wait 2>&1 | out-null
+        Start-Process "mpv" -PassThru "--play-and-exit --no-video-title-show --start-time=3 `"$pickedVideo`"" -Wait 2>&1 | out-null
 
         if ($auto -eq $false) {
             $vote = Read-Host "How do you like that? (A-B-C-D E-F-G)"
