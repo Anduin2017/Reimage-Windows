@@ -76,7 +76,7 @@ function InstallDotnet {
   TryInstallDotnetTool -toolName "Aiursoft.Dotlang"
   TryInstallDotnetTool -toolName "Aiursoft.Httping"
   TryInstallDotnetTool -toolName "Aiursoft.NiBot"
-  TryInstallDotnetTool -toolName "JetBrains.ReSharper.GlobalTools"
+  #TryInstallDotnetTool -toolName "JetBrains.ReSharper.GlobalTools"
 }
 
 Export-ModuleMember -Function InstallDotnet
