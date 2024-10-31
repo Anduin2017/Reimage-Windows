@@ -123,7 +123,7 @@ Write-Host "-----------------------------" -ForegroundColor Green
 Write-Host "        PART 3  - Code       " -ForegroundColor Green
 Write-Host "-----------------------------" -ForegroundColor Green
 
-Reset-GitRepos
+#Reset-GitRepos
 Update-PathVariable
 
 Write-Host "-----------------------------" -ForegroundColor Green
