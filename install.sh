@@ -1,7 +1,8 @@
 echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
 
-sudo apt install -y dotnet8 aria2 ffmpeg
+# Dotnet, Aria2, FFmpeg, iperf3, apt-file obs-studio gimp vlc
+sudo apt install -y dotnet8 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc
 
 # Chrome
 wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub
@@ -9,6 +10,18 @@ sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/google-chrome.gpg --im
 echo 'deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
 sudo apt update
 sudo apt install google-chrome-stable
+
+# Docker
+curl -fsSL get.docker.com -o get-docker.sh
+CHANNEL=stable sh get-docker.sh
+rm get-docker.sh
+
+# Node
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg --yes
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt update
+sudo apt install nodejs
 
 # code
 cd ~
@@ -19,10 +32,56 @@ rm -f packages.microsoft.gpg
 sudo apt update
 sudo apt install code
 
-# nextcloud
-sudo add-apt-repository -y ppa:nextcloud-devs/client
+# postman
+wget https://dl.pstmn.io/download/latest/linux_64 -O postman-linux-x64.tar.gz
+sudo tar -xzf postman-linux-x64.tar.gz -C /opt
+rm postman-linux-x64.tar.gz
+sudo ln -s /opt/Postman/Postman /usr/bin/postman
+echo "[Desktop Entry]
+Name=Postman
+Comment=API Development Platform
+Exec=/opt/Postman/Postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Terminal=false
+Type=Application
+Categories=System;Development;API;" | sudo tee /usr/share/applications/postman.desktop
+
+# Google earth
+wget -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/earth.gpg > /dev/null 2>&1
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/earth/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo apt update
-sudo apt install nextcloud-desktop nautilus-nextcloud
+sudo apt install google-earth-pro-stable -y
+
+# WPS
+wget https://wdl1.pcfg.cache.wpscdn.com/wpsdl/wpsoffice/download/linux/11723/wps-office_11.1.0.11723.XA_amd64.deb -O wps.deb
+sudo dpkg -i wps.deb
+sudo apt install --fix-broken -y
+rm wps.deb
+
+# Insomnia
+curl -1sLf \
+  'https://packages.konghq.com/public/insomnia/setup.deb.sh' \
+  | sudo -E distro=ubuntu codename=focal bash
+sudo apt-get update
+sudo apt-get install insomnia
+
+# Rider
+url=https://download.jetbrains.com/rider/JetBrains.Rider-2024.2.6.tar.gz
+wget -O /tmp/rider.tar.gz $url
+sudo tar -xzf /tmp/rider.tar.gz -C /opt
+sudo rm /opt/rider-old-backup -rf
+sudo mv /opt/rider /opt/rider-old-backup || true
+sudo mv /opt/JetBrains\ Rider-2024.2.6 /opt/rider
+sudo chown -R $USER:$USER /opt/rider
+rm /tmp/rider.tar.gz
+echo "[Desktop Entry]
+Name=JetBrains Rider
+Comment=Integrated Development Environment
+Exec=/opt/rider/bin/rider.sh
+Icon=/opt/rider/bin/rider.svg
+Terminal=false
+Type=Application
+Categories=Development;IDE;" | sudo tee /usr/share/applications/jetbrains-rider.desktop
 
 # wechat
 wget -O- https://deepin-wine.i-m.dev/setup.sh | sh
@@ -49,6 +108,23 @@ URL="https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/PROFILE_LINU
 mkdir -p ~/.config
 mkdir -p ~/.config/powershell
 curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1
+
+# Steam
+cd ~
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install libc6-i386 libutempter0 xbitmaps xterm libgl1-mesa-dri:i386 libgl1:i386 -y
+wget https://cdn.akamai.steamstatic.com/client/installer/steam.deb -O steam.deb
+sudo dpkg -i steam.deb
+sudo apt install --fix-broken -y
+rm steam.deb
+
+# nextcloud
+sudo add-apt-repository -y ppa:nextcloud-devs/client
+sudo apt update
+sudo apt install nextcloud-desktop nautilus-nextcloud
+
+echo "Press Enter when NextCloud is set up."
 
 # XRay
 echo "Installing xray..."
