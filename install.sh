@@ -197,3 +197,9 @@ TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 
 sudo ln -s ~/Nextcloud/ ~/Desktop/
 sudo ln -s ~/Source/Repos/ ~/Desktop/
+
+sudo apt install python3-apt python3-regex
+wget https://github.com/davidfoerster/aptsources-cleanup/releases/download/v0.1.7.5.2/aptsources-cleanup.pyz
+chmod +x aptsources-cleanup.pyz
+sudo bash -c "echo all | ./aptsources-cleanup.pyz  --yes"
+rm aptsources-cleanup.pyz
