@@ -4,6 +4,13 @@ sudo timedatectl set-timezone UTC
 # Dotnet, Aria2, FFmpeg, iperf3, apt-file obs-studio gimp vlc
 sudo apt install -y dotnet8 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc ibus-rime fwupd
 
+# User no sleep
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'nothing'
+
+# System no sleep
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
 # Firmware
 sudo fwupdmgr refresh
 sudo fwupdmgr get-updates
