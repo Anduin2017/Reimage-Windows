@@ -2,7 +2,20 @@ echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
 
 # Dotnet, Aria2, FFmpeg, iperf3, apt-file obs-studio gimp vlc
-sudo apt install -y dotnet8 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc
+sudo apt install -y dotnet8 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc ibus-rime fwupd
+
+# Firmware
+sudo fwupdmgr refresh
+sudo fwupdmgr get-updates
+sudo fwupdmgr update
+
+# IBus Rime Config.
+zip=https://gitlab.aiursoft.cn/anduin/anduinos-rime/-/archive/master/anduinos-rime-master.zip
+wget $zip -O anduinos-rime.zip && unzip anduinos-rime.zip && rm anduinos-rime.zip
+rsync -Aavx --update --delete ./anduinos-rime-master/assets/ ~/.config/ibus/rime/
+rm -rf anduinos-rime-master
+ibus restart
+ibus engine rime
 
 # Chrome
 wget https://dl-ssl.google.com/linux/linux_signing_key.pub -O /tmp/google.pub
