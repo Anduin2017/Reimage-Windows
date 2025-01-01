@@ -2,7 +2,7 @@ echo "Setting timezone..."
 sudo timedatectl set-timezone UTC
 
 # Dotnet, Aria2, FFmpeg, iperf3, apt-file obs-studio gimp vlc
-sudo apt install -y dotnet8 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc ibus-rime fwupd
+sudo apt install -y dotnet9 aria2 ffmpeg iperf3 apt-file obs-studio gimp vlc ibus-rime fwupd
 
 # User no sleep
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
