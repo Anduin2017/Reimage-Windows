@@ -11,19 +11,19 @@ function InstallGit {
     Add-PathToEnv "$env:ProgramFiles\Git\bin\"
     Add-PathToEnv "$env:ProgramFiles\Git\usr\bin\"
 
-    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa.pub"
-    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\SSH\id_rsa"
-    WaitLinkForNextcloud -path "$HOME\Nextcloud\Storage\GPG\pubring.kbx"
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Private\SSH\id_rsa.pub"
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Private\SSH\id_rsa"
+    WaitLinkForNextcloud -path "$HOME\Nextcloud\Private\GPG\pubring.kbx"
 
     Write-Host "Linking back SSH keys..." -ForegroundColor Green
-    $NextcloudSshConfigPath = "$HOME\Nextcloud\Storage\SSH\"
+    $NextcloudSshConfigPath = "$HOME\Nextcloud\Private\SSH\"
     $localSshConfigPath = "$HOME\.ssh\"
 
     Remove-Item -Path $localSshConfigPath -Recurse -Force -ErrorAction SilentlyContinue
     New-Item -ItemType SymbolicLink -Path $localSshConfigPath -Target $NextcloudSshConfigPath -Force -ErrorAction SilentlyContinue | Out-Null
 
     Write-Host "Linking back GPG keys..." -ForegroundColor Green
-    $NextcloudGpgConfigPath = "$HOME\Nextcloud\Storage\GPG\private.key"
+    $NextcloudGpgConfigPath = "$HOME\Nextcloud\Private\GPG\private.key"
     $localGpgConfigPath = "$HOME\.gnupg\"
     
     Remove-Item -Path $localGpgConfigPath -Recurse -Force -ErrorAction SilentlyContinue
