@@ -70,8 +70,6 @@ function InstallDotnet {
   TryInstallDotnetTool -toolName "Aiursoft.Static"
   TryInstallDotnetTool -toolName "Aiursoft.DotDownload"
   TryInstallDotnetTool -toolName "Anduin.HappyRecorder"
-  WaitLinkForNextcloud -path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\database.json"
-  happy-recorder.exe config set-db-location --path "$env:HOMEPATH\Nextcloud\Storage\HappyRecords\"
   TryInstallDotnetTool -toolName "Aiursoft.NugetNinja"
   TryInstallDotnetTool -toolName "Aiursoft.Dotlang"
   TryInstallDotnetTool -toolName "Aiursoft.Httping"
