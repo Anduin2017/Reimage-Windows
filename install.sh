@@ -134,7 +134,8 @@ source ~/.bashrc
 
 # Microsoft
 echo "This is a hack here. This is because Microsoft's repo is soooooooo stupid that it mixed up the .NET SDK!"
-wget -q "https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb"
+UB_VERSION=$(lsb_release -rs)
+wget -q "https://packages.microsoft.com/config/ubuntu/$UB_VERSION/packages-microsoft-prod.deb"
 sudo dpkg -i ./packages-microsoft-prod.deb
 rm ./packages-microsoft-prod.deb
 sudo apt update
