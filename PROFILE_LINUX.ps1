@@ -102,19 +102,20 @@ function Watch-RandomVideo {
         if ($auto -eq $false) {
             Start-Sleep -Seconds 1
         }
-        Start-Process "vlc" `
+        Start-Process "flatpak" `
         -ArgumentList @(
+            "run", "org.videolan.VLC",
             "--no-repeat",
             "--play-and-exit",
             "--no-video-title-show",
             "--start-time=3",
             "--rate=1.5",
-            "`"$pickedVideo`""
+            $pickedVideo
         ) `
         -RedirectStandardOutput "/dev/null" `
         -RedirectStandardError "/tmp/devnull2" `
         -Wait
-    
+
         if ($auto -eq $false) {
             $vote = Read-Host "How do you like that? (A-B-C-D E-F-G)"
             if (-not ([string]::IsNullOrEmpty($vote))) {
