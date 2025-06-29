@@ -187,7 +187,7 @@ git config --global user.name "Anduin Xue"
 # SSH Keys
 echo "Setting SSH keys..."
 mkdir ~/.ssh
-cp -r ~/Nextcloud/Private/SSH/* ~/.ssh/
+cp -r ~/Nextcloud/Encrypted/SSH/* ~/.ssh/
 chmod 644 ~/.ssh/id_rsa.pub
 chmod 600 ~/.ssh/id_rsa
 
@@ -195,7 +195,7 @@ chmod 600 ~/.ssh/id_rsa
 echo "Setting GPG keys..."
 sudo rm ~/.gnupg -rf
 mkdir ~/.gnupg
-gpg --import ~/Nextcloud/Private/GPG/private.key
+gpg --import ~/Nextcloud/Encrypted/GPG/private.key
 chmod 700 ~/.gnupg
 SIGNKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | awk -F/ '{print $2}')
 git config --global user.signingkey $SIGNKEY
