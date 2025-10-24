@@ -6,9 +6,8 @@ sudo apt install -y \
   dotnet9 \
   aria2 \
   ffmpeg \
-  iperf3 \
   apt-file \
-  gimp vlc \
+  gimp \
   ibus-rime \
   fwupd \
   pcp \
