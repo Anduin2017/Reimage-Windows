@@ -7,7 +7,6 @@ sudo apt install -y \
   aria2 \
   ffmpeg \
   apt-file \
-  gimp \
   ibus-rime \
   fwupd \
   pcp \
