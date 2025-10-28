@@ -63,7 +63,7 @@ function InstallDotnet {
   New-Item -Path "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\" -ItemType directory -Force -ErrorAction SilentlyContinue | Out-Null
   
   Write-Host "Installing microsoft/artifacts-credprovider..." -ForegroundColor Green
-  Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.cn/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
+  Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://git.aiursoft.com/PublicVault/artifacts-credprovider/raw/branch/master/helpers/installcredprovider.ps1'))
 
   TryInstallDotnetTool -toolName "dotnet-ef"
   TryInstallDotnetTool -toolName "Anduin.Parser"
