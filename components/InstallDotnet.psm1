@@ -11,16 +11,16 @@ function TryInstallDotnetTool {
 
   if ($globalTools -match $toolName) {
     Write-Host "$toolName is already installed. Updating it.."  -ForegroundColor Green
-    dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+    dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.com/v3/index.json" 2>$null
   }
   else {
     try {
       Write-Host "$toolName is not installed. Installing it.."  -ForegroundColor Green
-      dotnet tool install --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+      dotnet tool install --global $toolName --interactive --add-source "https://nuget.aiursoft.com/v3/index.json" 2>$null
     }
     catch {
       Write-Host "$toolName failed to be installed. Trying updating it.." -ForegroundColor Yellow
-      dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.cn/v3/index.json" 2>$null
+      dotnet tool update --global $toolName --interactive --add-source "https://nuget.aiursoft.com/v3/index.json" 2>$null
       Write-Warning "Failed to install or update .NET $toolName $_"
     }
   }
@@ -42,7 +42,7 @@ function InstallDotnet {
     $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
     <configuration>`
       <packageSources>`
-        <add key=`"aiursoft.cn`" value=`"https://nuget.aiursoft.cn/v3/index.json`" protocolVersion=`"3`" />`
+        <add key=`"aiursoft.cn`" value=`"https://nuget.aiursoft.com/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"Microsoft Visual Studio Offline Packages`" value=`"C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\`" />`
       </packageSources>`
