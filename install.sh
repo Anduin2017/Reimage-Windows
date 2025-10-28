@@ -54,7 +54,7 @@ sudo fwupdmgr get-updates
 sudo fwupdmgr update
 
 # IBus Rime Config.
-zip=https://gitlab.aiursoft.cn/anduin/anduinos-rime/-/archive/master/anduinos-rime-master.zip
+zip=https://gitlab.aiursoft.com/anduin/anduinos-rime/-/archive/master/anduinos-rime-master.zip
 wget $zip -O anduinos-rime.zip && unzip anduinos-rime.zip && rm anduinos-rime.zip
 rsync -Aavx --update --delete ./anduinos-rime-master/assets/ ~/.config/ibus/rime/
 rm -rf anduinos-rime-master
@@ -142,7 +142,7 @@ sudo rm /etc/apt/sources.list.d/microsoft-prod.list
 sudo apt update
 
 # Powershell Profile
-URL="https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/PROFILE_LINUX.ps1"
+URL="https://gitlab.aiursoft.com/anduin/reimage-windows/-/raw/master/PROFILE_LINUX.ps1"
 mkdir -p ~/.config
 mkdir -p ~/.config/powershell
 curl "$URL" --output - > ~/.config/powershell/Microsoft.PowerShell_profile.ps1

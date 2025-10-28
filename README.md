@@ -1,6 +1,6 @@
 # Re-image the Windows
 
-[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.cn/anduin/reimage-windows.svg)](https://gitlab.aiursoft.cn/anduin/reimage-windows/-/commits/master?ref_type=heads)
+[![ManHours](https://manhours.aiursoft.cn/r/gitlab.aiursoft.com/anduin/reimage-windows.svg)](https://gitlab.aiursoft.com/anduin/reimage-windows/-/commits/master?ref_type=heads)
 
 These scripts configure a ready-to-use Windows environment.
 
@@ -11,7 +11,7 @@ The following command will re-install Windows 10\11\insider for you.
 Right-click the start button, and click `Windows PowerShell`(Admin)`.
 
 ```powershell
-iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/Reimage.ps1'))
+iex ((New-Object System.Net.WebClient).DownloadString('https://gitlab.aiursoft.com/anduin/reimage-windows/-/raw/master/Reimage.ps1'))
 ```
 
 * It will ask you for the downloaded Windows ISO file. You can download it with any tool you like, and provide it the file name.
@@ -33,7 +33,7 @@ For example:
 Right-click the start button, and click `Windows PowerShell`(Admin)`.
 
 ```powershell
-Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue; $destinationPath = "$env:TEMP\reimage-windows-master.zip"; Invoke-WebRequest -Uri "https://gitlab.aiursoft.cn/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath -UseBasicParsing; Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP; Remove-Item $destinationPath; Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force; . "$env:TEMP\reimage-windows-master\install.ps1"
+Remove-Item "$env:TEMP\reimage-windows-master\" -Recurse -ErrorAction SilentlyContinue; $destinationPath = "$env:TEMP\reimage-windows-master.zip"; Invoke-WebRequest -Uri "https://gitlab.aiursoft.com/anduin/reimage-windows/-/archive/master/reimage-windows-master.zip" -OutFile $destinationPath -UseBasicParsing; Expand-Archive -Path $destinationPath -DestinationPath $env:TEMP; Remove-Item $destinationPath; Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force; . "$env:TEMP\reimage-windows-master\install.ps1"
 ```
 
 Caution: **DO NOT RUN** this in Windows Terminal!!! Instead, start a pure PowerShell with admin!
@@ -43,7 +43,7 @@ Caution: **DO NOT RUN** this in Windows Terminal!!! Instead, start a pure PowerS
 Open PowerShell and run:
 
 ```powershell
-$(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash
+$(Invoke-WebRequest https://gitlab.aiursoft.com/anduin/reimage-windows/-/raw/master/test_env.sh).Content | bash
 ```
 
 ### Ubuntu?
@@ -51,5 +51,5 @@ $(Invoke-WebRequest https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/mast
 Some of my machines are running Ubuntu. I also have a script to initialize Ubuntu environment.
 
 ```bash
-bash -c "$(wget -O- https://gitlab.aiursoft.cn/anduin/reimage-windows/-/raw/master/install.sh)"
+bash -c "$(wget -O- https://gitlab.aiursoft.com/anduin/reimage-windows/-/raw/master/install.sh)"
 ```

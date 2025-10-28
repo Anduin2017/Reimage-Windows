@@ -1,7 +1,7 @@
 function Get-LatestProfileVersion {
     param (
     )
-    $url = "https://gitlab.aiursoft.cn/api/v4/projects/anduin%2Freimage-windows/repository/commits"
+    $url = "https://gitlab.aiursoft.com/api/v4/projects/anduin%2Freimage-windows/repository/commits"
     $response = Invoke-RestMethod -Uri $url -Method Get
     $latestCommit = $response[0]
     return $latestCommit.created_at

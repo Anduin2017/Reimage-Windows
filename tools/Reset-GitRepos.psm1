@@ -43,7 +43,7 @@ function Reset-GitRepos {
     Start-Sleep -Seconds 5
     
     Write-Host "Cloning all repos..." -ForegroundColor Green
-    $gitlabBaseUrl = "https://gitlab.aiursoft.cn"
+    $gitlabBaseUrl = "https://gitlab.aiursoft.com"
     $apiUrl = "$gitlabBaseUrl/api/v4"
     $groupName = "Aiursoft"
     $userName = "Anduin"
