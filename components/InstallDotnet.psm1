@@ -42,7 +42,7 @@ function InstallDotnet {
     $config = "<?xml version=`"1.0`" encoding=`"utf-8`"?>`
     <configuration>`
       <packageSources>`
-        <add key=`"aiursoft.cn`" value=`"https://nuget.aiursoft.com/v3/index.json`" protocolVersion=`"3`" />`
+        <add key=`"aiursoft.com`" value=`"https://nuget.aiursoft.com/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"nuget.org`" value=`"https://api.nuget.org/v3/index.json`" protocolVersion=`"3`" />`
         <add key=`"Microsoft Visual Studio Offline Packages`" value=`"C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\`" />`
       </packageSources>`
