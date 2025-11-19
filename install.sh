@@ -60,6 +60,7 @@ rsync -Aavx --update --delete ./anduinos-rime-master/assets/ ~/.config/ibus/rime
 rm -rf anduinos-rime-master
 
 flatpak install -y flathub com.google.Chrome
+flatpak install -y flathub com.bitwarden.desktop
 flatpak install -y flathub com.github.iwalton3.jellyfin-media-player
 flatpak install -y flathub com.nextcloud.desktopclient.nextcloud
 flatpak install -y flathub chat.revolt.RevoltDesktop
