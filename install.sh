@@ -219,6 +219,7 @@ TryInstallDotnetTool "Aiursoft.DotDownload"
 TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 TryInstallDotnetTool "Aiursoft.Voyager"
+TryInstallDotnetTool "Aiursoft.FileLock"
 
 sudo ln -s ~/Nextcloud/ ~/Desktop/
 sudo ln -s ~/Source/Repos/ ~/Desktop/
