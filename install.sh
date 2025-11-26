@@ -203,8 +203,6 @@ file-lock decrypt -i ./Nextcloud/Encrypted/ssh_encrypted/ -o ./.ssh/
 
 # SSH Keys
 echo "Setting SSH keys..."
-mkdir ~/.ssh
-cp -r ~/Nextcloud/Encrypted/SSH/* ~/.ssh/
 chmod 644 ~/.ssh/id_rsa.pub
 chmod 600 ~/.ssh/id_rsa
 
