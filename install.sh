@@ -3,11 +3,12 @@ sudo timedatectl set-timezone UTC
 
 sudo apt update
 sudo apt install -y \
-  dotnet9 \
+  dotnet10 \
   aria2 \
   ffmpeg \
   apt-file \
   ibus-rime \
+  docker.io \
   fwupd \
   pcp \
   nvme-cli \
@@ -103,11 +104,6 @@ flatpak install -y flathub com.belmoussaoui.Decoder
 flatpak install -y flathub com.yubico.yubioath
 flatpak install -y flathub org.sqlitebrowser.sqlitebrowser
 flatpak install -y flathub io.bassi.Amberol
-
-# Docker
-curl -fsSL get.docker.com -o get-docker.sh
-CHANNEL=stable sh get-docker.sh
-rm get-docker.sh
 
 # Node
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg --yes
