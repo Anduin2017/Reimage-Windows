@@ -194,6 +194,7 @@ TryInstallDotnetTool "Aiursoft.NiBot"
 TryInstallDotnetTool "JetBrains.ReSharper.GlobalTools"
 TryInstallDotnetTool "Aiursoft.Voyager"
 TryInstallDotnetTool "Aiursoft.FileLock"
+TryInstallDotnetTool "Aiursoft.NetworkTest"
 
 file-lock decrypt -i ./Nextcloud/Encrypted/ssh_encrypted/ -o ./.ssh/
 
